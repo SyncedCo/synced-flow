@@ -20,6 +20,15 @@ For Codex-style skill loaders, use the repo-shipped skill at
 - Use semantic colours: `bg-background`, `text-foreground`, `bg-primary`,
   `text-primary-foreground`, `border-border`, `bg-surface`.
 - Use `sf-button`, `sf-card`, `sf-badge`, `sf-field`, and `sf-input` for common UI.
+- Keep browser affordances unless the UI intentionally replaces them: body
+  links stay underlined, content lists keep markers, and focus states remain
+  visible.
+- Use `@synced/fluid/app.css` for common app/site defaults when raw links should
+  not be underlined and menu lists should not show bullets. Add it with
+  `synced-fluid add app` if a project was initialised without it.
+- Use `sr-only` / `not-sr-only`, `sf-skip-link`, `sf-focus-ring`,
+  `sf-touch-target`, `sf-list-reset`, `sf-link`, and `sf-link-plain` for
+  accessibility and UI affordance work.
 - Use theme presets or config `theme` overrides for brand choices.
 - Keep class names complete in source files. Do not build classes from fragments.
 - Use `safelist` only when dynamic classes are unavoidable.

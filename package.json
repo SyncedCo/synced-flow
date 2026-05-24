@@ -32,6 +32,7 @@
     "./tokens.css": "./tokens.css",
     "./reset.css": "./reset.css",
     "./base.css": "./base.css",
+    "./app.css": "./app.css",
     "./layout.css": "./layout.css",
     "./components.css": "./components.css",
     "./utilities.css": "./utilities.css",

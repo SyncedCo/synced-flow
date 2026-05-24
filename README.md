@@ -10,6 +10,8 @@ for class tokens, then generates project-specific utility CSS.
 - component tokens: button, card, and input defaults
 - fluid scales: Utopia-style type and spacing clamps across the configured viewport range
 - layout primitives: container, section, stack, cluster, grid, sidebar, switcher, frame, cover, and flow
+- accessibility and base helpers: `sr-only`, `not-sr-only`, skip links, focus
+  rings, touch targets, link helpers, and list helpers
 - modular CSS layer exports when a project wants a smaller imported surface
 - modern CSS best practices: cascade layers, custom properties, logical
   properties, `clamp()`, OKLCH colour, container-aware primitives, and
@@ -58,7 +60,12 @@ Most bundled apps can use the full stylesheet:
 
 ```css
 @import "@synced/fluid/styles.css";
+@import "@synced/fluid/app.css";
 ```
+
+`app.css` is optional. It applies common app/site defaults such as removing raw
+link underlines and list markers. Leave it out for content-heavy pages that
+should keep browser affordances by default.
 
 For tighter CSS loading, import only the layers the project uses:
 
@@ -66,6 +73,7 @@ For tighter CSS loading, import only the layers the project uses:
 @import "@synced/fluid/tokens.css";
 @import "@synced/fluid/reset.css";
 @import "@synced/fluid/base.css";
+@import "@synced/fluid/app.css";
 @import "@synced/fluid/layout.css";
 @import "@synced/fluid/components.css";
 ```
@@ -78,7 +86,7 @@ It uses modern CSS techniques and keeps CSS loading compact in three ways:
 - the CLI scans source files and generates utility CSS only for discovered class
   tokens
 - CSS layers are exported separately, so projects can import only tokens, reset,
-  base, layout, components, or static utilities as needed
+  base, app defaults, layout, components, or static utilities as needed
 - generated animation keyframes are emitted only when scanned animation classes
   need them
 
@@ -91,11 +99,14 @@ Current built CSS sizes from `pnpm build` on 2026-05-24:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 17.8 KB | 4.2 KB | Full core stylesheet for simple setup. |
+| `styles.css` | 20.0 KB | 4.6 KB | Full core stylesheet for simple setup. |
 | `tokens.css` | 6.1 KB | 1.8 KB | Design tokens only. |
+| `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
+| `base.css` | 1.7 KB | 0.8 KB | Base element styles. |
+| `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
 | `layout.css` | 3.0 KB | 0.9 KB | Fluid layout primitives. |
 | `components.css` | 6.2 KB | 1.3 KB | Button, card, badge, field, and input primitives. |
-| `utilities.css` | 1.2 KB | 0.5 KB | Static `sf-*` helper utilities. |
+| `utilities.css` | 3.1 KB | 1.0 KB | Static `sf-*` helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The
 Synced Fluid approach is explicit and predictable: import the core layers you
@@ -108,6 +119,23 @@ PHP/template files and writes one enqueue-ready CSS file at
 
 See [CSS optimisation](docs/css-optimisation.md) for the full measurements,
 developer notes, and marketing-safe claims.
+
+## Base Styling Decisions
+
+Synced Fluid keeps the browser affordances people rely on:
+
+- links stay visibly underlined by default
+- `ul` and `ol` keep their markers by default
+- focus states are visible through `:focus-visible`
+- reduced-motion preferences are respected
+
+Use opt-in helpers when UI needs a different treatment: `sf-link-plain` for
+navigation links, `sf-list-reset` for menu lists, `sr-only` for assistive text,
+`sf-skip-link` for skip navigation, and `sf-touch-target` for compact controls.
+For app/site projects, include `@synced/fluid/app.css` or run
+`synced-fluid add app` to apply those common UI defaults globally.
+
+See [Base styling decisions](docs/base-styling.md).
 
 ## Configure
 
@@ -200,6 +228,7 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 
 - [Quick start](docs/quick-start.md)
 - [AI usage guide](docs/ai-usage.md)
+- [Base styling decisions](docs/base-styling.md)
 - [CLI reference](docs/cli-reference.md)
 - [Config reference](docs/config-reference.md)
 - [CSS optimisation](docs/css-optimisation.md)

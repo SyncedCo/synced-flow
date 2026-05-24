@@ -54,6 +54,18 @@ developers and AI agents to reach for first.
 </form>
 ```
 
+## Accessible Navigation
+
+```html
+<a class="sf-skip-link" href="#main">Skip to main content</a>
+<nav aria-label="Primary">
+  <ul class="sf-list-reset sf-cluster">
+    <li><a class="sf-link-plain sf-focus-ring" href="/">Home</a></li>
+    <li><a class="sf-link-plain sf-focus-ring" href="/docs">Docs</a></li>
+  </ul>
+</nav>
+```
+
 ## Split Layout
 
 ```html

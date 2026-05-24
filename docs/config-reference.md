@@ -10,6 +10,7 @@ export default defineConfig({
   scan: ['src', 'components'],
   out: 'src/synced-fluid.generated.css',
   responsiveVariants: false,
+  includeApp: true,
   safelist: [],
   theme: themePresets.synced,
 })
@@ -24,6 +25,7 @@ export default defineConfig({
 | `safelist` | `string[]` | Class tokens to always generate for dynamic class cases. |
 | `out` | `string` | Generated CSS output path. |
 | `includeCore` | `boolean` | Include reset/base/layout/component CSS in generated output. |
+| `includeApp` | `boolean` | Include optional app/site defaults when `includeCore` is true. |
 | `responsiveVariants` | `boolean` | Enable `sm:`, `md:`, `lg:`, `xl:` compatibility variants. |
 | `failOnUnsupported` | `boolean` | Fail when unsupported class tokens are detected. |
 | `quiet` | `boolean` | Suppress non-critical warnings. |
@@ -31,6 +33,8 @@ export default defineConfig({
 
 Set `includeCore: true` for environments that enqueue a plain CSS file and do
 not process npm CSS imports, such as many WordPress themes and plugins.
+Set `includeApp: true` with `includeCore` when that single generated file should
+also remove raw link underlines and list markers for app/site UI.
 
 ## Theme
 

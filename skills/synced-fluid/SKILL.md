@@ -42,6 +42,7 @@ For simple bundled apps:
 
 ```css
 @import "@synced/fluid/styles.css";
+@import "@synced/fluid/app.css";
 @import "./synced-fluid.generated.css";
 ```
 
@@ -51,14 +52,17 @@ For smaller core loading, import only the layers needed:
 @import "@synced/fluid/tokens.css";
 @import "@synced/fluid/reset.css";
 @import "@synced/fluid/base.css";
+@import "@synced/fluid/app.css";
 @import "@synced/fluid/layout.css";
 @import "@synced/fluid/components.css";
 @import "./synced-fluid.generated.css";
 ```
 
 Leave out `components.css` if the project only uses tokens and layout
-primitives. Leave out `utilities.css` unless static `sf-text-*`, `sf-prose`,
-`sf-visually-hidden`, or `sf-full-bleed` helpers are used.
+primitives. Leave out `app.css` when content-style browser defaults should stay
+intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
+`sf-prose`, `sr-only`, `not-sr-only`, `sf-skip-link`, `sf-focus-ring`,
+`sf-touch-target`, `sf-list-reset`, `sf-link`, or `sf-full-bleed` are used.
 
 ## Styling Rules
 
@@ -69,6 +73,14 @@ primitives. Leave out `utilities.css` unless static `sf-text-*`, `sf-prose`,
   `sf-badge`, `sf-field`, and `sf-input`.
 - Use semantic utility classes such as `bg-background`, `text-foreground`,
   `bg-primary`, `text-primary-foreground`, `border-border`, and `bg-surface`.
+- Keep browser affordances by default: body links stay underlined, content
+  lists keep markers, focus styles stay visible, and reduced-motion preferences
+  are respected.
+- Include `@synced/fluid/app.css`, or run `synced-fluid add app`, when an
+  app/site should remove raw link underlines and list markers globally.
+- Use `sr-only` / `not-sr-only`, `sf-skip-link`, `sf-focus-ring`,
+  `sf-touch-target`, `sf-list-reset`, `sf-link`, and `sf-link-plain` for
+  accessibility and explicit UI styling.
 - Put brand choices in `theme` config or theme presets rather than scattered
   one-off CSS.
 - Use modern CSS techniques already in the system: cascade layers, custom

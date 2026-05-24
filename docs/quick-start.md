@@ -35,13 +35,27 @@ use:
 @import "@synced/fluid/tokens.css";
 @import "@synced/fluid/reset.css";
 @import "@synced/fluid/base.css";
+@import "@synced/fluid/app.css";
 @import "@synced/fluid/layout.css";
 @import "@synced/fluid/components.css";
 ```
 
-Keep `utilities.css` out unless the project uses the static `sf-text-*`,
-`sf-prose`, `sf-visually-hidden`, or `sf-full-bleed` helpers. The generated CSS
-file already emits source-scanned utility classes.
+`app.css` is optional. It removes raw link underlines and list markers for
+common app/site UI. Leave it out, or run `synced-fluid init --no-app`, when a
+project should keep content-style browser defaults.
+
+Keep `utilities.css` out unless the project uses static helpers such as
+`sf-text-*`, `sf-prose`, `sr-only`, `not-sr-only`, `sf-skip-link`,
+`sf-focus-ring`, `sf-touch-target`, `sf-list-reset`, `sf-link`, or
+`sf-full-bleed`. The generated CSS file already emits source-scanned utility
+classes.
+
+## Base Defaults
+
+Synced Fluid uses a conservative base: links remain visibly underlined, lists
+keep their markers, focus styles are visible, and motion preferences are
+respected. Add `@synced/fluid/app.css` or run `synced-fluid add app` when a
+site should use app-style defaults globally.
 
 ## Build
 

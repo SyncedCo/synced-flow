@@ -25,6 +25,16 @@ if (command === 'init') {
   process.exit(0)
 }
 
+if (command === 'add') {
+  const addTarget = args.shift()
+  if (addTarget === 'app') {
+    runAddApp()
+    process.exit(0)
+  }
+  console.error(`Unknown add target "${addTarget ?? ''}". Use: synced-fluid add app`)
+  process.exit(1)
+}
+
 if (command === 'doctor' || command === 'validate') {
   process.exit(await runDoctor())
 }
@@ -56,6 +66,7 @@ const outFile = resolve(cwd, readOption('out') ?? config.out ?? 'synced-fluid.ge
 const cliScans = readOptions('scan')
 const sourceDirs = cliScans.length ? cliScans : config.scan ?? []
 const includeCore = readBooleanOption('include-core') ?? config.includeCore ?? false
+const includeApp = readBooleanOption('app') ?? config.includeApp ?? false
 const responsiveVariants = readBooleanOption('responsive-variants') ?? config.responsiveVariants ?? false
 const failOnUnsupported = readBooleanOption('fail-on-unsupported') ?? config.failOnUnsupported ?? true
 const quiet = args.includes('--quiet') || config.quiet === true
@@ -168,6 +179,7 @@ function validateConfig(config, label) {
   assertOptionalString(config, 'cwd', errors)
   assertOptionalString(config, 'out', errors)
   assertOptionalBoolean(config, 'includeCore', errors)
+  assertOptionalBoolean(config, 'includeApp', errors)
   assertOptionalBoolean(config, 'responsiveVariants', errors)
   assertOptionalBoolean(config, 'failOnUnsupported', errors)
   assertOptionalBoolean(config, 'quiet', errors)
@@ -260,6 +272,7 @@ function isPlainObject(value) {
 function printHelp() {
   console.log(`Usage:
   synced-fluid init [options]
+  synced-fluid add app [options]
   synced-fluid build [options]
   synced-fluid doctor [options]
   synced-fluid validate [options]
@@ -277,6 +290,9 @@ Options:
   --check                      Fail if the generated CSS is out of date.
   --include-core               Include reset, base, layout, and component CSS in output.
   --no-include-core            Only generate project tokens and utility CSS.
+  --app                        Include app.css opinionated app/site defaults.
+  --no-app                     Keep app.css out of init/generated core output.
+  --file <file>                CSS file to update for "synced-fluid add app".
   --responsive-variants        Enable sm:/md:/lg:/xl: compatibility variants.
   --no-responsive-variants     Treat responsive variants as unsupported.
   --fail-on-unsupported        Fail when class tokens cannot be generated.
@@ -301,6 +317,7 @@ async function runInit() {
   const noScripts = args.includes('--no-scripts')
   const responsive = readBooleanOption('responsive-variants') ?? preset === 'legacy'
   const includeCore = readBooleanOption('include-core') ?? preset === 'wordpress'
+  const includeApp = readBooleanOption('app') ?? defaultIncludeApp(preset)
   const scanDirs = readOptions('scan').length ? readOptions('scan') : defaultScanDirs(targetCwd, preset)
   const outPath = readOption('out') ?? defaultOutputPath(targetCwd, preset)
   const stylePath = includeCore ? outPath : defaultStyleEntryPath(targetCwd, preset, outPath)
@@ -319,7 +336,7 @@ export default defineConfig({
   scan: ${formatStringArray(scanDirs)},
   out: '${outPath}',
   responsiveVariants: ${responsive},
-${includeCore ? '  includeCore: true,\n' : ''}  theme: themePresets.${themeName},
+${includeCore ? '  includeCore: true,\n' : ''}${includeCore && includeApp ? '  includeApp: true,\n' : ''}  theme: themePresets.${themeName},
 ${safelistValues.length ? `  safelist: ${formatStringArray(safelistValues)},\n` : ''}})
 `,
     force
@@ -336,7 +353,7 @@ ${safelistValues.length ? `  safelist: ${formatStringArray(safelistValues)},\n` 
     writeProjectFile(
       styleFile,
       `@import "@synced/fluid/styles.css";
-@import "./${relative(dirname(styleFile), generatedFile).replace(/\\/g, '/')}";
+${includeApp ? '@import "@synced/fluid/app.css";\n' : ''}@import "./${relative(dirname(styleFile), generatedFile).replace(/\\/g, '/')}";
 
 /* Prefer synced-fluid.config.mjs theme overrides for reusable project tokens. */
 `,
@@ -370,6 +387,47 @@ ${safelistValues.length ? `  safelist: ${formatStringArray(safelistValues)},\n` 
   }
   console.log('  2. Run pnpm fluid:build')
   console.log('  3. Run pnpm fluid:doctor')
+  if (includeApp) {
+    console.log('Note: app.css removes raw link underlines and list markers for common app/site UI. Use sf-link, sf-list-disc, or sf-prose when content semantics need them.')
+  } else {
+    console.log('Note: base CSS keeps links visibly underlined and list markers intact. Add @synced/fluid/app.css or run synced-fluid add app for app/site defaults.')
+  }
+}
+
+function runAddApp() {
+  const targetCwd = resolve(readOption('cwd', process.cwd()))
+  const cssPath = readOption('file') ?? readOption('css') ?? findStyleEntry(targetCwd)
+
+  if (!cssPath) {
+    console.error('Could not find a CSS entry. Pass --file <path>, for example: synced-fluid add app --file src/synced-fluid.css')
+    process.exit(1)
+  }
+
+  const cssFile = resolve(targetCwd, cssPath)
+  if (!existsSync(cssFile)) {
+    console.error(`CSS file not found: ${relative(targetCwd, cssFile)}`)
+    process.exit(1)
+  }
+
+  const css = readFileSync(cssFile, 'utf8')
+  if (css.includes('@synced/fluid/app.css')) {
+    console.log(`skip ${relative(targetCwd, cssFile)} already imports @synced/fluid/app.css.`)
+    return
+  }
+
+  const appImport = '@import "@synced/fluid/app.css";'
+  let nextCss
+
+  if (css.includes('@import "@synced/fluid/styles.css";')) {
+    nextCss = css.replace('@import "@synced/fluid/styles.css";', `@import "@synced/fluid/styles.css";\n${appImport}`)
+  } else if (css.includes('@import "@synced/fluid/base.css";')) {
+    nextCss = css.replace('@import "@synced/fluid/base.css";', `@import "@synced/fluid/base.css";\n${appImport}`)
+  } else {
+    nextCss = `${appImport}\n${css}`
+  }
+
+  writeFileSync(cssFile, nextCss)
+  console.log(`update ${relative(targetCwd, cssFile)} with @synced/fluid/app.css`)
 }
 
 async function runDoctor() {
@@ -475,7 +533,7 @@ function runTokens() {
       layout: ['sf-container', 'sf-section', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-frame', 'sf-cover'],
       components: ['sf-button', 'sf-card', 'sf-badge', 'sf-field', 'sf-input', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
-      utilities: ['sf-prose', 'sf-visually-hidden', 'sf-full-bleed'],
+      utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-full-bleed'],
     },
   }
 
@@ -535,6 +593,32 @@ function defaultStyleEntryPath(targetCwd, preset, outPath) {
   if (preset === 'wordpress') return outPath
   if (preset === 'plain') return 'synced-fluid.css'
   return existsSync(resolve(targetCwd, 'src')) ? 'src/synced-fluid.css' : 'synced-fluid.css'
+}
+
+function defaultIncludeApp(preset) {
+  return ['next', 'vite', 'react', 'astro', 'plain'].includes(preset)
+}
+
+function findStyleEntry(targetCwd) {
+  const candidates = [
+    'src/synced-fluid.css',
+    'app/synced-fluid.css',
+    'src/app/synced-fluid.css',
+    'synced-fluid.css',
+  ]
+
+  for (const candidate of candidates) {
+    if (existsSync(resolve(targetCwd, candidate))) return candidate
+  }
+
+  const roots = ['app', 'src', 'pages', 'components', 'assets'].filter((dir) => existsSync(resolve(targetCwd, dir)))
+  for (const root of roots) {
+    const files = listProjectFiles(resolve(targetCwd, root))
+    const match = files.find((file) => file.endsWith('.css') && readFileSync(file, 'utf8').includes('@synced/fluid/'))
+    if (match) return relative(targetCwd, match)
+  }
+
+  return null
 }
 
 function writeProjectFile(file, contents, force) {
@@ -1839,13 +1923,15 @@ ${pairs.join('\n')}
 
 function buildBaseCss() {
   return `@layer reset {
-  *, *::before, *::after { box-sizing: border-box; border: 0 solid var(--color-border); }
-  * { margin: 0; }
-  html { min-block-size: 100%; scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; }
+  *:where(:not(dialog)) { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body { min-block-size: 100%; }
   img, picture, video, canvas, svg { display: block; max-inline-size: 100%; }
+  img, video { block-size: auto; }
   input, button, textarea, select { font: inherit; }
   button, input:where([type="button"], [type="submit"], [type="reset"]) { appearance: button; }
+  [hidden]:where(:not([hidden="until-found"])) { display: none !important; }
 }
 
 @layer base {
@@ -1868,7 +1954,13 @@ function buildBaseCss() {
 
   :where(p, li) { text-wrap: pretty; }
 
-  :where(a) { color: inherit; text-decoration: none; text-underline-offset: .2em; }
+  :where(a) {
+    color: inherit;
+    text-decoration-color: color-mix(in oklch, currentColor 55%, transparent);
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: .08em;
+    text-underline-offset: .18em;
+  }
 
   :where(button:not(:disabled), [role="button"]:not(:disabled), a[href]) { cursor: pointer; }
 
@@ -1893,6 +1985,33 @@ function buildBaseCss() {
       transition-duration: 0.01ms !important;
     }
   }
+}`
+}
+
+function buildAppCss() {
+  return `@layer app {
+  :where(a) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :where(ol, ul, menu) {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  :where(button) {
+    background: transparent;
+    border: 0;
+    color: inherit;
+  }
+
+  :where(fieldset) {
+    border: 0;
+    padding: 0;
+  }
+
+  :where(legend) { padding: 0; }
 }`
 }
 
@@ -2132,6 +2251,122 @@ function buildComponentCss() {
 }`
 }
 
+function buildStaticUtilitiesCss() {
+  return `@layer utilities {
+  .sf-text-caption { font-size: var(--step--1); line-height: 1.35; }
+  .sf-text-body { font-size: var(--step-0); line-height: 1.5; }
+  .sf-text-lead { font-size: var(--step-1); line-height: 1.45; }
+  .sf-text-h4 { font-size: var(--step-3); line-height: 1.1; }
+  .sf-text-h3 { font-size: var(--step-4); line-height: 1.05; }
+  .sf-text-h2 { font-size: var(--step-5); line-height: 1; }
+  .sf-text-h1 { font-size: var(--step-6); line-height: 1; }
+  .sf-text-display { font-size: var(--step-7); line-height: .95; }
+
+  .sf-prose {
+    max-inline-size: var(--prose-width, 68ch);
+  }
+
+  :where(.sf-visually-hidden, .sr-only) {
+    block-size: 0.0625rem;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    inline-size: 0.0625rem;
+    margin: -0.0625rem;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  :where(.sf-not-visually-hidden, .not-sr-only) {
+    block-size: auto;
+    clip: auto;
+    clip-path: none;
+    inline-size: auto;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    position: static;
+    white-space: normal;
+  }
+
+  .sf-skip-link {
+    background: var(--color-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    color: var(--color-primary-foreground);
+    inset-block-start: var(--space-s);
+    inset-inline-start: var(--space-s);
+    padding-block: var(--space-2xs);
+    padding-inline: var(--space-s);
+    position: fixed;
+    text-decoration: none;
+    transform: translateY(calc(-100% - var(--space-m)));
+    transition: transform var(--duration-fast) var(--ease-standard);
+    z-index: 999;
+  }
+
+  .sf-skip-link:focus-visible { transform: translateY(0); }
+
+  .sf-focus-ring:focus-visible {
+    outline: 0.125rem solid var(--color-ring);
+    outline-offset: .2rem;
+  }
+
+  .sf-focus-ring-inset:focus-visible {
+    outline: 0.125rem solid var(--color-ring);
+    outline-offset: -0.125rem;
+  }
+
+  .sf-touch-target {
+    min-block-size: 2.75rem;
+    min-inline-size: 2.75rem;
+  }
+
+  .sf-list-reset {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  .sf-list-disc {
+    list-style: disc;
+    padding-inline-start: var(--space-m);
+  }
+
+  .sf-list-decimal {
+    list-style: decimal;
+    padding-inline-start: var(--space-m);
+  }
+
+  :where(.sf-link, .sf-link-subtle) {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklch, currentColor 45%, transparent);
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: .08em;
+    text-underline-offset: .18em;
+  }
+
+  .sf-link { color: var(--color-primary); }
+
+  .sf-link:hover,
+  .sf-link-subtle:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .sf-link-plain {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .sf-full-bleed {
+    inline-size: 100vw;
+    margin-inline-start: 50%;
+    transform: translateX(-50%);
+  }
+}`
+}
+
 function buildUtilitiesCss(tokens) {
   const unsupported = []
   const rules = []
@@ -2170,11 +2405,11 @@ function buildUsedKeyframesCss(bases) {
 
 const tokens = collectClassTokens()
 const utilities = buildUtilitiesCss(tokens)
-const coreCss = includeCore ? [buildBaseCss(), buildLayoutCss(), buildComponentCss()] : []
+const coreCss = includeCore ? [buildBaseCss(), includeApp ? buildAppCss() : '', buildLayoutCss(), buildComponentCss(), buildStaticUtilitiesCss()] : []
 const themeCss = buildThemeCss(config.theme)
 const css = [
   '/* Generated by @synced/fluid. Edit synced-fluid.config.mjs or run synced-fluid build to refresh. */',
-  '@layer reset, tokens, base, layout, components, utilities, overrides;',
+  '@layer reset, tokens, base, app, layout, components, utilities, overrides;',
   buildTokensCss(),
   themeCss,
   ...coreCss,

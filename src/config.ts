@@ -74,6 +74,11 @@ export type SyncedFluidConfig = {
    */
   includeCore?: boolean
   /**
+   * Include app/site defaults when includeCore is true. For modular projects,
+   * import @synced/fluid/app.css from the CSS entry instead.
+   */
+  includeApp?: boolean
+  /**
    * Enable breakpoint-style variants such as sm:, md:, lg:, and xl:.
    * Leave false for strict fluid projects; enable only during migrations.
    */

@@ -28,13 +28,14 @@ Sizes are raw bytes and gzip bytes from `gzip -c`.
 
 | File | Raw | Gzip | Use |
 | --- | ---: | ---: | --- |
-| `tokens.css` | 6,062 B | 1,766 B | Design tokens only. |
-| `reset.css` | 567 B | 368 B | Reset layer only. |
-| `base.css` | 1,598 B | 719 B | Base element styles. |
-| `layout.css` | 3,034 B | 938 B | Layout primitives such as container, stack, grid, sidebar, and split. |
-| `components.css` | 6,194 B | 1,302 B | Component primitives such as button, card, badge, field, and input. |
-| `utilities.css` | 1,157 B | 492 B | Static `sf-text-*`, prose, visually-hidden, and full-bleed helpers. |
-| `styles.css` | 17,812 B | 4,227 B | Full backwards-compatible core stylesheet. |
+| `tokens.css` | 6,067 B | 1,769 B | Design tokens only. |
+| `reset.css` | 713 B | 430 B | Reset layer only. |
+| `base.css` | 1,732 B | 751 B | Base element styles. |
+| `app.css` | 505 B | 296 B | Optional app/site defaults for raw links, lists, and controls. |
+| `layout.css` | 3,039 B | 941 B | Layout primitives such as container, stack, grid, sidebar, and split. |
+| `components.css` | 6,199 B | 1,305 B | Component primitives such as button, card, badge, field, and input. |
+| `utilities.css` | 3,094 B | 1,015 B | Static type, prose, accessibility, link, list, and full-bleed helpers. |
+| `styles.css` | 20,019 B | 4,633 B | Full backwards-compatible core stylesheet. |
 
 Example generated project CSS with tokens plus one scanned `text-primary`
 utility measured 7,031 B raw and 1,943 B gzip.
@@ -53,14 +54,16 @@ Use layer imports when a project wants a smaller core surface:
 @import "@synced/fluid/tokens.css";
 @import "@synced/fluid/reset.css";
 @import "@synced/fluid/base.css";
+@import "@synced/fluid/app.css";
 @import "@synced/fluid/layout.css";
 @import "@synced/fluid/components.css";
 @import "./synced-fluid.generated.css";
 ```
 
 Leave out `components.css` if the project only uses tokens and layout
-primitives. Leave out `utilities.css` unless the project uses static `sf-text-*`,
-`sf-prose`, `sf-visually-hidden`, or `sf-full-bleed` helpers.
+primitives. Leave out `app.css` when content-style browser affordances should
+stay intact. Leave out `utilities.css` unless the project uses static type,
+prose, accessibility, link, list, or full-bleed helpers.
 
 ## WordPress
 
@@ -81,7 +84,7 @@ Safe claims:
 
 - Modern CSS-first: Synced Fluid uses cascade layers, custom properties,
   `clamp()`, logical properties, OKLCH colour, and container-aware primitives.
-- Compact by default: the full core stylesheet is currently about 4.2 KB gzip.
+- Compact by default: the full core stylesheet is currently about 4.6 KB gzip.
 - Flexible loading: developers can import only the CSS layers their project
   uses.
 - Source-scanned utilities: project utility CSS is generated from actual class
