@@ -1,0 +1,74 @@
+{
+  "name": "@synced/fluid",
+  "version": "0.1.0",
+  "description": "Standalone fluid CSS design system framework for Synced and reusable projects.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SyncedCo/synced-fluid.git"
+  },
+  "homepage": "https://syncedco.com",
+  "bugs": {
+    "url": "https://github.com/SyncedCo/synced-fluid/issues"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js"
+    },
+    "./presets": {
+      "types": "./src/presets.d.mts",
+      "import": "./src/presets.mjs"
+    },
+    "./tokens": "./src/tokens.mjs",
+    "./tokens.css": "./tokens.css",
+    "./reset.css": "./reset.css",
+    "./base.css": "./base.css",
+    "./layout.css": "./layout.css",
+    "./components.css": "./components.css",
+    "./utilities.css": "./utilities.css",
+    "./styles.css": "./styles.css"
+  },
+  "files": [
+    "*.css",
+    "bin",
+    "dist",
+    "docs",
+    "examples",
+    "src",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "SECURITY.md",
+    "SUPPORT.md",
+    "TRADEMARKS.md"
+  ],
+  "bin": {
+    "synced-fluid": "./bin/synced-fluid.mjs"
+  },
+  "scripts": {
+    "build": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
+    "build:css": "node scripts/build-css.mjs",
+    "check": "node scripts/build-css.mjs --check && tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepack": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
+    "prepare": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
+    "test": "pnpm build && node --test tests/*.test.mjs",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "synced-fluid-next-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "fluid:build": "synced-fluid build",
+    "fluid:check": "synced-fluid build --check",
+    "fluid:doctor": "synced-fluid doctor"
+  },
+  "dependencies": {
+    "@synced/fluid": "file:../..",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

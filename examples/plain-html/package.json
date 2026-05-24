@@ -1,0 +1,13 @@
+{
+  "name": "synced-fluid-plain-html-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fluid:build": "synced-fluid build",
+    "fluid:check": "synced-fluid build --check",
+    "fluid:doctor": "synced-fluid doctor"
+  },
+  "dependencies": {
+    "@synced/fluid": "file:../.."
+  }
+}
