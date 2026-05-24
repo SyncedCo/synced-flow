@@ -69,6 +69,7 @@ can build a basic website before project-specific CSS is needed.
 For copy-ready website sections, see [Website patterns](website-patterns.md).
 For accessible state styling and markup hooks, see
 [Accessibility CSS](accessibility-css.md).
+For the stable public surface, see [CSS API Contract](api-contract.md).
 
 ## Base Defaults
 
@@ -84,6 +85,9 @@ pnpm fluid:build
 pnpm fluid:check
 pnpm fluid:doctor
 ```
+
+In this repository, `pnpm check` also runs package guardrails for dependency
+count, gzip budgets, generated CSS shape, and raw-pixel usage.
 
 ## Theme Tokens
 

@@ -59,7 +59,8 @@
   "scripts": {
     "build": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
     "build:css": "node scripts/build-css.mjs",
-    "check": "node scripts/build-css.mjs --check && tsc --noEmit",
+    "check": "node scripts/build-css.mjs --check && tsc --noEmit && node scripts/guardrails.mjs",
+    "guardrails": "node scripts/guardrails.mjs",
     "clean": "rm -rf dist",
     "prepack": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
     "prepare": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",

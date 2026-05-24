@@ -1215,16 +1215,22 @@ ${typeUtilities.join('\n')}
     color: var(--sf-colour-primary-foreground);
     inset-block-start: var(--sf-space-s);
     inset-inline-start: var(--sf-space-s);
+    opacity: 0;
     padding-block: var(--sf-space-2xs);
     padding-inline: var(--sf-space-s);
+    pointer-events: none;
     position: fixed;
     text-decoration: none;
     transform: translateY(calc(-100% - var(--sf-space-m)));
-    transition: transform var(--sf-duration-fast) var(--sf-ease-standard);
+    transition: opacity var(--sf-duration-fast) var(--sf-ease-standard), transform var(--sf-duration-fast) var(--sf-ease-standard);
     z-index: 999;
   }
 
-  .sf-skip-link:focus-visible { transform: translateY(0); }
+  .sf-skip-link:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
 
   .sf-focus-ring:focus-visible {
     outline: 0.125rem solid var(--sf-colour-ring);

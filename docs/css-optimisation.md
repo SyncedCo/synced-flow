@@ -100,6 +100,15 @@ Safe claims:
 - Dependency-free runtime: the JavaScript entry currently ships without runtime
   package dependencies.
 
+The package guardrail script enforces current gzip budgets:
+
+```bash
+pnpm guardrails
+```
+
+Budgets are intentionally tight enough to catch accidental bloat while leaving
+room for small improvements to the core primitives.
+
 Avoid claiming:
 
 - automatic CSS tree-shaking in every bundler

@@ -15,6 +15,24 @@ export const themePresets = {
       primaryHover: 'oklch(60% 0.17 42)',
       primaryForeground: 'oklch(100% 0 0)',
       accent: 'oklch(70% 0.12 205)',
+      link: 'oklch(58% 0.17 42)',
+      linkHover: 'oklch(68% 0.18 44)',
+      ring: 'oklch(68% 0.18 44)',
+    },
+    components: {
+      button: {
+        radius: '0.5rem',
+        blockSize: '2.75rem',
+        paddingInline: 'var(--sf-space-s)',
+      },
+      card: {
+        radius: '0.75rem',
+        padding: 'var(--sf-space-m-l)',
+      },
+      input: {
+        radius: '0.5rem',
+        blockSize: '2.75rem',
+      },
     },
   },
   neutralSaas: {
@@ -33,9 +51,26 @@ export const themePresets = {
       primaryHover: 'oklch(44% 0.13 250)',
       primaryForeground: 'oklch(100% 0 0)',
       accent: 'oklch(70% 0.12 205)',
+      link: 'oklch(45% 0.13 250)',
+      linkHover: 'oklch(52% 0.14 250)',
+      ring: 'oklch(52% 0.14 250)',
     },
     layout: {
       containerMax: '76rem',
+      gutter: 'var(--sf-space-s-l)',
+    },
+    components: {
+      button: {
+        radius: '0.5rem',
+        blockSize: '2.625rem',
+      },
+      card: {
+        radius: '0.625rem',
+      },
+      input: {
+        radius: '0.5rem',
+        blockSize: '2.625rem',
+      },
     },
   },
   editorial: {
@@ -54,9 +89,26 @@ export const themePresets = {
       primaryHover: 'oklch(50% 0.16 40)',
       primaryForeground: 'oklch(100% 0 0)',
       accent: 'oklch(62% 0.13 150)',
+      link: 'oklch(50% 0.16 40)',
+      linkHover: 'oklch(58% 0.17 42)',
+      ring: 'oklch(58% 0.17 42)',
     },
     layout: {
       containerMax: '72rem',
+      gutter: 'var(--sf-space-m-l)',
+    },
+    components: {
+      button: {
+        radius: '999rem',
+        blockSize: '2.75rem',
+      },
+      card: {
+        radius: '0.5rem',
+        padding: 'var(--sf-space-l)',
+      },
+      input: {
+        radius: '0.375rem',
+      },
     },
   },
   darkApp: {
@@ -75,14 +127,43 @@ export const themePresets = {
       primaryHover: 'oklch(76% 0.12 205)',
       primaryForeground: 'oklch(13.5% 0.03 252)',
       accent: 'oklch(68% 0.18 44)',
+      link: 'oklch(76% 0.12 205)',
+      linkHover: 'oklch(82% 0.1 205)',
+      ring: 'oklch(70% 0.12 205)',
     },
     darkColours: {
       background: 'oklch(13.5% 0.03 252)',
       foreground: 'oklch(96% 0.008 86)',
       muted: 'oklch(78% 0.012 86)',
+      subtle: 'oklch(68% 0.012 86)',
       surface: 'oklch(18% 0.026 250)',
       surfaceAlt: 'oklch(22% 0.024 248)',
+      surfaceRaised: 'oklch(21% 0.028 250)',
+      surfaceInset: 'oklch(15% 0.03 252)',
       border: 'oklch(100% 0 0 / 0.14)',
+      borderStrong: 'oklch(100% 0 0 / 0.24)',
+      primarySoft: 'oklch(70% 0.12 205 / 0.16)',
+      primarySoftBorder: 'oklch(70% 0.12 205 / 0.32)',
+      link: 'oklch(76% 0.12 205)',
+      linkHover: 'oklch(82% 0.1 205)',
+      ring: 'oklch(70% 0.12 205)',
+    },
+    layout: {
+      containerMax: '80rem',
+      gutter: 'var(--sf-space-s-l)',
+    },
+    components: {
+      button: {
+        radius: '0.5rem',
+        blockSize: '2.625rem',
+      },
+      card: {
+        radius: '0.75rem',
+      },
+      input: {
+        radius: '0.5rem',
+        blockSize: '2.625rem',
+      },
     },
   },
 }

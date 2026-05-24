@@ -107,3 +107,4 @@ See `examples/plain-html` for a complete page using the same primitives.
 
 For copy-ready section patterns, see [Website patterns](website-patterns.md).
 For accessibility state hooks, see [Accessibility CSS](accessibility-css.md).
+For public API stability rules, see [CSS API Contract](api-contract.md).

@@ -114,3 +114,16 @@ When an action is in progress, keep the accessible name visible and add state:
 
 Synced Fluid styles this as a busy state, but the consuming app should still
 manage focus, state changes, and completion messaging.
+
+## Confidence Checklist
+
+Use this when changing the CSS system or examples:
+
+- Navigate the demo with keyboard only.
+- Confirm focus is visible on links, buttons, form controls, summaries, and the
+  skip link.
+- Confirm invalid, required, disabled, busy, current, expanded, selected, and
+  pressed states remain visible when those states are present in markup.
+- Confirm `details`/`summary` works without JavaScript.
+- Confirm forced-colors styles do not depend only on subtle background colour.
+- Confirm examples use native elements before ARIA.

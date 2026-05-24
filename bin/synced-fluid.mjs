@@ -505,7 +505,7 @@ async function runDoctor() {
   }
 
   if (loadedConfig?.includeCore) pass('Core CSS is included in generated output.')
-  else if (projectContains(targetCwd, '@synced/fluid/styles.css')) pass('Core stylesheet import found.')
+  else if (projectContains(targetCwd, '@synced/fluid/styles.css') || projectContains(targetCwd, '@import "../../styles.css"')) pass('Core stylesheet import found.')
   else warn('Import @synced/fluid/styles.css from your app CSS or layout entry.')
 
   for (const message of messages) console.log(message)
@@ -659,6 +659,11 @@ function formatStringArray(values) {
 }
 
 function projectContains(targetCwd, needle) {
+  const rootFiles = ['synced-fluid.css', 'styles.css', 'style.css', 'app.css', 'global.css', 'globals.css']
+    .map((file) => resolve(targetCwd, file))
+    .filter((file) => existsSync(file))
+  if (rootFiles.some((file) => readFileSync(file, 'utf8').includes(needle))) return true
+
   const roots = ['app', 'src', 'pages', 'components', 'templates', 'parts', 'patterns', 'blocks', 'inc', 'includes', 'assets'].filter((dir) => existsSync(resolve(targetCwd, dir)))
   const files = roots.flatMap((root) => listProjectFiles(resolve(targetCwd, root)))
   return files.some((file) => readFileSync(file, 'utf8').includes(needle))

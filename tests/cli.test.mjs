@@ -174,6 +174,16 @@ test('doctor passes a configured project', () => {
   assert.match(output, /pass Core stylesheet import found/)
 })
 
+test('doctor finds core imports in root CSS entries', () => {
+  const cwd = tempProject()
+  run(['init', '--cwd', cwd, '--preset', 'plain'])
+  run(['build', '--cwd', cwd])
+
+  const output = run(['doctor', '--cwd', cwd])
+
+  assert.match(output, /pass Core stylesheet import found/)
+})
+
 test('init supports theme aliases', () => {
   const cwd = tempProject()
 
@@ -181,6 +191,24 @@ test('init supports theme aliases', () => {
 
   const config = readFileSync(join(cwd, 'synced-fluid.config.mjs'), 'utf8')
   assert.match(config, /theme: themePresets\.neutralSaas/)
+})
+
+test('theme presets include production-ready semantic and component tokens', async () => {
+  const { themePresets } = await import(pathToFileURL(join(packageRoot, 'src/presets.mjs')).href)
+
+  for (const [name, preset] of Object.entries(themePresets)) {
+    assert.ok(preset.fonts?.sans, `${name} has a sans font`)
+    assert.ok(preset.fonts?.display, `${name} has a display font`)
+    assert.ok(preset.colours?.background, `${name} has a background colour`)
+    assert.ok(preset.colours?.foreground, `${name} has a foreground colour`)
+    assert.ok(preset.colours?.surface, `${name} has a surface colour`)
+    assert.ok(preset.colours?.primary, `${name} has a primary colour`)
+    assert.ok(preset.colours?.link, `${name} has a link colour`)
+    assert.ok(preset.colours?.ring, `${name} has a focus ring colour`)
+    assert.ok(preset.components?.button, `${name} has button component tokens`)
+    assert.ok(preset.components?.card, `${name} has card component tokens`)
+    assert.ok(preset.components?.input, `${name} has input component tokens`)
+  }
 })
 
 test('init supports WordPress themes with enqueue-ready CSS output', () => {
@@ -257,6 +285,15 @@ test('package exposes modular CSS layer files', () => {
   assert.match(utilitiesCss, /\.sf-skip-link/)
   assert.match(utilitiesCss, /\.sf-list-reset/)
   assert.match(utilitiesCss, /\.sf-link-plain/)
+})
+
+test('package guardrails pass', () => {
+  const output = execFileSync('node', ['scripts/guardrails.mjs'], {
+    cwd: packageRoot,
+    encoding: 'utf8',
+  })
+
+  assert.match(output, /pass guardrails/)
 })
 
 test('invalid config fails with actionable errors', () => {
