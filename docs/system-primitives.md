@@ -17,6 +17,7 @@ Use the `--sf-*` variables as the stable CSS foundation.
 | State | `--sf-colour-success`, `--sf-colour-warning`, `--sf-colour-danger`, `--sf-colour-info` | Feedback and notices. |
 | Motion | `--sf-duration-fast`, `--sf-duration-normal`, `--sf-ease-standard` | Consistent transitions. |
 | Component | `--sf-button-*`, `--sf-card-*`, `--sf-input-*`, `--sf-alert-*` | Reusable component defaults. |
+| Accessibility | `:focus-visible`, `:target`, `[aria-invalid]`, `[aria-current]`, `[aria-expanded]`, `[aria-selected]`, `[aria-busy]`, `[aria-disabled]` | Visible native and ARIA states. |
 
 Dark mode can be applied with `.sf-theme-dark` or `[data-sf-theme="dark"]`.
 
@@ -51,6 +52,7 @@ These cover the common UI elements needed for a simple site.
 | `sf-card`, `sf-card--flat`, `sf-card--raised`, `sf-card--interactive` | Card surfaces. |
 | `sf-card__header`, `sf-card__body`, `sf-card__footer`, `sf-card__title`, `sf-card__description` | Card structure. |
 | `sf-surface`, `sf-surface--alt`, `sf-surface--raised` | Generic reusable panels. |
+| `sf-logo-cloud`, `sf-feature`, `sf-stats`, `sf-testimonial`, `sf-pricing-grid`, `sf-faq`, `sf-cta`, `sf-footer` | Common website patterns. |
 | `sf-nav`, `sf-nav__list`, `sf-nav__link` | Navigation basics. |
 | `sf-form`, `sf-fieldset`, `sf-field`, `sf-label`, `sf-help`, `sf-error` | Form structure and messaging. |
 | `sf-input`, `sf-select`, `sf-textarea`, `sf-check` | Form controls. |
@@ -102,3 +104,6 @@ Use utility classes for small decisions that do not need a new component.
 ```
 
 See `examples/plain-html` for a complete page using the same primitives.
+
+For copy-ready section patterns, see [Website patterns](website-patterns.md).
+For accessibility state hooks, see [Accessibility CSS](accessibility-css.md).

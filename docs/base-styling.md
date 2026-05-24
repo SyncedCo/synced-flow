@@ -89,6 +89,11 @@ Use `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-help`, and
 `sf-error` for common form needs. Use `sf-alert` variants for notices and
 feedback.
 
+Synced Fluid also styles accessible states such as `[aria-invalid="true"]`,
+`[aria-disabled="true"]`, `[aria-busy="true"]`, `[aria-current="page"]`, and
+required-field markers. See [Accessibility CSS](accessibility-css.md) for the
+markup contract.
+
 ## List Utilities
 
 - `sf-list-reset` removes list markers and start padding for navigation or UI

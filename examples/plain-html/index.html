@@ -84,22 +84,122 @@
       </section>
 
       <section class="sf-section sf-bg-surface-alt" id="systems">
-        <div class="sf-container sf-split">
-          <div class="sf-stack">
-            <p class="sf-kicker">System first</p>
-            <h2>Start with reusable decisions, then customize only what matters.</h2>
-            <p class="sf-prose sf-text-muted">
-              Synced Fluid keeps defaults practical and gives projects semantic variables for
-              brand-specific choices. That keeps the first page fast while leaving room for product
-              or client identity.
-            </p>
+        <div class="sf-container sf-stack sf-stack--loose">
+          <div class="sf-logo-cloud" aria-label="Example trusted by">
+            <span>Studio</span>
+            <span>Agency</span>
+            <span>Startup</span>
+            <span>Product</span>
           </div>
-          <div class="sf-alert sf-alert--info">
-            <p class="sf-alert__title">No page CSS required for this demo</p>
-            <p>
-              The page uses the package stylesheet, semantic tokens, and reusable classes for all
-              visible layout and common UI styling.
-            </p>
+
+          <div class="sf-split">
+            <div class="sf-stack">
+              <p class="sf-kicker">System first</p>
+              <h2>Start with reusable decisions, then customize only what matters.</h2>
+              <p class="sf-prose sf-text-muted">
+                Synced Fluid keeps defaults practical and gives projects semantic variables for
+                brand-specific choices. That keeps the first page fast while leaving room for product
+                or client identity.
+              </p>
+            </div>
+            <div class="sf-alert sf-alert--info" role="status">
+              <p class="sf-alert__title">No page CSS required for this demo</p>
+              <p>
+                The page uses the package stylesheet, semantic tokens, and reusable classes for all
+                visible layout and common UI styling.
+              </p>
+            </div>
+          </div>
+
+          <div class="sf-stats">
+            <div class="sf-stat">
+              <p class="sf-stat__value">6.5 KB</p>
+              <p class="sf-stat__label">Full core gzip size</p>
+            </div>
+            <div class="sf-stat">
+              <p class="sf-stat__value">0</p>
+              <p class="sf-stat__label">Runtime dependencies</p>
+            </div>
+            <div class="sf-stat">
+              <p class="sf-stat__value">1</p>
+              <p class="sf-stat__label">CSS entry to import</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sf-section">
+        <div class="sf-container sf-stack sf-stack--loose">
+          <div class="sf-section-header">
+            <p class="sf-kicker">Website patterns</p>
+            <h2>Common sections without inventing new CSS every time.</h2>
+          </div>
+
+          <div class="sf-auto-grid">
+            <article class="sf-feature">
+              <span class="sf-feature__icon" aria-hidden="true">1</span>
+              <h3 class="sf-feature__title">Feature blocks</h3>
+              <p class="sf-feature__text">Use icons, titles, and supporting text for product or service sections.</p>
+            </article>
+            <article class="sf-feature">
+              <span class="sf-feature__icon" aria-hidden="true">2</span>
+              <h3 class="sf-feature__title">Proof sections</h3>
+              <p class="sf-feature__text">Combine stats, testimonials, and logo clouds with the same token rhythm.</p>
+            </article>
+            <article class="sf-feature">
+              <span class="sf-feature__icon" aria-hidden="true">3</span>
+              <h3 class="sf-feature__title">Conversion patterns</h3>
+              <p class="sf-feature__text">Build pricing, FAQs, forms, notices, and calls to action from named primitives.</p>
+            </article>
+          </div>
+
+          <figure class="sf-testimonial">
+            <blockquote class="sf-testimonial__quote">
+              "Synced Fluid gives us the repeatable parts first, so custom CSS is reserved for the brand moments."
+            </blockquote>
+            <figcaption class="sf-testimonial__meta">Example client, product team</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sf-section sf-bg-surface-alt">
+        <div class="sf-container sf-stack sf-stack--loose">
+          <div class="sf-section-header" data-align="center">
+            <p class="sf-kicker">Pricing and FAQ</p>
+            <h2>Useful commercial sections are part of the starter kit.</h2>
+          </div>
+
+          <div class="sf-pricing-grid">
+            <article class="sf-price-card">
+              <h3 class="sf-card__title">Starter</h3>
+              <div class="sf-price">
+                <span class="sf-price__value">£0</span>
+                <span class="sf-price__interval">prototype</span>
+              </div>
+              <p class="sf-card__description">Use the core primitives to build and test a new site direction.</p>
+              <a class="sf-button sf-button--outline sf-button--block" href="#contact">Try it</a>
+            </article>
+            <article class="sf-price-card sf-price-card--featured">
+              <p class="sf-badge">Most useful</p>
+              <h3 class="sf-card__title">Website</h3>
+              <div class="sf-price">
+                <span class="sf-price__value">£49</span>
+                <span class="sf-price__interval">project</span>
+              </div>
+              <p class="sf-card__description">Use patterns, docs, and examples to ship a complete marketing site.</p>
+              <a class="sf-button sf-button--default sf-button--block" href="#contact">Start</a>
+            </article>
+          </div>
+
+          <div class="sf-faq">
+            <details class="sf-faq__item">
+              <summary>Is this trying to replace Tailwind?</summary>
+              <p>No. Synced Fluid offers named CSS primitives and patterns for common website work.</p>
+            </details>
+            <details class="sf-faq__item">
+              <summary>Can I still customize a project?</summary>
+              <p>Yes. Override semantic tokens first, then add project CSS only for unique brand moments.</p>
+            </details>
           </div>
         </div>
       </section>
@@ -117,8 +217,9 @@
 
           <form class="sf-surface sf-form" action="/" method="post">
             <div class="sf-field">
-              <label for="name">Name</label>
-              <input class="sf-input" id="name" name="name" autocomplete="name" placeholder="Alex Morgan" />
+              <label class="sf-required" for="name">Name</label>
+              <input class="sf-input" id="name" name="name" autocomplete="name" placeholder="Alex Morgan" required aria-describedby="name-help" />
+              <p class="sf-help" id="name-help">Your name is required so the form has a clear accessible label and requirement.</p>
             </div>
 
             <div class="sf-field">
@@ -130,10 +231,11 @@
               </select>
             </div>
 
-            <div class="sf-field">
+            <div class="sf-field" data-invalid="true">
               <label for="message">Project notes</label>
-              <textarea class="sf-textarea" id="message" name="message" placeholder="Tell us what you want to build"></textarea>
-              <p class="sf-help">Use semantic classes first; add custom CSS only for truly project-specific styling.</p>
+              <textarea class="sf-textarea" id="message" name="message" placeholder="Tell us what you want to build" aria-invalid="true" aria-describedby="message-help message-error"></textarea>
+              <p class="sf-help" id="message-help">Use semantic classes first; add custom CSS only for truly project-specific styling.</p>
+              <p class="sf-error" id="message-error">Example invalid state: add a little more project detail.</p>
             </div>
 
             <label class="sf-check">
@@ -148,18 +250,21 @@
 
       <section class="sf-section sf-section--compact">
         <div class="sf-container">
-          <div class="sf-alert sf-alert--success">
-            <p class="sf-alert__title">Ready for a basic website build</p>
-            <p>
-              Header, hero, content, cards, form, call-to-action notice, and footer are all composed
-              from Synced Fluid primitives.
-            </p>
+          <div class="sf-cta" data-layout="split" role="status">
+            <div class="sf-stack sf-stack--tight">
+              <p class="sf-alert__title">Ready for a basic website build</p>
+              <p>
+                Header, hero, content, cards, proof, pricing, FAQ, form, call to action, and footer
+                are all composed from Synced Fluid primitives.
+              </p>
+            </div>
+            <a class="sf-button sf-button--default" href="#contact">Use the patterns</a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="sf-section sf-section--compact">
+    <footer class="sf-footer">
       <div class="sf-container sf-repel">
         <p class="sf-text-caption sf-text-muted">Synced Fluid plain HTML example</p>
         <a class="sf-link" href="#main">Back to top</a>

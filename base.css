@@ -73,6 +73,7 @@
   :where(button:not(:disabled), [role="button"]:not(:disabled), a[href]) { cursor: pointer; }
   :where(button:disabled, input:disabled, textarea:disabled, select:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
   :where(:focus-visible) { outline: 0.125rem solid var(--sf-colour-ring); outline-offset: .2rem; }
+  :where(:target) { scroll-margin-block: var(--sf-space-l); }
   ::selection { background: color-mix(in oklch, var(--sf-colour-primary) 28%, transparent); }
 
   @media (prefers-reduced-motion: reduce) {
@@ -82,6 +83,18 @@
       animation-iteration-count: 1 !important;
       scroll-behavior: auto !important;
       transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    :where(:focus-visible) {
+      outline: 2px solid Highlight;
+      outline-offset: .2rem;
+    }
+
+    ::selection {
+      background: Highlight;
+      color: HighlightText;
     }
   }
 }

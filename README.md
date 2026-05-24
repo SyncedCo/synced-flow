@@ -11,8 +11,11 @@ for class tokens, then generates project-specific utility CSS.
 - fluid scales: Utopia-style type and spacing clamps across the configured viewport range
 - layout primitives: container, section, stack, cluster, grid, sidebar, switcher, frame, cover, hero, and flow
 - component primitives: buttons, cards, surfaces, navigation, forms, alerts, badges, and section headers
+- website patterns: logo clouds, feature blocks, stats, testimonials, pricing, FAQ, CTA, and footer helpers
 - accessibility and base helpers: `sr-only`, `not-sr-only`, skip links, focus
   rings, touch targets, link helpers, and list helpers
+- accessibility state styling for invalid, required, disabled, busy, current,
+  expanded, pressed, selected, target, and forced-colors states
 - modular CSS layer exports when a project wants a smaller imported surface
 - modern CSS best practices: cascade layers, custom properties, logical
   properties, `clamp()`, OKLCH colour, container-aware primitives, and
@@ -108,13 +111,13 @@ Current built CSS sizes from `pnpm build` on 2026-05-24:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 31.7 KB | 6.5 KB | Full core stylesheet for simple setup. |
+| `styles.css` | 39.2 KB | 7.4 KB | Full core stylesheet for simple setup. |
 | `tokens.css` | 8.5 KB | 2.1 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
 | `base.css` | 3.1 KB | 1.1 KB | Base element styles. |
 | `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
 | `layout.css` | 3.8 KB | 1.1 KB | Fluid layout primitives. |
-| `components.css` | 11.9 KB | 2.3 KB | Button, card, surface, nav, form, alert, and input primitives. |
+| `components.css` | 19.1 KB | 3.2 KB | Button, card, surface, nav, form, alert, website pattern, accessibility state, and input primitives. |
 | `utilities.css` | 4.5 KB | 1.3 KB | Static `sf-*` helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The
@@ -238,7 +241,9 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 - [Quick start](docs/quick-start.md)
 - [AI usage guide](docs/ai-usage.md)
 - [Base styling decisions](docs/base-styling.md)
+- [Accessibility CSS](docs/accessibility-css.md)
 - [System primitives](docs/system-primitives.md)
+- [Website patterns](docs/website-patterns.md)
 - [CLI reference](docs/cli-reference.md)
 - [Config reference](docs/config-reference.md)
 - [CSS optimisation](docs/css-optimisation.md)

@@ -38,9 +38,9 @@ Sizes are raw bytes and gzip bytes from `gzip -c`.
 | `base.css` | 3,171 B | 1,077 B | Base element styles. |
 | `app.css` | 505 B | 296 B | Optional app/site defaults for raw links, lists, and controls. |
 | `layout.css` | 3,874 B | 1,136 B | Layout primitives such as container, stack, grid, sidebar, and split. |
-| `components.css` | 12,197 B | 2,317 B | Component primitives such as button, card, surface, nav, form, alert, and input. |
+| `components.css` | 19,569 B | 3,328 B | Component primitives such as button, card, surface, nav, form, alert, website patterns, accessibility states, and input. |
 | `utilities.css` | 4,654 B | 1,287 B | Static type, prose, accessibility, link, list, colour, border, and shadow helpers. |
-| `styles.css` | 32,480 B | 6,605 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
+| `styles.css` | 40,136 B | 7,539 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
 
 Example generated project CSS with tokens plus one scanned `text-primary`
 utility measured 7,031 B raw and 1,943 B gzip.
@@ -91,7 +91,7 @@ Safe claims:
 
 - Modern CSS-first: Synced Fluid uses cascade layers, custom properties,
   `clamp()`, logical properties, OKLCH colour, and container-aware primitives.
-- Compact by default: the full core stylesheet is currently about 6.5 KB gzip.
+- Compact by default: the full core stylesheet is currently about 7.4 KB gzip.
 - Flexible loading: developers can import only the CSS layers their project
   uses.
 - Source-scanned utilities: project utility CSS is generated from actual class
