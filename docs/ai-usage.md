@@ -2,6 +2,9 @@
 
 Use this when an AI agent is building or editing a project with Synced Fluid.
 
+For Codex-style skill loaders, use the repo-shipped skill at
+[`skills/synced-fluid/SKILL.md`](../skills/synced-fluid/SKILL.md).
+
 ## First Moves
 
 1. Install the package.

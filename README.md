@@ -206,6 +206,7 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 - [Presets](docs/presets.md)
 - [Recipes](docs/recipes.md)
 - [WordPress](docs/wordpress.md)
+- [Synced Fluid skill](skills/synced-fluid/SKILL.md)
 - [Tokens guide](docs/tokens.md)
 - [Tailwind comparison](docs/tailwind-comparison.md)
 - [Migration from Tailwind](docs/migration-from-tailwind.md)
