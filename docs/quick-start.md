@@ -28,8 +28,19 @@ Import that file once from your app entry, root layout, or main CSS file.
 import './synced-fluid.css'
 ```
 
-Bundled projects can import the full package stylesheet, or only the layers they
-use:
+Choose one core import strategy. Most projects use the full package stylesheet:
+
+```css
+@import "@synced/fluid/styles.css";
+@import "@synced/fluid/app.css";
+@import "./synced-fluid.generated.css";
+```
+
+`styles.css` already includes tokens, reset, base, layout, components, and
+static utilities. Do not also import those modular files alongside `styles.css`.
+
+For tighter loading, skip `styles.css` and import only the layers the project
+uses:
 
 ```css
 @import "@synced/fluid/tokens.css";
@@ -38,6 +49,8 @@ use:
 @import "@synced/fluid/app.css";
 @import "@synced/fluid/layout.css";
 @import "@synced/fluid/components.css";
+@import "@synced/fluid/utilities.css";
+@import "./synced-fluid.generated.css";
 ```
 
 `app.css` is optional. It removes raw link underlines and list markers for
@@ -49,6 +62,10 @@ Keep `utilities.css` out unless the project uses static helpers such as
 `sf-focus-ring`, `sf-touch-target`, `sf-list-reset`, `sf-link`, or
 `sf-full-bleed`. The generated CSS file already emits source-scanned utility
 classes.
+
+For the supported starter surface, see [System primitives](system-primitives.md).
+It lists the tokens, layout classes, component classes, and utility helpers that
+can build a basic website before project-specific CSS is needed.
 
 ## Base Defaults
 

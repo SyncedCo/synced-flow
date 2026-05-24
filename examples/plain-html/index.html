@@ -7,15 +7,163 @@
     <link rel="stylesheet" href="./synced-fluid.css" />
   </head>
   <body>
-    <main class="sf-section">
-      <section class="sf-container sf-stack">
-        <p class="sf-badge">Plain HTML starter</p>
-        <h1 class="sf-text-display">Fluid CSS without framework ceremony.</h1>
-        <p class="sf-text-lead sf-prose">
-          Use the package stylesheet, generated utility CSS, and semantic tokens in any project.
-        </p>
-        <a class="sf-button sf-button--default" href="/">Start building</a>
+    <a class="sf-skip-link" href="#main">Skip to main content</a>
+
+    <header class="sf-section sf-section--compact">
+      <nav class="sf-container sf-nav" aria-label="Primary">
+        <a class="sf-link-plain sf-text-h4 sf-font-display" href="/">Synced Fluid</a>
+        <ul class="sf-nav__list">
+          <li><a class="sf-nav__link" href="#features" aria-current="page">Features</a></li>
+          <li><a class="sf-nav__link" href="#systems">Systems</a></li>
+          <li><a class="sf-nav__link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="sf-hero">
+        <div class="sf-container sf-split">
+          <div class="sf-stack sf-stack--loose">
+            <div class="sf-stack sf-stack--tight">
+              <p class="sf-badge">Plain HTML starter</p>
+              <h1 class="sf-text-display">Build a modern fluid website without custom component CSS.</h1>
+            </div>
+            <p class="sf-text-lead sf-prose sf-text-muted">
+              This page uses Synced Fluid tokens, base styles, layouts, components, and utilities for
+              common website needs: navigation, sections, cards, forms, alerts, buttons, and responsive flow.
+            </p>
+            <div class="sf-button-group">
+              <a class="sf-button sf-button--default" href="#contact">Start building</a>
+              <a class="sf-button sf-button--outline" href="#features">View primitives</a>
+            </div>
+          </div>
+
+          <aside class="sf-surface sf-surface--raised sf-stack" aria-label="Starter coverage">
+            <p class="sf-kicker">Included primitives</p>
+            <ul class="sf-list-disc sf-flow">
+              <li>Fluid type and spacing tokens</li>
+              <li>Containers, stacks, splits, grids, and surfaces</li>
+              <li>Buttons, links, forms, cards, alerts, and focus states</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="sf-section" id="features">
+        <div class="sf-container sf-stack sf-stack--loose">
+          <div class="sf-section-header" data-align="center">
+            <p class="sf-kicker">Core building blocks</p>
+            <h2 class="sf-text-h1">Enough structure for a real website.</h2>
+            <p class="sf-text-lead sf-text-muted">
+              A developer can compose these pieces without writing one-off CSS for basic layout,
+              spacing, surfaces, typography, or interactive states.
+            </p>
+          </div>
+
+          <div class="sf-auto-grid">
+            <article class="sf-card sf-card--interactive sf-stack">
+              <div class="sf-card__header">
+                <h3 class="sf-card__title">Fluid foundations</h3>
+                <p class="sf-card__description">Type, spacing, radii, borders, shadows, and semantic colour roles.</p>
+              </div>
+            </article>
+            <article class="sf-card sf-card--interactive sf-stack">
+              <div class="sf-card__header">
+                <h3 class="sf-card__title">Layout primitives</h3>
+                <p class="sf-card__description">Containers, sections, stacks, clusters, splits, grids, frames, and covers.</p>
+              </div>
+            </article>
+            <article class="sf-card sf-card--interactive sf-stack">
+              <div class="sf-card__header">
+                <h3 class="sf-card__title">Common UI</h3>
+                <p class="sf-card__description">Buttons, forms, cards, alerts, nav links, badges, and accessible helpers.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sf-section sf-bg-surface-alt" id="systems">
+        <div class="sf-container sf-split">
+          <div class="sf-stack">
+            <p class="sf-kicker">System first</p>
+            <h2>Start with reusable decisions, then customize only what matters.</h2>
+            <p class="sf-prose sf-text-muted">
+              Synced Fluid keeps defaults practical and gives projects semantic variables for
+              brand-specific choices. That keeps the first page fast while leaving room for product
+              or client identity.
+            </p>
+          </div>
+          <div class="sf-alert sf-alert--info">
+            <p class="sf-alert__title">No page CSS required for this demo</p>
+            <p>
+              The page uses the package stylesheet, semantic tokens, and reusable classes for all
+              visible layout and common UI styling.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sf-section" id="contact">
+        <div class="sf-container sf-split">
+          <div class="sf-stack">
+            <p class="sf-kicker">Forms included</p>
+            <h2>Collect a lead without rebuilding inputs from scratch.</h2>
+            <p class="sf-prose sf-text-muted">
+              Fields, labels, help text, textarea, select, checkbox, focus rings, disabled states,
+              and buttons all share the same token system.
+            </p>
+          </div>
+
+          <form class="sf-surface sf-form" action="/" method="post">
+            <div class="sf-field">
+              <label for="name">Name</label>
+              <input class="sf-input" id="name" name="name" autocomplete="name" placeholder="Alex Morgan" />
+            </div>
+
+            <div class="sf-field">
+              <label for="project">Project type</label>
+              <select class="sf-select" id="project" name="project">
+                <option>Marketing website</option>
+                <option>Product site</option>
+                <option>Web app shell</option>
+              </select>
+            </div>
+
+            <div class="sf-field">
+              <label for="message">Project notes</label>
+              <textarea class="sf-textarea" id="message" name="message" placeholder="Tell us what you want to build"></textarea>
+              <p class="sf-help">Use semantic classes first; add custom CSS only for truly project-specific styling.</p>
+            </div>
+
+            <label class="sf-check">
+              <input type="checkbox" name="updates" />
+              <span>Send me practical CSS system updates.</span>
+            </label>
+
+            <button class="sf-button sf-button--default sf-button--block" type="submit">Send enquiry</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="sf-section sf-section--compact">
+        <div class="sf-container">
+          <div class="sf-alert sf-alert--success">
+            <p class="sf-alert__title">Ready for a basic website build</p>
+            <p>
+              Header, hero, content, cards, form, call-to-action notice, and footer are all composed
+              from Synced Fluid primitives.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
+
+    <footer class="sf-section sf-section--compact">
+      <div class="sf-container sf-repel">
+        <p class="sf-text-caption sf-text-muted">Synced Fluid plain HTML example</p>
+        <a class="sf-link" href="#main">Back to top</a>
+      </div>
+    </footer>
   </body>
 </html>

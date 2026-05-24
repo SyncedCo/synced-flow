@@ -9,6 +9,8 @@ make new projects consistent without hiding important browser affordances.
 - `ul` and `ol` keep their markers by default.
 - Form controls inherit project typography but keep their native semantics.
 - Focus styles are visible through `:focus-visible`.
+- Headings, code, blockquotes, horizontal rules, and selection states get
+  token-based defaults without removing their native meaning.
 
 ## Optional App Defaults
 
@@ -66,6 +68,26 @@ Available helpers:
   element has another clear affordance.
 
 Body and prose links should normally stay visibly identifiable.
+
+## Forms And UI Components
+
+The base layer keeps native form semantics, while component classes provide
+ready-to-use styling:
+
+```html
+<form class="sf-form">
+  <div class="sf-field">
+    <label for="email">Email</label>
+    <input class="sf-input" id="email" type="email" />
+    <p class="sf-help">We only use this for project updates.</p>
+  </div>
+  <button class="sf-button" type="submit">Send</button>
+</form>
+```
+
+Use `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-help`, and
+`sf-error` for common form needs. Use `sf-alert` variants for notices and
+feedback.
 
 ## List Utilities
 

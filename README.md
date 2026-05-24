@@ -6,10 +6,11 @@ It ships a fluid CSS foundation and a small CLI that scans a consuming project
 for class tokens, then generates project-specific utility CSS.
 
 - primitive tokens: fonts, OKLCH colour primitives, radii, shadows
-- semantic tokens: inherited surface, text, action, border, and state variables
-- component tokens: button, card, and input defaults
+- semantic tokens: inherited surface, text, action, border, link, and state variables
+- component tokens: button, card, input, alert, and navigation defaults
 - fluid scales: Utopia-style type and spacing clamps across the configured viewport range
-- layout primitives: container, section, stack, cluster, grid, sidebar, switcher, frame, cover, and flow
+- layout primitives: container, section, stack, cluster, grid, sidebar, switcher, frame, cover, hero, and flow
+- component primitives: buttons, cards, surfaces, navigation, forms, alerts, badges, and section headers
 - accessibility and base helpers: `sr-only`, `not-sr-only`, skip links, focus
   rings, touch targets, link helpers, and list helpers
 - modular CSS layer exports when a project wants a smaller imported surface
@@ -56,18 +57,25 @@ pnpm add git+https://github.com/SyncedCo/synced-fluid.git
 
 ## Import
 
-Most bundled apps can use the full stylesheet:
+Most projects should choose one core import strategy.
+
+Use the full stylesheet when simplicity matters:
 
 ```css
 @import "@synced/fluid/styles.css";
 @import "@synced/fluid/app.css";
 ```
 
+`styles.css` already includes the tokens, reset, base, layout, components, and
+static utilities layers. Do not also import those modular layer files alongside
+`styles.css`.
+
 `app.css` is optional. It applies common app/site defaults such as removing raw
 link underlines and list markers. Leave it out for content-heavy pages that
 should keep browser affordances by default.
 
-For tighter CSS loading, import only the layers the project uses:
+For tighter CSS loading, skip `styles.css` and import only the layers the
+project uses:
 
 ```css
 @import "@synced/fluid/tokens.css";
@@ -76,6 +84,7 @@ For tighter CSS loading, import only the layers the project uses:
 @import "@synced/fluid/app.css";
 @import "@synced/fluid/layout.css";
 @import "@synced/fluid/components.css";
+@import "@synced/fluid/utilities.css";
 ```
 
 ## CSS Size And Loading
@@ -99,14 +108,14 @@ Current built CSS sizes from `pnpm build` on 2026-05-24:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 20.0 KB | 4.6 KB | Full core stylesheet for simple setup. |
-| `tokens.css` | 6.1 KB | 1.8 KB | Design tokens only. |
+| `styles.css` | 31.7 KB | 6.5 KB | Full core stylesheet for simple setup. |
+| `tokens.css` | 8.5 KB | 2.1 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
-| `base.css` | 1.7 KB | 0.8 KB | Base element styles. |
+| `base.css` | 3.1 KB | 1.1 KB | Base element styles. |
 | `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
-| `layout.css` | 3.0 KB | 0.9 KB | Fluid layout primitives. |
-| `components.css` | 6.2 KB | 1.3 KB | Button, card, badge, field, and input primitives. |
-| `utilities.css` | 3.1 KB | 1.0 KB | Static `sf-*` helper utilities. |
+| `layout.css` | 3.8 KB | 1.1 KB | Fluid layout primitives. |
+| `components.css` | 11.9 KB | 2.3 KB | Button, card, surface, nav, form, alert, and input primitives. |
+| `utilities.css` | 4.5 KB | 1.3 KB | Static `sf-*` helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The
 Synced Fluid approach is explicit and predictable: import the core layers you
@@ -229,6 +238,7 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 - [Quick start](docs/quick-start.md)
 - [AI usage guide](docs/ai-usage.md)
 - [Base styling decisions](docs/base-styling.md)
+- [System primitives](docs/system-primitives.md)
 - [CLI reference](docs/cli-reference.md)
 - [Config reference](docs/config-reference.md)
 - [CSS optimisation](docs/css-optimisation.md)

@@ -6,7 +6,7 @@ export const fluidConfig = {
   minTypeScale: 1.2,
   maxTypeScale: 1.25,
   typeMinStep: -2,
-  typeMaxStep: 7,
+  typeMaxStep: 8,
   gridColumns: 12,
   gridMaxWidthRem: 90,
   radii: {

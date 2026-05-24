@@ -530,10 +530,10 @@ function runTokens() {
     components: componentTokens,
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
-      layout: ['sf-container', 'sf-section', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-frame', 'sf-cover'],
-      components: ['sf-button', 'sf-card', 'sf-badge', 'sf-field', 'sf-input', 'sf-section-header', 'sf-kicker'],
+      layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-frame', 'sf-cover'],
+      components: ['sf-button', 'sf-button-group', 'sf-card', 'sf-surface', 'sf-hero', 'sf-badge', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
-      utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-full-bleed'],
+      utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md'],
     },
   }
 

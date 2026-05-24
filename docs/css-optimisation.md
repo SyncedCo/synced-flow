@@ -22,20 +22,25 @@ CSS is not tree-shaken like JavaScript by default. The practical optimisation
 model is to import only the layers a project needs, then let
 `synced-fluid build` generate project-specific utility CSS.
 
+Choose either the bundled core stylesheet or modular layer imports. Do not
+import `styles.css` alongside `tokens.css`, `reset.css`, `base.css`,
+`layout.css`, `components.css`, or `utilities.css`, because `styles.css`
+already contains those layers.
+
 ## Current CSS Sizes
 
 Sizes are raw bytes and gzip bytes from `gzip -c`.
 
 | File | Raw | Gzip | Use |
 | --- | ---: | ---: | --- |
-| `tokens.css` | 6,067 B | 1,769 B | Design tokens only. |
+| `tokens.css` | 8,696 B | 2,192 B | Design tokens only. |
 | `reset.css` | 713 B | 430 B | Reset layer only. |
-| `base.css` | 1,732 B | 751 B | Base element styles. |
+| `base.css` | 3,171 B | 1,077 B | Base element styles. |
 | `app.css` | 505 B | 296 B | Optional app/site defaults for raw links, lists, and controls. |
-| `layout.css` | 3,039 B | 941 B | Layout primitives such as container, stack, grid, sidebar, and split. |
-| `components.css` | 6,199 B | 1,305 B | Component primitives such as button, card, badge, field, and input. |
-| `utilities.css` | 3,094 B | 1,015 B | Static type, prose, accessibility, link, list, and full-bleed helpers. |
-| `styles.css` | 20,019 B | 4,633 B | Full backwards-compatible core stylesheet. |
+| `layout.css` | 3,874 B | 1,136 B | Layout primitives such as container, stack, grid, sidebar, and split. |
+| `components.css` | 12,197 B | 2,317 B | Component primitives such as button, card, surface, nav, form, alert, and input. |
+| `utilities.css` | 4,654 B | 1,287 B | Static type, prose, accessibility, link, list, colour, border, and shadow helpers. |
+| `styles.css` | 32,480 B | 6,605 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
 
 Example generated project CSS with tokens plus one scanned `text-primary`
 utility measured 7,031 B raw and 1,943 B gzip.
@@ -46,9 +51,10 @@ Use the full stylesheet when simplicity matters:
 
 ```css
 @import "@synced/fluid/styles.css";
+@import "./synced-fluid.generated.css";
 ```
 
-Use layer imports when a project wants a smaller core surface:
+Use layer imports instead when a project wants a smaller core surface:
 
 ```css
 @import "@synced/fluid/tokens.css";
@@ -57,6 +63,7 @@ Use layer imports when a project wants a smaller core surface:
 @import "@synced/fluid/app.css";
 @import "@synced/fluid/layout.css";
 @import "@synced/fluid/components.css";
+@import "@synced/fluid/utilities.css";
 @import "./synced-fluid.generated.css";
 ```
 
@@ -84,7 +91,7 @@ Safe claims:
 
 - Modern CSS-first: Synced Fluid uses cascade layers, custom properties,
   `clamp()`, logical properties, OKLCH colour, and container-aware primitives.
-- Compact by default: the full core stylesheet is currently about 4.6 KB gzip.
+- Compact by default: the full core stylesheet is currently about 6.5 KB gzip.
 - Flexible loading: developers can import only the CSS layers their project
   uses.
 - Source-scanned utilities: project utility CSS is generated from actual class
