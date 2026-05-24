@@ -9,9 +9,21 @@ For Codex-style skill loaders, use the repo-shipped skill at
 
 1. Install the package.
 2. Run `synced-fluid init --preset <framework>`.
-3. Import the generated CSS entry once.
-4. Run `synced-fluid tokens --json` before choosing class names.
-5. Run `synced-fluid doctor` before finishing.
+3. Ask for a short theme brief: radius, fonts, primary colour, accent colour,
+   surface style, and density.
+4. Convert that brief into `synced-fluid.config.mjs` theme tokens.
+5. Import the generated CSS entry once.
+6. Run `synced-fluid tokens --json` before choosing class names.
+7. Run `synced-fluid doctor` before finishing.
+
+Good theme prompt:
+
+```text
+Use the Synced Fluid skill. Build a theme config for a modern B2B website:
+soft but not pill-shaped radius, system sans UI, editorial display headings,
+blue primary, green accent, light raised cards, and spacious sections.
+Return only the Synced Fluid config theme object.
+```
 
 ## Styling Rules
 
@@ -30,6 +42,7 @@ For Codex-style skill loaders, use the repo-shipped skill at
   `sf-touch-target`, `sf-list-reset`, `sf-link`, and `sf-link-plain` for
   accessibility and UI affordance work.
 - Use theme presets or config `theme` overrides for brand choices.
+- Put repeated brand decisions in theme tokens before adding custom CSS.
 - Keep class names complete in source files. Do not build classes from fragments.
 - Use `safelist` only when dynamic classes are unavoidable.
 - Do not enable `responsiveVariants` in new projects.

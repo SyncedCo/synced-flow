@@ -17,6 +17,52 @@ pnpm add git+https://github.com/SyncedCo/synced-fluid.git
 pnpm exec synced-fluid init
 ```
 
+## Shape The Theme First
+
+Before building pages, answer a small theme brief. This keeps brand decisions in
+tokens instead of scattered page CSS.
+
+- Radius: sharp, slightly rounded, or soft/curved?
+- Font family: system, geometric sans, editorial serif, or brand font?
+- Primary colour: main action and focus colour.
+- Secondary/accent colour: supporting highlights.
+- Surface style: flat, raised cards, or subtle panels?
+- Density: compact app UI or more spacious marketing pages?
+
+With an AI assistant, ask it to use the Synced Fluid skill and turn those
+answers into `synced-fluid.config.mjs` theme tokens.
+
+Example prompt:
+
+```text
+Use the Synced Fluid skill. Create a website theme with slightly rounded
+controls, Inter for UI, Fraunces for display headings, orange as the primary
+colour, cyan as the accent, light raised cards, and spacious marketing sections.
+Return the Synced Fluid theme config only.
+```
+
+Then place the result in `synced-fluid.config.mjs`:
+
+```js
+theme: {
+  fonts: {
+    sans: 'Inter, ui-sans-serif, system-ui, sans-serif',
+    display: 'Fraunces, Georgia, serif',
+  },
+  colours: {
+    primary: 'oklch(68% 0.18 44)',
+    primaryForeground: 'oklch(100% 0 0)',
+    accent: 'oklch(70% 0.12 205)',
+    ring: 'oklch(68% 0.18 44)',
+  },
+  components: {
+    button: { radius: '0.5rem' },
+    card: { radius: '0.75rem' },
+    input: { radius: '0.5rem' },
+  },
+}
+```
+
 ## Import
 
 `init` creates a CSS entry file such as `src/synced-fluid.css` or

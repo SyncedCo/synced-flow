@@ -154,6 +154,11 @@ See [Base styling decisions](docs/base-styling.md).
 `synced-fluid init` creates `synced-fluid.config.mjs`, a CSS entry file, a
 generated CSS placeholder, and `fluid:build` / `fluid:check` package scripts.
 
+Start by shaping the theme: radius style, font family, primary colour, accent
+colour, surface treatment, and density. With AI, ask it to use the Synced Fluid
+skill and convert that brief into `synced-fluid.config.mjs` theme tokens before
+building pages.
+
 You can also create the config by hand:
 
 ```js
