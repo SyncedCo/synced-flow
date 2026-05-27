@@ -10,12 +10,13 @@
   <body>
     <a class="sf-skip-link" href="#main">Skip to main content</a>
 
-    <header class="sf-section sf-section--compact">
+    <header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
       <nav class="sf-container sf-nav" aria-label="Primary">
         <a class="sf-link-plain sf-text-h4 sf-font-display" href="/">Synced Fluid</a>
         <ul class="sf-nav__list">
           <li><a class="sf-nav__link" href="#features" aria-current="page">Features</a></li>
           <li><a class="sf-nav__link" href="#systems">Systems</a></li>
+          <li><a class="sf-nav__link" href="#native">Native UI</a></li>
           <li><a class="sf-nav__link" href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -114,7 +115,7 @@
 
           <div class="sf-stats">
             <div class="sf-stat">
-              <p class="sf-stat__value">6.5 KB</p>
+              <p class="sf-stat__value">9.4 KB</p>
               <p class="sf-stat__label">Full core gzip size</p>
             </div>
             <div class="sf-stat">
@@ -248,6 +249,114 @@
           </form>
         </div>
       </section>
+
+      <section class="sf-section sf-bg-surface-alt" id="native">
+        <div class="sf-container sf-stack sf-stack--loose">
+          <div class="sf-section-header">
+            <p class="sf-kicker">Native component layer</p>
+            <h2>Dialog, popover, disclosure, tabs, and scroll patterns without a JS component library.</h2>
+            <p class="sf-text-muted sf-prose">
+              Synced Fluid styles native browser primitives and progressive state hooks. Projects can add tiny helper scripts only when accessible state sync needs it.
+            </p>
+          </div>
+
+          <div class="sf-auto-grid">
+            <article class="sf-card sf-stack">
+              <h3 class="sf-card__title">Dialog</h3>
+              <p class="sf-card__description">Use the native dialog element with tokenized panels and backdrops.</p>
+              <button class="sf-button sf-button--outline" type="button" commandfor="demo-dialog" command="show-modal">Open dialog</button>
+            </article>
+
+            <article class="sf-card sf-stack">
+              <h3 class="sf-card__title">Popover and tooltip</h3>
+              <p class="sf-card__description">
+                <button class="sf-tooltip-trigger" type="button" interestfor="demo-tooltip" aria-describedby="demo-tooltip">Hover or focus</button>
+                for native popover help where supported.
+              </p>
+              <p class="sf-tooltip" id="demo-tooltip" popover="hint">Tooltips keep the accessible description in markup.</p>
+              <button class="sf-button sf-button--secondary" type="button" popovertarget="demo-toast">Show toast</button>
+            </article>
+
+            <article class="sf-card sf-stack">
+              <h3 class="sf-card__title">Disclosure</h3>
+              <div class="sf-accordion">
+                <details name="native-demo">
+                  <summary>Can accordions be native?</summary>
+                  <p>Yes. Details elements with the same name behave as an exclusive accordion in supporting browsers.</p>
+                </details>
+                <details name="native-demo">
+                  <summary>Does this ship JavaScript?</summary>
+                  <p>No. The package ships CSS and documented markup contracts only.</p>
+                </details>
+              </div>
+            </article>
+
+            <article class="sf-card sf-stack">
+              <h3 class="sf-card__title">Drawer</h3>
+              <p class="sf-card__description">Use popover-backed drawers for menus, filters, and lightweight panels.</p>
+              <button class="sf-button sf-button--secondary" type="button" popovertarget="demo-drawer">Open drawer</button>
+            </article>
+          </div>
+
+          <section class="sf-tabs" aria-labelledby="tabs-title">
+            <h3 class="sf-text-h4" id="tabs-title">CSS-first tabs</h3>
+            <input id="tab-one" name="demo-tabs" type="radio" checked />
+            <input id="tab-two" name="demo-tabs" type="radio" />
+            <div class="sf-tab-list" aria-label="Native component examples">
+              <label class="sf-tab" for="tab-one">Markup</label>
+              <label class="sf-tab" for="tab-two">Theming</label>
+            </div>
+            <div class="sf-tab-panels">
+              <div class="sf-tab-panel">
+                <p>Use the CSS-only radio pattern for simple panels, or add example-level JavaScript for full tab keyboard behavior.</p>
+              </div>
+              <div class="sf-tab-panel">
+                <p>Native controls inherit light and dark semantic tokens through <code>color-scheme</code> and <code>data-sf-theme</code>.</p>
+              </div>
+            </div>
+          </section>
+
+          <div class="sf-scroll-viewport" data-snap="mandatory" data-size="preview" aria-label="Scroll snap demo">
+            <section class="sf-scroll-panel sf-surface">
+              <div class="sf-stack">
+                <p class="sf-kicker">Scroll panel</p>
+                <h3>First snap section</h3>
+              </div>
+            </section>
+            <section class="sf-scroll-panel sf-surface sf-surface--raised">
+              <div class="sf-stack">
+                <p class="sf-kicker">Sticky and snap</p>
+                <h3>Second snap section</h3>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <dialog class="sf-dialog" id="demo-dialog" aria-labelledby="demo-dialog-title">
+        <header class="sf-dialog__header">
+          <h2 id="demo-dialog-title">Native dialog</h2>
+          <button class="sf-button sf-button--ghost" type="button" commandfor="demo-dialog" command="close">Close</button>
+        </header>
+        <div class="sf-dialog__body">
+          <p class="sf-prose">The dialog uses native focus handling where supported and Synced Fluid tokens for its surface, border, radius, and backdrop.</p>
+        </div>
+        <footer class="sf-dialog__footer">
+          <button class="sf-button" type="button" commandfor="demo-dialog" command="close">Done</button>
+        </footer>
+      </dialog>
+
+      <aside class="sf-toast" id="demo-toast" popover role="status">
+        <p class="sf-alert__title">Saved</p>
+        <p>This toast is a popover-backed status message.</p>
+      </aside>
+
+      <aside class="sf-drawer sf-drawer--right sf-stack" id="demo-drawer" popover aria-label="Example drawer">
+        <p class="sf-kicker">Drawer</p>
+        <h2 class="sf-text-h4">Native popover panel</h2>
+        <p class="sf-prose">Drawers use the Popover API and inherit the same semantic surface tokens.</p>
+        <button class="sf-button sf-button--outline" type="button" popovertarget="demo-drawer" popovertargetaction="hide">Close drawer</button>
+      </aside>
 
       <section class="sf-section sf-section--compact">
         <div class="sf-container">

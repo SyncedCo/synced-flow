@@ -12,6 +12,8 @@ for class tokens, then generates project-specific utility CSS.
 - layout primitives: container, section, stack, cluster, grid, sidebar, switcher, frame, cover, hero, and flow
 - component primitives: buttons, cards, surfaces, navigation, forms, alerts, badges, and section headers
 - website patterns: logo clouds, feature blocks, stats, testimonials, pricing, FAQ, CTA, and footer helpers
+- native component styling: dialog, popover, drawer, tooltip, disclosure, tabs,
+  breadcrumbs, pagination, scroll snap, and sticky patterns
 - accessibility and base helpers: `sr-only`, `not-sr-only`, skip links, focus
   rings, touch targets, link helpers, and list helpers
 - accessibility state styling for invalid, required, disabled, busy, current,
@@ -107,18 +109,18 @@ breakpoint-heavy patterns: fluid `clamp()` scales, CSS custom properties,
 logical sizing and spacing, cascade layers, OKLCH colour tokens,
 container-aware layout primitives, and `prefers-reduced-motion` handling.
 
-Current built CSS sizes from `pnpm build` on 2026-05-24:
+Current built CSS sizes from `pnpm build` on 2026-05-27:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 39.2 KB | 7.4 KB | Full core stylesheet for simple setup. |
-| `tokens.css` | 8.5 KB | 2.1 KB | Design tokens only. |
+| `styles.css` | 51.5 KB | 9.4 KB | Full core stylesheet for simple setup. |
+| `tokens.css` | 9.2 KB | 2.2 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
-| `base.css` | 3.1 KB | 1.1 KB | Base element styles. |
+| `base.css` | 3.4 KB | 1.2 KB | Base element styles. |
 | `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
-| `layout.css` | 3.8 KB | 1.1 KB | Fluid layout primitives. |
-| `components.css` | 19.1 KB | 3.2 KB | Button, card, surface, nav, form, alert, website pattern, accessibility state, and input primitives. |
-| `utilities.css` | 4.5 KB | 1.3 KB | Static `sf-*` helper utilities. |
+| `layout.css` | 5.4 KB | 1.5 KB | Fluid layout, scroll, sticky, media, and split primitives. |
+| `components.css` | 26.5 KB | 4.4 KB | Button, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
+| `utilities.css` | 7.1 KB | 1.8 KB | Static `sf-*` content, motion, and helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The
 Synced Fluid approach is explicit and predictable: import the core layers you
@@ -249,6 +251,7 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 - [Accessibility CSS](docs/accessibility-css.md)
 - [System primitives](docs/system-primitives.md)
 - [CSS API contract](docs/api-contract.md)
+- [Native components](docs/native-components.md)
 - [Website patterns](docs/website-patterns.md)
 - [CLI reference](docs/cli-reference.md)
 - [Config reference](docs/config-reference.md)

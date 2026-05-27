@@ -63,6 +63,9 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--sf-split-min, 24rem)), 1fr));
   }
 
+  .sf-split--reverse > :first-child { order: 2; }
+  .sf-split--reverse > :last-child { order: 1; }
+
   .sf-centre {
     box-sizing: content-box;
     margin-inline: auto;
@@ -130,6 +133,70 @@
     display: grid;
     gap: var(--sf-grid-gap, var(--sf-gutter));
     grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--sf-panel-min, 18rem)), 1fr));
+  }
+
+  .sf-scroll-viewport,
+  .sf-scroll-snap-y {
+    block-size: var(--sf-scroll-viewport-size, 100svh);
+    overflow-y: auto;
+    scroll-padding-block: var(--sf-scroll-padding, var(--sf-space-l));
+    scroll-snap-type: y proximity;
+  }
+
+  :where(.sf-scroll-viewport, .sf-scroll-snap-y)[data-snap="mandatory"] {
+    --sf-scroll-snap-stop: always;
+    scroll-snap-type: y mandatory;
+  }
+  .sf-scroll-viewport[data-size="preview"] {
+    --sf-scroll-margin: 0;
+    --sf-scroll-padding: 0;
+    --sf-scroll-viewport-size: min(32rem, 80svh);
+    --sf-scroll-panel-min: min(32rem, 80svh);
+  }
+
+  .sf-scroll-panel {
+    align-content: center;
+    display: grid;
+    min-block-size: var(--sf-scroll-panel-min, 100svh);
+    scroll-margin-block: var(--sf-scroll-margin, var(--sf-space-l));
+    scroll-snap-align: start;
+    scroll-snap-stop: var(--sf-scroll-snap-stop, normal);
+  }
+
+  .sf-sticky-top {
+    position: sticky;
+    inset-block-start: var(--sf-sticky-offset, 0);
+    z-index: var(--sf-sticky-z, 20);
+  }
+
+  .sf-media-object {
+    align-items: var(--sf-media-object-align, start);
+    display: grid;
+    gap: var(--sf-space-s-m);
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .sf-aside-rail {
+    display: grid;
+    gap: var(--sf-gutter);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (min-width: 48rem) {
+    .sf-aside-rail {
+      grid-template-columns: minmax(0, 1fr) minmax(14rem, 22rem);
+    }
+
+    .sf-aside-rail[data-rail="start"] {
+      grid-template-columns: minmax(14rem, 22rem) minmax(0, 1fr);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    .sf-scroll-panel[data-view-progress] {
+      view-timeline-name: --sf-panel;
+      view-timeline-axis: block;
+    }
   }
 
   @container (min-width: 42rem) {

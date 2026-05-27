@@ -257,10 +257,15 @@ test('tokens command prints machine-readable starter surface', () => {
 
   assert.ok(tokens.themePresets.includes('neutral-saas'))
   assert.ok(tokens.starterClasses.layout.includes('sf-split'))
+  assert.ok(tokens.starterClasses.layout.includes('sf-scroll-panel'))
   assert.ok(tokens.starterClasses.components.includes('sf-section-header'))
+  assert.ok(tokens.starterClasses.components.includes('sf-dialog'))
+  assert.ok(tokens.starterClasses.components.includes('sf-tooltip'))
+  assert.ok(tokens.starterClasses.components.includes('sf-tabs'))
   assert.ok(tokens.starterClasses.utilities.includes('sr-only'))
   assert.ok(tokens.starterClasses.utilities.includes('sf-skip-link'))
   assert.ok(tokens.starterClasses.utilities.includes('sf-link-plain'))
+  assert.ok(tokens.starterClasses.utilities.includes('sf-animate-rise'))
   assert.ok(tokens.colours.semantic.includes('primary'))
 })
 
@@ -285,6 +290,18 @@ test('package exposes modular CSS layer files', () => {
   assert.match(utilitiesCss, /\.sf-skip-link/)
   assert.match(utilitiesCss, /\.sf-list-reset/)
   assert.match(utilitiesCss, /\.sf-link-plain/)
+  assert.match(utilitiesCss, /\.sf-animate-rise/)
+
+  const layoutCss = readFileSync(join(packageRoot, 'layout.css'), 'utf8')
+  const componentsCss = readFileSync(join(packageRoot, 'components.css'), 'utf8')
+  const tokensCss = readFileSync(join(packageRoot, 'tokens.css'), 'utf8')
+  assert.match(tokensCss, /\.sf-theme-light/)
+  assert.match(layoutCss, /\.sf-scroll-viewport/)
+  assert.match(layoutCss, /\.sf-sticky-top/)
+  assert.match(componentsCss, /\.sf-dialog/)
+  assert.match(componentsCss, /\.sf-popover/)
+  assert.match(componentsCss, /\.sf-drawer/)
+  assert.match(componentsCss, /\.sf-tabs/)
 })
 
 test('package guardrails pass', () => {

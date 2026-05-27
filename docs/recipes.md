@@ -97,7 +97,7 @@ CSS.
           <span class="sf-stat__label">Core import</span>
         </article>
         <article class="sf-stat">
-          <strong class="sf-stat__value">7.4 KB</strong>
+          <strong class="sf-stat__value">9.4 KB</strong>
           <span class="sf-stat__label">Full core gzip size</span>
         </article>
       </div>

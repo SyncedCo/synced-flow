@@ -82,6 +82,10 @@ For JavaScript-powered menus or toggles, use real buttons and update
 `aria-expanded`, `aria-pressed`, or `aria-selected` as appropriate. Synced Fluid
 styles those states for `.sf-button` and `.sf-nav__link`.
 
+For native dialog, popover, drawer, tooltip, tabs, and disclosure markup, see
+[Native Components](native-components.md). Synced Fluid styles those browser
+primitives but does not ship JavaScript components.
+
 ## Alerts And Status
 
 Synced Fluid alert variants are visual styles. Choose the live-region behavior

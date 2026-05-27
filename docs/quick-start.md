@@ -113,6 +113,8 @@ For the supported starter surface, see [System primitives](system-primitives.md)
 It lists the tokens, layout classes, component classes, and utility helpers that
 can build a basic website before project-specific CSS is needed.
 For copy-ready website sections, see [Website patterns](website-patterns.md).
+For native dialog, popover, disclosure, drawer, tooltip, tabs, and scroll
+patterns, see [Native Components](native-components.md).
 For accessible state styling and markup hooks, see
 [Accessibility CSS](accessibility-css.md).
 For the stable public surface, see [CSS API Contract](api-contract.md).

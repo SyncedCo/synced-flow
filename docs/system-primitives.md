@@ -19,7 +19,8 @@ Use the `--sf-*` variables as the stable CSS foundation.
 | Component | `--sf-button-*`, `--sf-card-*`, `--sf-input-*`, `--sf-alert-*` | Reusable component defaults. |
 | Accessibility | `:focus-visible`, `:target`, `[aria-invalid]`, `[aria-current]`, `[aria-expanded]`, `[aria-selected]`, `[aria-busy]`, `[aria-disabled]` | Visible native and ARIA states. |
 
-Dark mode can be applied with `.sf-theme-dark` or `[data-sf-theme="dark"]`.
+Light and dark modes can be applied with `.sf-theme-light`,
+`[data-sf-theme="light"]`, `.sf-theme-dark`, or `[data-sf-theme="dark"]`.
 
 ## Layout Classes
 
@@ -35,9 +36,11 @@ These classes are the first choice for page structure.
 | `sf-cluster` | Wrapping inline groups such as actions or tags. |
 | `sf-repel` | Space-between layout that wraps safely. |
 | `sf-split` | Responsive two-column layout. |
+| `sf-split--reverse` | Reverses split layout visual order. |
 | `sf-auto-grid`, `sf-panel-grid` | Responsive card and panel grids. |
 | `sf-frame`, `sf-frame--square`, `sf-frame--portrait`, `sf-frame--wide` | Stable media aspect ratios. |
 | `sf-cover`, `sf-hero` | Full-height and hero section structure. |
+| `sf-scroll-viewport`, `sf-scroll-panel`, `sf-scroll-snap-y`, `sf-sticky-top`, `sf-media-object`, `sf-aside-rail` | Scroll, sticky, and intent-based layout modes. |
 
 ## Component Classes
 
@@ -54,6 +57,11 @@ These cover the common UI elements needed for a simple site.
 | `sf-surface`, `sf-surface--alt`, `sf-surface--raised` | Generic reusable panels. |
 | `sf-logo-cloud`, `sf-feature`, `sf-stats`, `sf-testimonial`, `sf-pricing-grid`, `sf-faq`, `sf-cta`, `sf-footer` | Common website patterns. |
 | `sf-nav`, `sf-nav__list`, `sf-nav__link` | Navigation basics. |
+| `sf-nav--mobile`, `sf-menu`, `sf-breadcrumb`, `sf-pagination` | Mobile, menu, breadcrumb, and paginated navigation. |
+| `sf-dialog`, `sf-dialog__header`, `sf-dialog__body`, `sf-dialog__footer` | Native `<dialog>` styling. |
+| `sf-popover`, `sf-tooltip`, `sf-tooltip-trigger`, `sf-menu-popover`, `sf-toast`, `sf-banner`, `sf-drawer` | Popover-backed native overlays. |
+| `sf-disclosure`, `sf-accordion` | Native `details`/`summary` disclosure patterns. |
+| `sf-tabs`, `sf-tab-list`, `sf-tab`, `sf-tab-panel` | HTML/CSS-first tab styling. |
 | `sf-form`, `sf-fieldset`, `sf-field`, `sf-label`, `sf-help`, `sf-error` | Form structure and messaging. |
 | `sf-input`, `sf-select`, `sf-textarea`, `sf-check` | Form controls. |
 | `sf-alert`, `sf-alert--info`, `sf-alert--success`, `sf-alert--warning`, `sf-alert--danger`, `sf-alert__title` | Notices and feedback. |
@@ -71,9 +79,11 @@ Use utility classes for small decisions that do not need a new component.
 | `sf-border`, `sf-border-strong`, `sf-rounded`, `sf-rounded-panel`, `sf-rounded-full` | Border and radius helpers. |
 | `sf-shadow-sm`, `sf-shadow-md`, `sf-shadow-lg`, `sf-shadow-none` | Shadow helpers. |
 | `sf-prose`, `sf-text-balance`, `sf-text-pretty` | Content width and wrapping helpers. |
+| `sf-prose--blog`, `sf-prose--legal`, `sf-meta`, `sf-figure`, `sf-caption`, `sf-table-wrap` | Long-form content and article helpers. |
 | `sf-link`, `sf-link-subtle`, `sf-link-plain` | Link treatments. |
 | `sf-list-reset`, `sf-list-disc`, `sf-list-decimal` | List treatments. |
 | `sf-skip-link`, `sf-focus-ring`, `sf-focus-ring-inset`, `sf-touch-target`, `sr-only`, `not-sr-only` | Accessibility helpers. |
+| `sf-animate-fade`, `sf-animate-rise`, `sf-animate-scale`, `sf-animate-slide`, `sf-animate-stagger` | Reduced-motion-safe motion primitives. |
 
 ## Example
 
@@ -106,5 +116,6 @@ Use utility classes for small decisions that do not need a new component.
 See `examples/plain-html` for a complete page using the same primitives.
 
 For copy-ready section patterns, see [Website patterns](website-patterns.md).
+For native browser component patterns, see [Native Components](native-components.md).
 For accessibility state hooks, see [Accessibility CSS](accessibility-css.md).
 For public API stability rules, see [CSS API Contract](api-contract.md).

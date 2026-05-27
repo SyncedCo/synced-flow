@@ -45,6 +45,60 @@
     max-inline-size: var(--sf-prose-width, 68ch);
   }
 
+  .sf-prose--blog { --sf-prose-width: 72ch; }
+  .sf-prose--legal { --sf-prose-width: 80ch; }
+
+  :where(.sf-prose--blog, .sf-prose--legal) > * + * {
+    margin-block-start: var(--sf-space-s);
+  }
+
+  :where(.sf-prose--blog, .sf-prose--legal) :where(h2, h3) {
+    margin-block-start: var(--sf-space-l);
+  }
+
+  .sf-meta {
+    align-items: center;
+    color: var(--sf-colour-muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--sf-step--1);
+    font-weight: 700;
+    gap: var(--sf-space-2xs);
+  }
+
+  .sf-figure {
+    display: grid;
+    gap: var(--sf-space-xs);
+  }
+
+  .sf-caption {
+    color: var(--sf-colour-muted);
+    font-size: var(--sf-step--1);
+  }
+
+  .sf-table-wrap {
+    border: 1px solid var(--sf-colour-border);
+    border-radius: var(--sf-radius-panel);
+    overflow-x: auto;
+  }
+
+  .sf-table-wrap table {
+    border-collapse: collapse;
+    inline-size: 100%;
+    min-inline-size: var(--sf-table-min, 42rem);
+  }
+
+  .sf-table-wrap :where(th, td) {
+    border-block-end: 1px solid var(--sf-colour-border);
+    padding: var(--sf-space-xs);
+    text-align: start;
+  }
+
+  .sf-table-wrap :where(th) {
+    background: var(--sf-colour-surface-alt);
+    font-weight: 800;
+  }
+
   :where(.sf-visually-hidden, .sr-only) {
     block-size: 0.0625rem;
     border: 0;
@@ -148,5 +202,49 @@
     inline-size: 100vw;
     margin-inline-start: 50%;
     transform: translateX(-50%);
+  }
+
+  .sf-animate-fade,
+  .sf-animate-rise,
+  .sf-animate-scale,
+  .sf-animate-slide {
+    animation-duration: var(--sf-motion-duration, var(--sf-duration-slow));
+    animation-fill-mode: both;
+    animation-timing-function: var(--sf-motion-ease, var(--sf-ease-emphasized));
+  }
+
+  .sf-animate-fade { animation-name: sf-fade; }
+  .sf-animate-rise { animation-name: sf-rise; }
+  .sf-animate-scale { animation-name: sf-scale; }
+  .sf-animate-slide { animation-name: sf-slide; }
+
+  .sf-animate-stagger > * {
+    animation-delay: calc(var(--sf-stagger-index, 0) * var(--sf-stagger-step, 80ms));
+  }
+
+  @keyframes sf-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes sf-rise {
+    from { opacity: 0; transform: translateY(var(--sf-motion-distance, var(--sf-space-s))); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes sf-scale {
+    from { opacity: 0; transform: scale(.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes sf-slide {
+    from { opacity: 0; transform: translateX(var(--sf-motion-distance, var(--sf-space-s))); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :where(.sf-animate-fade, .sf-animate-rise, .sf-animate-scale, .sf-animate-slide) {
+      animation: none;
+    }
   }
 }
