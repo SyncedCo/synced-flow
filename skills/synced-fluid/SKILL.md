@@ -16,9 +16,13 @@ should only support migration from existing projects.
 
 1. Check whether `@synced/fluid` is installed.
 2. Check for `synced-fluid.config.mjs`.
-3. Run or recommend `synced-fluid tokens --json` before choosing class names.
-4. Use `synced-fluid doctor` to verify setup.
-5. Keep `responsiveVariants` off for new projects.
+3. Run or recommend `synced-fluid catalog --json` before choosing recipes and
+   class names.
+4. Use `synced-fluid suggest "<brief>"` for section or page composition.
+5. Use `synced-fluid recipe <id> --markup` when a project needs copy-ready page
+   structure.
+6. Use `synced-fluid lint` and `synced-fluid doctor` to verify setup.
+7. Keep `responsiveVariants` off for new projects.
 
 ## Setup
 
@@ -71,6 +75,9 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
   `sf-frame`, and `sf-flow`.
 - Prefer component primitives for common UI: `sf-button`, `sf-card`,
   `sf-badge`, `sf-field`, and `sf-input`.
+- Prefer native component patterns for common interaction: `sf-dialog`,
+  `sf-popover`, `sf-drawer`, `sf-disclosure`, `sf-accordion`, `sf-tabs`,
+  `sf-tooltip`, `sf-toast`, and `sf-banner`.
 - Use semantic utility classes such as `bg-background`, `text-foreground`,
   `bg-primary`, `text-primary-foreground`, `border-border`, and `bg-surface`.
 - Keep browser affordances by default: body links stay underlined, content
@@ -107,6 +114,7 @@ Run:
 ```bash
 pnpm fluid:build
 pnpm fluid:check
+pnpm fluid:lint
 pnpm fluid:doctor
 ```
 

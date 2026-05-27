@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawnSync } from 'node:child_process'
-import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync, renameSync } from 'node:fs'
+import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync, renameSync, watch } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -44,7 +44,28 @@ if (command === 'tokens') {
   process.exit(0)
 }
 
-if (command !== 'build') {
+if (command === 'catalog') {
+  runCatalog()
+  process.exit(0)
+}
+
+if (command === 'suggest') {
+  runSuggest()
+  process.exit(0)
+}
+
+if (command === 'recipe' || command === 'recipes') {
+  runRecipe()
+  process.exit(0)
+}
+
+if (command === 'theme') {
+  process.exit(await runThemeCommand())
+}
+
+const projectCommands = new Set(['build', 'lint', 'watch'])
+
+if (!projectCommands.has(command)) {
   console.error(`Unknown command "${command}".`)
   printHelp()
   process.exit(1)
@@ -91,6 +112,11 @@ if (missingSourceDirs.length && !quiet) {
   console.warn(`Scan directories not found: ${missingSourceDirs.join(', ')}`)
 }
 
+if (command === 'watch') {
+  await runWatch()
+  process.exit(0)
+}
+
 function readOption(name, fallback) {
   const prefix = `--${name}=`
   const inline = args.find((arg) => arg.startsWith(prefix))
@@ -121,8 +147,70 @@ function readOptions(name) {
   return values
 }
 
+function readPositionals() {
+  const valueOptions = new Set(['--config', '--cwd', '--preset', '--theme', '--scan', '--out', '--safelist', '--file', '--css', '--from', '--limit', '--framework', '--section'])
+  const values = []
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index]
+    if (arg.startsWith('--')) {
+      if (valueOptions.has(arg) && args[index + 1] && !args[index + 1].startsWith('--')) index += 1
+      continue
+    }
+    values.push(arg)
+  }
+
+  return values
+}
+
 function splitOptionList(value) {
   return value.split(/[,\s]+/).filter(Boolean)
+}
+
+async function runWatch() {
+  const buildArgs = ['build', ...args.filter((arg) => arg !== '--watch')]
+  let timer = null
+  let running = false
+
+  function build(reason) {
+    if (running) return
+    running = true
+    const label = reason ? ` after ${reason}` : ''
+    console.log(`synced-fluid build${label}`)
+    const result = spawnSync(process.execPath, [scriptFile, ...buildArgs], {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+      stdio: 'inherit',
+    })
+    running = false
+    if (result.status === 0) console.log('pass build complete. Watching for changes...')
+    else console.log('warn build failed. Fix the issue and save again.')
+  }
+
+  function schedule(reason) {
+    clearTimeout(timer)
+    timer = setTimeout(() => build(reason), 120)
+  }
+
+  build()
+
+  const watched = new Set()
+  for (const dir of sourceDirs) {
+    const fullDir = resolve(repoRoot, dir)
+    if (!existsSync(fullDir)) continue
+    for (const file of listProjectFiles(fullDir)) {
+      const parent = dirname(file)
+      if (watched.has(parent)) continue
+      watched.add(parent)
+      watch(parent, { persistent: true }, (_event, filename) => {
+        if (filename && !/\.(tsx|ts|jsx|js|astro|html|php|phtml|twig|mdx|vue|svelte|css)$/.test(String(filename))) return
+        schedule(filename ? String(filename) : relative(repoRoot, parent))
+      })
+    }
+  }
+
+  console.log(`Watching ${watched.size} directories. Press Ctrl+C to stop.`)
+  await new Promise(() => {})
 }
 
 function normalizeThemeName(value) {
@@ -277,6 +365,13 @@ function printHelp() {
   synced-fluid doctor [options]
   synced-fluid validate [options]
   synced-fluid tokens [options]
+  synced-fluid catalog [options]
+  synced-fluid suggest "<site or section brief>" [options]
+  synced-fluid recipe [id] [options]
+  synced-fluid lint [options]
+  synced-fluid watch [options]
+  synced-fluid theme init --from <brief.md> [options]
+  synced-fluid theme validate [options]
 
 Options:
   --config <file>              Use a specific config file.
@@ -300,6 +395,9 @@ Options:
   --no-scripts                 init without adding package.json scripts.
   --force                      overwrite init-managed files.
   --quiet                      Suppress non-critical warnings.
+  --from <file>                Read a theme brief for "theme init".
+  --limit <number>             Limit results for "suggest".
+  --markup                     Include markup snippets in text recipe output.
 
 Config:
   Create synced-fluid.config.mjs and export defineConfig({ scan, out }).`)
@@ -468,6 +566,12 @@ async function runDoctor() {
     if (scripts['fluid:doctor'] === 'synced-fluid doctor') pass('fluid:doctor script is configured.')
     else warn('Add "fluid:doctor": "synced-fluid doctor" to package.json.')
 
+    if (scripts['fluid:lint'] === 'synced-fluid lint') pass('fluid:lint script is configured.')
+    else warn('Add "fluid:lint": "synced-fluid lint" to package.json so class mistakes are caught before handoff.')
+
+    if (scripts['fluid:watch'] === 'synced-fluid watch') pass('fluid:watch script is configured.')
+    else warn('Add "fluid:watch": "synced-fluid watch" to package.json for local rebuilds during development.')
+
     const tailwindDeps = ['tailwindcss', '@tailwindcss/postcss', '@tailwindcss/vite', 'tailwind-merge'].filter((name) => allDeps[name])
     if (tailwindDeps.length) warn(`Tailwind packages still present: ${tailwindDeps.join(', ')}.`)
     else pass('No Tailwind dependencies found.')
@@ -500,6 +604,22 @@ async function runDoctor() {
     if (check.status === 0) pass('Generated CSS is up to date.')
     else warn('Generated CSS is out of date or unsupported classes were found; run synced-fluid build and review warnings.')
 
+    const lint = spawnSync(process.execPath, [scriptFile, 'lint', '--cwd', targetCwd, '--quiet'], {
+      encoding: 'utf8',
+    })
+    if (lint.status === 0) pass('No unsupported class tokens found.')
+    else warn('Unsupported class tokens were found; run synced-fluid lint for nearest supported alternatives.')
+
+    const themeErrors = []
+    if (loaded.theme === undefined) warn('No theme configured; add a theme preset or run synced-fluid theme init --from brief.md.')
+    else {
+      validateTheme(loaded.theme, themeErrors)
+      if (themeErrors.length) warn(`Theme config has ${themeErrors.length} issue(s); run synced-fluid theme validate.`)
+      else pass('Theme config is valid.')
+    }
+
+    if (loaded.failOnUnsupported === false) warn('failOnUnsupported is disabled; enable it before release so unsupported classes fail the build.')
+
     if (loaded.responsiveVariants) warn('responsiveVariants is enabled; use this only for migration projects.')
     else pass('Strict fluid mode is enabled.')
   }
@@ -508,12 +628,26 @@ async function runDoctor() {
   else if (projectContains(targetCwd, '@synced/fluid/styles.css') || projectContains(targetCwd, '@import "../../styles.css"')) pass('Core stylesheet import found.')
   else warn('Import @synced/fluid/styles.css from your app CSS or layout entry.')
 
+  const duplicateImports = findDuplicateCoreImports(targetCwd)
+  if (duplicateImports.length) {
+    warn(`Avoid duplicate core CSS imports in ${duplicateImports.join(', ')}. Use styles.css alone, or import modular layers without styles.css.`)
+  } else {
+    pass('No duplicate core stylesheet imports found.')
+  }
+
+  const customTokenFiles = findCustomTokenOverrides(targetCwd)
+  if (customTokenFiles.length) {
+    warn(`Custom --sf-* token overrides found in ${customTokenFiles.join(', ')}. Prefer synced-fluid.config.mjs theme tokens for reusable brand decisions.`)
+  } else {
+    pass('No ad hoc --sf-* token overrides found in project CSS.')
+  }
+
   for (const message of messages) console.log(message)
   return failed ? 1 : 0
 }
 
-function runTokens() {
-  const tokenSummary = {
+function getTokenSummary() {
+  return {
     type: {
       minStep: fluidConfig.typeMinStep,
       maxStep: fluidConfig.typeMaxStep,
@@ -536,6 +670,332 @@ function runTokens() {
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
   }
+}
+
+function getPublicPatterns() {
+  return [
+    {
+      id: 'sticky-navigation',
+      name: 'Sticky header and navigation',
+      whenToUse: 'Global site headers, section navigation, scroll-spy style pages, and mobile nav shells.',
+      classes: ['sf-sticky-top', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-button', 'sf-button--ghost'],
+      markup: '<header class="sf-section sf-section--compact sf-sticky-top"><nav class="sf-container sf-nav">...</nav></header>',
+      keywords: ['nav', 'navigation', 'header', 'sticky', 'mobile', 'menu', 'scroll-spy'],
+    },
+    {
+      id: 'hero-split',
+      name: 'Split hero',
+      whenToUse: 'Landing page intros with copy, actions, media, and a supporting stats or proof block.',
+      classes: ['sf-section', 'sf-container', 'sf-split', 'sf-stack', 'sf-kicker', 'sf-text-display', 'sf-text-lead', 'sf-button', 'sf-frame'],
+      markup: '<section class="sf-section"><div class="sf-container sf-split">...</div></section>',
+      keywords: ['hero', 'intro', 'split', 'landing', 'media', 'cta'],
+    },
+    {
+      id: 'card-grid',
+      name: 'Feature or card grid',
+      whenToUse: 'Feature lists, service cards, pricing summaries, team cards, and blog indexes.',
+      classes: ['sf-section', 'sf-container', 'sf-section-header', 'sf-auto-grid', 'sf-card', 'sf-card--interactive', 'sf-badge'],
+      markup: '<section class="sf-section"><div class="sf-container sf-stack"><div class="sf-auto-grid">...</div></div></section>',
+      keywords: ['feature', 'features', 'grid', 'cards', 'services', 'team', 'pricing', 'blog'],
+    },
+    {
+      id: 'native-dialog-drawer',
+      name: 'Native dialog, popover, and drawer',
+      whenToUse: 'Modals, mobile menus, cookie notices, command menus, lightweight drawers, and non-JS native overlays.',
+      classes: ['sf-dialog', 'sf-dialog__header', 'sf-dialog__body', 'sf-dialog__footer', 'sf-popover', 'sf-drawer', 'sf-toast', 'sf-banner'],
+      markup: '<dialog class="sf-dialog">...</dialog><aside popover class="sf-drawer sf-drawer--right">...</aside>',
+      keywords: ['dialog', 'modal', 'drawer', 'popover', 'toast', 'banner', 'cookie', 'overlay', 'menu'],
+    },
+    {
+      id: 'faq-disclosure-tabs',
+      name: 'FAQ, disclosure, and tabs',
+      whenToUse: 'FAQs, filters, mobile sections, feature tabs, pricing toggles, and compact long content.',
+      classes: ['sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-faq'],
+      markup: '<details class="sf-disclosure"><summary>Question</summary><p>Answer</p></details>',
+      keywords: ['faq', 'accordion', 'details', 'summary', 'tabs', 'toggle', 'filters', 'pricing'],
+    },
+    {
+      id: 'scroll-snap-page',
+      name: 'Scroll snap page sections',
+      whenToUse: 'Portfolio panels, product storytelling, presentation-style pages, and full-page feature sections.',
+      classes: ['sf-scroll-viewport', 'sf-scroll-snap-y', 'sf-scroll-panel', 'sf-sticky-top', 'sf-section', 'sf-container'],
+      markup: '<main class="sf-scroll-viewport" data-snap="mandatory"><section class="sf-scroll-panel">...</section></main>',
+      keywords: ['scroll', 'snap', 'panel', 'portfolio', 'presentation', 'full-page', 'sections'],
+    },
+    {
+      id: 'long-form-content',
+      name: 'Blog article and long-form content',
+      whenToUse: 'Articles, legal pages, documentation, case studies, figures, captions, metadata, and responsive tables.',
+      classes: ['sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-breadcrumb'],
+      markup: '<article class="sf-container sf-prose sf-prose--blog">...</article>',
+      keywords: ['blog', 'article', 'prose', 'legal', 'docs', 'case-study', 'table', 'figure', 'seo'],
+    },
+    {
+      id: 'contact-form',
+      name: 'Accessible contact form',
+      whenToUse: 'Contact forms, sign-up forms, newsletter forms, and simple application flows.',
+      classes: ['sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-button'],
+      markup: '<form class="sf-form"><label class="sf-field"><span class="sf-label">Email</span><input class="sf-input"></label></form>',
+      keywords: ['form', 'contact', 'signup', 'newsletter', 'input', 'select', 'textarea', 'checkbox'],
+    },
+  ]
+}
+
+function getPublicRecipes() {
+  return [
+    {
+      id: 'saas-landing',
+      name: 'SaaS landing page',
+      whenToUse: 'Product marketing pages with hero, proof, features, pricing, FAQ, CTA, and footer.',
+      sections: ['sticky-navigation', 'hero-split', 'card-grid', 'faq-disclosure-tabs', 'contact-form'],
+      classes: ['sf-sticky-top', 'sf-nav', 'sf-section', 'sf-container', 'sf-split', 'sf-card', 'sf-auto-grid', 'sf-pricing-grid', 'sf-faq', 'sf-cta', 'sf-footer'],
+      keywords: ['saas', 'landing', 'marketing', 'pricing', 'feature', 'faq', 'cta', 'product'],
+      markup: `<a class="sf-skip-link" href="#main">Skip to main content</a>
+<header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
+  <nav class="sf-container sf-nav" aria-label="Main navigation">
+    <a class="sf-nav__link" href="/">Product</a>
+    <ul class="sf-nav__list">
+      <li><a class="sf-nav__link" href="#features">Features</a></li>
+      <li><a class="sf-nav__link" href="#pricing">Pricing</a></li>
+      <li><a class="sf-nav__link" href="#faq">FAQ</a></li>
+    </ul>
+    <a class="sf-button sf-button--sm" href="#contact">Book demo</a>
+  </nav>
+</header>
+<main id="main">
+  <section class="sf-section">
+    <div class="sf-container sf-split">
+      <div class="sf-stack">
+        <p class="sf-kicker">Launch faster</p>
+        <h1 class="sf-text-display">A modern product site without page-specific CSS.</h1>
+        <p class="sf-text-lead sf-prose">Compose hero, proof, pricing, FAQ, and contact sections from Synced Fluid primitives.</p>
+        <div class="sf-cluster">
+          <a class="sf-button sf-button--default" href="#contact">Start free</a>
+          <a class="sf-button sf-button--outline" href="#features">View features</a>
+        </div>
+      </div>
+      <aside class="sf-card sf-stack">
+        <p class="sf-badge">Included</p>
+        <ul class="sf-list-disc">
+          <li>Fluid tokens</li>
+          <li>Native components</li>
+          <li>Accessible states</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <section class="sf-section" id="features">
+    <div class="sf-container sf-stack">
+      <header class="sf-section-header" data-align="center">
+        <p class="sf-kicker">Features</p>
+        <h2 class="sf-text-h2">Everything a basic website needs.</h2>
+      </header>
+      <div class="sf-auto-grid">
+        <article class="sf-card sf-card--interactive sf-stack"><h3 class="sf-text-h4">Tokens</h3><p class="sf-text-muted">Theme type, colour, radius, motion, and surfaces.</p></article>
+        <article class="sf-card sf-card--interactive sf-stack"><h3 class="sf-text-h4">Patterns</h3><p class="sf-text-muted">Hero, cards, nav, forms, pricing, FAQ, and CTA.</p></article>
+        <article class="sf-card sf-card--interactive sf-stack"><h3 class="sf-text-h4">Guardrails</h3><p class="sf-text-muted">Doctor, lint, catalog, and recipe discovery.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="sf-section" id="pricing">
+    <div class="sf-container sf-stack">
+      <header class="sf-section-header" data-align="center"><p class="sf-kicker">Pricing</p><h2 class="sf-text-h2">Simple plans.</h2></header>
+      <div class="sf-pricing-grid">
+        <article class="sf-price-card"><h3>Starter</h3><p class="sf-price">$19</p><a class="sf-button sf-button--outline" href="#contact">Choose Starter</a></article>
+        <article class="sf-price-card" data-featured="true"><h3>Team</h3><p class="sf-price">$49</p><a class="sf-button" href="#contact">Choose Team</a></article>
+      </div>
+    </div>
+  </section>
+</main>`,
+    },
+    {
+      id: 'portfolio-scroll',
+      name: 'Scroll snap portfolio',
+      whenToUse: 'Portfolio, case study, or studio pages that use full-panel storytelling.',
+      sections: ['sticky-navigation', 'scroll-snap-page', 'card-grid', 'contact-form'],
+      classes: ['sf-sticky-top', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-split', 'sf-card', 'sf-frame', 'sf-button'],
+      keywords: ['portfolio', 'scroll', 'snap', 'case', 'study', 'studio', 'full-page', 'panel'],
+      markup: `<header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
+  <nav class="sf-container sf-nav" aria-label="Portfolio navigation">
+    <a class="sf-nav__link" href="#intro">Studio</a>
+    <ul class="sf-nav__list"><li><a class="sf-nav__link" href="#work">Work</a></li><li><a class="sf-nav__link" href="#contact">Contact</a></li></ul>
+  </nav>
+</header>
+<main class="sf-scroll-viewport" data-snap="mandatory">
+  <section class="sf-scroll-panel" id="intro">
+    <div class="sf-container sf-stack">
+      <p class="sf-kicker">Selected work</p>
+      <h1 class="sf-text-display">Fluid portfolio panels with native scroll snap.</h1>
+      <p class="sf-text-lead sf-prose">Use each panel for one story, proof point, or call to action.</p>
+    </div>
+  </section>
+  <section class="sf-scroll-panel" id="work">
+    <div class="sf-container sf-split">
+      <div class="sf-card sf-stack"><p class="sf-badge">Case study</p><h2 class="sf-text-h2">Project title</h2><p class="sf-text-muted">Replace this panel with project details.</p></div>
+      <div class="sf-frame sf-card"></div>
+    </div>
+  </section>
+  <section class="sf-scroll-panel" id="contact">
+    <div class="sf-container sf-stack"><h2 class="sf-text-h2">Let's build the next one.</h2><a class="sf-button" href="mailto:hello@example.com">Start a project</a></div>
+  </section>
+</main>`,
+    },
+    {
+      id: 'agency-home',
+      name: 'Agency homepage',
+      whenToUse: 'Agency, consultancy, or service business websites with services, proof, team, and contact.',
+      sections: ['sticky-navigation', 'hero-split', 'card-grid', 'contact-form'],
+      classes: ['sf-nav', 'sf-hero', 'sf-split', 'sf-feature', 'sf-testimonial', 'sf-stats', 'sf-form', 'sf-footer'],
+      keywords: ['agency', 'consultancy', 'service', 'team', 'proof', 'testimonial', 'contact'],
+      markup: `<main>
+  <section class="sf-hero">
+    <div class="sf-container sf-split">
+      <div class="sf-stack"><p class="sf-kicker">Agency</p><h1 class="sf-text-display">Strategy, design, and build in one fluid system.</h1><p class="sf-text-lead sf-prose">A complete service homepage using Synced Fluid primitives.</p><a class="sf-button" href="#contact">Plan a project</a></div>
+      <aside class="sf-stats"><article class="sf-stat"><strong class="sf-stat__value">12</strong><span class="sf-stat__label">Years</span></article><article class="sf-stat"><strong class="sf-stat__value">80+</strong><span class="sf-stat__label">Launches</span></article></aside>
+    </div>
+  </section>
+  <section class="sf-section"><div class="sf-container sf-auto-grid"><article class="sf-feature"><h2 class="sf-feature__title">Positioning</h2><p class="sf-feature__text">Turn offers into clear site structure.</p></article><article class="sf-feature"><h2 class="sf-feature__title">Design systems</h2><p class="sf-feature__text">Build tokens before pages.</p></article><article class="sf-feature"><h2 class="sf-feature__title">Delivery</h2><p class="sf-feature__text">Ship fast with fewer one-off styles.</p></article></div></section>
+  <section class="sf-section" id="contact"><div class="sf-container sf-cta"><h2 class="sf-text-h2">Ready to scope the work?</h2><a class="sf-button" href="mailto:hello@example.com">Contact us</a></div></section>
+</main>`,
+    },
+    {
+      id: 'blog-index',
+      name: 'Blog index',
+      whenToUse: 'Editorial indexes, resources pages, changelogs, and news listings.',
+      sections: ['sticky-navigation', 'card-grid', 'long-form-content'],
+      classes: ['sf-breadcrumb', 'sf-section-header', 'sf-auto-grid', 'sf-card', 'sf-meta', 'sf-pagination'],
+      keywords: ['blog', 'index', 'resources', 'articles', 'news', 'seo', 'cards'],
+      markup: `<main class="sf-section">
+  <div class="sf-container sf-stack">
+    <nav class="sf-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>Resources</span></nav>
+    <header class="sf-section-header"><p class="sf-kicker">Resources</p><h1 class="sf-text-display">Ideas, guides, and product notes.</h1></header>
+    <div class="sf-auto-grid">
+      <article class="sf-card sf-card--interactive sf-stack"><p class="sf-meta">Guide - 6 min read</p><h2 class="sf-text-h4"><a class="sf-link-plain" href="/articles/theme-tokens">Theme tokens first</a></h2><p class="sf-text-muted">Keep brand decisions reusable.</p></article>
+      <article class="sf-card sf-card--interactive sf-stack"><p class="sf-meta">Pattern - 4 min read</p><h2 class="sf-text-h4"><a class="sf-link-plain" href="/articles/native-ui">Native UI patterns</a></h2><p class="sf-text-muted">Use browser primitives before JavaScript.</p></article>
+    </div>
+    <nav class="sf-pagination" aria-label="Pagination"><a href="#">Previous</a><a aria-current="page" href="#">1</a><a href="#">2</a><a href="#">Next</a></nav>
+  </div>
+</main>`,
+    },
+    {
+      id: 'article-page',
+      name: 'Article page',
+      whenToUse: 'Long-form blog posts, documentation pages, legal content, and case studies.',
+      sections: ['long-form-content'],
+      classes: ['sf-breadcrumb', 'sf-prose', 'sf-prose--blog', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap'],
+      keywords: ['article', 'post', 'prose', 'legal', 'documentation', 'case', 'study', 'long-form'],
+      markup: `<main class="sf-section">
+  <article class="sf-container sf-prose sf-prose--blog">
+    <nav class="sf-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><a href="/articles">Articles</a><span>Theme tokens</span></nav>
+    <p class="sf-meta">Guide - 6 min read - Updated today</p>
+    <h1>Theme tokens before page CSS</h1>
+    <p class="sf-text-lead">Synced Fluid works best when repeated brand decisions live in config.</p>
+    <figure class="sf-figure"><div class="sf-frame"></div><figcaption class="sf-caption">Use real project imagery here.</figcaption></figure>
+    <h2>Start with primitives</h2>
+    <p>Use semantic colours, fluid spacing, and named components before adding custom CSS.</p>
+    <div class="sf-table-wrap"><table><thead><tr><th>Layer</th><th>Use</th></tr></thead><tbody><tr><td>Tokens</td><td>Brand decisions</td></tr><tr><td>Components</td><td>Common UI</td></tr></tbody></table></div>
+  </article>
+</main>`,
+    },
+    {
+      id: 'about-timeline',
+      name: 'About and timeline',
+      whenToUse: 'About pages, company stories, roadmaps, and chronological proof sections.',
+      sections: ['hero-split', 'card-grid'],
+      classes: ['sf-section', 'sf-container', 'sf-split', 'sf-stack', 'sf-card', 'sf-meta'],
+      keywords: ['about', 'timeline', 'history', 'roadmap', 'company', 'story'],
+      markup: `<main>
+  <section class="sf-section"><div class="sf-container sf-split"><div class="sf-stack"><p class="sf-kicker">About</p><h1 class="sf-text-display">Built for teams who want fast, modern CSS.</h1></div><p class="sf-text-lead sf-prose">Tell the company story with clear type, spacing, and surfaces.</p></div></section>
+  <section class="sf-section"><div class="sf-container sf-stack"><h2 class="sf-text-h2">Timeline</h2><div class="sf-stack"><article class="sf-card"><p class="sf-meta">2024</p><h3>Started with fluid tokens</h3></article><article class="sf-card"><p class="sf-meta">2026</p><h3>Expanded into native-first recipes</h3></article></div></div></section>
+</main>`,
+    },
+    {
+      id: 'team-grid',
+      name: 'Team grid',
+      whenToUse: 'Team, advisors, contributors, partners, or speaker sections.',
+      sections: ['card-grid'],
+      classes: ['sf-section', 'sf-container', 'sf-section-header', 'sf-auto-grid', 'sf-card', 'sf-frame', 'sf-meta'],
+      keywords: ['team', 'people', 'advisors', 'contributors', 'partners', 'speakers'],
+      markup: `<section class="sf-section">
+  <div class="sf-container sf-stack">
+    <header class="sf-section-header"><p class="sf-kicker">Team</p><h2 class="sf-text-h2">People behind the work.</h2></header>
+    <div class="sf-auto-grid">
+      <article class="sf-card sf-stack"><div class="sf-frame"></div><h3 class="sf-text-h4">Alex Morgan</h3><p class="sf-meta">Design systems</p></article>
+      <article class="sf-card sf-stack"><div class="sf-frame"></div><h3 class="sf-text-h4">Jamie Lee</h3><p class="sf-meta">Frontend engineering</p></article>
+    </div>
+  </div>
+</section>`,
+    },
+    {
+      id: 'contact-page',
+      name: 'Contact page',
+      whenToUse: 'Contact, lead capture, support, and booking pages.',
+      sections: ['contact-form', 'faq-disclosure-tabs'],
+      classes: ['sf-section', 'sf-container', 'sf-split', 'sf-form', 'sf-field', 'sf-input', 'sf-textarea', 'sf-disclosure'],
+      keywords: ['contact', 'lead', 'form', 'support', 'booking', 'faq'],
+      markup: `<main class="sf-section">
+  <div class="sf-container sf-split">
+    <div class="sf-stack"><p class="sf-kicker">Contact</p><h1 class="sf-text-display">Tell us what you are building.</h1><details class="sf-disclosure"><summary>When will you reply?</summary><p>Usually within one working day.</p></details></div>
+    <form class="sf-form sf-card"><label class="sf-field"><span class="sf-label">Email</span><input class="sf-input" type="email" required /></label><label class="sf-field"><span class="sf-label">Message</span><textarea class="sf-textarea" rows="5"></textarea></label><button class="sf-button" type="submit">Send</button></form>
+  </div>
+</main>`,
+    },
+    {
+      id: 'not-found',
+      name: '404 page',
+      whenToUse: 'Missing pages and broken routes that need a useful recovery path.',
+      sections: ['hero-split'],
+      classes: ['sf-section', 'sf-container', 'sf-stack', 'sf-text-display', 'sf-button', 'sf-button--outline'],
+      keywords: ['404', 'not-found', 'error', 'missing', 'empty'],
+      markup: `<main class="sf-section">
+  <section class="sf-container sf-stack">
+    <p class="sf-kicker">404</p>
+    <h1 class="sf-text-display">This page is not available.</h1>
+    <p class="sf-text-lead sf-prose">The link may be old, or the page may have moved.</p>
+    <div class="sf-cluster"><a class="sf-button" href="/">Go home</a><a class="sf-button sf-button--outline" href="/contact">Contact support</a></div>
+  </section>
+</main>`,
+    },
+    {
+      id: 'coming-soon',
+      name: 'Coming soon page',
+      whenToUse: 'Pre-launch pages, waitlists, newsletter capture, and product teasers.',
+      sections: ['hero-split', 'contact-form'],
+      classes: ['sf-section', 'sf-container', 'sf-stack', 'sf-card', 'sf-form', 'sf-input', 'sf-button', 'sf-badge'],
+      keywords: ['coming', 'soon', 'waitlist', 'launch', 'newsletter', 'signup'],
+      markup: `<main class="sf-section">
+  <section class="sf-container sf-split">
+    <div class="sf-stack"><p class="sf-badge">Coming soon</p><h1 class="sf-text-display">A new product is almost ready.</h1><p class="sf-text-lead sf-prose">Join the list for launch updates.</p></div>
+    <form class="sf-form sf-card"><label class="sf-field"><span class="sf-label">Email</span><input class="sf-input" type="email" placeholder="you@example.com" required /></label><button class="sf-button" type="submit">Join waitlist</button></form>
+  </section>
+</main>`,
+    },
+  ]
+}
+
+function getPublicCatalog() {
+  const tokens = getTokenSummary()
+  return {
+    name: '@synced/fluid',
+    purpose: 'A dependency-free fluid CSS system for complete modern websites using tokens, layout primitives, native components, recipes, and generated utilities.',
+    cssFiles: ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'app.css', 'layout.css', 'components.css', 'utilities.css'],
+    commands: ['init', 'build', 'watch', 'lint', 'doctor', 'tokens', 'catalog', 'suggest', 'recipe', 'theme init', 'theme validate'],
+    tokens,
+    classes: tokens.starterClasses,
+    patterns: getPublicPatterns(),
+    recipes: getPublicRecipes(),
+    guardrails: [
+      'Prefer tokens and sf-* primitives before custom CSS.',
+      'Do not import styles.css alongside modular core layer files.',
+      'Keep generated utility class names complete in source files.',
+      'Use theme config for repeated brand choices.',
+      'Keep JavaScript optional; native components are styled, not shipped as JS widgets.',
+    ],
+  }
+}
+
+function runTokens() {
+  const tokenSummary = getTokenSummary()
 
   if (args.includes('--json')) {
     console.log(JSON.stringify(tokenSummary, null, 2))
@@ -552,6 +1012,376 @@ function runTokens() {
   console.log(`Component classes: ${tokenSummary.starterClasses.components.join(', ')}`)
   console.log('')
   console.log('Use --json for a machine-readable token map.')
+}
+
+function runCatalog() {
+  const catalog = getPublicCatalog()
+  if (args.includes('--json')) {
+    console.log(JSON.stringify(catalog, null, 2))
+    return
+  }
+
+  console.log('Synced Fluid catalog')
+  console.log('')
+  console.log(catalog.purpose)
+  console.log('')
+  console.log(`Commands: ${catalog.commands.join(', ')}`)
+  console.log(`Patterns: ${catalog.patterns.map((pattern) => pattern.id).join(', ')}`)
+  console.log(`Recipes: ${catalog.recipes.map((recipe) => recipe.id).join(', ')}`)
+  console.log('')
+  console.log('Use --json for the full machine-readable API catalog.')
+}
+
+function runSuggest() {
+  const json = args.includes('--json')
+  const limit = Number(readOption('limit', '3'))
+  const query = readPositionals().join(' ').trim()
+  if (!query) {
+    console.error('Pass a short brief, for example: synced-fluid suggest "full page scroll portfolio"')
+    process.exit(1)
+  }
+
+  const terms = query.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
+  const scored = scoreCatalogItems(getPublicPatterns(), terms, limit)
+  const recipeMatches = scoreCatalogItems(getPublicRecipes(), terms, limit)
+
+  if (json) {
+    console.log(JSON.stringify({ query, suggestions: scored, recipes: recipeMatches }, null, 2))
+    return
+  }
+
+  if (!scored.length && !recipeMatches.length) {
+    console.log('No close recipe match found. Run synced-fluid catalog --json to inspect available patterns.')
+    return
+  }
+
+  console.log(`Suggestions for "${query}"`)
+  if (recipeMatches.length) {
+    console.log('')
+    console.log('Recipes:')
+    for (const recipe of recipeMatches) {
+      console.log(`- ${recipe.id}: ${recipe.name}`)
+      console.log(`  Use: ${recipe.whenToUse}`)
+      console.log(`  Command: synced-fluid recipe ${recipe.id}`)
+    }
+  }
+  if (scored.length) {
+    console.log('')
+    console.log('Patterns:')
+    for (const pattern of scored) {
+      console.log(`- ${pattern.id}: ${pattern.name}`)
+      console.log(`  Classes: ${pattern.classes.join(' ')}`)
+      console.log(`  Markup: ${pattern.markup}`)
+    }
+  }
+}
+
+function scoreCatalogItems(items, terms, limit) {
+  return items
+    .map((item) => {
+      const haystack = [item.id, item.name, item.whenToUse, ...(item.keywords ?? []), ...(item.classes ?? []), ...(item.sections ?? [])].join(' ').toLowerCase()
+      const score = terms.reduce((sum, term) => sum + (haystack.includes(term) ? 2 : 0) + (item.keywords ?? []).filter((keyword) => keyword.includes(term)).length, 0)
+      return { ...item, score }
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id))
+    .slice(0, Number.isFinite(limit) && limit > 0 ? limit : 3)
+}
+
+function runRecipe() {
+  const id = readPositionals()[0]
+  const framework = readOption('framework', 'html')
+  const section = readOption('section')
+  const recipes = getPublicRecipes()
+  const patterns = getPublicPatterns()
+
+  if (section) {
+    const pattern = findPattern(section, patterns)
+    if (!pattern) {
+      console.error(`Unknown section "${section}". Use one of: ${patterns.map((entry) => entry.id).join(', ')}.`)
+      process.exit(1)
+    }
+    const markup = renderMarkup(pattern.markup, framework, pattern.name)
+    if (args.includes('--json')) {
+      console.log(JSON.stringify({ ...pattern, framework, renderedMarkup: markup }, null, 2))
+      return
+    }
+    console.log(`${pattern.id}: ${pattern.name}`)
+    console.log(`Use: ${pattern.whenToUse}`)
+    console.log(`Classes: ${pattern.classes.join(' ')}`)
+    if (args.includes('--markup')) {
+      console.log('')
+      console.log(markup)
+    }
+    return
+  }
+
+  if (args.includes('--json')) {
+    const payload = id ? recipes.find((recipe) => recipe.id === id) : recipes
+    if (!payload) {
+      console.error(`Unknown recipe "${id}". Use one of: ${recipes.map((recipe) => recipe.id).join(', ')}.`)
+      process.exit(1)
+    }
+    if (Array.isArray(payload)) console.log(JSON.stringify(payload, null, 2))
+    else console.log(JSON.stringify({ ...payload, framework, renderedMarkup: renderMarkup(payload.markup, framework, payload.name) }, null, 2))
+    return
+  }
+
+  if (!id) {
+    console.log('Synced Fluid recipes')
+    for (const recipe of recipes) {
+      console.log(`- ${recipe.id}: ${recipe.name}`)
+    }
+    console.log('')
+    console.log('Run synced-fluid recipe <id> --markup to print copy-ready HTML.')
+    return
+  }
+
+  const recipe = recipes.find((entry) => entry.id === id)
+  if (!recipe) {
+    console.error(`Unknown recipe "${id}". Use one of: ${recipes.map((entry) => entry.id).join(', ')}.`)
+    process.exit(1)
+  }
+
+  console.log(`${recipe.id}: ${recipe.name}`)
+  console.log(`Use: ${recipe.whenToUse}`)
+  console.log(`Sections: ${recipe.sections.join(', ')}`)
+  console.log(`Classes: ${recipe.classes.join(' ')}`)
+  console.log(`Framework: ${framework}`)
+  if (args.includes('--markup')) {
+    console.log('')
+    console.log(renderMarkup(recipe.markup, framework, recipe.name))
+  }
+}
+
+function findPattern(value, patterns) {
+  const normal = value.toLowerCase()
+  return (
+    patterns.find((pattern) => pattern.id === normal) ??
+    patterns.find((pattern) => pattern.keywords.some((keyword) => keyword === normal)) ??
+    patterns.find((pattern) => pattern.name.toLowerCase().includes(normal))
+  )
+}
+
+function renderMarkup(markup, framework, name) {
+  if (framework === 'html' || framework === 'astro-html') return markup
+  if (framework === 'astro') {
+    return `---
+import '../styles/synced-fluid.css'
+---
+
+${markup}`
+  }
+  if (framework === 'next' || framework === 'react' || framework === 'jsx') {
+    return `export default function Page() {
+  return (
+    <>
+${indentMarkup(htmlToJsx(markup), 6)}
+    </>
+  )
+}`
+  }
+
+  console.error(`Unknown framework "${framework}". Use html, next, react, or astro.`)
+  process.exit(1)
+}
+
+function htmlToJsx(markup) {
+  return markup
+    .replace(/\bclass=/g, 'className=')
+    .replace(/\bfor=/g, 'htmlFor=')
+    .replace(/<!--/g, '{/*')
+    .replace(/-->/g, '*/}')
+}
+
+function indentMarkup(markup, spaces) {
+  const pad = ' '.repeat(spaces)
+  return markup.split('\n').map((line) => `${pad}${line}`).join('\n')
+}
+
+async function runThemeCommand() {
+  const subcommand = args.shift()
+  if (subcommand === 'init') return runThemeInit()
+  if (subcommand === 'validate') return runThemeValidate()
+
+  console.error('Unknown theme command. Use: synced-fluid theme init --from brief.md or synced-fluid theme validate')
+  return 1
+}
+
+function runThemeInit() {
+  const targetCwd = resolve(readOption('cwd', process.cwd()))
+  const from = readOption('from')
+  if (!from) {
+    console.error('Pass a theme brief with --from <file>, for example: synced-fluid theme init --from brief.md')
+    return 1
+  }
+
+  const briefFile = resolve(targetCwd, from)
+  if (!existsSync(briefFile)) {
+    console.error(`Theme brief not found: ${relative(targetCwd, briefFile)}`)
+    return 1
+  }
+
+  const brief = readFileSync(briefFile, 'utf8')
+  const theme = themeFromBrief(brief)
+  const errors = []
+  validateTheme(theme, errors)
+  if (errors.length) {
+    console.error('Generated theme was invalid:')
+    for (const error of errors) console.error(`  - ${error}`)
+    return 1
+  }
+
+  const summary = summarizeTheme(theme)
+  if (args.includes('--json')) {
+    console.log(JSON.stringify({ summary, theme }, null, 2))
+    return 0
+  }
+
+  console.log(`Summary: ${summary}`)
+  console.log('')
+  console.log('Paste this into synced-fluid.config.mjs:')
+  console.log('')
+  console.log(`theme: ${formatJsValue(theme, 0)},`)
+  return 0
+}
+
+async function runThemeValidate() {
+  const targetCwd = resolve(readOption('cwd', process.cwd()))
+  const configPath = resolveConfigPath(readOption('config'), targetCwd)
+  if (!configPath) {
+    console.error('synced-fluid.config.mjs was not found.')
+    return 1
+  }
+
+  const loaded = await loadConfig(configPath)
+  const errors = []
+  if (loaded.theme === undefined) errors.push('theme is missing. Add themePresets.<name> or a theme object.')
+  else validateTheme(loaded.theme, errors)
+
+  if (errors.length) {
+    console.error(`Invalid Synced Fluid theme in ${relative(targetCwd, configPath)}:`)
+    for (const error of errors) console.error(`  - ${error}`)
+    return 1
+  }
+
+  console.log(`pass theme is valid in ${relative(targetCwd, configPath)}.`)
+  return 0
+}
+
+function themeFromBrief(brief) {
+  const lower = brief.toLowerCase()
+  const primary = findNamedColour(lower, 'primary') ?? findAnyColour(lower) ?? 'oklch(62% 0.19 252)'
+  const accent = findNamedColour(lower, 'accent') ?? findNamedColour(lower, 'secondary') ?? (primary.includes('252') ? 'oklch(68% 0.16 150)' : 'oklch(62% 0.19 252)')
+  const radius = lower.includes('no radius') || lower.includes('square') || lower.includes('sharp') ? '0.125rem' : lower.includes('pill') || lower.includes('fully rounded') ? '999rem' : lower.includes('slightly') || lower.includes('subtle') ? '0.5rem' : '0.875rem'
+  const compact = lower.includes('compact') || lower.includes('dense')
+  const spacious = lower.includes('spacious') || lower.includes('generous') || lower.includes('open')
+  const raised = lower.includes('raised') || lower.includes('elevated') || lower.includes('shadow')
+  const serif = lower.includes('serif') || lower.includes('editorial')
+  const mono = lower.includes('mono') || lower.includes('developer')
+
+  return {
+    fonts: {
+      sans: lower.includes('inter') ? 'Inter, ui-sans-serif, system-ui, sans-serif' : 'ui-sans-serif, system-ui, sans-serif',
+      display: serif ? 'Georgia, ui-serif, serif' : 'var(--sf-font-sans)',
+      ...(mono ? { mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' } : {}),
+    },
+    colours: {
+      primary,
+      link: primary,
+      ring: primary,
+      accent,
+      surface: lower.includes('warm') ? 'oklch(97% 0.018 72)' : 'oklch(98% 0.004 248)',
+      'surface-alt': lower.includes('warm') ? 'oklch(94% 0.024 72)' : 'oklch(95% 0.006 248)',
+    },
+    darkColours: {
+      primary: colorForDarkMode(primary),
+      link: colorForDarkMode(primary),
+      ring: colorForDarkMode(primary),
+      accent: colorForDarkMode(accent),
+    },
+    radii: {
+      md: radius,
+      lg: radius,
+      xl: radius === '999rem' ? '1.75rem' : `calc(${radius} * 1.4)`,
+    },
+    layout: {
+      containerMax: lower.includes('wide') ? '82rem' : lower.includes('narrow') ? '64rem' : '72rem',
+      gutter: compact ? 'var(--space-xs-s)' : spacious ? 'var(--space-m-xl)' : 'var(--space-s-l)',
+    },
+    components: {
+      button: {
+        radius,
+        blockSize: compact ? '2.5rem' : spacious ? '3rem' : '2.75rem',
+        paddingInline: compact ? 'var(--space-xs)' : 'var(--space-s)',
+      },
+      card: {
+        radius: radius === '999rem' ? '1.5rem' : `calc(${radius} * 1.4)`,
+        padding: compact ? 'var(--space-s)' : spacious ? 'var(--space-l)' : 'var(--space-m-l)',
+        ...(raised ? { shadow: 'var(--shadow-md)' } : {}),
+      },
+      input: {
+        radius,
+        blockSize: compact ? '2.5rem' : '2.75rem',
+      },
+    },
+  }
+}
+
+function findNamedColour(brief, label) {
+  const segment = brief.match(new RegExp(`${label}[^\\n.;,]*(blue|green|orange|red|purple|violet|teal|cyan|pink|amber|yellow|slate|black|neutral)`))
+  return segment ? colourFromName(segment[1]) : null
+}
+
+function findAnyColour(brief) {
+  const match = brief.match(/\b(blue|green|orange|red|purple|violet|teal|cyan|pink|amber|yellow|slate|black|neutral)\b/)
+  return match ? colourFromName(match[1]) : null
+}
+
+function colourFromName(name) {
+  return {
+    blue: 'oklch(62% 0.19 252)',
+    green: 'oklch(62% 0.16 150)',
+    orange: 'oklch(69% 0.18 44)',
+    red: 'oklch(58% 0.22 26)',
+    purple: 'oklch(58% 0.2 292)',
+    violet: 'oklch(58% 0.2 292)',
+    teal: 'oklch(64% 0.13 186)',
+    cyan: 'oklch(70% 0.13 210)',
+    pink: 'oklch(64% 0.2 8)',
+    amber: 'oklch(72% 0.16 70)',
+    yellow: 'oklch(80% 0.15 92)',
+    slate: 'oklch(44% 0.04 258)',
+    black: 'oklch(22% 0.02 258)',
+    neutral: 'oklch(48% 0.02 248)',
+  }[name]
+}
+
+function colorForDarkMode(value) {
+  if (value.includes('252')) return 'oklch(72% 0.14 252)'
+  if (value.includes('150')) return 'oklch(76% 0.13 150)'
+  if (value.includes('44')) return 'oklch(76% 0.14 44)'
+  if (value.includes('292')) return 'oklch(74% 0.14 292)'
+  return value
+}
+
+function summarizeTheme(theme) {
+  return `${theme.radii.md} radius, ${theme.fonts.display.includes('serif') ? 'serif display' : 'system display'}, ${theme.colours.primary} primary, ${theme.colours.accent} accent, ${theme.layout.containerMax} container.`
+}
+
+function formatJsValue(value, indent = 0) {
+  const pad = ' '.repeat(indent)
+  const nextPad = ' '.repeat(indent + 2)
+  if (typeof value === 'string') return `'${value.replace(/'/g, "\\'")}'`
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value)
+  if (Array.isArray(value)) return `[${value.map((item) => formatJsValue(item, indent)).join(', ')}]`
+  if (isPlainObject(value)) {
+    const entries = Object.entries(value)
+    if (!entries.length) return '{}'
+    const lines = entries.map(([key, nested]) => `${nextPad}${/^[a-zA-Z_$][\w$]*$/.test(key) ? key : `'${key}'`}: ${formatJsValue(nested, indent + 2)},`)
+    return `{\n${lines.join('\n')}\n${pad}}`
+  }
+  return 'undefined'
 }
 
 function detectPreset(targetCwd) {
@@ -650,6 +1480,8 @@ function addPackageScripts(targetCwd) {
   pkg.scripts['fluid:build'] ??= 'synced-fluid build'
   pkg.scripts['fluid:check'] ??= 'synced-fluid build --check'
   pkg.scripts['fluid:doctor'] ??= 'synced-fluid doctor'
+  pkg.scripts['fluid:lint'] ??= 'synced-fluid lint'
+  pkg.scripts['fluid:watch'] ??= 'synced-fluid watch'
   writeFileSync(packageFile, `${JSON.stringify(pkg, null, 2)}\n`)
   console.log('update package.json scripts')
 }
@@ -659,14 +1491,39 @@ function formatStringArray(values) {
 }
 
 function projectContains(targetCwd, needle) {
+  return allProjectFiles(targetCwd).some((file) => readFileSync(file, 'utf8').includes(needle))
+}
+
+function allProjectFiles(targetCwd) {
   const rootFiles = ['synced-fluid.css', 'styles.css', 'style.css', 'app.css', 'global.css', 'globals.css']
     .map((file) => resolve(targetCwd, file))
     .filter((file) => existsSync(file))
-  if (rootFiles.some((file) => readFileSync(file, 'utf8').includes(needle))) return true
 
   const roots = ['app', 'src', 'pages', 'components', 'templates', 'parts', 'patterns', 'blocks', 'inc', 'includes', 'assets'].filter((dir) => existsSync(resolve(targetCwd, dir)))
-  const files = roots.flatMap((root) => listProjectFiles(resolve(targetCwd, root)))
-  return files.some((file) => readFileSync(file, 'utf8').includes(needle))
+  return [...rootFiles, ...roots.flatMap((root) => listProjectFiles(resolve(targetCwd, root)))]
+}
+
+function findDuplicateCoreImports(targetCwd) {
+  const modularImports = ['tokens.css', 'reset.css', 'base.css', 'app.css', 'layout.css', 'components.css', 'utilities.css']
+  return allProjectFiles(targetCwd)
+    .filter((file) => file.endsWith('.css'))
+    .filter((file) => {
+      const css = readFileSync(file, 'utf8')
+      return css.includes('@synced/fluid/styles.css') && modularImports.some((name) => css.includes(`@synced/fluid/${name}`))
+    })
+    .map((file) => relative(targetCwd, file))
+}
+
+function findCustomTokenOverrides(targetCwd) {
+  return allProjectFiles(targetCwd)
+    .filter((file) => file.endsWith('.css'))
+    .filter((file) => {
+      const relativeFile = relative(targetCwd, file)
+      if (/synced-fluid\.generated\.css$/.test(relativeFile)) return false
+      const css = readFileSync(file, 'utf8')
+      return /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(css)
+    })
+    .map((file) => relative(targetCwd, file))
 }
 
 function listProjectFiles(dir) {
@@ -2383,7 +3240,7 @@ function buildUtilitiesCss(tokens) {
     else if (rule) rules.push(rule)
   }
 
-  if (unsupported.length && !quiet) {
+  if (unsupported.length && !quiet && command !== 'lint') {
     const report = unsupported.slice(0, 160).join('\n  ')
     console.warn(`Unsupported class tokens: ${unsupported.length}\n  ${report}`)
   }
@@ -2408,6 +3265,64 @@ function buildUsedKeyframesCss(bases) {
   return keyframes.length ? `\n${keyframes.map((rule) => `  ${rule}`).join('\n')}` : ''
 }
 
+function knownPublicClasses() {
+  const classes = Object.values(getTokenSummary().starterClasses).flat()
+  return [...new Set([...classes, ...knownShippedClasses(), ...utilitySuggestionClasses(), 'flex', 'grid', 'hidden', 'block', 'inline-flex', 'relative', 'absolute', 'sticky', 'sr-only', 'not-sr-only'])]
+}
+
+function knownShippedClasses() {
+  const cssFile = resolve(packageRoot, 'styles.css')
+  if (!existsSync(cssFile)) return []
+  const css = readFileSync(cssFile, 'utf8')
+  const classes = new Set()
+  for (const match of css.matchAll(/\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*(?:--?[_a-zA-Z0-9-]+)?(?:__[_a-zA-Z0-9-]+)?)/g)) {
+    classes.add(match[1])
+  }
+  return [...classes]
+}
+
+function utilitySuggestionClasses() {
+  const colours = Object.keys(semanticColours)
+  const spacing = ['0', '1', '2', '3', '4', '6', '8', '10', '12']
+  return [
+    ...colours.flatMap((name) => [`text-${name}`, `bg-${name}`, `border-${name}`, `ring-${name}`]),
+    ...spacing.flatMap((name) => [`p-${name}`, `px-${name}`, `py-${name}`, `m-${name}`, `gap-${name}`]),
+    'text-sm',
+    'text-base',
+    'text-lg',
+    'font-sans',
+    'font-display',
+    'rounded',
+    'rounded-lg',
+    'shadow-md',
+  ]
+}
+
+function nearestClass(token) {
+  const { base } = splitVariants(token)
+  const candidates = knownPublicClasses()
+  const scored = candidates
+    .map((candidate) => ({ candidate, score: levenshtein(base, candidate) }))
+    .sort((a, b) => a.score - b.score)
+  return scored[0]?.score <= Math.max(4, Math.ceil(base.length / 3)) ? scored[0].candidate : null
+}
+
+function levenshtein(a, b) {
+  const previous = Array.from({ length: b.length + 1 }, (_, index) => index)
+  for (let i = 0; i < a.length; i += 1) {
+    const current = [i + 1]
+    for (let j = 0; j < b.length; j += 1) {
+      current[j + 1] = Math.min(
+        current[j] + 1,
+        previous[j + 1] + 1,
+        previous[j] + (a[i] === b[j] ? 0 : 1)
+      )
+    }
+    previous.splice(0, previous.length, ...current)
+  }
+  return previous[b.length]
+}
+
 const tokens = collectClassTokens()
 const utilities = buildUtilitiesCss(tokens)
 const coreCss = includeCore ? [buildBaseCss(), includeApp ? buildAppCss() : '', buildLayoutCss(), buildComponentCss(), buildStaticUtilitiesCss()] : []
@@ -2420,6 +3335,26 @@ const css = [
   ...coreCss,
   utilities.css,
 ].filter(Boolean).join('\n\n') + '\n'
+
+if (command === 'lint') {
+  const known = new Set(knownPublicClasses())
+  const unknownStatic = tokens.filter((token) => {
+    const { base } = splitVariants(token)
+    return base.startsWith('sf-') && !known.has(base)
+  })
+  const lintFailures = [...new Set([...utilities.unsupported, ...unknownStatic])]
+
+  if (!lintFailures.length) {
+    console.log('pass no unsupported class tokens found.')
+  } else {
+    console.error(`Unsupported class tokens: ${lintFailures.length}`)
+    for (const token of lintFailures.slice(0, 160)) {
+      const suggestion = nearestClass(token)
+      console.error(`  - ${token}${suggestion ? ` (did you mean ${suggestion}?)` : ''}`)
+    }
+  }
+  process.exit(lintFailures.length ? 1 : 0)
+}
 
 if (checkOnly) {
   const current = existsSync(outFile) ? readFileSync(outFile, 'utf8') : ''

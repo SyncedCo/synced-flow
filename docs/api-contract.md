@@ -18,7 +18,7 @@ These are intended for application code and examples.
 | Native components | `sf-dialog`, `sf-popover`, `sf-tooltip`, `sf-drawer`, `sf-disclosure`, `sf-accordion`, `sf-tabs`, `sf-menu`, `sf-breadcrumb`, `sf-pagination` |
 | Website patterns | `sf-logo-cloud`, `sf-feature`, `sf-stats`, `sf-testimonial`, `sf-pricing-grid`, `sf-price-card`, `sf-faq`, `sf-cta`, `sf-footer` |
 | Utilities | `sf-prose`, `sf-link`, `sf-link-subtle`, `sf-link-plain`, `sf-list-*`, `sf-focus-ring`, `sf-touch-target`, `sf-skip-link`, `sr-only`, `not-sr-only` |
-| CLI | `synced-fluid init`, `add app`, `build`, `doctor`, `tokens` |
+| CLI | `synced-fluid init`, `add app`, `build`, `watch`, `lint`, `doctor`, `tokens`, `catalog`, `suggest`, `recipe`, `theme init`, `theme validate` |
 
 ## Internal Or Compatibility Surface
 

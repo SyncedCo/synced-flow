@@ -131,6 +131,7 @@ site should use app-style defaults globally.
 ```bash
 pnpm fluid:build
 pnpm fluid:check
+pnpm fluid:lint
 pnpm fluid:doctor
 ```
 
@@ -242,6 +243,8 @@ wp_enqueue_style(
 ```bash
 pnpm exec synced-fluid tokens
 pnpm exec synced-fluid tokens --json
+pnpm exec synced-fluid catalog --json
+pnpm exec synced-fluid suggest "service site with pricing and faq"
 ```
 
 Use this before generating UI so class names, token names, and presets stay

@@ -55,6 +55,7 @@ pnpm build
 pnpm check
 pnpm test
 node bin/synced-fluid.mjs tokens --json
+node bin/synced-fluid.mjs catalog --json
 node bin/synced-fluid.mjs doctor --cwd examples/plain-html
 ```
 

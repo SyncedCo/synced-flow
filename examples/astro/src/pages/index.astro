@@ -1,0 +1,85 @@
+---
+import '../styles/synced-fluid.css'
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Synced Fluid Astro Example</title>
+  </head>
+  <body>
+    <header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
+      <nav class="sf-container sf-nav" aria-label="Main navigation">
+        <a class="sf-nav__link" href="#home">Studio</a>
+        <ul class="sf-nav__list">
+          <li><a class="sf-nav__link" href="#articles">Articles</a></li>
+          <li><a class="sf-nav__link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="sf-section">
+        <div class="sf-container sf-stack">
+          <p class="sf-badge">Astro template</p>
+          <h1 class="sf-text-display">A content site from native CSS primitives.</h1>
+          <p class="sf-text-lead sf-prose">
+            Replace these sections with project content. The layout, typography, cards, navigation, and form styling come from Synced Fluid.
+          </p>
+          <div class="sf-cluster">
+            <a class="sf-button sf-button--default" href="#contact">Start a project</a>
+            <a class="sf-button sf-button--outline" href="#articles">Read articles</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="articles" class="sf-section">
+        <div class="sf-container sf-stack">
+          <div class="sf-section-header">
+            <p class="sf-kicker">Articles</p>
+            <h2 class="sf-text-h2">Blog cards and article metadata without custom CSS.</h2>
+          </div>
+          <div class="sf-auto-grid">
+            <article class="sf-card sf-card--interactive sf-stack">
+              <p class="sf-meta">Guide · 5 min read</p>
+              <h3 class="sf-text-h4">Theme from reusable tokens</h3>
+              <p class="sf-text-muted">Keep brand choices in config before adding project CSS.</p>
+            </article>
+            <article class="sf-card sf-card--interactive sf-stack">
+              <p class="sf-meta">Pattern · 3 min read</p>
+              <h3 class="sf-text-h4">Native disclosure and tabs</h3>
+              <p class="sf-text-muted">Use browser primitives first and add optional JS only when needed.</p>
+            </article>
+            <article class="sf-card sf-card--interactive sf-stack">
+              <p class="sf-meta">Recipe · 4 min read</p>
+              <h3 class="sf-text-h4">Scroll panels</h3>
+              <p class="sf-text-muted">Create immersive panels with scroll snap and sticky layout classes.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="sf-section">
+        <div class="sf-container sf-split">
+          <div class="sf-stack">
+            <p class="sf-kicker">Contact</p>
+            <h2 class="sf-text-h2">Ready for a real content workflow.</h2>
+            <p class="sf-prose">This example is deliberately complete enough for an AI agent to replace sections instead of inventing new styling.</p>
+          </div>
+          <form class="sf-form sf-card">
+            <label class="sf-field">
+              <span class="sf-label">Email</span>
+              <input class="sf-input" type="email" placeholder="you@example.com" />
+            </label>
+            <label class="sf-field">
+              <span class="sf-label">Project</span>
+              <textarea class="sf-textarea" rows="4" placeholder="Tell us about the site."></textarea>
+            </label>
+            <button class="sf-button sf-button--default" type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

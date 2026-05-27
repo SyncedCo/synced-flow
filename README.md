@@ -14,6 +14,8 @@ for class tokens, then generates project-specific utility CSS.
 - website patterns: logo clouds, feature blocks, stats, testimonials, pricing, FAQ, CTA, and footer helpers
 - native component styling: dialog, popover, drawer, tooltip, disclosure, tabs,
   breadcrumbs, pagination, scroll snap, and sticky patterns
+- AI-friendly CLI discovery: `catalog --json`, `suggest`, `lint`, `watch`, and
+  `theme init --from` for turning a site brief into reusable theme tokens
 - accessibility and base helpers: `sr-only`, `not-sr-only`, skip links, focus
   rings, touch targets, link helpers, and list helpers
 - accessibility state styling for invalid, required, disabled, busy, current,
@@ -154,7 +156,8 @@ See [Base styling decisions](docs/base-styling.md).
 ## Configure
 
 `synced-fluid init` creates `synced-fluid.config.mjs`, a CSS entry file, a
-generated CSS placeholder, and `fluid:build` / `fluid:check` package scripts.
+generated CSS placeholder, and `fluid:build` / `fluid:check` / `fluid:lint` /
+`fluid:watch` package scripts.
 
 Start by shaping the theme: radius style, font family, primary colour, accent
 colour, surface treatment, and density. With AI, ask it to use the Synced Fluid
@@ -190,6 +193,8 @@ Add package scripts:
   "scripts": {
     "fluid:build": "synced-fluid build",
     "fluid:check": "synced-fluid build --check",
+    "fluid:lint": "synced-fluid lint",
+    "fluid:watch": "synced-fluid watch",
     "fluid:doctor": "synced-fluid doctor"
   }
 }
@@ -206,6 +211,11 @@ Discover the supported starter surface:
 ```bash
 pnpm exec synced-fluid tokens
 pnpm exec synced-fluid tokens --json
+pnpm exec synced-fluid catalog --json
+pnpm exec synced-fluid suggest "full page scroll portfolio"
+pnpm exec synced-fluid recipe portfolio-scroll --markup
+pnpm exec synced-fluid recipe portfolio-scroll --framework next --markup
+pnpm exec synced-fluid theme init --from brief.md
 ```
 
 ## Use

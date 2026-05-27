@@ -13,8 +13,8 @@ For Codex-style skill loaders, use the repo-shipped skill at
    surface style, and density.
 4. Convert that brief into `synced-fluid.config.mjs` theme tokens.
 5. Import the generated CSS entry once.
-6. Run `synced-fluid tokens --json` before choosing class names.
-7. Run `synced-fluid doctor` before finishing.
+6. Run `synced-fluid catalog --json` before choosing recipes and classes.
+7. Run `synced-fluid lint` and `synced-fluid doctor` before finishing.
 
 Good theme prompt:
 
@@ -23,6 +23,12 @@ Use the Synced Fluid skill. Build a theme config for a modern B2B website:
 soft but not pill-shaped radius, system sans UI, editorial display headings,
 blue primary, green accent, light raised cards, and spacious sections.
 Return only the Synced Fluid config theme object.
+```
+
+For a file-based workflow, put the answers in `brief.md` and run:
+
+```bash
+pnpm exec synced-fluid theme init --from brief.md
 ```
 
 ## Styling Rules
@@ -43,6 +49,11 @@ Return only the Synced Fluid config theme object.
   accessibility and UI affordance work.
 - Use theme presets or config `theme` overrides for brand choices.
 - Put repeated brand decisions in theme tokens before adding custom CSS.
+- Use `synced-fluid suggest "<brief>"` to choose section recipes before adding
+  new one-off patterns.
+- Use `synced-fluid recipe <id> --markup` to get copy-ready page sections for
+  SaaS, portfolio, agency, blog, article, about, team, contact, 404, and coming
+  soon pages.
 - Keep class names complete in source files. Do not build classes from fragments.
 - Use `safelist` only when dynamic classes are unavoidable.
 - Do not enable `responsiveVariants` in new projects.
@@ -68,6 +79,7 @@ Return only the Synced Fluid config theme object.
 ```bash
 pnpm fluid:build
 pnpm fluid:check
+pnpm fluid:lint
 pnpm fluid:doctor
 ```
 

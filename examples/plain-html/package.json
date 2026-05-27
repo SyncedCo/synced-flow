@@ -5,6 +5,8 @@
   "scripts": {
     "fluid:build": "synced-fluid build",
     "fluid:check": "synced-fluid build --check",
+    "fluid:lint": "synced-fluid lint",
+    "fluid:watch": "synced-fluid watch",
     "fluid:doctor": "synced-fluid doctor"
   },
   "dependencies": {

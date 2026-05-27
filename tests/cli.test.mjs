@@ -60,6 +60,8 @@ test('init scaffolds config, CSS entry, generated CSS, and scripts', () => {
   assert.equal(pkg.scripts['fluid:build'], 'synced-fluid build')
   assert.equal(pkg.scripts['fluid:check'], 'synced-fluid build --check')
   assert.equal(pkg.scripts['fluid:doctor'], 'synced-fluid doctor')
+  assert.equal(pkg.scripts['fluid:lint'], 'synced-fluid lint')
+  assert.equal(pkg.scripts['fluid:watch'], 'synced-fluid watch')
   assert.match(output, /app\.css removes raw link underlines and list markers/)
 })
 
@@ -267,6 +269,133 @@ test('tokens command prints machine-readable starter surface', () => {
   assert.ok(tokens.starterClasses.utilities.includes('sf-link-plain'))
   assert.ok(tokens.starterClasses.utilities.includes('sf-animate-rise'))
   assert.ok(tokens.colours.semantic.includes('primary'))
+})
+
+test('catalog command prints public API for AI composition', () => {
+  const output = run(['catalog', '--json'])
+  const catalog = JSON.parse(output)
+
+  assert.ok(catalog.commands.includes('suggest'))
+  assert.ok(catalog.commands.includes('recipe'))
+  assert.ok(catalog.commands.includes('theme init'))
+  assert.ok(catalog.patterns.some((pattern) => pattern.id === 'scroll-snap-page'))
+  assert.ok(catalog.patterns.some((pattern) => pattern.classes.includes('sf-dialog')))
+  assert.ok(catalog.recipes.some((recipe) => recipe.id === 'saas-landing'))
+  assert.ok(catalog.recipes.some((recipe) => recipe.id === 'coming-soon'))
+})
+
+test('suggest command returns matching recipes and classes', () => {
+  const output = run(['suggest', 'full page scroll portfolio', '--json'])
+  const result = JSON.parse(output)
+
+  assert.equal(result.query, 'full page scroll portfolio')
+  assert.equal(result.suggestions[0].id, 'scroll-snap-page')
+  assert.ok(result.suggestions[0].classes.includes('sf-scroll-panel'))
+  assert.equal(result.recipes[0].id, 'portfolio-scroll')
+  assert.ok(result.recipes[0].markup.includes('sf-scroll-viewport'))
+})
+
+test('recipe command prints copy-ready recipe markup', () => {
+  const output = run(['recipe', 'saas-landing', '--json'])
+  const recipe = JSON.parse(output)
+
+  assert.equal(recipe.id, 'saas-landing')
+  assert.ok(recipe.sections.includes('hero-split'))
+  assert.ok(recipe.markup.includes('sf-pricing-grid'))
+
+  const textOutput = run(['recipe', 'coming-soon', '--markup'])
+  assert.match(textOutput, /coming-soon: Coming soon page/)
+  assert.match(textOutput, /sf-form sf-card/)
+
+  const nextOutput = run(['recipe', 'portfolio-scroll', '--framework', 'next', '--markup'])
+  assert.match(nextOutput, /export default function Page/)
+  assert.match(nextOutput, /className="sf-scroll-viewport"/)
+
+  const astroSection = run(['recipe', '--section', 'form', '--framework', 'astro', '--markup'])
+  assert.match(astroSection, /import '\.\.\/styles\/synced-fluid\.css'/)
+  assert.match(astroSection, /class="sf-form"/)
+})
+
+test('theme init converts a brief into a valid theme object', () => {
+  const cwd = tempProject()
+  writeFileSync(join(cwd, 'brief.md'), 'Modern B2B site. Slightly rounded. Inter system UI. Primary blue, accent green, raised cards, spacious sections.')
+
+  const output = run(['theme', 'init', '--cwd', cwd, '--from', 'brief.md', '--json'])
+  const result = JSON.parse(output)
+
+  assert.match(result.summary, /primary/)
+  assert.equal(result.theme.colours.primary, 'oklch(62% 0.19 252)')
+  assert.equal(result.theme.colours.accent, 'oklch(62% 0.16 150)')
+  assert.equal(result.theme.components.card.shadow, 'var(--shadow-md)')
+})
+
+test('theme validate checks configured theme shape', () => {
+  const cwd = tempProject()
+  writeFileSync(
+    join(cwd, 'synced-fluid.config.mjs'),
+    `import { defineConfig } from '@synced/fluid/config'
+
+export default defineConfig({
+  scan: ['src'],
+  theme: {
+    fonts: { sans: 'ui-sans-serif, system-ui, sans-serif' },
+    colours: { primary: 'oklch(62% 0.19 252)' },
+  },
+})
+`
+  )
+
+  const output = run(['theme', 'validate', '--cwd', cwd])
+  assert.match(output, /pass theme is valid/)
+})
+
+test('lint reports unsupported classes with nearest alternatives', () => {
+  const cwd = tempProject()
+  writeFileSync(join(cwd, 'src/App.jsx'), '<div class="sf-buton text-prmary"></div>\n')
+  writeFileSync(
+    join(cwd, 'synced-fluid.config.mjs'),
+    `import { defineConfig } from '@synced/fluid/config'
+
+export default defineConfig({
+  scan: ['src'],
+  out: 'src/synced-fluid.generated.css',
+})
+`
+  )
+
+  const result = spawnSync('node', [cli, 'lint', '--cwd', cwd], {
+    cwd: packageRoot,
+    encoding: 'utf8',
+  })
+
+  assert.notEqual(result.status, 0)
+  assert.match(result.stderr, /sf-buton.*sf-button/)
+  assert.match(result.stderr, /text-prmary.*text-primary/)
+})
+
+test('doctor teaches missing scripts and unsupported classes', () => {
+  const cwd = tempProject()
+  writeFileSync(join(cwd, 'src/App.jsx'), '<div class="sf-buton"></div>\n')
+  writeFileSync(
+    join(cwd, 'synced-fluid.config.mjs'),
+    `import { defineConfig } from '@synced/fluid/config'
+
+export default defineConfig({
+  scan: ['src'],
+  out: 'src/synced-fluid.generated.css',
+  failOnUnsupported: false,
+  theme: {
+    colours: { primary: 'oklch(62% 0.19 252)' },
+  },
+})
+`
+  )
+
+  const output = run(['doctor', '--cwd', cwd])
+
+  assert.match(output, /Add "fluid:lint": "synced-fluid lint"/)
+  assert.match(output, /Unsupported class tokens were found/)
+  assert.match(output, /failOnUnsupported is disabled/)
 })
 
 test('package exposes modular CSS layer files', () => {

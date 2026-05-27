@@ -4,6 +4,31 @@ These recipes are copy-ready starting points. They intentionally compose the
 public API from [System primitives](system-primitives.md) and avoid one-off page
 CSS.
 
+## CLI Recipe Catalog
+
+The CLI also ships page-level recipes for AI agents and template generators:
+
+```bash
+pnpm exec synced-fluid recipe
+pnpm exec synced-fluid recipe saas-landing --markup
+pnpm exec synced-fluid recipe saas-landing --framework next --markup
+pnpm exec synced-fluid recipe --section form --framework astro --markup
+pnpm exec synced-fluid suggest "portfolio with full page scroll" --json
+```
+
+Available recipe ids:
+
+- `saas-landing`
+- `portfolio-scroll`
+- `agency-home`
+- `blog-index`
+- `article-page`
+- `about-timeline`
+- `team-grid`
+- `contact-page`
+- `not-found`
+- `coming-soon`
+
 ## Marketing Homepage
 
 ```html
