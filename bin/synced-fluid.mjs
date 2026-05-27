@@ -636,7 +636,7 @@ async function runDoctor() {
     pass('No duplicate core stylesheet imports found.')
   }
 
-  const customTokenFiles = findCustomTokenOverrides(targetCwd)
+  const customTokenFiles = findCustomTokenOverrides(targetCwd, loadedConfig?.out)
   if (customTokenFiles.length) {
     warn(`Custom --sf-* token overrides found in ${customTokenFiles.join(', ')}. Prefer synced-fluid.config.mjs theme tokens for reusable brand decisions.`)
   } else {
@@ -1558,11 +1558,13 @@ function findDuplicateCoreImports(targetCwd) {
     .map((file) => relative(targetCwd, file))
 }
 
-function findCustomTokenOverrides(targetCwd) {
+function findCustomTokenOverrides(targetCwd, generatedOut) {
+  const generatedFile = generatedOut ? resolve(targetCwd, generatedOut) : null
   return allProjectFiles(targetCwd)
     .filter((file) => file.endsWith('.css'))
     .filter((file) => {
       const relativeFile = relative(targetCwd, file)
+      if (generatedFile && file === generatedFile) return false
       if (/synced-fluid\.generated\.css$/.test(relativeFile)) return false
       const css = readFileSync(file, 'utf8')
       return /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(css)

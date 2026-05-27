@@ -237,6 +237,7 @@ test('init supports WordPress themes with enqueue-ready CSS output', () => {
 
   const doctor = run(['doctor', '--cwd', cwd])
   assert.match(doctor, /pass Core CSS is included in generated output/)
+  assert.match(doctor, /pass No ad hoc --sf-\* token overrides found in project CSS/)
 })
 
 test('init include-core writes a single importable CSS output', () => {

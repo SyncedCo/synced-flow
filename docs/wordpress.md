@@ -19,6 +19,27 @@ The WordPress preset:
 - enables `includeCore`
 - writes `assets/css/synced-fluid.css`
 
+See [`examples/wordpress`](../examples/wordpress) for a lean block theme style
+template with `theme.json`, template parts, PHP patterns, enqueue code, and an
+enqueue-ready generated CSS output.
+
+## Example Structure
+
+```text
+examples/wordpress/
+  functions.php
+  theme.json
+  synced-fluid.config.mjs
+  assets/css/synced-fluid.css
+  parts/header.html
+  parts/footer.html
+  templates/front-page.html
+  templates/index.html
+  patterns/landing-hero.php
+  patterns/feature-grid.php
+  patterns/contact-cta.php
+```
+
 ## Enqueue
 
 ```php

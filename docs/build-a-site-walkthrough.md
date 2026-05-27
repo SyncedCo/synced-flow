@@ -11,6 +11,8 @@ pnpm exec synced-fluid init --preset next --theme synced
 ```
 
 Use the closest preset: `next`, `astro`, `vite`, `wordpress`, or `plain`.
+For WordPress, see [WordPress](wordpress.md) and the
+[`examples/wordpress`](../examples/wordpress) template.
 
 ## 2. Write A Theme Brief
 
