@@ -216,6 +216,7 @@ pnpm exec synced-fluid suggest "full page scroll portfolio"
 pnpm exec synced-fluid recipe portfolio-scroll --markup
 pnpm exec synced-fluid recipe portfolio-scroll --framework next --markup
 pnpm exec synced-fluid theme init --from brief.md
+pnpm exec synced-fluid theme init --from brief.md --preset-base neutral-saas
 ```
 
 ## Use
@@ -256,6 +257,7 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 ## Docs
 
 - [Quick start](docs/quick-start.md)
+- [Build a site walkthrough](docs/build-a-site-walkthrough.md)
 - [AI usage guide](docs/ai-usage.md)
 - [Base styling decisions](docs/base-styling.md)
 - [Accessibility CSS](docs/accessibility-css.md)

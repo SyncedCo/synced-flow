@@ -118,6 +118,7 @@ patterns, see [Native Components](native-components.md).
 For accessible state styling and markup hooks, see
 [Accessibility CSS](accessibility-css.md).
 For the stable public surface, see [CSS API Contract](api-contract.md).
+For a full project flow, see [Build a site walkthrough](build-a-site-walkthrough.md).
 
 ## Base Defaults
 

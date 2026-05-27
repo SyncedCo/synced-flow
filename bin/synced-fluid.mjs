@@ -396,6 +396,7 @@ Options:
   --force                      overwrite init-managed files.
   --quiet                      Suppress non-critical warnings.
   --from <file>                Read a theme brief for "theme init".
+  --preset-base <name>         Base "theme init" output on synced, neutral-saas, editorial, or dark-app.
   --limit <number>             Limit results for "suggest".
   --markup                     Include markup snippets in text recipe output.
 
@@ -1211,6 +1212,11 @@ async function runThemeCommand() {
 function runThemeInit() {
   const targetCwd = resolve(readOption('cwd', process.cwd()))
   const from = readOption('from')
+  const presetBase = normalizeThemeName(readOption('preset-base', 'synced'))
+  if (!themePresets[presetBase]) {
+    console.error(`Unknown preset base "${readOption('preset-base')}". Use one of: ${presetNames.map(kebabThemeName).join(', ')}.`)
+    return 1
+  }
   if (!from) {
     console.error('Pass a theme brief with --from <file>, for example: synced-fluid theme init --from brief.md')
     return 1
@@ -1223,7 +1229,8 @@ function runThemeInit() {
   }
 
   const brief = readFileSync(briefFile, 'utf8')
-  const theme = themeFromBrief(brief)
+  const analysis = analyseThemeBrief(brief)
+  const theme = themeFromBrief(brief, presetBase)
   const errors = []
   validateTheme(theme, errors)
   if (errors.length) {
@@ -1234,11 +1241,17 @@ function runThemeInit() {
 
   const summary = summarizeTheme(theme)
   if (args.includes('--json')) {
-    console.log(JSON.stringify({ summary, theme }, null, 2))
+    console.log(JSON.stringify({ summary, presetBase: kebabThemeName(presetBase), warnings: analysis.warnings, theme }, null, 2))
     return 0
   }
 
   console.log(`Summary: ${summary}`)
+  console.log(`Preset base: ${kebabThemeName(presetBase)}`)
+  if (analysis.warnings.length) {
+    console.log('')
+    console.log('Warnings:')
+    for (const warning of analysis.warnings) console.log(`- ${warning}`)
+  }
   console.log('')
   console.log('Paste this into synced-fluid.config.mjs:')
   console.log('')
@@ -1269,21 +1282,40 @@ async function runThemeValidate() {
   return 0
 }
 
-function themeFromBrief(brief) {
+function analyseThemeBrief(brief) {
   const lower = brief.toLowerCase()
-  const primary = findNamedColour(lower, 'primary') ?? findAnyColour(lower) ?? 'oklch(62% 0.19 252)'
-  const accent = findNamedColour(lower, 'accent') ?? findNamedColour(lower, 'secondary') ?? (primary.includes('252') ? 'oklch(68% 0.16 150)' : 'oklch(62% 0.19 252)')
-  const radius = lower.includes('no radius') || lower.includes('square') || lower.includes('sharp') ? '0.125rem' : lower.includes('pill') || lower.includes('fully rounded') ? '999rem' : lower.includes('slightly') || lower.includes('subtle') ? '0.5rem' : '0.875rem'
+  const checks = [
+    ['radius', /\b(radius|rounded|square|sharp|pill|curved)\b/],
+    ['font', /\b(font|typeface|sans|serif|inter|system|editorial|display)\b/],
+    ['primary colour', /\b(primary|brand)\b.*\b(blue|green|orange|red|purple|violet|teal|cyan|pink|amber|yellow|slate|black|neutral)\b/],
+    ['accent colour', /\b(accent|secondary)\b.*\b(blue|green|orange|red|purple|violet|teal|cyan|pink|amber|yellow|slate|black|neutral)\b/],
+    ['surface style', /\b(surface|card|raised|elevated|flat|warm)\b/],
+    ['density', /\b(compact|dense|spacious|generous|open)\b/],
+  ]
+  const warnings = checks
+    .filter(([, pattern]) => !pattern.test(lower))
+    .map(([label]) => `Brief does not mention ${label}; Synced Fluid used a sensible default.`)
+  return { warnings }
+}
+
+function themeFromBrief(brief, presetBase = 'synced') {
+  const lower = brief.toLowerCase()
+  const base = structuredClone(themePresets[presetBase] ?? themePresets.synced)
+  const primary = findNamedColour(lower, 'primary') ?? findNamedColour(lower, 'brand') ?? findAnyColour(lower) ?? base.colours?.primary ?? 'oklch(62% 0.19 252)'
+  const accent = findNamedColour(lower, 'accent') ?? findNamedColour(lower, 'secondary') ?? base.colours?.accent ?? (primary.includes('252') ? 'oklch(68% 0.16 150)' : 'oklch(62% 0.19 252)')
+  const radius = lower.includes('no radius') || lower.includes('square') || lower.includes('sharp') ? '0.125rem' : lower.includes('pill') || lower.includes('fully rounded') ? '999rem' : lower.includes('slightly') || lower.includes('subtle') ? '0.5rem' : base.components?.button?.radius ?? '0.875rem'
   const compact = lower.includes('compact') || lower.includes('dense')
   const spacious = lower.includes('spacious') || lower.includes('generous') || lower.includes('open')
   const raised = lower.includes('raised') || lower.includes('elevated') || lower.includes('shadow')
+  const flat = lower.includes('flat')
   const serif = lower.includes('serif') || lower.includes('editorial')
   const mono = lower.includes('mono') || lower.includes('developer')
+  const warm = lower.includes('warm')
 
-  return {
+  return mergeTheme(base, {
     fonts: {
-      sans: lower.includes('inter') ? 'Inter, ui-sans-serif, system-ui, sans-serif' : 'ui-sans-serif, system-ui, sans-serif',
-      display: serif ? 'Georgia, ui-serif, serif' : 'var(--sf-font-sans)',
+      sans: lower.includes('inter') ? 'Inter, ui-sans-serif, system-ui, sans-serif' : base.fonts?.sans ?? 'ui-sans-serif, system-ui, sans-serif',
+      display: serif ? 'Georgia, ui-serif, serif' : base.fonts?.display ?? 'var(--sf-font-sans)',
       ...(mono ? { mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' } : {}),
     },
     colours: {
@@ -1291,8 +1323,8 @@ function themeFromBrief(brief) {
       link: primary,
       ring: primary,
       accent,
-      surface: lower.includes('warm') ? 'oklch(97% 0.018 72)' : 'oklch(98% 0.004 248)',
-      'surface-alt': lower.includes('warm') ? 'oklch(94% 0.024 72)' : 'oklch(95% 0.006 248)',
+      surface: warm ? 'oklch(97% 0.018 72)' : base.colours?.surface ?? 'oklch(98% 0.004 248)',
+      'surface-alt': warm ? 'oklch(94% 0.024 72)' : base.colours?.surfaceAlt ?? base.colours?.['surface-alt'] ?? 'oklch(95% 0.006 248)',
     },
     darkColours: {
       primary: colorForDarkMode(primary),
@@ -1306,8 +1338,8 @@ function themeFromBrief(brief) {
       xl: radius === '999rem' ? '1.75rem' : `calc(${radius} * 1.4)`,
     },
     layout: {
-      containerMax: lower.includes('wide') ? '82rem' : lower.includes('narrow') ? '64rem' : '72rem',
-      gutter: compact ? 'var(--space-xs-s)' : spacious ? 'var(--space-m-xl)' : 'var(--space-s-l)',
+      containerMax: lower.includes('wide') ? '82rem' : lower.includes('narrow') ? '64rem' : base.layout?.containerMax ?? '72rem',
+      gutter: compact ? 'var(--space-xs-s)' : spacious ? 'var(--space-m-xl)' : base.layout?.gutter ?? 'var(--space-s-l)',
     },
     components: {
       button: {
@@ -1319,13 +1351,23 @@ function themeFromBrief(brief) {
         radius: radius === '999rem' ? '1.5rem' : `calc(${radius} * 1.4)`,
         padding: compact ? 'var(--space-s)' : spacious ? 'var(--space-l)' : 'var(--space-m-l)',
         ...(raised ? { shadow: 'var(--shadow-md)' } : {}),
+        ...(flat ? { shadow: 'none' } : {}),
       },
       input: {
         radius,
         blockSize: compact ? '2.5rem' : '2.75rem',
       },
     },
+  })
+}
+
+function mergeTheme(base, overrides) {
+  const output = structuredClone(base)
+  for (const [key, value] of Object.entries(overrides)) {
+    if (isPlainObject(value) && isPlainObject(output[key])) output[key] = mergeTheme(output[key], value)
+    else output[key] = value
   }
+  return output
 }
 
 function findNamedColour(brief, label) {
@@ -1366,7 +1408,9 @@ function colorForDarkMode(value) {
 }
 
 function summarizeTheme(theme) {
-  return `${theme.radii.md} radius, ${theme.fonts.display.includes('serif') ? 'serif display' : 'system display'}, ${theme.colours.primary} primary, ${theme.colours.accent} accent, ${theme.layout.containerMax} container.`
+  const displayFont = theme.fonts.display.toLowerCase()
+  const displayLabel = /\b(georgia|fraunces|ui-serif)\b/.test(displayFont) ? 'serif display' : 'system display'
+  return `${theme.radii.md} radius, ${displayLabel}, ${theme.colours.primary} primary, ${theme.colours.accent} accent, ${theme.layout.containerMax} container.`
 }
 
 function formatJsValue(value, indent = 0) {

@@ -155,6 +155,7 @@ CSS.
 
 ```bash
 pnpm exec synced-fluid theme init --from brief.md
+pnpm exec synced-fluid theme init --from brief.md --preset-base neutral-saas
 pnpm exec synced-fluid theme init --from brief.md --json
 pnpm exec synced-fluid theme validate
 ```
@@ -162,3 +163,6 @@ pnpm exec synced-fluid theme validate
 `theme init --from` reads a simple brief for radius, fonts, colours, card style,
 and density, then prints a validated `theme` block for
 `synced-fluid.config.mjs`. `theme validate` checks the configured theme shape.
+Use `--preset-base synced`, `--preset-base neutral-saas`,
+`--preset-base editorial`, or `--preset-base dark-app` to inherit a starting
+preset before applying brief-derived overrides.

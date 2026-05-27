@@ -29,7 +29,11 @@ For a file-based workflow, put the answers in `brief.md` and run:
 
 ```bash
 pnpm exec synced-fluid theme init --from brief.md
+pnpm exec synced-fluid theme init --from brief.md --preset-base neutral-saas
 ```
+
+If the output includes warnings, ask the user for the missing brand decisions
+before finalising the theme.
 
 ## Styling Rules
 

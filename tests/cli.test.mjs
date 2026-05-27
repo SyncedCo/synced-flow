@@ -320,13 +320,27 @@ test('theme init converts a brief into a valid theme object', () => {
   const cwd = tempProject()
   writeFileSync(join(cwd, 'brief.md'), 'Modern B2B site. Slightly rounded. Inter system UI. Primary blue, accent green, raised cards, spacious sections.')
 
-  const output = run(['theme', 'init', '--cwd', cwd, '--from', 'brief.md', '--json'])
+  const output = run(['theme', 'init', '--cwd', cwd, '--from', 'brief.md', '--preset-base', 'neutral-saas', '--json'])
   const result = JSON.parse(output)
 
   assert.match(result.summary, /primary/)
+  assert.equal(result.presetBase, 'neutral-saas')
   assert.equal(result.theme.colours.primary, 'oklch(62% 0.19 252)')
   assert.equal(result.theme.colours.accent, 'oklch(62% 0.16 150)')
+  assert.equal(result.theme.layout.containerMax, '76rem')
   assert.equal(result.theme.components.card.shadow, 'var(--shadow-md)')
+})
+
+test('theme init warns when a brief omits brand decisions', () => {
+  const cwd = tempProject()
+  writeFileSync(join(cwd, 'brief.md'), 'Simple website.')
+
+  const output = run(['theme', 'init', '--cwd', cwd, '--from', 'brief.md', '--json'])
+  const result = JSON.parse(output)
+
+  assert.ok(result.warnings.some((warning) => warning.includes('primary colour')))
+  assert.ok(result.warnings.some((warning) => warning.includes('density')))
+  assert.equal(result.theme.colours.primary, 'oklch(68% 0.18 44)')
 })
 
 test('theme validate checks configured theme shape', () => {
