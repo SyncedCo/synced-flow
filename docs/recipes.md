@@ -128,7 +128,7 @@ panels, and product workspaces.
           <span class="sf-stat__label">Core import</span>
         </article>
         <article class="sf-stat">
-          <strong class="sf-stat__value">9.4 KB</strong>
+          <strong class="sf-stat__value">9.8 KB</strong>
           <span class="sf-stat__label">Full core gzip size</span>
         </article>
       </div>
@@ -155,13 +155,13 @@ pnpm exec synced-fluid suggest "SaaS dashboard with login and metrics"
 The recipe includes:
 
 - signed-out sign-in form
-- signed-in account menu with role and sign-out action
-- top app bar, sidebar navigation, and mobile drawer navigation
+- signed-in sidebar account area with initials, role, settings, and sign-out
+- traditional SaaS app shell with persistent left navigation and mobile drawer
 - KPI cards, alert state, filter/search form, customer table, and activity list
 
-It uses existing Synced Fluid primitives such as `sf-sidebar`, `sf-panel-grid`,
-`sf-stat`, `sf-card`, `sf-form`, `sf-table-wrap`, `sf-drawer`, and
-`sf-menu-popover`.
+It uses Synced Fluid primitives such as `sf-app-shell`, `sf-app-sidebar`,
+`sf-app-main`, `sf-toolbar`, `sf-metric-grid`, `sf-pipeline`, `sf-panel-grid`,
+`sf-stat`, `sf-card`, `sf-form`, `sf-table-wrap`, and `sf-drawer`.
 
 ## Documentation Page
 

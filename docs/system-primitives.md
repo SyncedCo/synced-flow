@@ -35,9 +35,11 @@ These classes are the first choice for page structure.
 | `sf-flow` | Adds block flow spacing between prose-like children. |
 | `sf-cluster` | Wrapping inline groups such as actions or tags. |
 | `sf-repel` | Space-between layout that wraps safely. |
+| `sf-toolbar` | Dense app/page toolbar that wraps actions safely. |
+| `sf-app-shell`, `sf-app-sidebar`, `sf-app-sidebar__brand`, `sf-app-main` | Product app shell with persistent sidebar and main workspace. |
 | `sf-split` | Responsive two-column layout. |
 | `sf-split--reverse` | Reverses split layout visual order. |
-| `sf-auto-grid`, `sf-panel-grid` | Responsive card and panel grids. |
+| `sf-auto-grid`, `sf-panel-grid`, `sf-metric-grid`, `sf-pipeline` | Responsive card, metric, and operational grids. |
 | `sf-frame`, `sf-frame--square`, `sf-frame--portrait`, `sf-frame--wide` | Stable media aspect ratios. |
 | `sf-cover`, `sf-hero` | Full-height and hero section structure. |
 | `sf-scroll-viewport`, `sf-scroll-panel`, `sf-scroll-snap-y`, `sf-sticky-top`, `sf-media-object`, `sf-aside-rail` | Scroll, sticky, and intent-based layout modes. |
@@ -78,6 +80,7 @@ Use utility classes for small decisions that do not need a new component.
 | `sf-bg-background`, `sf-bg-surface`, `sf-bg-surface-alt`, `sf-bg-primary-soft`, `sf-bg-success-soft`, `sf-bg-warning-soft`, `sf-bg-danger-soft` | Semantic backgrounds. |
 | `sf-border`, `sf-border-strong`, `sf-rounded`, `sf-rounded-panel`, `sf-rounded-full` | Border and radius helpers. |
 | `sf-shadow-sm`, `sf-shadow-md`, `sf-shadow-lg`, `sf-shadow-none` | Shadow helpers. |
+| `sf-push-block-end`, `sf-push-block-start`, `sf-push-inline-end`, `sf-push-inline-start` | Auto-margin positioning helpers for pushing items to an edge inside flex/grid layouts. |
 | `sf-prose`, `sf-text-balance`, `sf-text-pretty` | Content width and wrapping helpers. |
 | `sf-prose--blog`, `sf-prose--legal`, `sf-meta`, `sf-figure`, `sf-caption`, `sf-table-wrap` | Long-form content and article helpers. |
 | `sf-link`, `sf-link-subtle`, `sf-link-plain` | Link treatments. |

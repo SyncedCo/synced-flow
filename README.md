@@ -117,18 +117,18 @@ breakpoint-heavy patterns: fluid `clamp()` scales, CSS custom properties,
 logical sizing and spacing, cascade layers, OKLCH colour tokens,
 container-aware layout primitives, and `prefers-reduced-motion` handling.
 
-Current built CSS sizes from `pnpm build` on 2026-05-27:
+Current built CSS sizes from `pnpm build` on 2026-05-28:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 51.5 KB | 9.4 KB | Full core stylesheet for simple setup. |
-| `tokens.css` | 9.2 KB | 2.2 KB | Design tokens only. |
+| `styles.css` | 55.4 KB | 9.8 KB | Full core stylesheet for simple setup. |
+| `tokens.css` | 9.5 KB | 2.2 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
 | `base.css` | 3.4 KB | 1.2 KB | Base element styles. |
 | `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
-| `layout.css` | 5.4 KB | 1.5 KB | Fluid layout, scroll, sticky, media, and split primitives. |
-| `components.css` | 26.5 KB | 4.4 KB | Button, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
-| `utilities.css` | 7.1 KB | 1.8 KB | Static `sf-*` content, motion, and helper utilities. |
+| `layout.css` | 7.8 KB | 1.9 KB | Fluid layout, app shell, scroll, sticky, media, and split primitives. |
+| `components.css` | 27.5 KB | 4.5 KB | Button, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
+| `utilities.css` | 7.5 KB | 1.9 KB | Static `sf-*` content, positioning, motion, and helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The
 Synced Fluid approach is explicit and predictable: import the core layers you

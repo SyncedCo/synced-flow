@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Synced Fluid SaaS Dashboard Template</title>
+    <link rel="stylesheet" href="../plain-html/synced-fluid.css" />
+  </head>
+  <body>
+    <a class="sf-skip-link" href="#dashboard-main">Skip to dashboard</a>
+    <div class="sf-app-shell sf-theme-dark">
+      <aside class="sf-app-sidebar sf-stack" aria-label="Workspace navigation">
+        <div class="sf-app-sidebar__brand">
+          <span class="sf-badge" aria-hidden="true">SF</span>
+          <div><strong>Product Suite</strong><br><span class="sf-text-muted">Workspace</span></div>
+        </div>
+        <nav class="sf-nav" aria-label="Primary">
+          <p class="sf-kicker">Overview</p>
+          <ul class="sf-nav__list">
+            <li><a class="sf-nav__link" href="#dashboard-main" aria-current="page">Dashboard</a></li>
+            <li><a class="sf-nav__link" href="#command">Command centre</a></li>
+          </ul>
+          <p class="sf-kicker">Workspace</p>
+          <ul class="sf-nav__list">
+            <li><a class="sf-nav__link" href="#customers">Customers</a></li>
+            <li><a class="sf-nav__link" href="#pipeline">Pipeline</a></li>
+            <li><a class="sf-nav__link" href="#activity">Activity</a></li>
+            <li><a class="sf-nav__link" href="#billing">Billing</a></li>
+          </ul>
+          <p class="sf-kicker">System</p>
+          <ul class="sf-nav__list">
+            <li><a class="sf-nav__link" href="/app/settings">Settings</a></li>
+          </ul>
+        </nav>
+        <article class="sf-alert sf-alert--info" role="status">
+          <p class="sf-alert__title">Auth UI only</p>
+          <p>Wire sessions and permissions in your app. Synced Fluid styles the shell and states.</p>
+        </article>
+        <footer class="sf-stack sf-stack--tight sf-push-block-end">
+          <div class="sf-cluster">
+            <span class="sf-badge" aria-hidden="true">S</span>
+            <span><strong>Account owner</strong><br><span class="sf-text-muted">Admin role</span></span>
+          </div>
+          <form action="/logout" method="post"><button class="sf-button sf-button--ghost sf-button--block" type="submit">Sign out</button></form>
+          <p class="sf-text-caption sf-text-muted">Product Suite v1.0</p>
+        </footer>
+      </aside>
+      <main class="sf-app-main sf-stack sf-stack--loose" id="dashboard-main">
+        <header class="sf-toolbar">
+          <div>
+            <p class="sf-kicker">Dashboard</p>
+            <h1 class="sf-text-h4 sf-font-sans">Workspace health</h1>
+            <p class="sf-text-muted">A dense SaaS dashboard layout using Synced Fluid primitives.</p>
+          </div>
+        </header>
+        <nav class="sf-drawer sf-drawer--right sf-drawer--stack" id="dashboard-mobile-menu" popover="auto" aria-label="Mobile dashboard navigation">
+          <button class="sf-button sf-button--ghost" type="button" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Close</button>
+          <form class="sf-stack" action="/app" method="get">
+            <button class="sf-nav__link" type="submit" formaction="#dashboard-main" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Dashboard</button>
+            <button class="sf-nav__link" type="submit" formaction="#customers" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Customers</button>
+            <button class="sf-nav__link" type="submit" formaction="#pipeline" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Pipeline</button>
+            <button class="sf-nav__link" type="submit" formaction="#billing" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Billing</button>
+          </form>
+        </nav>
+        <section class="sf-metric-grid" aria-label="Workspace metrics">
+          <article class="sf-card sf-stack"><p class="sf-kicker">Accounts</p><strong class="sf-stat__value">128</strong><span class="sf-text-muted">12 active this week</span></article>
+          <article class="sf-card sf-stack"><p class="sf-kicker">Revenue</p><strong class="sf-stat__value">$78k</strong><span class="sf-text-muted">Tracked this month</span></article>
+          <article class="sf-card sf-stack"><p class="sf-kicker">Tasks</p><strong class="sf-stat__value">24</strong><span class="sf-text-muted">5 overdue</span></article>
+          <article class="sf-card sf-stack"><p class="sf-kicker">Health</p><strong class="sf-stat__value">94%</strong><span class="sf-text-muted">Across active accounts</span></article>
+        </section>
+        <section class="sf-panel-grid" id="command" data-density="featured">
+          <article class="sf-card sf-stack"><div class="sf-repel"><h2 class="sf-card__title">Command centre</h2><span class="sf-badge">Priority</span></div><p class="sf-card__description">Follow-ups, approvals, and missing next actions stay visible.</p></article>
+          <article class="sf-card sf-stack" id="billing"><h2 class="sf-card__title">Billing watch</h2><p class="sf-card__description">2 overdue payment follow-ups and 1 renewal due this week.</p></article>
+          <article class="sf-card sf-stack"><h2 class="sf-card__title">Relationship pulse</h2><p class="sf-card__description">Three customer timelines need a recent touch point.</p></article>
+        </section>
+        <section class="sf-card sf-stack" id="pipeline">
+          <div class="sf-repel"><h2 class="sf-card__title">Pipeline</h2><a class="sf-link" href="/app/pipeline">View all</a></div>
+          <div class="sf-pipeline">
+            <article class="sf-surface sf-stack"><p class="sf-kicker">Lead</p><strong class="sf-text-h3">3</strong><span class="sf-text-muted">$4,200</span></article>
+            <article class="sf-surface sf-stack"><p class="sf-kicker">Qualified</p><strong class="sf-text-h3">5</strong><span class="sf-text-muted">$18,600</span></article>
+            <article class="sf-surface sf-stack"><p class="sf-kicker">Won</p><strong class="sf-text-h3">2</strong><span class="sf-text-muted">$9,400</span></article>
+            <article class="sf-surface sf-stack"><p class="sf-kicker">In progress</p><strong class="sf-text-h3">4</strong><span class="sf-text-muted">$21,700</span></article>
+            <article class="sf-surface sf-stack"><p class="sf-kicker">Delivered</p><strong class="sf-text-h3">8</strong><span class="sf-text-muted">$34,900</span></article>
+          </div>
+        </section>
+        <section class="sf-panel-grid" id="customers">
+          <article class="sf-card sf-stack">
+            <div class="sf-repel"><h2 class="sf-card__title">Recent activity</h2><a class="sf-link" href="/app/activity">View all</a></div>
+            <div class="sf-table-wrap">
+              <table>
+                <thead><tr><th>Item</th><th>Status</th><th>Value</th><th>Date</th></tr></thead>
+                <tbody>
+                  <tr><td>Enterprise onboarding</td><td><span class="sf-badge">Active</span></td><td>$7,800</td><td>Today</td></tr>
+                  <tr><td>Usage review</td><td><span class="sf-badge">Scheduled</span></td><td>$4,050</td><td>Yesterday</td></tr>
+                  <tr><td>Renewal workflow</td><td><span class="sf-badge">Complete</span></td><td>$3,250</td><td>17 May</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="sf-card sf-stack" id="activity">
+            <div class="sf-repel"><h2 class="sf-card__title">Recent customers</h2><a class="sf-link" href="/app/customers">View all</a></div>
+            <ul class="sf-list-reset sf-stack">
+              <li class="sf-repel"><span><strong>Northstar Labs</strong><br><span class="sf-text-muted">Growth workspace</span></span><span class="sf-text-muted">Healthy</span></li>
+              <li class="sf-repel"><span><strong>Willow Group</strong><br><span class="sf-text-muted">Operations workspace</span></span><span class="sf-text-muted">Needs review</span></li>
+              <li class="sf-repel"><span><strong>Harbour Systems</strong><br><span class="sf-text-muted">Platform workspace</span></span><span class="sf-text-muted">Healthy</span></li>
+            </ul>
+          </article>
+        </section>
+        <section class="sf-card sf-form" aria-labelledby="signin-title">
+          <!-- Example unauthenticated state. Wire this form to your app auth provider. -->
+          <div class="sf-repel">
+            <div><p class="sf-kicker">Signed out state</p><h2 class="sf-card__title" id="signin-title">Sign in to your workspace</h2></div>
+            <span class="sf-badge">Auth UI only</span>
+          </div>
+          <div class="sf-panel-grid">
+            <label class="sf-field"><span class="sf-label">Email</span><input class="sf-input" type="email" autocomplete="email" placeholder="you@example.com"></label>
+            <label class="sf-field"><span class="sf-label">Password</span><input class="sf-input" type="password" autocomplete="current-password"></label>
+          </div>
+          <label class="sf-check"><input type="checkbox" name="remember"> <span>Remember this device</span></label>
+          <div class="sf-cluster"><button class="sf-button" type="submit">Sign in</button><a class="sf-link" href="/forgot-password">Forgot password?</a></div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

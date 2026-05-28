@@ -37,10 +37,10 @@ Sizes are raw bytes and gzip bytes from `gzip -c`.
 | `reset.css` | 713 B | 430 B | Reset layer only. |
 | `base.css` | 3,455 B | 1,152 B | Base element styles. |
 | `app.css` | 505 B | 296 B | Optional app/site defaults for raw links, lists, and controls. |
-| `layout.css` | 5,492 B | 1,520 B | Layout primitives such as container, stack, grid, sidebar, scroll snap, sticky, media object, and split. |
-| `components.css` | 27,116 B | 4,375 B | Component primitives such as button, card, surface, nav, form, alert, native overlays, disclosure, tabs, website patterns, accessibility states, and input. |
-| `utilities.css` | 7,289 B | 1,848 B | Static type, prose, content, motion, accessibility, link, list, colour, border, and shadow helpers. |
-| `styles.css` | 53,081 B | 9,410 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
+| `layout.css` | 7,739 B | 1,912 B | Layout primitives such as container, stack, grid, app shell, sidebar, scroll snap, sticky, media object, and split. |
+| `components.css` | 27,497 B | 4,457 B | Component primitives such as button, card, surface, nav, form, alert, native overlays, disclosure, tabs, website patterns, accessibility states, and input. |
+| `utilities.css` | 7,498 B | 1,886 B | Static type, prose, content, positioning, motion, accessibility, link, list, colour, border, and shadow helpers. |
+| `styles.css` | 55,532 B | 9,878 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
 
 Example generated project CSS with tokens plus one scanned `text-primary`
 utility measured 7,031 B raw and 1,943 B gzip.
@@ -91,7 +91,7 @@ Safe claims:
 
 - Modern CSS-first: Synced Fluid uses cascade layers, custom properties,
   `clamp()`, logical properties, OKLCH colour, and container-aware primitives.
-- Compact by default: the full core stylesheet is currently about 9.4 KB gzip.
+- Compact by default: the full core stylesheet is currently about 9.8 KB gzip.
 - Flexible loading: developers can import only the CSS layers their project
   uses.
 - Source-scanned utilities: project utility CSS is generated from actual class
