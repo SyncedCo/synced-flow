@@ -1020,8 +1020,8 @@ function getTokenSummary() {
     components: componentTokens,
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
-      layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-container--full', 'sf-rail-shell', 'sf-rail-shell__rail', 'sf-rail-shell__body', 'sf-rail-shell__mark', 'sf-rail-shell__label', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-auto-grid--xs', 'sf-auto-grid--sm', 'sf-auto-grid--lg', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-chapter', 'sf-chapter__copy', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -2459,9 +2459,14 @@ function findCustomTokenOverrides(targetCwd, generatedOut) {
       if (generatedFile && file === generatedFile) return false
       if (/synced-flow\.generated\.css$/.test(relativeFile)) return false
       const css = readFileSync(file, 'utf8')
-      return /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(css)
+      return findCustomTokenOverrideIndex(css) >= 0
     })
     .map((file) => relative(targetCwd, file))
+}
+
+function findCustomTokenOverrideIndex(css) {
+  const match = /(^|[;{\s])--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-[a-zA-Z0-9-]*\s*:/m.exec(css)
+  return match ? (match.index ?? 0) + match[1].length : -1
 }
 
 function listProjectFiles(dir) {
@@ -4521,8 +4526,9 @@ function collectCompositionIssues() {
       issues.push(lintIssue('invalid-popover-on-anchor', 'warn', rel, source, match.index ?? 0, 'popoverTarget is attached to an anchor.', 'Use a button invoker. For hash navigation, use a button with formAction plus popoverTargetAction="hide".'))
     }
 
-    if (isCss && !isPackageSelf && /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(source) && !/synced-flow\.generated\.css$/.test(rel)) {
-      issues.push(lintIssue('theme-override-in-css', 'warn', rel, source, source.search(/--sf-/), 'Project CSS defines custom --sf-* tokens.', 'Move repeated brand decisions to synced-flow.config.mjs theme tokens.'))
+    const customTokenOverrideIndex = isCss ? findCustomTokenOverrideIndex(source) : -1
+    if (isCss && !isPackageSelf && customTokenOverrideIndex >= 0 && !/synced-flow\.generated\.css$/.test(rel)) {
+      issues.push(lintIssue('theme-override-in-css', 'warn', rel, source, customTokenOverrideIndex, 'Project CSS defines custom --sf-* tokens.', 'Move repeated brand decisions to synced-flow.config.mjs theme tokens.'))
     }
   }
   return issues

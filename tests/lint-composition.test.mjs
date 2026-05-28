@@ -69,6 +69,24 @@ test('lint composition rules teach native interaction structure', () => {
   assert.ok(output.issues.every((issue) => issue.fix))
 })
 
+test('lint allows project CSS to consume Synced Flow tokens', () => {
+  const cwd = tempProject()
+  writeFileSync(
+    join(cwd, 'src/theme.css'),
+    `.panel {
+  color: var(--sf-colour-muted);
+  padding: var(--sf-space-s);
+  border-radius: var(--sf-card-radius);
+}
+`
+  )
+
+  const output = lintJson(cwd)
+
+  assert.equal(output.ok, true)
+  assert.equal(output.issues.some((issue) => issue.rule === 'theme-override-in-css'), false)
+})
+
 test('lint json reports unknown generated utility alternatives as errors', () => {
   const cwd = tempProject()
   writeFileSync(join(cwd, 'src/App.jsx'), '<div className="sf-buton text-prmary"></div>\n')

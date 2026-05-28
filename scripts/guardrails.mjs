@@ -4,9 +4,9 @@ import { readFileSync } from 'node:fs'
 import { gzipSync } from 'node:zlib'
 
 const budgets = {
-  'styles.css': 10500,
-  'components.css': 5200,
-  'layout.css': 1950,
+  'styles.css': 12000,
+  'components.css': 6250,
+  'layout.css': 2450,
   'utilities.css': 2200,
   'tokens.css': 2600,
 }
