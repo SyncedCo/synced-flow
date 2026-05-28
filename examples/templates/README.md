@@ -9,12 +9,14 @@ Use the CLI for framework-specific output:
 ```bash
 pnpm exec synced-fluid recipe saas-landing --markup
 pnpm exec synced-fluid recipe saas-landing --framework next --markup
+pnpm exec synced-fluid recipe saas-dashboard --framework next --markup
 pnpm exec synced-fluid recipe portfolio-scroll --framework astro --markup
 ```
 
 Templates:
 
 - `saas-landing.html`
+- `saas-dashboard.html`
 - `portfolio-scroll.html`
 - `blog-index.html`
 - `coming-soon.html`

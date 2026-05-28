@@ -6,7 +6,7 @@ import { gzipSync } from 'node:zlib'
 const budgets = {
   'styles.css': 10500,
   'components.css': 5000,
-  'layout.css': 1700,
+  'layout.css': 1950,
   'utilities.css': 2200,
   'tokens.css': 2600,
 }

@@ -41,6 +41,54 @@
     justify-content: space-between;
   }
 
+  .sf-toolbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sf-space-s);
+    justify-content: space-between;
+  }
+
+  .sf-app-shell {
+    background: var(--sf-colour-background);
+    color: var(--sf-colour-foreground);
+    display: grid;
+    grid-template-columns: minmax(14rem, var(--sf-app-sidebar-width, 16rem)) minmax(0, 1fr);
+    min-block-size: 100dvh;
+  }
+
+  .sf-app-sidebar {
+    align-self: start;
+    background: var(--sf-colour-surface);
+    border-inline-end: 1px solid var(--sf-colour-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sf-space-s);
+    max-block-size: 100dvh;
+    min-block-size: 100dvh;
+    overflow: auto;
+    padding: var(--sf-space-s);
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  .sf-app-sidebar__brand {
+    align-items: center;
+    display: flex;
+    gap: var(--sf-space-xs);
+    padding-block-end: var(--sf-space-s);
+  }
+
+  .sf-app-sidebar > footer {
+    border-block-start: 1px solid var(--sf-colour-border);
+    padding-block-start: var(--sf-space-s);
+  }
+
+  .sf-app-main {
+    min-inline-size: 0;
+    padding: var(--sf-app-main-padding, var(--sf-space-m-l));
+  }
+
   .sf-grid {
     display: grid;
     gap: var(--sf-grid-gap, var(--sf-gutter));
@@ -135,6 +183,17 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--sf-panel-min, 18rem)), 1fr));
   }
 
+  .sf-metric-grid,
+  .sf-pipeline {
+    display: grid;
+    gap: var(--sf-space-s);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--sf-panel-min, 11rem)), 1fr));
+  }
+
+  .sf-pipeline {
+    --sf-panel-min: 10rem;
+  }
+
   .sf-scroll-viewport,
   .sf-scroll-snap-y {
     block-size: var(--sf-scroll-viewport-size, 100svh);
@@ -189,6 +248,20 @@
 
     .sf-aside-rail[data-rail="start"] {
       grid-template-columns: minmax(14rem, 22rem) minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 56rem) {
+    .sf-app-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .sf-app-sidebar {
+      display: none;
+    }
+
+    .sf-app-main {
+      --sf-app-main-padding: var(--sf-space-s);
     }
   }
 

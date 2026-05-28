@@ -41,6 +41,11 @@
   .sf-shadow-lg { box-shadow: var(--sf-shadow-lg); }
   .sf-shadow-none { box-shadow: none; }
 
+  .sf-push-block-end { margin-block-start: auto; }
+  .sf-push-block-start { margin-block-end: auto; }
+  .sf-push-inline-end { margin-inline-start: auto; }
+  .sf-push-inline-start { margin-inline-end: auto; }
+
   .sf-prose {
     max-inline-size: var(--sf-prose-width, 68ch);
   }
