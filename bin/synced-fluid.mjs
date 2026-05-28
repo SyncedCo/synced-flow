@@ -1355,6 +1355,136 @@ function getPublicRecipes() {
 </main>`,
     },
     {
+      id: 'saas-dashboard',
+      name: 'SaaS dashboard',
+      whenToUse: 'Authenticated SaaS apps, admin panels, customer portals, CRMs, analytics dashboards, and product workspaces.',
+      sections: ['sticky-navigation', 'mobile-nav-drawer', 'card-grid', 'contact-form', 'long-form-content'],
+      classes: ['sf-skip-link', 'sf-container--wide', 'sf-sidebar', 'sf-stack', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-sticky-top', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-drawer', 'sf-drawer--stack', 'sf-card', 'sf-surface', 'sf-stat', 'sf-alert', 'sf-badge', 'sf-button', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-table-wrap', 'sf-menu-popover'],
+      keywords: ['saas', 'dashboard', 'admin', 'panel', 'portal', 'crm', 'analytics', 'app', 'auth', 'login', 'signin', 'sign-in', 'user', 'account', 'metrics', 'activity', 'customers'],
+      markup: `<a class="sf-skip-link" href="#dashboard-main">Skip to dashboard</a>
+<header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
+  <nav class="sf-container sf-container--wide sf-nav sf-nav--mobile" aria-label="App navigation">
+    <a class="sf-nav__link" href="/app">Acme Console</a>
+    <ul class="sf-nav__list">
+      <li><a class="sf-nav__link" href="#overview" aria-current="page">Overview</a></li>
+      <li><a class="sf-nav__link" href="#customers">Customers</a></li>
+      <li><a class="sf-nav__link" href="#billing">Billing</a></li>
+    </ul>
+    <div class="sf-cluster">
+      <button class="sf-button sf-button--ghost sf-button--sm" type="button" popovertarget="account-menu"><span class="sf-badge" aria-hidden="true">SM</span><span>Scott Mackey · Owner</span></button>
+      <button class="sf-button sf-button--ghost sf-button--icon" type="button" popovertarget="dashboard-mobile-menu" aria-label="Open dashboard menu">Menu</button>
+    </div>
+  </nav>
+</header>
+<nav class="sf-drawer sf-drawer--right sf-drawer--stack" id="dashboard-mobile-menu" popover="auto" aria-label="Mobile dashboard navigation">
+  <button class="sf-button sf-button--ghost" type="button" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Close</button>
+  <form class="sf-stack" action="/app" method="get">
+    <button class="sf-nav__link" type="submit" formaction="#overview" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Overview</button>
+    <button class="sf-nav__link" type="submit" formaction="#customers" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Customers</button>
+    <button class="sf-nav__link" type="submit" formaction="#billing" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Billing</button>
+  </form>
+</nav>
+<div class="sf-menu-popover sf-drawer--stack" id="account-menu" popover="auto" aria-label="Account menu">
+  <div class="sf-stack">
+    <p class="sf-badge">Signed in</p>
+    <p><strong>Scott Mackey</strong><br><span class="sf-text-muted">Workspace owner</span></p>
+    <a class="sf-nav__link" href="/app/account">Account settings</a>
+    <form action="/logout" method="post"><button class="sf-button sf-button--outline sf-button--block" type="submit">Sign out</button></form>
+  </div>
+</div>
+<div class="sf-section sf-bg-surface-alt">
+  <div class="sf-container sf-container--wide sf-sidebar">
+    <aside class="sf-sidebar__sidebar sf-stack" aria-label="Workspace sections">
+      <p class="sf-kicker">Workspace</p>
+      <nav class="sf-nav" aria-label="Sidebar navigation">
+        <ul class="sf-nav__list">
+          <li><a class="sf-nav__link" href="#overview" aria-current="page">Overview</a></li>
+          <li><a class="sf-nav__link" href="#customers">Customers</a></li>
+          <li><a class="sf-nav__link" href="#activity">Activity</a></li>
+          <li><a class="sf-nav__link" href="#billing">Billing</a></li>
+        </ul>
+      </nav>
+      <article class="sf-alert sf-alert--info" role="status">
+        <p class="sf-alert__title">Trial active</p>
+        <p>Authentication and billing logic belongs to your app. Synced Fluid styles the UI states.</p>
+      </article>
+    </aside>
+    <main class="sf-sidebar__content sf-stack" id="dashboard-main">
+      <section class="sf-card sf-form" aria-labelledby="signin-title">
+        <!-- Example unauthenticated state. Wire this form to your app auth provider. -->
+        <div class="sf-repel">
+          <div>
+            <p class="sf-kicker">Signed out state</p>
+            <h2 class="sf-text-h3" id="signin-title">Sign in to your workspace</h2>
+          </div>
+          <span class="sf-badge">Auth UI only</span>
+        </div>
+        <div class="sf-panel-grid">
+          <label class="sf-field"><span class="sf-label">Email</span><input class="sf-input" type="email" autocomplete="email" placeholder="you@example.com"></label>
+          <label class="sf-field"><span class="sf-label">Password</span><input class="sf-input" type="password" autocomplete="current-password"></label>
+        </div>
+        <label class="sf-check"><input type="checkbox" name="remember"> <span>Remember this device</span></label>
+        <div class="sf-cluster"><button class="sf-button" type="submit">Sign in</button><a class="sf-link" href="/forgot-password">Forgot password?</a></div>
+      </section>
+      <section class="sf-stack" id="overview">
+        <div class="sf-repel">
+          <div>
+            <p class="sf-kicker">Authenticated dashboard</p>
+            <h1 class="sf-text-h2">Overview</h1>
+            <p class="sf-text-muted">Welcome back, Scott. Here is the current workspace health.</p>
+          </div>
+          <div class="sf-cluster">
+            <button class="sf-button sf-button--outline" type="button">Export</button>
+            <a class="sf-button" href="/app/customers/new">Add customer</a>
+          </div>
+        </div>
+        <div class="sf-stats">
+          <article class="sf-stat"><strong class="sf-stat__value">$42k</strong><span class="sf-stat__label">Monthly recurring revenue</span></article>
+          <article class="sf-stat"><strong class="sf-stat__value">1,284</strong><span class="sf-stat__label">Active customers</span></article>
+          <article class="sf-stat"><strong class="sf-stat__value">98.4%</strong><span class="sf-stat__label">Uptime this month</span></article>
+        </div>
+      </section>
+      <section class="sf-panel-grid" aria-label="Dashboard panels">
+        <article class="sf-card sf-stack">
+          <div class="sf-repel"><h2 class="sf-card__title">Revenue trend</h2><span class="sf-badge">Live</span></div>
+          <p class="sf-card__description">Use a real chart component in the app layer. This card shows the styled panel shell.</p>
+          <div class="sf-frame sf-bg-surface-alt" aria-label="Chart placeholder"></div>
+        </article>
+        <article class="sf-card sf-stack" id="billing">
+          <h2 class="sf-card__title">Billing notice</h2>
+          <p class="sf-card__description">Your card expires soon. Update billing to avoid interruption.</p>
+          <a class="sf-button sf-button--secondary" href="/app/billing">Update billing</a>
+        </article>
+      </section>
+      <section class="sf-card sf-stack" id="customers">
+        <div class="sf-repel">
+          <div><h2 class="sf-card__title">Customers</h2><p class="sf-card__description">Search and review recent account activity.</p></div>
+          <form class="sf-form" action="/app/customers" method="get"><label class="sf-field"><span class="sf-label">Search</span><input class="sf-input" type="search" name="q" placeholder="Search customers"></label></form>
+        </div>
+        <div class="sf-table-wrap">
+          <table>
+            <thead><tr><th>Customer</th><th>Status</th><th>Plan</th><th>Last active</th></tr></thead>
+            <tbody>
+              <tr><td>Northstar Studio</td><td><span class="sf-badge">Active</span></td><td>Team</td><td>2 minutes ago</td></tr>
+              <tr><td>Bright Labs</td><td><span class="sf-badge">Trial</span></td><td>Starter</td><td>Today</td></tr>
+              <tr><td>Riverline Co</td><td><span class="sf-badge">At risk</span></td><td>Scale</td><td>Yesterday</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="sf-card sf-stack" id="activity">
+        <h2 class="sf-card__title">Recent activity</h2>
+        <ul class="sf-list-reset sf-stack">
+          <li class="sf-repel"><span>New invite accepted</span><span class="sf-text-muted">10:42</span></li>
+          <li class="sf-repel"><span>Invoice paid</span><span class="sf-text-muted">09:15</span></li>
+          <li class="sf-repel"><span>API token rotated</span><span class="sf-text-muted">Yesterday</span></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</div>`,
+    },
+    {
       id: 'agency-home',
       name: 'Agency homepage',
       whenToUse: 'Agency, consultancy, or service business websites with services, proof, team, and contact.',
@@ -1920,6 +2050,9 @@ function htmlToJsx(markup) {
   return markup
     .replace(/\bclass=/g, 'className=')
     .replace(/\bfor=/g, 'htmlFor=')
+    .replace(/\bautocomplete=/g, 'autoComplete=')
+    .replace(/\breadonly=/g, 'readOnly=')
+    .replace(/\btabindex=/g, 'tabIndex=')
     .replace(/\bformaction=/g, 'formAction=')
     .replace(/\bpopoverTarget=/g, 'popoverTarget=')
     .replace(/\bpopovertarget=/g, 'popoverTarget=')
@@ -1928,6 +2061,8 @@ function htmlToJsx(markup) {
     .replace(/\bcommandfor=/g, 'commandFor=')
     .replace(/<!--/g, '{/*')
     .replace(/-->/g, '*/}')
+    .replace(/<input([^>/]*?)>/g, '<input$1 />')
+    .replace(/<br>/g, '<br />')
 }
 
 function indentMarkup(markup, spaces) {

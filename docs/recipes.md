@@ -11,6 +11,7 @@ The CLI also ships page-level recipes for AI agents and template generators:
 ```bash
 pnpm exec synced-fluid recipe
 pnpm exec synced-fluid recipe saas-landing --markup
+pnpm exec synced-fluid recipe saas-dashboard --framework next --markup
 pnpm exec synced-fluid recipe saas-landing --framework next --markup
 pnpm exec synced-fluid recipe --section form --framework astro --markup
 pnpm exec synced-fluid suggest "portfolio with full page scroll" --json
@@ -19,6 +20,7 @@ pnpm exec synced-fluid suggest "portfolio with full page scroll" --json
 Available recipe ids:
 
 - `saas-landing`
+- `saas-dashboard`
 - `portfolio-scroll`
 - `agency-home`
 - `blog-index`
@@ -97,6 +99,10 @@ Available recipe ids:
 
 ## SaaS Product Page
 
+Use `saas-landing` for public marketing and product showcase pages.
+Use `saas-dashboard` for authenticated SaaS app screens, portals, CRMs, admin
+panels, and product workspaces.
+
 ```html
 <main>
   <section class="sf-section">
@@ -134,6 +140,28 @@ Available recipe ids:
   </section>
 </main>
 ```
+
+## SaaS Dashboard And Auth State
+
+This recipe is CSS and markup only. Authentication, sessions, permissions, and
+providers belong to the consuming app.
+
+```bash
+pnpm exec synced-fluid recipe saas-dashboard --markup
+pnpm exec synced-fluid recipe saas-dashboard --framework next --markup
+pnpm exec synced-fluid suggest "SaaS dashboard with login and metrics"
+```
+
+The recipe includes:
+
+- signed-out sign-in form
+- signed-in account menu with role and sign-out action
+- top app bar, sidebar navigation, and mobile drawer navigation
+- KPI cards, alert state, filter/search form, customer table, and activity list
+
+It uses existing Synced Fluid primitives such as `sf-sidebar`, `sf-panel-grid`,
+`sf-stat`, `sf-card`, `sf-form`, `sf-table-wrap`, `sf-drawer`, and
+`sf-menu-popover`.
 
 ## Documentation Page
 

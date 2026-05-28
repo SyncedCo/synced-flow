@@ -72,8 +72,13 @@ pnpm exec synced-fluid pattern mobile-nav-drawer --framework next --markup
 ```
 
 Available page recipes include `saas-landing`, `portfolio-scroll`,
-`agency-home`, `blog-index`, `article-page`, `about-timeline`, `team-grid`,
-`contact-page`, `not-found`, and `coming-soon`.
+`saas-dashboard`, `agency-home`, `blog-index`, `article-page`,
+`about-timeline`, `team-grid`, `contact-page`, `not-found`, and
+`coming-soon`.
+
+Choose `saas-landing` for public SaaS marketing pages. Choose
+`saas-dashboard` for authenticated app screens with login/account state,
+workspace navigation, metrics, tables, and activity panels.
 
 ## 4. Edit Content, Not CSS
 

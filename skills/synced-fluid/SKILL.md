@@ -90,6 +90,11 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
   `sf-frame`, and `sf-flow`.
 - Prefer component primitives for common UI: `sf-button`, `sf-card`,
   `sf-badge`, `sf-field`, and `sf-input`.
+- Use `saas-landing` for public SaaS marketing pages. Use `saas-dashboard` for
+  authenticated app UI, admin panels, portals, CRMs, analytics dashboards,
+  metrics, tables, account menus, and login state.
+- Do not implement authentication logic in Synced Fluid markup. Wire sessions,
+  providers, permissions, and sign-out actions in the consuming app.
 - Prefer native component patterns for common interaction: `sf-dialog`,
   `sf-popover`, `sf-drawer`, `sf-drawer--stack`, `sf-disclosure`,
   `sf-accordion`, `sf-tabs`, `sf-tooltip`, `sf-toast`, and `sf-banner`.

@@ -200,9 +200,11 @@ pnpm exec synced-fluid recipe coming-soon --json
 ```
 
 Current recipes include SaaS landing, scroll portfolio, agency homepage, blog
-index, article page, about timeline, team grid, contact page, 404, and coming
-soon. Recipes are composed from public `sf-*` classes and are intended as
-copy-paste starting points rather than new utility APIs.
+index, article page, about timeline, team grid, contact page, 404, coming soon,
+and SaaS dashboard. Use `saas-landing` for public product marketing and
+`saas-dashboard` for authenticated app UI with account state, metrics, tables,
+and workspace navigation. Recipes are composed from public `sf-*` classes and
+are intended as copy-paste starting points rather than new utility APIs.
 
 Use `--framework html`, `--framework next`, `--framework react`, or
 `--framework astro` to adapt markup. Use `--section <id-or-keyword>` to print a

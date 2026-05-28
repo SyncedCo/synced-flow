@@ -297,6 +297,7 @@ test('catalog command prints public API for AI composition', () => {
   assert.ok(catalog.patterns.some((pattern) => pattern.id === 'scroll-snap-page'))
   assert.ok(catalog.patterns.some((pattern) => pattern.classes.includes('sf-dialog')))
   assert.ok(catalog.recipes.some((recipe) => recipe.id === 'saas-landing'))
+  assert.ok(catalog.recipes.some((recipe) => recipe.id === 'saas-dashboard'))
   assert.ok(catalog.recipes.some((recipe) => recipe.id === 'coming-soon'))
 })
 
@@ -309,6 +310,15 @@ test('suggest command returns matching recipes and classes', () => {
   assert.ok(result.suggestions[0].classes.includes('sf-scroll-panel'))
   assert.equal(result.recipes[0].id, 'portfolio-scroll')
   assert.ok(result.recipes[0].markup.includes('sf-scroll-viewport'))
+})
+
+test('suggest command discovers SaaS dashboard recipe for app UI briefs', () => {
+  const output = run(['suggest', 'SaaS dashboard with login and metrics', '--json'])
+  const result = JSON.parse(output)
+
+  assert.equal(result.recipes[0].id, 'saas-dashboard')
+  assert.ok(result.recipes[0].keywords.includes('login'))
+  assert.ok(result.recipes[0].markup.includes('Sign in to your workspace'))
 })
 
 test('suggest scaffold prints a coherent Next starter dry run', () => {
@@ -371,6 +381,20 @@ test('recipe command prints copy-ready recipe markup', () => {
   const nextOutput = run(['recipe', 'portfolio-scroll', '--framework', 'next', '--markup'])
   assert.match(nextOutput, /export default function Page/)
   assert.match(nextOutput, /className="sf-scroll-viewport"/)
+
+  const dashboard = JSON.parse(run(['recipe', 'saas-dashboard', '--json']))
+  assert.equal(dashboard.id, 'saas-dashboard')
+  assert.match(dashboard.markup, /Sign in to your workspace/)
+  assert.match(dashboard.markup, /Scott Mackey/)
+  assert.match(dashboard.markup, /Sign out/)
+  assert.match(dashboard.markup, /sf-table-wrap/)
+
+  const dashboardNext = run(['recipe', 'saas-dashboard', '--framework', 'next', '--markup'])
+  assert.match(dashboardNext, /export default function Page/)
+  assert.match(dashboardNext, /className="sf-menu-popover sf-drawer--stack"/)
+  assert.match(dashboardNext, /popoverTarget="account-menu"/)
+  assert.match(dashboardNext, /formAction="#customers"/)
+  assert.match(dashboardNext, /autoComplete="email"/)
 
   const astroSection = run(['recipe', '--section', 'form', '--framework', 'astro', '--markup'])
   assert.match(astroSection, /import '\.\.\/styles\/synced-fluid\.css'/)

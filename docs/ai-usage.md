@@ -75,6 +75,11 @@ before finalising the theme.
 - Use `synced-fluid recipe <id> --markup` to get copy-ready page sections for
   SaaS, portfolio, agency, blog, article, about, team, contact, 404, and coming
   soon pages.
+- Choose `saas-landing` for public SaaS marketing pages. Choose
+  `saas-dashboard` for authenticated app UI, admin panels, portals, CRMs,
+  analytics dashboards, metrics, tables, account menus, and login state.
+- Treat auth recipe markup as UI only; sessions, providers, permissions, and
+  sign-out logic belong to the consuming app.
 - Keep class names complete in source files. Do not build classes from fragments.
 - Use `safelist` only when dynamic classes are unavoidable.
 - Do not enable `responsiveVariants` in new projects.
