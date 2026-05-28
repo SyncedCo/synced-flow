@@ -65,6 +65,17 @@ test('init scaffolds config, CSS entry, generated CSS, and scripts', () => {
   assert.match(output, /app\.css removes raw link underlines and list markers/)
 })
 
+test('init can install project-level AI guidance', () => {
+  const cwd = tempProject()
+
+  run(['init', '--cwd', cwd, '--preset', 'vite', '--agents'])
+
+  const agents = readFileSync(join(cwd, 'AGENTS.md'), 'utf8')
+  assert.match(agents, /Synced Fluid/)
+  assert.match(agents, /catalog --json/)
+  assert.match(agents, /node_modules\/@synced\/fluid\/skills\/synced-fluid\/SKILL\.md/)
+})
+
 test('init can opt out of app defaults', () => {
   const cwd = tempProject()
 
@@ -277,8 +288,12 @@ test('catalog command prints public API for AI composition', () => {
   const catalog = JSON.parse(output)
 
   assert.ok(catalog.commands.includes('suggest'))
+  assert.ok(catalog.commands.includes('agents install'))
+  assert.ok(catalog.commands.includes('pattern'))
   assert.ok(catalog.commands.includes('recipe'))
   assert.ok(catalog.commands.includes('theme init'))
+  assert.ok(catalog.patterns.some((pattern) => pattern.id === 'mobile-nav-drawer'))
+  assert.ok(catalog.patterns.some((pattern) => pattern.id === 'mobile-nav-drawer' && pattern.requiresJs === false))
   assert.ok(catalog.patterns.some((pattern) => pattern.id === 'scroll-snap-page'))
   assert.ok(catalog.patterns.some((pattern) => pattern.classes.includes('sf-dialog')))
   assert.ok(catalog.recipes.some((recipe) => recipe.id === 'saas-landing'))
@@ -294,6 +309,51 @@ test('suggest command returns matching recipes and classes', () => {
   assert.ok(result.suggestions[0].classes.includes('sf-scroll-panel'))
   assert.equal(result.recipes[0].id, 'portfolio-scroll')
   assert.ok(result.recipes[0].markup.includes('sf-scroll-viewport'))
+})
+
+test('suggest scaffold prints a coherent Next starter dry run', () => {
+  const output = run(['suggest', 'scroll portfolio', '--scaffold', '--framework', 'next', '--dry-run'])
+
+  assert.match(output, /Scaffold for "scroll portfolio" \(next\)/)
+  assert.match(output, /src\/app\/page\.tsx/)
+  assert.match(output, /Matched recipe: portfolio-scroll/)
+  assert.match(output, /sf-scroll-viewport/)
+  assert.match(output, /dry-run no files were changed/)
+})
+
+test('pattern command prints copy-ready interaction markup', () => {
+  const list = run(['pattern', '--list'])
+  assert.match(list, /mobile-nav-drawer/)
+
+  const output = run(['pattern', 'mobile-nav-drawer', '--framework', 'next', '--markup'])
+  assert.match(output, /export default function Page/)
+  assert.match(output, /popoverTarget="site-mobile-menu"/)
+  assert.match(output, /popoverTargetAction="hide"/)
+
+  const json = JSON.parse(run(['pattern', 'mobile-nav-drawer', '--json']))
+  assert.equal(json.id, 'mobile-nav-drawer')
+  assert.equal(json.requiresJs, false)
+  assert.ok(json.a11y.some((note) => note.includes('aria-label')))
+})
+
+test('agents install, status, and skill commands expose AI setup', () => {
+  const cwd = tempProject()
+
+  const dryRun = run(['agents', 'install', '--cwd', cwd, '--target', 'cursor', '--dry-run'])
+  assert.match(dryRun, /dry-run no files were changed/)
+  assert.equal(existsSync(join(cwd, 'AGENTS.md')), false)
+
+  run(['agents', 'install', '--cwd', cwd, '--target', 'cursor'])
+  assert.match(readFileSync(join(cwd, 'AGENTS.md'), 'utf8'), /Synced Fluid/)
+  assert.match(readFileSync(join(cwd, '.cursor/rules/synced-fluid.mdc'), 'utf8'), /catalog --json/)
+
+  const status = run(['agents', 'status', '--cwd', cwd])
+  assert.match(status, /pass universal/)
+  assert.match(status, /pass cursor/)
+
+  const skill = run(['skill'])
+  assert.match(skill, /skills\/synced-fluid\/SKILL\.md/)
+  assert.match(skill, /agents install/)
 })
 
 test('recipe command prints copy-ready recipe markup', () => {
@@ -445,6 +505,7 @@ test('package exposes modular CSS layer files', () => {
   assert.match(componentsCss, /\.sf-dialog/)
   assert.match(componentsCss, /\.sf-popover/)
   assert.match(componentsCss, /\.sf-drawer/)
+  assert.match(componentsCss, /\.sf-drawer--stack/)
   assert.match(componentsCss, /\.sf-tabs/)
 })
 

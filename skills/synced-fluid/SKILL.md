@@ -16,24 +16,39 @@ should only support migration from existing projects.
 
 1. Check whether `@synced/fluid` is installed.
 2. Check for `synced-fluid.config.mjs`.
-3. Run or recommend `synced-fluid catalog --json` before choosing recipes and
+3. Run or recommend `synced-fluid agents status` to see whether project-level
+   guidance is installed.
+4. Run or recommend `synced-fluid catalog --json` before choosing recipes and
    class names.
-4. Use `synced-fluid suggest "<brief>"` for section or page composition.
-5. Use `synced-fluid recipe <id> --markup` when a project needs copy-ready page
+5. Use `synced-fluid pattern --list` and `synced-fluid pattern <id> --markup`
+   before hand-rolling native interaction markup.
+6. Use `synced-fluid suggest "<brief>"` or
+   `synced-fluid suggest "<brief>" --scaffold --dry-run` for section, page, or
+   starter composition.
+7. Use `synced-fluid recipe <id> --markup` when a project needs copy-ready page
    structure.
-6. Use `synced-fluid lint` and `synced-fluid doctor` to verify setup.
-7. Keep `responsiveVariants` off for new projects.
+8. Use `synced-fluid lint --json` and `synced-fluid doctor` to verify setup.
+9. Keep `responsiveVariants` off for new projects.
 
 ## Setup
 
 Use the closest preset:
 
 ```bash
-pnpm exec synced-fluid init --preset next
+pnpm exec synced-fluid init --preset next --agents
 pnpm exec synced-fluid init --preset vite
 pnpm exec synced-fluid init --preset astro
 pnpm exec synced-fluid init --preset wordpress
 pnpm exec synced-fluid init --preset plain
+```
+
+For an existing project, install project-local AI guidance:
+
+```bash
+pnpm exec synced-fluid agents install
+pnpm exec synced-fluid agents install --target all
+pnpm exec synced-fluid agents status
+pnpm exec synced-fluid skill
 ```
 
 Use `--preset wordpress` for WordPress themes and plugins. It scans PHP and
@@ -76,8 +91,10 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
 - Prefer component primitives for common UI: `sf-button`, `sf-card`,
   `sf-badge`, `sf-field`, and `sf-input`.
 - Prefer native component patterns for common interaction: `sf-dialog`,
-  `sf-popover`, `sf-drawer`, `sf-disclosure`, `sf-accordion`, `sf-tabs`,
-  `sf-tooltip`, `sf-toast`, and `sf-banner`.
+  `sf-popover`, `sf-drawer`, `sf-drawer--stack`, `sf-disclosure`,
+  `sf-accordion`, `sf-tabs`, `sf-tooltip`, `sf-toast`, and `sf-banner`.
+- Use `synced-fluid pattern mobile-nav-drawer --markup` for complete mobile nav
+  drawers instead of composing only `sf-nav--mobile`.
 - Use semantic utility classes such as `bg-background`, `text-foreground`,
   `bg-primary`, `text-primary-foreground`, `border-border`, and `bg-surface`.
 - Keep browser affordances by default: body links stay underlined, content
@@ -114,7 +131,7 @@ Run:
 ```bash
 pnpm fluid:build
 pnpm fluid:check
-pnpm fluid:lint
+pnpm exec synced-fluid lint --json
 pnpm fluid:doctor
 ```
 

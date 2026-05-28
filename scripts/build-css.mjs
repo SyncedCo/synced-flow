@@ -1354,6 +1354,16 @@ function buildComponentCss() {
     max-block-size: min(80dvh, 42rem);
   }
 
+  .sf-drawer--stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sf-space-s);
+  }
+
+  .sf-drawer--stack:popover-open {
+    display: flex;
+  }
+
   @supports (anchor-name: --sf-anchor) {
     .sf-tooltip-trigger,
     [data-sf-anchor] {

@@ -15,10 +15,25 @@ These are intended for application code and examples.
 | Theme config | `theme.fonts`, `theme.colours`, `theme.darkColours`, `theme.radii`, `theme.layout`, `theme.components` |
 | Layout classes | `sf-container`, `sf-section`, `sf-stack`, `sf-flow`, `sf-cluster`, `sf-repel`, `sf-auto-grid`, `sf-switcher`, `sf-sidebar`, `sf-split`, `sf-frame`, `sf-cover` |
 | Components | `sf-button`, `sf-card`, `sf-surface`, `sf-hero`, `sf-nav`, `sf-form`, `sf-field`, `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-alert`, `sf-badge`, `sf-section-header`, `sf-kicker` |
-| Native components | `sf-dialog`, `sf-popover`, `sf-tooltip`, `sf-drawer`, `sf-disclosure`, `sf-accordion`, `sf-tabs`, `sf-menu`, `sf-breadcrumb`, `sf-pagination` |
+| Native components | `sf-dialog`, `sf-popover`, `sf-tooltip`, `sf-drawer`, `sf-drawer--stack`, `sf-disclosure`, `sf-accordion`, `sf-tabs`, `sf-menu`, `sf-breadcrumb`, `sf-pagination` |
 | Website patterns | `sf-logo-cloud`, `sf-feature`, `sf-stats`, `sf-testimonial`, `sf-pricing-grid`, `sf-price-card`, `sf-faq`, `sf-cta`, `sf-footer` |
 | Utilities | `sf-prose`, `sf-link`, `sf-link-subtle`, `sf-link-plain`, `sf-list-*`, `sf-focus-ring`, `sf-touch-target`, `sf-skip-link`, `sr-only`, `not-sr-only` |
-| CLI | `synced-fluid init`, `add app`, `build`, `watch`, `lint`, `doctor`, `tokens`, `catalog`, `suggest`, `recipe`, `theme init`, `theme validate` |
+| CLI | `synced-fluid init`, `agents install`, `agents status`, `skill`, `add app`, `build`, `watch`, `lint`, `doctor`, `tokens`, `catalog`, `suggest`, `pattern`, `recipe`, `theme init`, `theme validate` |
+
+## AI Agent Contract
+
+The project-level AI setup commands are public in 0.x:
+
+- `synced-fluid agents install [--target universal|cursor|codex|claude|copilot|windsurf|gemini|aider|all] [--force] [--dry-run]`
+- `synced-fluid agents status`
+- `synced-fluid skill`
+- `synced-fluid pattern <id> [--framework html|next|react|astro] [--markup|--json]`
+- `synced-fluid pattern --list`
+- `synced-fluid suggest "<brief>" --scaffold [--framework next|vite|astro|plain] [--out dir] [--dry-run] [--force]`
+- `synced-fluid lint [--json] [--fix] [paths...]`
+
+`catalog --json` includes `patterns[]` with copy-ready interaction metadata:
+classes, markup, JS requirement notes, accessibility notes, and gotchas.
 
 ## Internal Or Compatibility Surface
 

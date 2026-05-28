@@ -25,6 +25,15 @@ if (command === 'init') {
   process.exit(0)
 }
 
+if (command === 'agents') {
+  process.exit(await runAgentsCommand())
+}
+
+if (command === 'skill') {
+  runSkill()
+  process.exit(0)
+}
+
 if (command === 'add') {
   const addTarget = args.shift()
   if (addTarget === 'app') {
@@ -51,6 +60,11 @@ if (command === 'catalog') {
 
 if (command === 'suggest') {
   runSuggest()
+  process.exit(0)
+}
+
+if (command === 'pattern' || command === 'patterns') {
+  runPattern()
   process.exit(0)
 }
 
@@ -85,7 +99,8 @@ const cwd = resolve(cliCwd ?? config.cwd ?? process.cwd())
 const repoRoot = cwd
 const outFile = resolve(cwd, readOption('out') ?? config.out ?? 'synced-fluid.generated.css')
 const cliScans = readOptions('scan')
-const sourceDirs = cliScans.length ? cliScans : config.scan ?? []
+const positionalSourceDirs = command === 'lint' ? readPositionals() : []
+const sourceDirs = cliScans.length ? cliScans : positionalSourceDirs.length ? positionalSourceDirs : config.scan ?? (command === 'lint' ? ['.'] : [])
 const includeCore = readBooleanOption('include-core') ?? config.includeCore ?? false
 const includeApp = readBooleanOption('app') ?? config.includeApp ?? false
 const responsiveVariants = readBooleanOption('responsive-variants') ?? config.responsiveVariants ?? false
@@ -148,7 +163,7 @@ function readOptions(name) {
 }
 
 function readPositionals() {
-  const valueOptions = new Set(['--config', '--cwd', '--preset', '--theme', '--scan', '--out', '--safelist', '--file', '--css', '--from', '--limit', '--framework', '--section'])
+  const valueOptions = new Set(['--config', '--cwd', '--preset', '--theme', '--scan', '--out', '--safelist', '--file', '--css', '--from', '--limit', '--framework', '--section', '--target', '--agents', '--preset-base'])
   const values = []
 
   for (let index = 0; index < args.length; index += 1) {
@@ -360,6 +375,9 @@ function isPlainObject(value) {
 function printHelp() {
   console.log(`Usage:
   synced-fluid init [options]
+  synced-fluid agents install [options]
+  synced-fluid agents status [options]
+  synced-fluid skill [options]
   synced-fluid add app [options]
   synced-fluid build [options]
   synced-fluid doctor [options]
@@ -367,6 +385,7 @@ function printHelp() {
   synced-fluid tokens [options]
   synced-fluid catalog [options]
   synced-fluid suggest "<site or section brief>" [options]
+  synced-fluid pattern [id] [options]
   synced-fluid recipe [id] [options]
   synced-fluid lint [options]
   synced-fluid watch [options]
@@ -377,6 +396,8 @@ Options:
   --config <file>              Use a specific config file.
   --cwd <dir>                  Resolve scans and output from a directory.
   --preset <name>              init preset: next, vite, react, astro, wordpress, plain.
+  --agents <target>            init and install project AI guidance: universal, cursor, codex, claude, copilot, windsurf, gemini, aider, all.
+  --target <name>              agents install target: universal, cursor, codex, claude, copilot, windsurf, gemini, aider, all.
   --theme <name>               init theme: synced, neutral-saas, editorial, dark-app.
   --scan <dir>                 Add a source directory to scan for classes.
   --out <file>                 Generated CSS output path.
@@ -399,6 +420,8 @@ Options:
   --preset-base <name>         Base "theme init" output on synced, neutral-saas, editorial, or dark-app.
   --limit <number>             Limit results for "suggest".
   --markup                     Include markup snippets in text recipe output.
+  --dry-run                    Print planned agent/scaffold writes without changing files.
+  --fix                        Accept lint auto-fix mode; current composition rules print guided fixes.
 
 Config:
   Create synced-fluid.config.mjs and export defineConfig({ scan, out }).`)
@@ -425,6 +448,7 @@ async function runInit() {
   const styleFile = resolve(targetCwd, stylePath)
   const singleCssOutput = generatedFile === styleFile
   const safelistValues = readOptions('safelist')
+  const agentsTarget = readOption('agents')
 
   writeProjectFile(
     configFile,
@@ -468,6 +492,14 @@ ${includeApp ? '@import "@synced/fluid/app.css";\n' : ''}@import "./${relative(d
   }
 
   if (!noScripts) addPackageScripts(targetCwd)
+  if (agentsTarget !== undefined || args.includes('--agents')) {
+    await installAgentGuidance({
+      targetCwd,
+      target: agentsTarget || 'universal',
+      force,
+      dryRun: args.includes('--dry-run'),
+    })
+  }
 
   console.log(`Synced Fluid initialised for ${preset} with ${kebabThemeName(themeName)} theme.`)
   console.log(`Config: ${relative(targetCwd, configFile)}`)
@@ -491,6 +523,292 @@ ${includeApp ? '@import "@synced/fluid/app.css";\n' : ''}@import "./${relative(d
   } else {
     console.log('Note: base CSS keeps links visibly underlined and list markers intact. Add @synced/fluid/app.css or run synced-fluid add app for app/site defaults.')
   }
+  console.log('AI setup: run synced-fluid agents install to add project-level agent guidance.')
+}
+
+async function runAgentsCommand() {
+  const subcommand = args.shift() ?? 'status'
+  if (subcommand === 'install') {
+    await installAgentGuidance({
+      targetCwd: resolve(readOption('cwd', process.cwd())),
+      target: readOption('target', 'universal'),
+      force: args.includes('--force'),
+      dryRun: args.includes('--dry-run'),
+    })
+    return 0
+  }
+  if (subcommand === 'status') {
+    printAgentsStatus(resolve(readOption('cwd', process.cwd())))
+    return 0
+  }
+
+  console.error('Unknown agents command. Use: synced-fluid agents install or synced-fluid agents status')
+  return 1
+}
+
+function runSkill() {
+  const skillPath = join(packageRoot, 'skills/synced-fluid/SKILL.md')
+  console.log('Synced Fluid AI skill')
+  console.log('')
+  console.log(`Skill file: ${relative(process.cwd(), skillPath)}`)
+  console.log('Use it to guide AI agents toward Synced Fluid tokens, classes, recipes, patterns, lint, and doctor checks.')
+  console.log('')
+  console.log('Project setup:')
+  console.log('  synced-fluid agents install')
+  console.log('  synced-fluid agents install --target all')
+  console.log('')
+  console.log('Core agent commands:')
+  console.log('  synced-fluid catalog --json')
+  console.log('  synced-fluid pattern --list')
+  console.log('  synced-fluid suggest "site brief" --scaffold --dry-run')
+  console.log('  synced-fluid lint --json')
+  console.log('  synced-fluid doctor')
+}
+
+async function installAgentGuidance({ targetCwd, target = 'universal', force = false, dryRun = false }) {
+  const targets = expandAgentTargets(target)
+  if (!targets.length) {
+    console.error(`Unknown agents target "${target}". Use universal, cursor, codex, claude, copilot, windsurf, gemini, aider, or all.`)
+    process.exitCode = 1
+    return
+  }
+
+  const writes = []
+  for (const targetName of targets) writes.push(...agentWritesForTarget(targetCwd, targetName))
+
+  const seen = new Set()
+  for (const write of writes) {
+    const key = `${write.file}:${write.mode ?? 'file'}`
+    if (seen.has(key)) continue
+    seen.add(key)
+    applyAgentWrite(targetCwd, write, { force, dryRun })
+  }
+
+  if (dryRun) console.log('dry-run no files were changed.')
+  else console.log('Synced Fluid agent guidance is ready.')
+}
+
+function expandAgentTargets(target) {
+  const requested = splitOptionList(target || 'universal')
+  const all = ['universal', 'cursor', 'codex', 'claude', 'copilot', 'windsurf', 'gemini', 'aider']
+  const expanded = requested.flatMap((entry) => (entry === 'all' ? all : [entry]))
+  return expanded.filter((entry, index) => all.includes(entry) && expanded.indexOf(entry) === index)
+}
+
+function agentWritesForTarget(targetCwd, target) {
+  const skill = readFileSync(join(packageRoot, 'skills/synced-fluid/SKILL.md'), 'utf8')
+  const commonRules = syncedFluidAgentRules()
+
+  if (target === 'universal' || target === 'codex') {
+    return [
+      {
+        file: resolve(targetCwd, 'AGENTS.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+    ]
+  }
+
+  if (target === 'cursor') {
+    return [
+      {
+        file: resolve(targetCwd, '.cursor/rules/synced-fluid.mdc'),
+        contents: `---
+description: Use Synced Fluid CSS primitives, recipes, patterns, and guardrails when building UI in this project.
+alwaysApply: false
+---
+
+${commonRules}
+`,
+      },
+      {
+        file: resolve(targetCwd, 'AGENTS.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+    ]
+  }
+
+  if (target === 'claude') {
+    return [
+      {
+        file: resolve(targetCwd, '.claude/skills/synced-fluid/SKILL.md'),
+        contents: skill,
+      },
+      {
+        file: resolve(targetCwd, 'CLAUDE.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+    ]
+  }
+
+  if (target === 'copilot') {
+    return [
+      {
+        file: resolve(targetCwd, '.github/copilot-instructions.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+      {
+        file: resolve(targetCwd, '.github/instructions/synced-fluid.instructions.md'),
+        contents: `---
+applyTo: "**/*.{html,css,js,jsx,ts,tsx,astro,vue,svelte,php,mdx}"
+---
+
+${commonRules}
+`,
+      },
+    ]
+  }
+
+  if (target === 'windsurf') {
+    return [
+      {
+        file: resolve(targetCwd, '.windsurf/rules/synced-fluid.md'),
+        contents: `---
+trigger: model_decision
+description: Use Synced Fluid CSS primitives, recipes, patterns, and guardrails for UI work.
+---
+
+${commonRules}
+`,
+      },
+      {
+        file: resolve(targetCwd, 'AGENTS.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+    ]
+  }
+
+  if (target === 'gemini') {
+    return [
+      {
+        file: resolve(targetCwd, 'GEMINI.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+      {
+        file: resolve(targetCwd, 'AGENTS.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+    ]
+  }
+
+  if (target === 'aider') {
+    return [
+      {
+        file: resolve(targetCwd, 'AGENTS.md'),
+        mode: 'section',
+        title: 'Synced Fluid',
+        contents: commonRules,
+      },
+      {
+        file: resolve(targetCwd, '.aider.conf.yml'),
+        contents: `# Read project-level Synced Fluid guidance.
+read:
+  - AGENTS.md`,
+      },
+    ]
+  }
+
+  return []
+}
+
+function syncedFluidAgentRules() {
+  return `Read the Synced Fluid skill before generating UI:
+- Packaged skill: node_modules/@synced/fluid/skills/synced-fluid/SKILL.md
+- Prefer sf-* primitives, recipes, and patterns before custom CSS.
+- Do not use Tailwind utilities as the design system surface.
+- Keep class names complete in source; do not build dynamic fragments such as sf-\${...} or text-\${...}.
+- Run synced-fluid catalog --json before choosing recipes or classes.
+- Use synced-fluid pattern --list and synced-fluid pattern <id> --markup for interaction markup.
+- Run synced-fluid lint --json and synced-fluid doctor before finishing.
+- Put brand tokens in synced-fluid.config.mjs, not scattered --sf-* overrides.`
+}
+
+function applyAgentWrite(targetCwd, write, { force, dryRun }) {
+  const rel = relative(targetCwd, write.file)
+  const existed = existsSync(write.file)
+  const next = write.mode === 'section' ? upsertManagedSection(write.file, write.title, write.contents, force, dryRun) : write.contents
+
+  if (write.mode === 'section') {
+    if (next === null) {
+      console.log(`skip ${rel} already has Synced Fluid guidance. Use --force to refresh.`)
+      return
+    }
+    if (dryRun) {
+      console.log(`would ${existed ? 'update' : 'write'} ${rel}`)
+      return
+    }
+    mkdirSync(dirname(write.file), { recursive: true })
+    writeFileSync(write.file, next)
+    console.log(`${existed ? 'update' : 'write'} ${rel}`)
+    return
+  }
+
+  if (existsSync(write.file) && !force) {
+    console.log(`skip ${rel} already exists. Use --force to overwrite.`)
+    return
+  }
+  if (dryRun) {
+    console.log(`would write ${rel}`)
+    return
+  }
+  mkdirSync(dirname(write.file), { recursive: true })
+  writeFileSync(write.file, next)
+  console.log(`write ${rel}`)
+}
+
+function upsertManagedSection(file, title, contents, force, dryRun) {
+  const start = `<!-- synced-fluid:${title}:start -->`
+  const end = `<!-- synced-fluid:${title}:end -->`
+  const section = `${start}
+## ${title}
+
+${contents}
+${end}`
+  const current = existsSync(file) ? readFileSync(file, 'utf8') : ''
+
+  if (current.includes(start) && current.includes(end)) {
+    if (!force) return null
+    return current.replace(new RegExp(`${escapeRegExp(start)}[\\s\\S]*?${escapeRegExp(end)}`), section)
+  }
+
+  return `${current.trimEnd()}${current.trim() ? '\n\n' : ''}${section}\n`
+}
+
+function printAgentsStatus(targetCwd) {
+  const entries = [
+    ['universal', 'AGENTS.md', hasManagedSyncedFluidSection(resolve(targetCwd, 'AGENTS.md'))],
+    ['cursor', '.cursor/rules/synced-fluid.mdc', existsSync(resolve(targetCwd, '.cursor/rules/synced-fluid.mdc'))],
+    ['claude', '.claude/skills/synced-fluid/SKILL.md', existsSync(resolve(targetCwd, '.claude/skills/synced-fluid/SKILL.md'))],
+    ['copilot', '.github/copilot-instructions.md', hasManagedSyncedFluidSection(resolve(targetCwd, '.github/copilot-instructions.md'))],
+    ['windsurf', '.windsurf/rules/synced-fluid.md', existsSync(resolve(targetCwd, '.windsurf/rules/synced-fluid.md'))],
+    ['gemini', 'GEMINI.md', hasManagedSyncedFluidSection(resolve(targetCwd, 'GEMINI.md'))],
+    ['aider', '.aider.conf.yml', existsSync(resolve(targetCwd, '.aider.conf.yml'))],
+  ]
+
+  console.log('Synced Fluid agent setup')
+  for (const [name, path, ok] of entries) console.log(`${ok ? 'pass' : 'warn'} ${name}: ${path}${ok ? '' : ' missing'}`)
+  if (!entries.some(([, , ok]) => ok)) console.log('Run: synced-fluid agents install')
+}
+
+function hasManagedSyncedFluidSection(file) {
+  return existsSync(file) && readFileSync(file, 'utf8').includes('<!-- synced-fluid:Synced Fluid:start -->')
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 function runAddApp() {
@@ -534,6 +852,7 @@ async function runDoctor() {
   const messages = []
   let failed = false
   let loadedConfig = null
+  const packageSource = isSyncedFluidSource(targetCwd)
 
   function pass(message) {
     messages.push(`pass ${message}`)
@@ -553,6 +872,9 @@ async function runDoctor() {
     warn('package.json not found; skipping dependency and script checks.')
   } else {
     const pkg = JSON.parse(readFileSync(packageFile, 'utf8'))
+    if (packageSource) {
+      pass('Running in the @synced/fluid source package.')
+    } else {
     const allDeps = { ...(pkg.dependencies ?? {}), ...(pkg.devDependencies ?? {}) }
     if (allDeps['@synced/fluid']) pass('@synced/fluid is installed.')
     else warn('@synced/fluid is not listed in package.json.')
@@ -576,11 +898,13 @@ async function runDoctor() {
     const tailwindDeps = ['tailwindcss', '@tailwindcss/postcss', '@tailwindcss/vite', 'tailwind-merge'].filter((name) => allDeps[name])
     if (tailwindDeps.length) warn(`Tailwind packages still present: ${tailwindDeps.join(', ')}.`)
     else pass('No Tailwind dependencies found.')
+    }
   }
 
   const foundConfig = resolveConfigPath(readOption('config'), targetCwd)
   if (!foundConfig) {
-    fail('synced-fluid.config.mjs was not found.')
+    if (packageSource) pass('Package source does not require a consumer synced-fluid.config.mjs.')
+    else fail('synced-fluid.config.mjs was not found.')
   } else {
     pass(`Config found at ${relative(targetCwd, foundConfig)}.`)
     const loaded = await loadConfig(foundConfig)
@@ -638,13 +962,44 @@ async function runDoctor() {
 
   const customTokenFiles = findCustomTokenOverrides(targetCwd, loadedConfig?.out)
   if (customTokenFiles.length) {
-    warn(`Custom --sf-* token overrides found in ${customTokenFiles.join(', ')}. Prefer synced-fluid.config.mjs theme tokens for reusable brand decisions.`)
+    if (packageSource) pass('Package source CSS owns the shipped --sf-* token definitions.')
+    else warn(`Custom --sf-* token overrides found in ${customTokenFiles.join(', ')}. Prefer synced-fluid.config.mjs theme tokens for reusable brand decisions.`)
   } else {
     pass('No ad hoc --sf-* token overrides found in project CSS.')
   }
 
+  if (packageSource && existsSync(resolve(targetCwd, 'skills/synced-fluid/SKILL.md'))) pass('Packaged Synced Fluid AI skill found.')
+  else if (hasAnyAgentGuidance(targetCwd)) pass('Synced Fluid AI agent guidance found.')
+  else warn('Synced Fluid AI agent guidance not found; run synced-fluid agents install.')
+
   for (const message of messages) console.log(message)
   return failed ? 1 : 0
+}
+
+function hasAnyAgentGuidance(targetCwd) {
+  return [
+    'AGENTS.md',
+    '.cursor/rules/synced-fluid.mdc',
+    '.claude/skills/synced-fluid/SKILL.md',
+    '.github/copilot-instructions.md',
+    '.github/instructions/synced-fluid.instructions.md',
+    '.windsurf/rules/synced-fluid.md',
+    'GEMINI.md',
+    '.aider.conf.yml',
+  ].some((file) => {
+    const full = resolve(targetCwd, file)
+    return existsSync(full) && readFileSync(full, 'utf8').includes('Synced Fluid')
+  })
+}
+
+function isSyncedFluidSource(targetCwd) {
+  const packageFile = resolve(targetCwd, 'package.json')
+  if (!existsSync(packageFile)) return false
+  try {
+    return JSON.parse(readFileSync(packageFile, 'utf8')).name === '@synced/fluid'
+  } catch {
+    return false
+  }
 }
 
 function getTokenSummary() {
@@ -666,7 +1021,7 @@ function getTokenSummary() {
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
       layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-frame', 'sf-cover', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      components: ['sf-button', 'sf-button-group', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -676,9 +1031,158 @@ function getTokenSummary() {
 function getPublicPatterns() {
   return [
     {
+      id: 'mobile-nav-drawer',
+      name: 'Mobile nav drawer',
+      whenToUse: 'Responsive headers that need a burger button, popover-backed drawer, close button, and vertical navigation without shipping a JS component.',
+      classes: ['sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-button', 'sf-button--ghost', 'sf-button--icon', 'sf-drawer', 'sf-drawer--right', 'sf-drawer--stack', 'sf-list-reset'],
+      requiresJs: false,
+      requiresJsNotes: 'Close-on-navigate uses button invokers with popoverTargetAction="hide". Scroll-spy active states need optional IntersectionObserver when aria-current should update while scrolling.',
+      a11y: ['Use aria-label on the nav.', 'Use aria-current="page" or aria-current="location" on the active link.', 'Keep the menu trigger and close button as buttons, not anchors.'],
+      gotchas: ['popovertarget only works on buttons.', 'Use sf-drawer--stack for vertical drawer flow.', 'Use formAction on nav buttons when you need hash navigation and popover close without custom JavaScript.'],
+      markup: {
+        html: `<header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
+  <nav class="sf-container sf-nav sf-nav--mobile" aria-label="Main navigation">
+    <a class="sf-nav__link" href="/">Site</a>
+    <ul class="sf-nav__list">
+      <li><a class="sf-nav__link" href="#work" aria-current="page">Work</a></li>
+      <li><a class="sf-nav__link" href="#contact">Contact</a></li>
+    </ul>
+    <button class="sf-button sf-button--ghost sf-button--icon" type="button" popovertarget="site-mobile-menu" aria-label="Open menu">Menu</button>
+  </nav>
+</header>
+<nav class="sf-drawer sf-drawer--right sf-drawer--stack" id="site-mobile-menu" popover="auto" aria-label="Mobile navigation">
+  <button class="sf-button sf-button--ghost" type="button" popovertarget="site-mobile-menu" popovertargetaction="hide">Close</button>
+  <form class="sf-stack" action="/" method="get">
+    <button class="sf-nav__link" type="submit" formaction="#work" popovertarget="site-mobile-menu" popovertargetaction="hide">Work</button>
+    <button class="sf-nav__link" type="submit" formaction="#contact" popovertarget="site-mobile-menu" popovertargetaction="hide">Contact</button>
+  </form>
+</nav>`,
+      },
+      keywords: ['nav', 'navigation', 'mobile', 'drawer', 'burger', 'menu', 'popover', 'close'],
+    },
+    {
+      id: 'scroll-viewport-sections',
+      name: 'Scroll viewport sections',
+      whenToUse: 'Full-page scroll sections with a sticky header and hash navigation.',
+      classes: ['sf-scroll-viewport', 'sf-scroll-snap-y', 'sf-scroll-panel', 'sf-sticky-top', 'sf-section', 'sf-container', 'sf-nav', 'sf-nav__link'],
+      requiresJs: false,
+      requiresJsNotes: 'Hash navigation and CSS scroll snap work without JavaScript. Live scroll-spy state requires optional JavaScript.',
+      a11y: ['Use real section headings.', 'Set scroll-margin or use sf-scroll-panel for anchored sections.', 'Keep skip links outside the snapping viewport.'],
+      gotchas: ['Scroll snap requires a constrained viewport height.', 'Do not nest another page scroller around sf-scroll-viewport.'],
+      markup: {
+        html: `<a class="sf-skip-link" href="#main">Skip to main content</a>
+<header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
+  <nav class="sf-container sf-nav" aria-label="Section navigation">
+    <a class="sf-nav__link" href="#intro" aria-current="location">Intro</a>
+    <a class="sf-nav__link" href="#work">Work</a>
+    <a class="sf-nav__link" href="#contact">Contact</a>
+  </nav>
+</header>
+<main class="sf-scroll-viewport sf-scroll-snap-y" id="main">
+  <section class="sf-scroll-panel" id="intro"><div class="sf-container sf-stack"><h1 class="sf-text-display">Intro panel</h1></div></section>
+  <section class="sf-scroll-panel" id="work"><div class="sf-container sf-stack"><h2 class="sf-text-h1">Work panel</h2></div></section>
+  <section class="sf-scroll-panel" id="contact"><div class="sf-container sf-stack"><h2 class="sf-text-h1">Contact panel</h2></div></section>
+</main>`,
+      },
+      keywords: ['scroll', 'snap', 'viewport', 'panel', 'portfolio', 'sections', 'sticky', 'hash'],
+    },
+    {
+      id: 'scroll-viewport-with-spy',
+      name: 'Scroll viewport with optional spy',
+      whenToUse: 'Scroll snap pages where the active navigation item should update while the user scrolls.',
+      classes: ['sf-scroll-viewport', 'sf-scroll-panel', 'sf-sticky-top', 'sf-nav', 'sf-nav__link'],
+      requiresJs: true,
+      requiresJsNotes: 'CSS handles layout and snapping. IntersectionObserver is needed when aria-current should update during free scrolling.',
+      a11y: ['Update aria-current on the active nav link.', 'Do not rely on colour alone for current state.', 'Respect prefers-reduced-motion for scripted scrolling.'],
+      gotchas: ['Keep the observer script in the consuming app or example, not the Synced Fluid package.', 'Anchor links still work without the optional script.'],
+      markup: {
+        html: `<nav class="sf-container sf-nav sf-sticky-top" aria-label="Section navigation">
+  <a class="sf-nav__link" href="#one" aria-current="location">One</a>
+  <a class="sf-nav__link" href="#two">Two</a>
+</nav>
+<main class="sf-scroll-viewport sf-scroll-snap-y" data-sf-scroll-spy>
+  <section class="sf-scroll-panel" id="one"><div class="sf-container"><h1 class="sf-text-display">One</h1></div></section>
+  <section class="sf-scroll-panel" id="two"><div class="sf-container"><h2 class="sf-text-h1">Two</h2></div></section>
+</main>
+<script>
+  const links = [...document.querySelectorAll('[data-sf-scroll-spy] ~ * a[href^="#"], nav a[href^="#"]')]
+  const panels = [...document.querySelectorAll('.sf-scroll-panel[id]')]
+  const observer = new IntersectionObserver((entries) => {
+    const active = entries.find((entry) => entry.isIntersecting)
+    if (!active) return
+    for (const link of links) link.toggleAttribute('aria-current', link.hash === '#' + active.target.id)
+  }, { threshold: 0.6 })
+  for (const panel of panels) observer.observe(panel)
+</script>`,
+      },
+      keywords: ['scroll', 'spy', 'intersectionobserver', 'portfolio', 'active', 'nav', 'sections'],
+    },
+    {
+      id: 'native-dialog-react',
+      name: 'Native dialog for React',
+      whenToUse: 'React or Next client components that use the browser dialog element rather than a JavaScript modal library.',
+      classes: ['sf-dialog', 'sf-dialog__header', 'sf-dialog__body', 'sf-dialog__footer', 'sf-button', 'sf-button--outline'],
+      requiresJs: true,
+      requiresJsNotes: 'Opening a dialog with showModal() needs a small client handler until commandfor/command support is widely available.',
+      a11y: ['Use a visible heading inside the dialog.', 'Provide a close button.', 'Use method="dialog" for native close actions.'],
+      gotchas: ['commandfor/command is progressive enhancement.', 'In React, call showModal() from a client component for broad support.'],
+      markup: {
+        html: `<button class="sf-button" type="button" commandfor="demo-dialog" command="show-modal">Open dialog</button>
+<dialog class="sf-dialog" id="demo-dialog" aria-labelledby="demo-dialog-title">
+  <div class="sf-dialog__header"><h2 class="sf-text-h3" id="demo-dialog-title">Native dialog</h2></div>
+  <div class="sf-dialog__body"><p>Use native dialog first, with a small app-level fallback where needed.</p></div>
+  <form class="sf-dialog__footer" method="dialog"><button class="sf-button sf-button--outline">Close</button></form>
+</dialog>`,
+        next: `'use client'
+
+import { useRef } from 'react'
+
+export default function DialogExample() {
+  const dialogRef = useRef(null)
+
+  return (
+    <>
+      <button className="sf-button" type="button" onClick={() => dialogRef.current?.showModal()}>Open dialog</button>
+      <dialog className="sf-dialog" ref={dialogRef} aria-labelledby="demo-dialog-title">
+        <div className="sf-dialog__header"><h2 className="sf-text-h3" id="demo-dialog-title">Native dialog</h2></div>
+        <div className="sf-dialog__body"><p>Use native dialog first, with a small app-level fallback where needed.</p></div>
+        <form className="sf-dialog__footer" method="dialog"><button className="sf-button sf-button--outline">Close</button></form>
+      </dialog>
+    </>
+  )
+}`,
+      },
+      keywords: ['dialog', 'modal', 'react', 'next', 'native', 'commandfor', 'client'],
+    },
+    {
+      id: 'popover-drawer-layout',
+      name: 'Popover drawer layout',
+      whenToUse: 'Popover-backed side panels, mobile menus, filters, and lightweight drawers.',
+      classes: ['sf-drawer', 'sf-drawer--left', 'sf-drawer--right', 'sf-drawer--bottom', 'sf-drawer--stack', 'sf-popover', 'sf-button'],
+      requiresJs: false,
+      requiresJsNotes: 'Popover open/close is native when supported. Older browsers fall back to visible markup unless the consuming app adds a polyfill.',
+      a11y: ['Use an accessible name on the drawer.', 'Provide a visible close button.', 'Keep trigger and close controls as buttons.'],
+      gotchas: [':popover-open can change display; use sf-drawer--stack for vertical nav flow.', 'Do not attach popoverTarget to anchors.'],
+      markup: {
+        html: `<button class="sf-button" type="button" popovertarget="filters-drawer">Open filters</button>
+<aside class="sf-drawer sf-drawer--right sf-drawer--stack" id="filters-drawer" popover="auto" aria-label="Filters">
+  <button class="sf-button sf-button--ghost" type="button" popovertarget="filters-drawer" popovertargetaction="hide">Close</button>
+  <form class="sf-form">
+    <label class="sf-field"><span class="sf-label">Search</span><input class="sf-input" type="search" /></label>
+    <button class="sf-button" type="submit" popovertarget="filters-drawer" popovertargetaction="hide">Apply</button>
+  </form>
+</aside>`,
+      },
+      keywords: ['popover', 'drawer', 'layout', 'filters', 'menu', 'mobile', 'stack'],
+    },
+    {
       id: 'sticky-navigation',
       name: 'Sticky header and navigation',
       whenToUse: 'Global site headers, section navigation, scroll-spy style pages, and mobile nav shells.',
+      requiresJs: false,
+      requiresJsNotes: 'Sticky positioning and anchor navigation are CSS/HTML features. Scroll-spy state needs optional JavaScript.',
+      a11y: ['Use aria-label on nav.', 'Use aria-current for active links.'],
+      gotchas: ['Pair mobile versions with mobile-nav-drawer for complete drawer behavior.'],
       classes: ['sf-sticky-top', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-button', 'sf-button--ghost'],
       markup: '<header class="sf-section sf-section--compact sf-sticky-top"><nav class="sf-container sf-nav">...</nav></header>',
       keywords: ['nav', 'navigation', 'header', 'sticky', 'mobile', 'menu', 'scroll-spy'],
@@ -814,14 +1318,23 @@ function getPublicRecipes() {
       name: 'Scroll snap portfolio',
       whenToUse: 'Portfolio, case study, or studio pages that use full-panel storytelling.',
       sections: ['sticky-navigation', 'scroll-snap-page', 'card-grid', 'contact-form'],
-      classes: ['sf-sticky-top', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-split', 'sf-card', 'sf-frame', 'sf-button'],
+      classes: ['sf-sticky-top', 'sf-nav--mobile', 'sf-drawer', 'sf-drawer--stack', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-split', 'sf-card', 'sf-frame', 'sf-button'],
       keywords: ['portfolio', 'scroll', 'snap', 'case', 'study', 'studio', 'full-page', 'panel'],
       markup: `<header class="sf-section sf-section--compact sf-sticky-top sf-bg-background">
-  <nav class="sf-container sf-nav" aria-label="Portfolio navigation">
+  <nav class="sf-container sf-nav sf-nav--mobile" aria-label="Portfolio navigation">
     <a class="sf-nav__link" href="#intro">Studio</a>
     <ul class="sf-nav__list"><li><a class="sf-nav__link" href="#work">Work</a></li><li><a class="sf-nav__link" href="#contact">Contact</a></li></ul>
+    <button class="sf-button sf-button--ghost sf-button--icon" type="button" popovertarget="portfolio-mobile-menu" aria-label="Open menu">Menu</button>
   </nav>
 </header>
+<nav class="sf-drawer sf-drawer--right sf-drawer--stack" id="portfolio-mobile-menu" popover="auto" aria-label="Mobile portfolio navigation">
+  <button class="sf-button sf-button--ghost" type="button" popovertarget="portfolio-mobile-menu" popovertargetaction="hide">Close</button>
+  <form class="sf-stack" action="/" method="get">
+    <button class="sf-nav__link" type="submit" formaction="#intro" popovertarget="portfolio-mobile-menu" popovertargetaction="hide">Intro</button>
+    <button class="sf-nav__link" type="submit" formaction="#work" popovertarget="portfolio-mobile-menu" popovertargetaction="hide">Work</button>
+    <button class="sf-nav__link" type="submit" formaction="#contact" popovertarget="portfolio-mobile-menu" popovertargetaction="hide">Contact</button>
+  </form>
+</nav>
 <main class="sf-scroll-viewport" data-snap="mandatory">
   <section class="sf-scroll-panel" id="intro">
     <div class="sf-container sf-stack">
@@ -980,7 +1493,7 @@ function getPublicCatalog() {
     name: '@synced/fluid',
     purpose: 'A dependency-free fluid CSS system for complete modern websites using tokens, layout primitives, native components, recipes, and generated utilities.',
     cssFiles: ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'app.css', 'layout.css', 'components.css', 'utilities.css'],
-    commands: ['init', 'build', 'watch', 'lint', 'doctor', 'tokens', 'catalog', 'suggest', 'recipe', 'theme init', 'theme validate'],
+    commands: ['init', 'agents install', 'agents status', 'skill', 'build', 'watch', 'lint', 'doctor', 'tokens', 'catalog', 'suggest', 'pattern', 'recipe', 'theme init', 'theme validate'],
     tokens,
     classes: tokens.starterClasses,
     patterns: getPublicPatterns(),
@@ -1037,6 +1550,7 @@ function runSuggest() {
   const json = args.includes('--json')
   const limit = Number(readOption('limit', '3'))
   const query = readPositionals().join(' ').trim()
+  const scaffold = args.includes('--scaffold')
   if (!query) {
     console.error('Pass a short brief, for example: synced-fluid suggest "full page scroll portfolio"')
     process.exit(1)
@@ -1045,6 +1559,11 @@ function runSuggest() {
   const terms = query.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
   const scored = scoreCatalogItems(getPublicPatterns(), terms, limit)
   const recipeMatches = scoreCatalogItems(getPublicRecipes(), terms, limit)
+
+  if (scaffold) {
+    runSuggestScaffold(query, recipeMatches, scored)
+    return
+  }
 
   if (json) {
     console.log(JSON.stringify({ query, suggestions: scored, recipes: recipeMatches }, null, 2))
@@ -1072,9 +1591,218 @@ function runSuggest() {
     for (const pattern of scored) {
       console.log(`- ${pattern.id}: ${pattern.name}`)
       console.log(`  Classes: ${pattern.classes.join(' ')}`)
-      console.log(`  Markup: ${pattern.markup}`)
+      console.log(`  Markup: ${patternMarkupFor(pattern, 'html')}`)
     }
   }
+}
+
+function runPattern() {
+  const patterns = getPublicPatterns()
+  const framework = readOption('framework', 'html')
+  const id = readPositionals()[0]
+
+  if (args.includes('--list') || !id) {
+    if (args.includes('--json')) {
+      console.log(JSON.stringify(patterns, null, 2))
+      return
+    }
+    console.log('Synced Fluid patterns')
+    for (const pattern of patterns) console.log(`- ${pattern.id}: ${pattern.name}`)
+    console.log('')
+    console.log('Run synced-fluid pattern <id> --markup to print copy-ready markup.')
+    return
+  }
+
+  const pattern = findPattern(id, patterns)
+  if (!pattern) {
+    console.error(`Unknown pattern "${id}". Use one of: ${patterns.map((entry) => entry.id).join(', ')}.`)
+    process.exit(1)
+  }
+
+  const markup = renderMarkup(patternMarkupFor(pattern, framework), framework, pattern.name)
+  if (args.includes('--json')) {
+    console.log(JSON.stringify({ ...pattern, framework, renderedMarkup: markup }, null, 2))
+    return
+  }
+
+  console.log(`${pattern.id}: ${pattern.name}`)
+  console.log(`Use: ${pattern.whenToUse}`)
+  console.log(`Classes: ${pattern.classes.join(' ')}`)
+  if (pattern.requiresJs !== undefined) console.log(`Requires JS: ${pattern.requiresJs ? 'yes' : 'no'}`)
+  if (pattern.requiresJsNotes) console.log(`Notes: ${pattern.requiresJsNotes}`)
+  if (args.includes('--markup')) {
+    console.log('')
+    console.log(markup)
+  }
+}
+
+function patternMarkupFor(pattern, framework = 'html') {
+  if (typeof pattern.markup === 'string') return pattern.markup
+  return pattern.markup?.[framework] ?? pattern.markup?.html ?? ''
+}
+
+function runSuggestScaffold(query, recipeMatches, patternMatches) {
+  const framework = readOption('framework', 'plain')
+  const targetCwd = resolve(readOption('out', process.cwd()))
+  const dryRun = args.includes('--dry-run')
+  const force = args.includes('--force')
+  const recipe = recipeMatches[0] ?? getPublicRecipes()[0]
+  const files = scaffoldFiles({ query, framework, recipe, patterns: patternMatches })
+
+  if (!files.length) {
+    console.error(`Unknown scaffold framework "${framework}". Use next, vite, astro, or plain.`)
+    process.exit(1)
+  }
+
+  console.log(`Scaffold for "${query}" (${framework})`)
+  console.log('')
+  console.log('Files:')
+  for (const file of files) console.log(`- ${file.path}`)
+
+  if (dryRun) {
+    for (const file of files) {
+      console.log('')
+      console.log(`--- ${file.path} ---`)
+      console.log(file.contents.trimEnd())
+    }
+    console.log('')
+    console.log('dry-run no files were changed.')
+    return
+  }
+
+  for (const file of files) writeScaffoldFile(resolve(targetCwd, file.path), file.contents, force)
+  addPackageScripts(targetCwd)
+}
+
+function scaffoldFiles({ query, framework, recipe, patterns }) {
+  const safeRecipe = recipe ?? getPublicRecipes()[0]
+  const htmlMarkup = safeRecipe.markup
+  const config = `import { defineConfig } from '@synced/fluid/config'
+import { themePresets } from '@synced/fluid/presets'
+
+export default defineConfig({
+  scan: ${framework === 'next' ? "['src/app', 'src/components']" : framework === 'astro' ? "['src', 'components']" : framework === 'plain' ? "['.']" : "['src', 'components']"},
+  out: '${framework === 'next' ? 'src/app/synced-fluid.generated.css' : framework === 'astro' ? 'src/styles/synced-fluid.generated.css' : framework === 'plain' ? 'synced-fluid.generated.css' : 'src/synced-fluid.generated.css'}',
+  theme: themePresets.synced,
+})
+`
+  const matchedComment = `Matched recipe: ${safeRecipe.id}. Matched patterns: ${patterns.map((pattern) => pattern.id).join(', ') || 'none'}. Brief: ${query}.`
+
+  if (framework === 'next') {
+    return [
+      { path: 'synced-fluid.config.mjs', contents: config },
+      {
+        path: 'src/app/synced-fluid.css',
+        contents: `@import "@synced/fluid/styles.css";
+@import "@synced/fluid/app.css";
+@import "./synced-fluid.generated.css";
+`,
+      },
+      {
+        path: 'src/app/layout.tsx',
+        contents: `import './synced-fluid.css'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
+}
+`,
+      },
+      {
+        path: 'src/app/page.tsx',
+        contents: `// ${matchedComment}
+${renderMarkup(htmlMarkup, 'next', safeRecipe.name)}
+`,
+      },
+    ]
+  }
+
+  if (framework === 'astro') {
+    return [
+      { path: 'synced-fluid.config.mjs', contents: config },
+      {
+        path: 'src/styles/synced-fluid.css',
+        contents: `@import "@synced/fluid/styles.css";
+@import "@synced/fluid/app.css";
+@import "./synced-fluid.generated.css";
+`,
+      },
+      {
+        path: 'src/pages/index.astro',
+        contents: `---
+import '../styles/synced-fluid.css'
+---
+<!-- ${matchedComment} -->
+${htmlMarkup}
+`,
+      },
+    ]
+  }
+
+  if (framework === 'vite') {
+    return [
+      { path: 'synced-fluid.config.mjs', contents: config },
+      {
+        path: 'src/synced-fluid.css',
+        contents: `@import "@synced/fluid/styles.css";
+@import "@synced/fluid/app.css";
+@import "./synced-fluid.generated.css";
+`,
+      },
+      {
+        path: 'src/main.jsx',
+        contents: `import './synced-fluid.css'
+
+document.querySelector('#app').innerHTML = \`${htmlMarkup.replace(/`/g, '\\`')}\`
+`,
+      },
+    ]
+  }
+
+  if (framework === 'plain' || framework === 'html') {
+    return [
+      { path: 'synced-fluid.config.mjs', contents: config },
+      {
+        path: 'synced-fluid.css',
+        contents: `@import "@synced/fluid/styles.css";
+@import "@synced/fluid/app.css";
+@import "./synced-fluid.generated.css";
+`,
+      },
+      {
+        path: 'index.html',
+        contents: `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Synced Fluid starter</title>
+    <link rel="stylesheet" href="./synced-fluid.css" />
+  </head>
+  <body>
+    <!-- ${matchedComment} -->
+${indentMarkup(htmlMarkup, 4)}
+  </body>
+</html>
+`,
+      },
+    ]
+  }
+
+  return []
+}
+
+function writeScaffoldFile(file, contents, force) {
+  if (existsSync(file) && !force) {
+    console.log(`skip ${relative(process.cwd(), file)} already exists. Use --force to overwrite.`)
+    return
+  }
+  mkdirSync(dirname(file), { recursive: true })
+  writeFileSync(file, contents)
+  console.log(`write ${relative(process.cwd(), file)}`)
 }
 
 function scoreCatalogItems(items, terms, limit) {
@@ -1102,7 +1830,7 @@ function runRecipe() {
       console.error(`Unknown section "${section}". Use one of: ${patterns.map((entry) => entry.id).join(', ')}.`)
       process.exit(1)
     }
-    const markup = renderMarkup(pattern.markup, framework, pattern.name)
+    const markup = renderMarkup(patternMarkupFor(pattern, framework), framework, pattern.name)
     if (args.includes('--json')) {
       console.log(JSON.stringify({ ...pattern, framework, renderedMarkup: markup }, null, 2))
       return
@@ -1174,6 +1902,7 @@ import '../styles/synced-fluid.css'
 ${markup}`
   }
   if (framework === 'next' || framework === 'react' || framework === 'jsx') {
+    if (/export\s+default\s+function/.test(markup)) return markup
     return `export default function Page() {
   return (
     <>
@@ -1191,6 +1920,12 @@ function htmlToJsx(markup) {
   return markup
     .replace(/\bclass=/g, 'className=')
     .replace(/\bfor=/g, 'htmlFor=')
+    .replace(/\bformaction=/g, 'formAction=')
+    .replace(/\bpopoverTarget=/g, 'popoverTarget=')
+    .replace(/\bpopovertarget=/g, 'popoverTarget=')
+    .replace(/\bpopoverTargetAction=/g, 'popoverTargetAction=')
+    .replace(/\bpopovertargetaction=/g, 'popoverTargetAction=')
+    .replace(/\bcommandfor=/g, 'commandFor=')
     .replace(/<!--/g, '{/*')
     .replace(/-->/g, '*/}')
 }
@@ -1831,6 +2566,7 @@ function looksLikeClass(token) {
   if (/^\/|^\.\//.test(token)) return false
   if (/["'<>()]/.test(token) && !/^[a-z-]+\[/.test(token) && !/^[a-z-]+-\[/.test(token) && !/^\[&/.test(token)) return false
   if (/^[\[\](),:]+$/.test(token) || token.endsWith(':')) return false
+  if (/^(sf|text|bg|border|p[trblxy]?|m[trblxy]?|gap)-$/.test(token)) return false
   if (/^[A-Z][A-Za-z]+$/.test(token)) return false
   if (token.startsWith('--')) return false
 
@@ -3353,6 +4089,65 @@ function nearestClass(token) {
   return scored[0]?.score <= Math.max(4, Math.ceil(base.length / 3)) ? scored[0].candidate : null
 }
 
+function lintSourceFiles() {
+  const files = new Set()
+  for (const dir of sourceDirs) {
+    const fullDir = resolve(repoRoot, dir)
+    if (existsSync(fullDir) && statSync(fullDir).isDirectory()) {
+      for (const file of listProjectFiles(fullDir)) files.add(file)
+    } else if (existsSync(fullDir)) {
+      files.add(fullDir)
+    }
+  }
+  return [...files]
+}
+
+function collectCompositionIssues() {
+  const issues = []
+  for (const file of lintSourceFiles()) {
+    const source = readFileSync(file, 'utf8')
+    const rel = relative(repoRoot, file)
+    const isCss = file.endsWith('.css')
+    const isPackageSelf = repoRoot === packageRoot
+
+    if (!isCss && /\bpopover(?:=|\s|>)/i.test(source) && !/(popoverTargetAction|popovertargetaction)=["']hide["']|command=["']hide-popover["']/i.test(source)) {
+      issues.push(lintIssue('popover-missing-close', 'warn', rel, source, source.search(/\bpopover/i), 'Popover markup has no native close or hide invoker.', 'Add a close button or hide-on-navigate button. See: synced-fluid pattern mobile-nav-drawer --markup'))
+    }
+
+    if (!isCss && source.includes('sf-nav--mobile') && !/<button\b[^>]*(popoverTarget|popovertarget|commandFor|commandfor)=/i.test(source)) {
+      issues.push(lintIssue('mobile-nav-incomplete', 'warn', rel, source, source.indexOf('sf-nav--mobile'), 'sf-nav--mobile has no menu trigger.', 'Add a button with popoverTarget pointing to an sf-drawer popover. See: synced-fluid pattern mobile-nav-drawer --markup'))
+    }
+
+    for (const match of isCss ? [] : source.matchAll(/`[^`]*(?:sf-|text-|bg-|border-|p[trblxy]?-|m[trblxy]?-|gap-)\$\{[\s\S]*?`/g)) {
+      issues.push(lintIssue('dynamic-class-fragment', 'warn', rel, source, match.index ?? 0, 'Class names are built from dynamic fragments.', 'Use complete class strings in source and safelist unavoidable dynamic classes.'))
+    }
+
+    for (const match of isCss ? [] : source.matchAll(/<a\b[^>]*(?:popoverTarget|popovertarget)=/gi)) {
+      issues.push(lintIssue('invalid-popover-on-anchor', 'warn', rel, source, match.index ?? 0, 'popoverTarget is attached to an anchor.', 'Use a button invoker. For hash navigation, use a button with formAction plus popoverTargetAction="hide".'))
+    }
+
+    if (isCss && !isPackageSelf && /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(source) && !/synced-fluid\.generated\.css$/.test(rel)) {
+      issues.push(lintIssue('theme-override-in-css', 'warn', rel, source, source.search(/--sf-/), 'Project CSS defines custom --sf-* tokens.', 'Move repeated brand decisions to synced-fluid.config.mjs theme tokens.'))
+    }
+  }
+  return issues
+}
+
+function lintIssue(rule, severity, file, source, index, message, fix) {
+  return {
+    rule,
+    severity,
+    file,
+    line: lineNumberAt(source, Math.max(0, index)),
+    message,
+    fix,
+  }
+}
+
+function lineNumberAt(source, index) {
+  return source.slice(0, index).split('\n').length
+}
+
 function levenshtein(a, b) {
   const previous = Array.from({ length: b.length + 1 }, (_, index) => index)
   for (let i = 0; i < a.length; i += 1) {
@@ -3383,23 +4178,49 @@ const css = [
 ].filter(Boolean).join('\n\n') + '\n'
 
 if (command === 'lint') {
+  const json = args.includes('--json')
+  const fix = args.includes('--fix')
   const known = new Set(knownPublicClasses())
   const unknownStatic = tokens.filter((token) => {
     const { base } = splitVariants(token)
     return base.startsWith('sf-') && !known.has(base)
   })
   const lintFailures = [...new Set([...utilities.unsupported, ...unknownStatic])]
+  const issues = [
+    ...lintFailures.map((token) => ({
+      rule: 'unknown-generated-utility',
+      severity: 'error',
+      file: null,
+      line: null,
+      message: `Unsupported class token "${token}".`,
+      fix: nearestClass(token) ? `Use "${nearestClass(token)}" or run synced-fluid catalog --json for supported classes.` : 'Use a supported Synced Fluid class, a generated utility, or add a safelist entry for unavoidable dynamic output.',
+      token,
+    })),
+    ...collectCompositionIssues(),
+  ]
+  const hasErrors = issues.some((issue) => issue.severity === 'error')
 
-  if (!lintFailures.length) {
+  if (json) {
+    console.log(JSON.stringify({ ok: issues.length === 0, issues }, null, 2))
+    process.exit(hasErrors ? 1 : 0)
+  }
+
+  if (!issues.length) {
     console.log('pass no unsupported class tokens found.')
   } else {
-    console.error(`Unsupported class tokens: ${lintFailures.length}`)
+    if (lintFailures.length) console.error(`Unsupported class tokens: ${lintFailures.length}`)
     for (const token of lintFailures.slice(0, 160)) {
       const suggestion = nearestClass(token)
       console.error(`  - ${token}${suggestion ? ` (did you mean ${suggestion}?)` : ''}`)
     }
+    const warnings = issues.filter((issue) => issue.severity !== 'error')
+    if (warnings.length) {
+      console.error(`Composition warnings: ${warnings.length}`)
+      for (const issue of warnings.slice(0, 160)) console.error(`  - ${issue.file}:${issue.line} ${issue.rule}: ${issue.message} ${issue.fix}`)
+    }
+    if (fix) console.error('No automatic fixes were applied; current composition rules provide guided fixes only.')
   }
-  process.exit(lintFailures.length ? 1 : 0)
+  process.exit(hasErrors ? 1 : 0)
 }
 
 if (checkOnly) {

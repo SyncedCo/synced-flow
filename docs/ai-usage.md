@@ -1,20 +1,32 @@
-# AI Usage Guide
+# AI Agent Setup And Usage
 
 Use this when an AI agent is building or editing a project with Synced Fluid.
 
-For Codex-style skill loaders, use the repo-shipped skill at
-[`skills/synced-fluid/SKILL.md`](../skills/synced-fluid/SKILL.md).
+Synced Fluid ships a skill at
+[`skills/synced-fluid/SKILL.md`](../skills/synced-fluid/SKILL.md). In a
+consumer project, make it discoverable with project-level guidance:
+
+```bash
+pnpm exec synced-fluid agents install
+pnpm exec synced-fluid agents status
+pnpm exec synced-fluid skill
+```
+
+Use `agents install --target all` to add project-local guidance for Cursor,
+Codex-style agents, Claude, Copilot, Windsurf, Gemini, and Aider where those
+tools have clear project conventions.
 
 ## First Moves
 
 1. Install the package.
-2. Run `synced-fluid init --preset <framework>`.
+2. Run `synced-fluid init --preset <framework> --agents`.
 3. Ask for a short theme brief: radius, fonts, primary colour, accent colour,
    surface style, and density.
 4. Convert that brief into `synced-fluid.config.mjs` theme tokens.
 5. Import the generated CSS entry once.
 6. Run `synced-fluid catalog --json` before choosing recipes and classes.
-7. Run `synced-fluid lint` and `synced-fluid doctor` before finishing.
+7. Run `synced-fluid pattern --list` before hand-rolling interaction markup.
+8. Run `synced-fluid lint --json` and `synced-fluid doctor` before finishing.
 
 Good theme prompt:
 
@@ -55,6 +67,11 @@ before finalising the theme.
 - Put repeated brand decisions in theme tokens before adding custom CSS.
 - Use `synced-fluid suggest "<brief>"` to choose section recipes before adding
   new one-off patterns.
+- Use `synced-fluid suggest "<brief>" --scaffold --framework <target> --dry-run`
+  when starting a page or project from a brief.
+- Use `synced-fluid pattern <id> --markup` for complete native interaction
+  patterns such as mobile drawers, scroll sections, popover drawers, and native
+  dialogs.
 - Use `synced-fluid recipe <id> --markup` to get copy-ready page sections for
   SaaS, portfolio, agency, blog, article, about, team, contact, 404, and coming
   soon pages.
@@ -83,7 +100,7 @@ before finalising the theme.
 ```bash
 pnpm fluid:build
 pnpm fluid:check
-pnpm fluid:lint
+pnpm exec synced-fluid lint --json
 pnpm fluid:doctor
 ```
 

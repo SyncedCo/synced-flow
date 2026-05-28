@@ -7,12 +7,16 @@ decisions first, then recipes, then verification.
 
 ```bash
 pnpm add @synced/fluid
-pnpm exec synced-fluid init --preset next --theme synced
+pnpm exec synced-fluid init --preset next --theme synced --agents
 ```
 
 Use the closest preset: `next`, `astro`, `vite`, `wordpress`, or `plain`.
 For WordPress, see [WordPress](wordpress.md) and the
 [`examples/wordpress`](../examples/wordpress) template.
+
+`--agents` adds a project-level `AGENTS.md` Synced Fluid section so AI coding
+agents can find the packaged skill and the right CLI checks. Existing projects
+can run `pnpm exec synced-fluid agents install`.
 
 ## 2. Write A Theme Brief
 
@@ -45,6 +49,7 @@ Ask Synced Fluid for matching recipes:
 
 ```bash
 pnpm exec synced-fluid suggest "SaaS landing page with pricing and FAQ"
+pnpm exec synced-fluid suggest "scroll portfolio with contact" --scaffold --framework next --dry-run
 ```
 
 Print copy-ready markup:
@@ -57,6 +62,13 @@ For a single section:
 
 ```bash
 pnpm exec synced-fluid recipe --section form --framework next --markup
+```
+
+For interaction patterns such as mobile drawers or scroll panels:
+
+```bash
+pnpm exec synced-fluid pattern --list
+pnpm exec synced-fluid pattern mobile-nav-drawer --framework next --markup
 ```
 
 Available page recipes include `saas-landing`, `portfolio-scroll`,
@@ -73,19 +85,23 @@ Keep the `sf-*` structure where possible:
 - content: `sf-prose`, `sf-meta`, `sf-figure`, `sf-table-wrap`
 
 Use `synced-fluid catalog --json` when an AI agent needs the full public API.
+Use `synced-fluid pattern <id> --json` when it needs accessibility notes,
+gotchas, and framework-specific markup for native interactions.
 
 ## 5. Build And Verify
 
 ```bash
 pnpm fluid:build
 pnpm fluid:check
-pnpm fluid:lint
+pnpm exec synced-fluid lint --json
 pnpm fluid:doctor
 ```
 
-`lint` catches unsupported class tokens and suggests nearest alternatives.
+`lint` catches unsupported class tokens, suggests nearest alternatives, and
+warns about incomplete native interaction composition such as drawers without
+close paths or dynamic class fragments.
 `doctor` checks setup, generated CSS freshness, theme shape, duplicate imports,
-ad hoc token overrides, and release-facing guardrails.
+ad hoc token overrides, AI guidance, and release-facing guardrails.
 
 ## 6. Keep It Lean
 

@@ -16,6 +16,8 @@ for class tokens, then generates project-specific utility CSS.
   breadcrumbs, pagination, scroll snap, and sticky patterns
 - AI-friendly CLI discovery: `catalog --json`, `suggest`, `lint`, `watch`, and
   `theme init --from` for turning a site brief into reusable theme tokens
+- project-level AI agent setup: `agents install`, `agents status`, and `skill`
+  make the packaged Synced Fluid skill visible to common coding agents
 - accessibility and base helpers: `sr-only`, `not-sr-only`, skip links, focus
   rings, touch targets, link helpers, and list helpers
 - accessibility state styling for invalid, required, disabled, busy, current,
@@ -53,8 +55,12 @@ SyncedCo, or Synced Fluid branding in a way that implies official endorsement.
 
 ```bash
 pnpm add @synced/fluid
-pnpm exec synced-fluid init --theme synced
+pnpm exec synced-fluid init --preset next --theme synced --agents
 ```
+
+`--agents` adds project-level AI guidance so Cursor, Codex-style agents, Claude,
+Copilot, Windsurf, Gemini, and Aider can discover the Synced Fluid skill and
+recommended CLI checks from the consuming project.
 
 Until the package is published to a registry, install it from the GitHub repo:
 
@@ -158,6 +164,18 @@ See [Base styling decisions](docs/base-styling.md).
 `synced-fluid init` creates `synced-fluid.config.mjs`, a CSS entry file, a
 generated CSS placeholder, and `fluid:build` / `fluid:check` / `fluid:lint` /
 `fluid:watch` package scripts.
+
+To add AI agent guidance to an existing project:
+
+```bash
+pnpm exec synced-fluid agents install
+pnpm exec synced-fluid agents status
+pnpm exec synced-fluid skill
+```
+
+Use `--target all` to also add tool-specific project files for Cursor, Claude,
+Copilot, Windsurf, Gemini, and Aider where those tools support project-local
+instructions or skills.
 
 Start by shaping the theme: radius style, font family, primary colour, accent
 colour, surface treatment, and density. With AI, ask it to use the Synced Fluid

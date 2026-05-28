@@ -17,6 +17,7 @@ Options:
 | `--preset astro` | Astro project. |
 | `--preset wordpress` | WordPress theme or plugin with enqueue-ready CSS output. |
 | `--preset plain` | Plain HTML/CSS project. |
+| `--agents <target>` | Install project-level AI guidance after init. Omit the value for `universal`. |
 | `--theme <name>` | Use `synced`, `neutral-saas`, `editorial`, or `dark-app`. |
 | `--scan <dir>` | Add source directories. |
 | `--out <file>` | Choose generated CSS output path. |
@@ -26,6 +27,32 @@ Options:
 | `--responsive-variants` | Enable migration support for `sm:`/`lg:` classes. |
 | `--no-scripts` | Do not update `package.json`. |
 | `--force` | Overwrite init-managed files. |
+
+## agents
+
+Install or inspect project-level AI guidance.
+
+```bash
+pnpm exec synced-fluid agents install
+pnpm exec synced-fluid agents install --target all
+pnpm exec synced-fluid agents install --target cursor --dry-run
+pnpm exec synced-fluid agents status
+```
+
+Targets are `universal`, `cursor`, `codex`, `claude`, `copilot`, `windsurf`,
+`gemini`, `aider`, and `all`. The default target is `universal`, which writes a
+managed Synced Fluid section to `AGENTS.md`. Tool-specific targets add
+project-local instruction or skill files where the tool supports them.
+
+Use `--force` to refresh managed guidance and `--dry-run` to preview writes.
+
+## skill
+
+Print the packaged Synced Fluid skill location and the project setup commands.
+
+```bash
+pnpm exec synced-fluid skill
+```
 
 ## add app
 
@@ -65,15 +92,25 @@ loop helper and does not add a bundler or runtime dependency.
 ## lint
 
 Scan configured source files and report unsupported class tokens with nearest
-public Synced Fluid alternatives.
+public Synced Fluid alternatives. It also reports composition warnings for
+common AI-generated structural mistakes.
 
 ```bash
 pnpm exec synced-fluid lint
+pnpm exec synced-fluid lint --json
+pnpm exec synced-fluid lint --json src components
 ```
 
 Use this before handoff when an AI agent or template generator has composed
 markup. It catches misspelled generated utilities such as `text-prmary` and
 unknown `sf-*` classes such as `sf-buton`.
+
+Composition rules include `popover-missing-close`, `mobile-nav-incomplete`,
+`dynamic-class-fragment`, `invalid-popover-on-anchor`,
+`theme-override-in-css`, and `unknown-generated-utility`. JSON output returns
+`ok` and an `issues[]` array with `rule`, `severity`, `file`, `line`,
+`message`, and `fix`. `--fix` is accepted for forward compatibility; current
+composition rules provide guided fixes rather than rewriting source.
 
 ## doctor
 
@@ -86,7 +123,8 @@ pnpm exec synced-fluid validate
 
 Checks include package installation, package scripts, config, generated CSS,
 core stylesheet import, lint status, theme shape, duplicate core imports,
-ad hoc token overrides, Tailwind residue, and whether strict fluid mode is on.
+ad hoc token overrides, Tailwind residue, AI agent guidance, and whether strict
+fluid mode is on.
 
 `validate` is an alias for `doctor`.
 
@@ -121,10 +159,32 @@ Return matching recipes and classes for a short site or section brief.
 ```bash
 pnpm exec synced-fluid suggest "full page scroll portfolio"
 pnpm exec synced-fluid suggest "native drawer menu and contact form" --json
+pnpm exec synced-fluid suggest "scroll portfolio" --scaffold --framework next --dry-run
 ```
 
 JSON output includes matching section patterns and full-page recipes. Use the
 recipe id with `recipe` when an agent needs copy-ready markup.
+
+With `--scaffold`, Synced Fluid prints or writes a minimal starter for
+`next`, `vite`, `astro`, or `plain`. Use `--out <dir>` to choose the project
+directory, `--dry-run` to print the file tree and contents, and `--force` to
+overwrite scaffold-managed files.
+
+## pattern
+
+List or print copy-ready interaction patterns.
+
+```bash
+pnpm exec synced-fluid pattern --list
+pnpm exec synced-fluid pattern mobile-nav-drawer --framework next --markup
+pnpm exec synced-fluid pattern scroll-viewport-sections --json
+```
+
+Current interaction patterns include `mobile-nav-drawer`,
+`scroll-viewport-sections`, `scroll-viewport-with-spy`,
+`native-dialog-react`, and `popover-drawer-layout`. Pattern JSON includes
+classes, framework markup, JS requirement notes, accessibility notes, and
+implementation gotchas.
 
 ## recipe
 
