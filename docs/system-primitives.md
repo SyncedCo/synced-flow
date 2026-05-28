@@ -68,7 +68,7 @@ These cover the common UI elements needed for a simple site.
 | `sf-form`, `sf-fieldset`, `sf-field`, `sf-label`, `sf-help`, `sf-error` | Form structure and messaging. |
 | `sf-input`, `sf-select`, `sf-textarea`, `sf-check` | Form controls. |
 | `sf-alert`, `sf-alert--info`, `sf-alert--success`, `sf-alert--warning`, `sf-alert--danger`, `sf-alert__title` | Notices and feedback. |
-| `sf-section-header`, `sf-kicker`, `sf-badge` | Common marketing/content patterns. |
+| `sf-section-header`, `sf-kicker`, `sf-badge`, `sf-avatar` | Common marketing/content and account patterns. |
 
 ## Utility Classes
 
