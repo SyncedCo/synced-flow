@@ -160,6 +160,8 @@
     --sf-alert-padding: var(--sf-space-s-m);
     --sf-nav-gap: var(--sf-space-xs-s);
     --sf-nav-link-radius: var(--sf-radius-sm);
+    --sf-icon-size: 1em;
+    --sf-icon-stroke: 2;
   }
 
   :where(.sf-theme-light, [data-sf-theme="light"]) {
@@ -713,6 +715,7 @@
   }
 
   .sf-button--icon,
+  .sf-icon-button,
   .sf-button[data-size="icon"] {
     --sf-button-block-size: 2.75rem;
     inline-size: 2.75rem;
@@ -730,6 +733,21 @@
     flex-wrap: wrap;
     gap: var(--sf-space-2xs);
   }
+
+  .sf-icon {
+    block-size: var(--sf-icon-size, 1em);
+    color: var(--sf-icon-colour, currentColor);
+    flex: 0 0 auto;
+    inline-size: var(--sf-icon-size, 1em);
+    stroke-width: var(--sf-icon-stroke, 2);
+    vertical-align: -0.125em;
+  }
+
+  .sf-icon--xs { --sf-icon-size: var(--sf-step--1); }
+  .sf-icon--sm { --sf-icon-size: var(--sf-step-0); }
+  .sf-icon--md { --sf-icon-size: var(--sf-step-1); }
+  .sf-icon--lg { --sf-icon-size: var(--sf-step-2); }
+  .sf-icon--xl { --sf-icon-size: var(--sf-step-3); }
 
   .sf-card {
     background: var(--sf-card-bg, var(--sf-colour-surface));

@@ -33,14 +33,14 @@ Sizes are raw bytes and gzip bytes from `gzip -c`.
 
 | File | Raw | Gzip | Use |
 | --- | ---: | ---: | --- |
-| `tokens.css` | 9,455 B | 2,216 B | Design tokens only. |
+| `tokens.css` | 9,505 B | 2,232 B | Design tokens only. |
 | `reset.css` | 713 B | 430 B | Reset layer only. |
 | `base.css` | 3,455 B | 1,152 B | Base element styles. |
 | `app.css` | 505 B | 296 B | Optional app/site defaults for raw links, lists, and controls. |
 | `layout.css` | 7,739 B | 1,912 B | Layout primitives such as container, stack, grid, app shell, sidebar, scroll snap, sticky, media object, and split. |
-| `components.css` | 27,497 B | 4,457 B | Component primitives such as button, card, surface, nav, form, alert, native overlays, disclosure, tabs, website patterns, accessibility states, and input. |
+| `components.css` | 28,599 B | 4,644 B | Component primitives such as button, icon, card, surface, nav, form, alert, native overlays, disclosure, tabs, website patterns, accessibility states, and input. |
 | `utilities.css` | 7,498 B | 1,886 B | Static type, prose, content, positioning, motion, accessibility, link, list, colour, border, and shadow helpers. |
-| `styles.css` | 55,532 B | 9,878 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
+| `styles.css` | 56,242 B | 10,036 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
 
 Example generated project CSS with tokens plus one scanned `text-primary`
 utility measured 7,031 B raw and 1,943 B gzip.
@@ -91,7 +91,7 @@ Safe claims:
 
 - Modern CSS-first: Synced Fluid uses cascade layers, custom properties,
   `clamp()`, logical properties, OKLCH colour, and container-aware primitives.
-- Compact by default: the full core stylesheet is currently about 9.8 KB gzip.
+- Compact by default: the full core stylesheet is currently about 10.0 KB gzip.
 - Flexible loading: developers can import only the CSS layers their project
   uses.
 - Source-scanned utilities: project utility CSS is generated from actual class

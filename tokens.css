@@ -160,6 +160,8 @@
     --sf-alert-padding: var(--sf-space-s-m);
     --sf-nav-gap: var(--sf-space-xs-s);
     --sf-nav-link-radius: var(--sf-radius-sm);
+    --sf-icon-size: 1em;
+    --sf-icon-stroke: 2;
   }
 
   :where(.sf-theme-light, [data-sf-theme="light"]) {

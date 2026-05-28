@@ -121,13 +121,13 @@ Current built CSS sizes from `pnpm build` on 2026-05-28:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 55.4 KB | 9.8 KB | Full core stylesheet for simple setup. |
+| `styles.css` | 56.2 KB | 10.0 KB | Full core stylesheet for simple setup. |
 | `tokens.css` | 9.5 KB | 2.2 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
 | `base.css` | 3.4 KB | 1.2 KB | Base element styles. |
 | `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
 | `layout.css` | 7.8 KB | 1.9 KB | Fluid layout, app shell, scroll, sticky, media, and split primitives. |
-| `components.css` | 27.5 KB | 4.5 KB | Button, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
+| `components.css` | 28.6 KB | 4.6 KB | Button, icon, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
 | `utilities.css` | 7.5 KB | 1.9 KB | Static `sf-*` content, positioning, motion, and helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The
@@ -158,6 +158,21 @@ For app/site projects, include `@synced/fluid/app.css` or run
 `synced-fluid add app` to apply those common UI defaults globally.
 
 See [Base styling decisions](docs/base-styling.md).
+
+## Icons
+
+Synced Fluid supports icons without shipping an icon set. Use `sf-icon` on
+inline SVGs or external libraries such as Lucide, Heroicons, or Bootstrap Icons;
+icons inherit `currentColor` and size from fluid system tokens.
+
+```tsx
+import { Settings } from "lucide-react"
+
+<button className="sf-button">
+  <Settings className="sf-icon" aria-hidden="true" />
+  Settings
+</button>
+```
 
 ## Configure
 

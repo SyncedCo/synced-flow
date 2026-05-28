@@ -52,8 +52,9 @@ These cover the common UI elements needed for a simple site.
 | --- | --- |
 | `sf-button` | Base button/link button. |
 | `sf-button--default`, `sf-button--secondary`, `sf-button--outline`, `sf-button--ghost`, `sf-button--link`, `sf-button--destructive` | Button variants. |
-| `sf-button--sm`, `sf-button--lg`, `sf-button--icon`, `sf-button--block` | Button sizing and width. |
+| `sf-button--sm`, `sf-button--lg`, `sf-button--icon`, `sf-icon-button`, `sf-button--block` | Button sizing and width. |
 | `sf-button-group` | Wrapped action group. |
+| `sf-icon`, `sf-icon--xs`, `sf-icon--sm`, `sf-icon--md`, `sf-icon--lg`, `sf-icon--xl` | Fluid, currentColor SVG icon sizing for Lucide, Heroicons, Bootstrap Icons, or inline SVG. |
 | `sf-card`, `sf-card--flat`, `sf-card--raised`, `sf-card--interactive` | Card surfaces. |
 | `sf-card__header`, `sf-card__body`, `sf-card__footer`, `sf-card__title`, `sf-card__description` | Card structure. |
 | `sf-surface`, `sf-surface--alt`, `sf-surface--raised` | Generic reusable panels. |
@@ -89,6 +90,30 @@ Use utility classes for small decisions that do not need a new component.
 | `sf-animate-fade`, `sf-animate-rise`, `sf-animate-scale`, `sf-animate-slide`, `sf-animate-stagger` | Reduced-motion-safe motion primitives. |
 
 ## Example
+
+```html
+<button class="sf-button">
+  <svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24">...</svg>
+  Settings
+</button>
+
+<button class="sf-button sf-button--ghost sf-icon-button" aria-label="Settings">
+  <svg class="sf-icon sf-icon--lg" aria-hidden="true" viewBox="0 0 24 24">...</svg>
+</button>
+```
+
+```tsx
+import { Settings } from "lucide-react"
+
+export function SettingsButton() {
+  return (
+    <button className="sf-button">
+      <Settings className="sf-icon" aria-hidden="true" />
+      Settings
+    </button>
+  )
+}
+```
 
 ```html
 <section class="sf-section">
