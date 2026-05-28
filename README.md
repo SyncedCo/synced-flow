@@ -1,17 +1,31 @@
 # Synced Flow
 
-Standalone fluid CSS design system framework for Synced and reusable projects.
+AI-native fluid CSS design system for brand-consistent websites, agency builds,
+and modern frontend projects.
 
-It ships a fluid CSS foundation and a small CLI that scans a consuming project
-for class tokens, then generates project-specific utility CSS.
+Synced Flow gives developers and AI coding agents a shared styling contract:
+fluid tokens, layout primitives, accessible components, website recipes, and
+source-scanned utility CSS.
 
-- primitive tokens: fonts, OKLCH colour primitives, radii, shadows
-- semantic tokens: inherited surface, text, action, border, link, and state variables
-- component tokens: button, card, input, alert, and navigation defaults
-- fluid scales: Utopia-style type and spacing clamps across the configured viewport range
-- layout primitives: container, section, stack, cluster, grid, sidebar, switcher, frame, cover, hero, and flow
-- component primitives: buttons, cards, surfaces, navigation, forms, alerts, badges, avatars, charts, and section headers
-- website patterns: logo clouds, feature blocks, stats, testimonials, pricing, FAQ, CTA, and footer helpers
+Use it when you want AI-assisted build speed without breakpoint soup, one-off
+brand drift, or generated class chaos.
+
+- fluid by default: Utopia-style type and spacing with modern `clamp()` scales
+- token-led: primitive, semantic, and component tokens using CSS custom
+  properties and OKLCH colour
+- agent-readable: `catalog --json`, `suggest`, `recipe`, `pattern`, `lint`,
+  `doctor`, and project-local AI guidance
+- agency-ready: presets for WordPress, Next, Astro, Vite, and plain HTML
+- accessible defaults: visible focus states, skip links, reduced-motion
+  safeguards, and state styling
+- lean CSS loading: modular layers plus generated utilities scanned from real
+  project usage
+- layout primitives: container, section, stack, cluster, grid, sidebar,
+  switcher, frame, cover, hero, and flow
+- component primitives: buttons, cards, surfaces, navigation, forms, alerts,
+  badges, avatars, charts, and section headers
+- website patterns: logo clouds, feature blocks, stats, testimonials, pricing,
+  FAQ, CTA, and footer helpers
 - native component styling: dialog, popover, drawer, tooltip, disclosure, tabs,
   breadcrumbs, pagination, scroll snap, and sticky patterns
 - AI-friendly CLI discovery: `catalog --json`, `suggest`, `lint`, `watch`, and
@@ -289,6 +303,7 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 
 ## Docs
 
+- [Why Synced Flow?](docs/why-synced-flow.md)
 - [Quick start](docs/quick-start.md)
 - [Build a site walkthrough](docs/build-a-site-walkthrough.md)
 - [AI usage guide](docs/ai-usage.md)
