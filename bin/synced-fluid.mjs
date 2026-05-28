@@ -1021,7 +1021,7 @@ function getTokenSummary() {
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
       layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -1359,10 +1359,10 @@ function getPublicRecipes() {
       name: 'SaaS dashboard',
       whenToUse: 'Authenticated SaaS apps, admin panels, customer portals, CRMs, analytics dashboards, and product workspaces.',
       sections: ['sticky-navigation', 'mobile-nav-drawer', 'card-grid', 'contact-form', 'long-form-content'],
-      classes: ['sf-skip-link', 'sf-theme-dark', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-drawer', 'sf-drawer--stack', 'sf-card', 'sf-surface', 'sf-stat', 'sf-alert', 'sf-badge', 'sf-button', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-table-wrap'],
+      classes: ['sf-skip-link', 'sf-theme-light', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-icon', 'sf-card', 'sf-surface', 'sf-stat', 'sf-badge', 'sf-avatar', 'sf-button', 'sf-button--outline', 'sf-button--icon', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-table-wrap', 'sf-font-sans', 'sf-visually-hidden'],
       keywords: ['saas', 'dashboard', 'admin', 'panel', 'portal', 'crm', 'analytics', 'app', 'auth', 'login', 'signin', 'sign-in', 'user', 'account', 'metrics', 'pipeline', 'activity', 'customers', 'accounts', 'tasks', 'tickets', 'revenue'],
       markup: `<a class="sf-skip-link" href="#dashboard-main">Skip to dashboard</a>
-<div class="sf-app-shell sf-theme-dark">
+<div class="sf-app-shell sf-theme-light">
   <aside class="sf-app-sidebar sf-stack" aria-label="Workspace navigation">
     <div class="sf-app-sidebar__brand">
       <span class="sf-badge" aria-hidden="true">SF</span>
@@ -1371,25 +1371,21 @@ function getPublicRecipes() {
     <nav class="sf-nav" aria-label="Primary">
       <p class="sf-kicker">Overview</p>
       <ul class="sf-nav__list">
-        <li><a class="sf-nav__link" href="#dashboard-main" aria-current="page">Dashboard</a></li>
-        <li><a class="sf-nav__link" href="#command">Command centre</a></li>
+        <li><a class="sf-nav__link" href="#dashboard-main" aria-current="page"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg><span>Dashboard</span></a></li>
+        <li><a class="sf-nav__link" href="#command"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg><span>Command centre</span></a></li>
       </ul>
       <p class="sf-kicker">Workspace</p>
       <ul class="sf-nav__list">
-        <li><a class="sf-nav__link" href="#customers">Customers</a></li>
-        <li><a class="sf-nav__link" href="#pipeline">Pipeline</a></li>
-        <li><a class="sf-nav__link" href="#activity">Activity</a></li>
-        <li><a class="sf-nav__link" href="#billing">Billing</a></li>
+        <li><a class="sf-nav__link" href="#customers"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Customers</span></a></li>
+        <li><a class="sf-nav__link" href="#pipeline"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg><span>Pipeline</span></a></li>
+        <li><a class="sf-nav__link" href="#activity"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg><span>Activity</span></a></li>
+        <li><a class="sf-nav__link" href="#billing"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg><span>Billing</span></a></li>
       </ul>
       <p class="sf-kicker">System</p>
       <ul class="sf-nav__list">
-        <li><a class="sf-nav__link" href="/app/settings">Settings</a></li>
+        <li><a class="sf-nav__link" href="/app/settings"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>Settings</span></a></li>
       </ul>
     </nav>
-    <article class="sf-alert sf-alert--info" role="status">
-      <p class="sf-alert__title">Auth UI only</p>
-      <p>Wire sessions and permissions in your app. Synced Fluid styles the shell and states.</p>
-    </article>
     <footer class="sf-stack sf-stack--tight sf-push-block-end">
       <div class="sf-cluster">
         <span class="sf-badge" aria-hidden="true">S</span>
@@ -1401,58 +1397,74 @@ function getPublicRecipes() {
   </aside>
   <main class="sf-app-main sf-stack sf-stack--loose" id="dashboard-main">
     <header class="sf-toolbar">
-      <div>
-        <p class="sf-kicker">Dashboard</p>
-        <h1 class="sf-text-h4 sf-font-sans">Workspace health</h1>
-        <p class="sf-text-muted">A dense SaaS dashboard layout using Synced Fluid primitives.</p>
+      <div class="sf-cluster">
+        <button class="sf-button sf-button--outline sf-button--icon" type="button" aria-label="Open workspace menu">
+          <svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="7" y2="7"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="17" y2="17"></line></svg>
+        </button>
+        <form class="sf-field" role="search">
+          <label class="sf-visually-hidden" for="dashboard-search">Search workspace</label>
+          <input class="sf-input" id="dashboard-search" type="search" placeholder="Search or type command..." size="36">
+        </form>
+        <span class="sf-badge" aria-hidden="true">Cmd K</span>
+      </div>
+      <div class="sf-cluster" aria-label="Theme, notifications, and signed-in user">
+        <button class="sf-button sf-button--outline sf-button--icon" type="button" aria-label="Use light theme" aria-pressed="true">
+          <svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+        </button>
+        <button class="sf-button sf-button--outline sf-button--icon" type="button" aria-label="Use dark theme" aria-pressed="false">
+          <svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 7.4A9 9 0 1 1 12 3Z"></path></svg>
+        </button>
+        <button class="sf-button sf-button--outline sf-button--icon" type="button" aria-label="View notifications">
+          <svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.27 21a2 2 0 0 0 3.46 0"></path><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path></svg>
+        </button>
+        <div class="sf-cluster" aria-label="Signed in as Admin">
+          <span class="sf-avatar" aria-hidden="true">A</span>
+          <strong>Admin</strong>
+        </div>
       </div>
     </header>
-    <nav class="sf-drawer sf-drawer--right sf-drawer--stack" id="dashboard-mobile-menu" popover="auto" aria-label="Mobile dashboard navigation">
-      <button class="sf-button sf-button--ghost" type="button" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Close</button>
-      <form class="sf-stack" action="/app" method="get">
-        <button class="sf-nav__link" type="submit" formaction="#dashboard-main" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Dashboard</button>
-        <button class="sf-nav__link" type="submit" formaction="#customers" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Customers</button>
-        <button class="sf-nav__link" type="submit" formaction="#pipeline" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Pipeline</button>
-        <button class="sf-nav__link" type="submit" formaction="#billing" popovertarget="dashboard-mobile-menu" popovertargetaction="hide">Billing</button>
-      </form>
-    </nav>
-    <section class="sf-metric-grid" aria-label="Workspace metrics">
-      <article class="sf-card sf-stack"><p class="sf-kicker">Accounts</p><strong class="sf-stat__value">128</strong><span class="sf-text-muted">12 active this week</span></article>
-      <article class="sf-card sf-stack"><p class="sf-kicker">Revenue</p><strong class="sf-stat__value">$78k</strong><span class="sf-text-muted">Tracked this month</span></article>
-      <article class="sf-card sf-stack"><p class="sf-kicker">Tasks</p><strong class="sf-stat__value">24</strong><span class="sf-text-muted">5 overdue</span></article>
-      <article class="sf-card sf-stack"><p class="sf-kicker">Health</p><strong class="sf-stat__value">94%</strong><span class="sf-text-muted">Across active accounts</span></article>
+    <section class="sf-stack sf-stack--tight" aria-labelledby="workspace-health-title">
+      <p class="sf-kicker">Dashboard</p>
+      <h1 class="sf-text-h4 sf-font-sans" id="workspace-health-title">Workspace health</h1>
+      <p class="sf-text-muted">A dense SaaS dashboard layout using Synced Fluid primitives.</p>
     </section>
-    <section class="sf-panel-grid" id="command" data-density="featured">
-      <article class="sf-card sf-stack"><div class="sf-repel"><h2 class="sf-card__title">Command centre</h2><span class="sf-badge">Priority</span></div><p class="sf-card__description">Follow-ups, approvals, and missing next actions stay visible.</p></article>
-      <article class="sf-card sf-stack" id="billing"><h2 class="sf-card__title">Billing watch</h2><p class="sf-card__description">2 overdue payment follow-ups and 1 renewal due this week.</p></article>
-      <article class="sf-card sf-stack"><h2 class="sf-card__title">Relationship pulse</h2><p class="sf-card__description">Three customer timelines need a recent touch point.</p></article>
+    <section class="sf-metric-grid" aria-label="Workspace metrics">
+      <article class="sf-card sf-stack"><p class="sf-kicker">Accounts</p><strong class="sf-stat__value sf-font-sans">128</strong><span class="sf-text-muted">12 active this week</span></article>
+      <article class="sf-card sf-stack"><p class="sf-kicker">Revenue</p><strong class="sf-stat__value sf-font-sans">£78k</strong><span class="sf-text-muted">Tracked this month</span></article>
+      <article class="sf-card sf-stack"><p class="sf-kicker">Tasks</p><strong class="sf-stat__value sf-font-sans">24</strong><span class="sf-text-muted">5 overdue</span></article>
+      <article class="sf-card sf-stack"><p class="sf-kicker">Health</p><strong class="sf-stat__value sf-font-sans">94%</strong><span class="sf-text-muted">Across active accounts</span></article>
+    </section>
+    <section class="sf-metric-grid" id="command">
+      <article class="sf-card sf-stack"><div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Command centre</h2><span class="sf-badge">Priority</span></div><p class="sf-card__description">Follow-ups, approvals, and missing next actions stay visible.</p></article>
+      <article class="sf-card sf-stack" id="billing"><h2 class="sf-card__title sf-font-sans">Billing watch</h2><p class="sf-card__description">2 overdue payment follow-ups and 1 renewal due this week.</p></article>
+      <article class="sf-card sf-stack"><h2 class="sf-card__title sf-font-sans">Relationship pulse</h2><p class="sf-card__description">Three customer timelines need a recent touch point.</p></article>
     </section>
     <section class="sf-card sf-stack" id="pipeline">
-      <div class="sf-repel"><h2 class="sf-card__title">Pipeline</h2><a class="sf-link" href="/app/pipeline">View all</a></div>
+      <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Pipeline</h2><a class="sf-link" href="/app/pipeline">View all</a></div>
       <div class="sf-pipeline">
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Lead</p><strong class="sf-text-h3">3</strong><span class="sf-text-muted">$4,200</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Qualified</p><strong class="sf-text-h3">5</strong><span class="sf-text-muted">$18,600</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Won</p><strong class="sf-text-h3">2</strong><span class="sf-text-muted">$9,400</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">In progress</p><strong class="sf-text-h3">4</strong><span class="sf-text-muted">$21,700</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Delivered</p><strong class="sf-text-h3">8</strong><span class="sf-text-muted">$34,900</span></article>
+        <article class="sf-surface sf-stack"><p class="sf-kicker">Lead</p><strong class="sf-text-h3">3</strong><span class="sf-text-muted">£4,200</span></article>
+        <article class="sf-surface sf-stack"><p class="sf-kicker">Qualified</p><strong class="sf-text-h3">5</strong><span class="sf-text-muted">£18,600</span></article>
+        <article class="sf-surface sf-stack"><p class="sf-kicker">Won</p><strong class="sf-text-h3">2</strong><span class="sf-text-muted">£9,400</span></article>
+        <article class="sf-surface sf-stack"><p class="sf-kicker">In progress</p><strong class="sf-text-h3">4</strong><span class="sf-text-muted">£21,700</span></article>
+        <article class="sf-surface sf-stack"><p class="sf-kicker">Delivered</p><strong class="sf-text-h3">8</strong><span class="sf-text-muted">£34,900</span></article>
       </div>
     </section>
     <section class="sf-panel-grid" id="customers">
       <article class="sf-card sf-stack">
-        <div class="sf-repel"><h2 class="sf-card__title">Recent activity</h2><a class="sf-link" href="/app/activity">View all</a></div>
+        <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Recent activity</h2><a class="sf-link" href="/app/activity">View all</a></div>
         <div class="sf-table-wrap">
           <table>
             <thead><tr><th>Item</th><th>Status</th><th>Value</th><th>Date</th></tr></thead>
             <tbody>
-              <tr><td>Enterprise onboarding</td><td><span class="sf-badge">Active</span></td><td>$7,800</td><td>Today</td></tr>
-              <tr><td>Usage review</td><td><span class="sf-badge">Scheduled</span></td><td>$4,050</td><td>Yesterday</td></tr>
-              <tr><td>Renewal workflow</td><td><span class="sf-badge">Complete</span></td><td>$3,250</td><td>17 May</td></tr>
+              <tr><td>Enterprise onboarding</td><td><span class="sf-badge">Active</span></td><td>£7,800</td><td>Today</td></tr>
+              <tr><td>Usage review</td><td><span class="sf-badge">Scheduled</span></td><td>£4,050</td><td>Yesterday</td></tr>
+              <tr><td>Renewal workflow</td><td><span class="sf-badge">Complete</span></td><td>£3,250</td><td>17 May</td></tr>
             </tbody>
           </table>
         </div>
       </article>
       <article class="sf-card sf-stack" id="activity">
-        <div class="sf-repel"><h2 class="sf-card__title">Recent customers</h2><a class="sf-link" href="/app/customers">View all</a></div>
+        <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Recent customers</h2><a class="sf-link" href="/app/customers">View all</a></div>
         <ul class="sf-list-reset sf-stack">
           <li class="sf-repel"><span><strong>Northstar Labs</strong><br><span class="sf-text-muted">Growth workspace</span></span><span class="sf-text-muted">Healthy</span></li>
           <li class="sf-repel"><span><strong>Willow Group</strong><br><span class="sf-text-muted">Operations workspace</span></span><span class="sf-text-muted">Needs review</span></li>
@@ -1463,7 +1475,7 @@ function getPublicRecipes() {
     <section class="sf-card sf-form" aria-labelledby="signin-title">
       <!-- Example unauthenticated state. Wire this form to your app auth provider. -->
       <div class="sf-repel">
-        <div><p class="sf-kicker">Signed out state</p><h2 class="sf-card__title" id="signin-title">Sign in to your workspace</h2></div>
+        <div><p class="sf-kicker">Signed out state</p><h2 class="sf-card__title sf-font-sans" id="signin-title">Sign in to your workspace</h2></div>
         <span class="sf-badge">Auth UI only</span>
       </div>
       <div class="sf-panel-grid">
@@ -2051,6 +2063,9 @@ function htmlToJsx(markup) {
     .replace(/\bpopoverTargetAction=/g, 'popoverTargetAction=')
     .replace(/\bpopovertargetaction=/g, 'popoverTargetAction=')
     .replace(/\bcommandfor=/g, 'commandFor=')
+    .replace(/\bstroke-linecap=/g, 'strokeLinecap=')
+    .replace(/\bstroke-linejoin=/g, 'strokeLinejoin=')
+    .replace(/\bstroke-width=/g, 'strokeWidth=')
     .replace(/<!--/g, '{/*')
     .replace(/-->/g, '*/}')
     .replace(/<input([^>/]*?)>/g, '<input$1 />')
@@ -3882,8 +3897,13 @@ function buildLayoutCss() {
   }
 
   .sf-app-sidebar .sf-nav__link {
+    --icon-size: var(--step-0);
+    gap: var(--space-xs);
     inline-size: 100%;
     justify-content: flex-start;
+    min-block-size: 2.5rem;
+    padding-block: var(--space-2xs);
+    padding-inline: var(--space-xs);
     text-align: start;
   }
 
@@ -3969,12 +3989,20 @@ function buildLayoutCss() {
       grid-template-columns: 1fr;
     }
 
-    .sf-app-sidebar {
-      display: none;
-    }
-
     .sf-app-main {
       --sf-app-main-padding: var(--space-s);
+    }
+
+    .sf-app-sidebar {
+      border-block-end: 1px solid var(--color-border);
+      border-inline-end: 0;
+      max-block-size: none;
+      min-block-size: auto;
+      position: static;
+    }
+
+    .sf-app-sidebar > footer {
+      margin-block-start: 0;
     }
   }
 
@@ -4107,6 +4135,22 @@ function buildComponentCss() {
     gap: var(--space-3xs);
     line-height: 1;
     padding: .45em .75em;
+  }
+
+  .sf-avatar {
+    align-items: center;
+    aspect-ratio: 1;
+    background: color-mix(in oklch, var(--color-primary) 14%, transparent);
+    border: 1px solid color-mix(in oklch, var(--color-primary) 28%, transparent);
+    border-radius: var(--radius-full);
+    color: var(--color-primary);
+    display: inline-flex;
+    flex: 0 0 auto;
+    font-size: var(--step--1);
+    font-weight: 800;
+    inline-size: var(--avatar-size, 2.25rem);
+    justify-content: center;
+    line-height: 1;
   }
 
   .sf-field {

@@ -256,12 +256,20 @@
       grid-template-columns: 1fr;
     }
 
-    .sf-app-sidebar {
-      display: none;
-    }
-
     .sf-app-main {
       --sf-app-main-padding: var(--sf-space-s);
+    }
+
+    .sf-app-sidebar {
+      border-block-end: 1px solid var(--sf-colour-border);
+      border-inline-end: 0;
+      max-block-size: none;
+      min-block-size: auto;
+      position: static;
+    }
+
+    .sf-app-sidebar > footer {
+      margin-block-start: 0;
     }
   }
 
