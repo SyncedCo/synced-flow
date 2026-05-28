@@ -14,7 +14,7 @@ These are intended for application code and examples.
 | Tokens | `--sf-*` custom properties emitted by `tokens.css` |
 | Theme config | `theme.fonts`, `theme.colours`, `theme.darkColours`, `theme.radii`, `theme.layout`, `theme.components` |
 | Layout classes | `sf-container`, `sf-section`, `sf-stack`, `sf-flow`, `sf-cluster`, `sf-repel`, `sf-toolbar`, `sf-app-shell`, `sf-app-sidebar`, `sf-app-main`, `sf-auto-grid`, `sf-switcher`, `sf-sidebar`, `sf-split`, `sf-frame`, `sf-cover`, `sf-metric-grid`, `sf-pipeline` |
-| Components | `sf-button`, `sf-card`, `sf-surface`, `sf-hero`, `sf-nav`, `sf-form`, `sf-field`, `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-alert`, `sf-badge`, `sf-section-header`, `sf-kicker` |
+| Components | `sf-button`, `sf-icon`, `sf-icon-button`, `sf-card`, `sf-surface`, `sf-hero`, `sf-nav`, `sf-form`, `sf-field`, `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-alert`, `sf-badge`, `sf-section-header`, `sf-kicker` |
 | Native components | `sf-dialog`, `sf-popover`, `sf-tooltip`, `sf-drawer`, `sf-drawer--stack`, `sf-disclosure`, `sf-accordion`, `sf-tabs`, `sf-menu`, `sf-breadcrumb`, `sf-pagination` |
 | Website patterns | `sf-logo-cloud`, `sf-feature`, `sf-stats`, `sf-testimonial`, `sf-pricing-grid`, `sf-price-card`, `sf-faq`, `sf-cta`, `sf-footer` |
 | Utilities | `sf-prose`, `sf-link`, `sf-link-subtle`, `sf-link-plain`, `sf-list-*`, `sf-push-*`, `sf-focus-ring`, `sf-touch-target`, `sf-skip-link`, `sr-only`, `not-sr-only` |

@@ -128,7 +128,7 @@ panels, and product workspaces.
           <span class="sf-stat__label">Core import</span>
         </article>
         <article class="sf-stat">
-          <strong class="sf-stat__value">9.8 KB</strong>
+          <strong class="sf-stat__value">10.0 KB</strong>
           <span class="sf-stat__label">Full core gzip size</span>
         </article>
       </div>

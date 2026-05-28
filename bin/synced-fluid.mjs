@@ -1021,7 +1021,7 @@ function getTokenSummary() {
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
       layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -3688,6 +3688,8 @@ ${pairs.join('\n')}
     --duration-normal: 220ms;
     --duration-slow: 360ms;
     --ease-standard: cubic-bezier(.2, 0, 0, 1);
+    --icon-size: 1em;
+    --icon-stroke: 2;
   }
 }`
 }
@@ -4037,7 +4039,23 @@ function buildComponentCss() {
   .sf-button--destructive { background: var(--color-destructive); color: var(--color-destructive-foreground); }
   .sf-button--sm { --button-size: 2.25rem; --button-padding-inline: var(--space-xs); }
   .sf-button--lg { --button-size: 3rem; --button-padding-inline: var(--space-m); }
-  .sf-button--icon { --button-size: 2.75rem; inline-size: 2.75rem; padding-inline: 0; }
+  .sf-button--icon,
+  .sf-icon-button { --button-size: 2.75rem; inline-size: 2.75rem; padding-inline: 0; }
+
+  .sf-icon {
+    block-size: var(--icon-size, 1em);
+    color: var(--icon-color, currentColor);
+    flex: 0 0 auto;
+    inline-size: var(--icon-size, 1em);
+    stroke-width: var(--icon-stroke, 2);
+    vertical-align: -0.125em;
+  }
+
+  .sf-icon--xs { --icon-size: var(--step--1); }
+  .sf-icon--sm { --icon-size: var(--step-0); }
+  .sf-icon--md { --icon-size: var(--step-1); }
+  .sf-icon--lg { --icon-size: var(--step-2); }
+  .sf-icon--xl { --icon-size: var(--step-3); }
 
   .sf-card {
     background: var(--card-bg, var(--color-card));
