@@ -1,7 +1,7 @@
 {
   "name": "@synced/flow",
   "version": "0.1.0",
-  "description": "Standalone fluid CSS design system framework for Synced and reusable projects.",
+  "description": "AI-native fluid CSS design system for brand-consistent websites and agency builds.",
   "type": "module",
   "license": "MIT",
   "repository": {
