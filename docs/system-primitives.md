@@ -69,6 +69,7 @@ These cover the common UI elements needed for a simple site.
 | `sf-input`, `sf-select`, `sf-textarea`, `sf-check` | Form controls. |
 | `sf-alert`, `sf-alert--info`, `sf-alert--success`, `sf-alert--warning`, `sf-alert--danger`, `sf-alert__title` | Notices and feedback. |
 | `sf-section-header`, `sf-kicker`, `sf-badge`, `sf-avatar` | Common marketing/content and account patterns. |
+| `sf-chart`, `sf-chart__plot`, `sf-chart__svg`, `sf-chart__legend`, `sf-meter-list`, `sf-meter` | Lightweight chart shells for app-owned SVG charts and native meter bars. |
 
 ## Utility Classes
 

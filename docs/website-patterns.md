@@ -53,7 +53,7 @@ to semantic tokens and local CSS.
 
 <div class="sf-stats">
   <div class="sf-stat">
-    <p class="sf-stat__value">10.2 KB</p>
+    <p class="sf-stat__value">10.5 KB</p>
     <p class="sf-stat__label">Full core gzip size</p>
   </div>
 </div>

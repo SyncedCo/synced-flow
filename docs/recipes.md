@@ -128,7 +128,7 @@ panels, and product workspaces.
           <span class="sf-stat__label">Core import</span>
         </article>
         <article class="sf-stat">
-          <strong class="sf-stat__value">10.2 KB</strong>
+          <strong class="sf-stat__value">10.5 KB</strong>
           <span class="sf-stat__label">Full core gzip size</span>
         </article>
       </div>
@@ -158,12 +158,14 @@ The recipe includes:
 - signed-in sidebar account area with initials, role, settings, and sign-out
 - Lucide-compatible inline SVG sidebar icons using `sf-icon`
 - Generic account initials using `sf-avatar`
+- Inline SVG and native meter analytics using `sf-chart` and `sf-meter`
 - traditional SaaS app shell with persistent desktop navigation and a visible stacked mobile navigation rail
 - KPI cards, theme-aware toolbar, filter/search form, customer table, and activity list
 
 It uses Synced Fluid primitives such as `sf-app-shell`, `sf-app-sidebar`,
-`sf-app-main`, `sf-toolbar`, `sf-metric-grid`, `sf-pipeline`, `sf-panel-grid`,
-`sf-icon`, `sf-stat`, `sf-card`, `sf-form`, and `sf-table-wrap`.
+`sf-app-main`, `sf-toolbar`, `sf-metric-grid`, `sf-panel-grid`, `sf-icon`,
+`sf-chart`, `sf-chart--wide`, `sf-meter`, `sf-card`, `sf-form`, and
+`sf-table-wrap`.
 
 ## Documentation Page
 

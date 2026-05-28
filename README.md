@@ -10,7 +10,7 @@ for class tokens, then generates project-specific utility CSS.
 - component tokens: button, card, input, alert, and navigation defaults
 - fluid scales: Utopia-style type and spacing clamps across the configured viewport range
 - layout primitives: container, section, stack, cluster, grid, sidebar, switcher, frame, cover, hero, and flow
-- component primitives: buttons, cards, surfaces, navigation, forms, alerts, badges, avatars, and section headers
+- component primitives: buttons, cards, surfaces, navigation, forms, alerts, badges, avatars, charts, and section headers
 - website patterns: logo clouds, feature blocks, stats, testimonials, pricing, FAQ, CTA, and footer helpers
 - native component styling: dialog, popover, drawer, tooltip, disclosure, tabs,
   breadcrumbs, pagination, scroll snap, and sticky patterns
@@ -121,13 +121,13 @@ Current built CSS sizes from `pnpm build` on 2026-05-28:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 57.2 KB | 10.2 KB | Full core stylesheet for simple setup. |
+| `styles.css` | 59.1 KB | 10.5 KB | Full core stylesheet for simple setup. |
 | `tokens.css` | 9.5 KB | 2.2 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
 | `base.css` | 3.4 KB | 1.2 KB | Base element styles. |
 | `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
 | `layout.css` | 7.5 KB | 1.9 KB | Fluid layout, app shell, scroll, sticky, media, and split primitives. |
-| `components.css` | 29.3 KB | 4.7 KB | Button, icon, avatar, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
+| `components.css` | 31.3 KB | 5.0 KB | Button, icon, avatar, chart, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
 | `utilities.css` | 7.5 KB | 1.9 KB | Static `sf-*` content, positioning, motion, and helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The

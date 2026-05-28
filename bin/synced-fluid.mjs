@@ -1021,7 +1021,7 @@ function getTokenSummary() {
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
       layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-surface', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -1359,7 +1359,7 @@ function getPublicRecipes() {
       name: 'SaaS dashboard',
       whenToUse: 'Authenticated SaaS apps, admin panels, customer portals, CRMs, analytics dashboards, and product workspaces.',
       sections: ['sticky-navigation', 'mobile-nav-drawer', 'card-grid', 'contact-form', 'long-form-content'],
-      classes: ['sf-skip-link', 'sf-theme-light', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-icon', 'sf-card', 'sf-surface', 'sf-stat', 'sf-badge', 'sf-avatar', 'sf-button', 'sf-button--outline', 'sf-button--icon', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-table-wrap', 'sf-font-sans', 'sf-visually-hidden'],
+      classes: ['sf-skip-link', 'sf-theme-light', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-stack--tight', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-icon', 'sf-card', 'sf-surface', 'sf-stat', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-button', 'sf-button--outline', 'sf-button--icon', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-table-wrap', 'sf-font-sans', 'sf-visually-hidden'],
       keywords: ['saas', 'dashboard', 'admin', 'panel', 'portal', 'crm', 'analytics', 'app', 'auth', 'login', 'signin', 'sign-in', 'user', 'account', 'metrics', 'pipeline', 'activity', 'customers', 'accounts', 'tasks', 'tickets', 'revenue'],
       markup: `<a class="sf-skip-link" href="#dashboard-main">Skip to dashboard</a>
 <div class="sf-app-shell sf-theme-light">
@@ -1377,7 +1377,6 @@ function getPublicRecipes() {
       <p class="sf-kicker">Workspace</p>
       <ul class="sf-nav__list">
         <li><a class="sf-nav__link" href="#customers"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Customers</span></a></li>
-        <li><a class="sf-nav__link" href="#pipeline"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg><span>Pipeline</span></a></li>
         <li><a class="sf-nav__link" href="#activity"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg><span>Activity</span></a></li>
         <li><a class="sf-nav__link" href="#billing"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg><span>Billing</span></a></li>
       </ul>
@@ -1423,31 +1422,47 @@ function getPublicRecipes() {
         </div>
       </div>
     </header>
-    <section class="sf-stack sf-stack--tight" aria-labelledby="workspace-health-title">
-      <p class="sf-kicker">Dashboard</p>
-      <h1 class="sf-text-h4 sf-font-sans" id="workspace-health-title">Workspace health</h1>
-      <p class="sf-text-muted">A dense SaaS dashboard layout using Synced Fluid primitives.</p>
-    </section>
     <section class="sf-metric-grid" aria-label="Workspace metrics">
-      <article class="sf-card sf-stack"><p class="sf-kicker">Accounts</p><strong class="sf-stat__value sf-font-sans">128</strong><span class="sf-text-muted">12 active this week</span></article>
-      <article class="sf-card sf-stack"><p class="sf-kicker">Revenue</p><strong class="sf-stat__value sf-font-sans">£78k</strong><span class="sf-text-muted">Tracked this month</span></article>
-      <article class="sf-card sf-stack"><p class="sf-kicker">Tasks</p><strong class="sf-stat__value sf-font-sans">24</strong><span class="sf-text-muted">5 overdue</span></article>
-      <article class="sf-card sf-stack"><p class="sf-kicker">Health</p><strong class="sf-stat__value sf-font-sans">94%</strong><span class="sf-text-muted">Across active accounts</span></article>
+      <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Accounts</p><span class="sf-badge">+12</span></div><strong class="sf-text-h3 sf-font-sans">128</strong><span class="sf-text-muted">Active workspaces</span></article>
+      <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Revenue</p><span class="sf-badge">Month</span></div><strong class="sf-text-h3 sf-font-sans">£78k</strong><span class="sf-text-muted">Tracked this month</span></article>
+      <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Tasks</p><span class="sf-badge">5 due</span></div><strong class="sf-text-h3 sf-font-sans">24</strong><span class="sf-text-muted">Open actions</span></article>
+      <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Health</p><span class="sf-badge">Good</span></div><strong class="sf-text-h3 sf-font-sans">94%</strong><span class="sf-text-muted">Across accounts</span></article>
+    </section>
+    <section class="sf-panel-grid" data-density="featured" aria-labelledby="analytics-title">
+      <article class="sf-card sf-chart sf-chart--wide sf-stack" aria-labelledby="analytics-title">
+        <div class="sf-repel">
+          <div><p class="sf-kicker">Analytics</p><h2 class="sf-card__title sf-font-sans" id="analytics-title">Revenue trend</h2></div>
+          <span class="sf-badge">+12%</span>
+        </div>
+        <div class="sf-chart__plot">
+          <svg class="sf-chart__svg" viewBox="0 0 320 160" role="img" aria-labelledby="revenue-chart-title revenue-chart-desc">
+            <title id="revenue-chart-title">Revenue trend for the last six months</title>
+            <desc id="revenue-chart-desc">Revenue rises from twenty eight thousand pounds to seventy eight thousand pounds with one mid-period dip.</desc>
+            <path class="sf-chart__grid" d="M20 30H300M20 75H300M20 120H300"></path>
+            <path class="sf-chart__axis" d="M20 20V140H304"></path>
+            <path class="sf-chart__area" d="M20 124L72 104L124 112L176 76L228 54L280 34L280 140L20 140Z"></path>
+            <path class="sf-chart__line" d="M20 124L72 104L124 112L176 76L228 54L280 34"></path>
+            <circle class="sf-chart__point" cx="280" cy="34" r="4"></circle>
+          </svg>
+        </div>
+        <div class="sf-chart__legend" aria-label="Chart legend">
+          <span class="sf-chart__legend-item"><span class="sf-chart__swatch" aria-hidden="true"></span>Revenue</span>
+          <span class="sf-text-muted">£78k current month</span>
+        </div>
+      </article>
+      <article class="sf-card sf-chart sf-stack" aria-labelledby="capacity-title">
+        <div><p class="sf-kicker">Capacity</p><h2 class="sf-card__title sf-font-sans" id="capacity-title">Usage by area</h2></div>
+        <div class="sf-meter-list">
+          <label class="sf-meter-row"><span class="sf-repel"><strong>Accounts</strong><span class="sf-text-muted">82%</span></span><meter class="sf-meter" min="0" max="100" value="82">82%</meter></label>
+          <label class="sf-meter-row"><span class="sf-repel"><strong>Automation</strong><span class="sf-text-muted">64%</span></span><meter class="sf-meter" min="0" max="100" value="64">64%</meter></label>
+          <label class="sf-meter-row"><span class="sf-repel"><strong>Support</strong><span class="sf-text-muted">48%</span></span><meter class="sf-meter" min="0" max="100" value="48">48%</meter></label>
+        </div>
+      </article>
     </section>
     <section class="sf-metric-grid" id="command">
       <article class="sf-card sf-stack"><div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Command centre</h2><span class="sf-badge">Priority</span></div><p class="sf-card__description">Follow-ups, approvals, and missing next actions stay visible.</p></article>
       <article class="sf-card sf-stack" id="billing"><h2 class="sf-card__title sf-font-sans">Billing watch</h2><p class="sf-card__description">2 overdue payment follow-ups and 1 renewal due this week.</p></article>
       <article class="sf-card sf-stack"><h2 class="sf-card__title sf-font-sans">Relationship pulse</h2><p class="sf-card__description">Three customer timelines need a recent touch point.</p></article>
-    </section>
-    <section class="sf-card sf-stack" id="pipeline">
-      <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Pipeline</h2><a class="sf-link" href="/app/pipeline">View all</a></div>
-      <div class="sf-pipeline">
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Lead</p><strong class="sf-text-h3">3</strong><span class="sf-text-muted">£4,200</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Qualified</p><strong class="sf-text-h3">5</strong><span class="sf-text-muted">£18,600</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Won</p><strong class="sf-text-h3">2</strong><span class="sf-text-muted">£9,400</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">In progress</p><strong class="sf-text-h3">4</strong><span class="sf-text-muted">£21,700</span></article>
-        <article class="sf-surface sf-stack"><p class="sf-kicker">Delivered</p><strong class="sf-text-h3">8</strong><span class="sf-text-muted">£34,900</span></article>
-      </div>
     </section>
     <section class="sf-panel-grid" id="customers">
       <article class="sf-card sf-stack">
@@ -4151,6 +4166,95 @@ function buildComponentCss() {
     inline-size: var(--avatar-size, 2.25rem);
     justify-content: center;
     line-height: 1;
+  }
+
+  .sf-chart {
+    --chart-accent: var(--color-primary);
+  }
+
+  .sf-chart__plot {
+    background: color-mix(in oklch, var(--color-surface) 72%, transparent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    padding: var(--space-xs);
+  }
+
+  .sf-chart--wide {
+    --chart-block-size: 14rem;
+  }
+
+  .sf-chart__svg {
+    block-size: var(--chart-block-size, 12rem);
+    display: block;
+    inline-size: 100%;
+  }
+
+  .sf-chart__grid,
+  .sf-chart__axis {
+    fill: none;
+    stroke: var(--color-border);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .sf-chart__area {
+    fill: color-mix(in oklch, var(--chart-accent) 18%, transparent);
+  }
+
+  .sf-chart__line {
+    fill: none;
+    stroke: var(--chart-accent);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .sf-chart__point {
+    fill: var(--chart-accent);
+    stroke: var(--color-card);
+    stroke-width: 2;
+  }
+
+  .sf-chart__legend {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .sf-chart__legend-item {
+    align-items: center;
+    color: var(--color-muted-foreground);
+    display: inline-flex;
+    gap: var(--space-3xs);
+  }
+
+  .sf-chart__swatch {
+    aspect-ratio: 1;
+    background: var(--chart-accent);
+    border-radius: var(--radius-full);
+    display: inline-block;
+    inline-size: .75rem;
+  }
+
+  .sf-meter-list {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .sf-meter-row {
+    display: grid;
+    gap: var(--space-3xs);
+  }
+
+  .sf-meter {
+    accent-color: var(--chart-accent, var(--color-primary));
+    block-size: .625rem;
+    border-radius: var(--radius-full);
+    inline-size: 100%;
+    overflow: hidden;
   }
 
   .sf-field {

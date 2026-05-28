@@ -23,7 +23,6 @@
           <p class="sf-kicker">Workspace</p>
           <ul class="sf-nav__list">
             <li><a class="sf-nav__link" href="#customers"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Customers</span></a></li>
-            <li><a class="sf-nav__link" href="#pipeline"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg><span>Pipeline</span></a></li>
             <li><a class="sf-nav__link" href="#activity"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg><span>Activity</span></a></li>
             <li><a class="sf-nav__link" href="#billing"><svg class="sf-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg><span>Billing</span></a></li>
           </ul>
@@ -69,31 +68,47 @@
             </div>
           </div>
         </header>
-        <section class="sf-stack sf-stack--tight" aria-labelledby="workspace-health-title">
-          <p class="sf-kicker">Dashboard</p>
-          <h1 class="sf-text-h4 sf-font-sans" id="workspace-health-title">Workspace health</h1>
-          <p class="sf-text-muted">A dense SaaS dashboard layout using Synced Fluid primitives.</p>
-        </section>
         <section class="sf-metric-grid" aria-label="Workspace metrics">
-          <article class="sf-card sf-stack"><p class="sf-kicker">Accounts</p><strong class="sf-stat__value sf-font-sans">128</strong><span class="sf-text-muted">12 active this week</span></article>
-          <article class="sf-card sf-stack"><p class="sf-kicker">Revenue</p><strong class="sf-stat__value sf-font-sans">£78k</strong><span class="sf-text-muted">Tracked this month</span></article>
-          <article class="sf-card sf-stack"><p class="sf-kicker">Tasks</p><strong class="sf-stat__value sf-font-sans">24</strong><span class="sf-text-muted">5 overdue</span></article>
-          <article class="sf-card sf-stack"><p class="sf-kicker">Health</p><strong class="sf-stat__value sf-font-sans">94%</strong><span class="sf-text-muted">Across active accounts</span></article>
+          <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Accounts</p><span class="sf-badge">+12</span></div><strong class="sf-text-h3 sf-font-sans">128</strong><span class="sf-text-muted">Active workspaces</span></article>
+          <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Revenue</p><span class="sf-badge">Month</span></div><strong class="sf-text-h3 sf-font-sans">£78k</strong><span class="sf-text-muted">Tracked this month</span></article>
+          <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Tasks</p><span class="sf-badge">5 due</span></div><strong class="sf-text-h3 sf-font-sans">24</strong><span class="sf-text-muted">Open actions</span></article>
+          <article class="sf-card sf-stack sf-stack--tight"><div class="sf-repel"><p class="sf-kicker">Health</p><span class="sf-badge">Good</span></div><strong class="sf-text-h3 sf-font-sans">94%</strong><span class="sf-text-muted">Across accounts</span></article>
+        </section>
+        <section class="sf-panel-grid" data-density="featured" aria-labelledby="analytics-title">
+          <article class="sf-card sf-chart sf-chart--wide sf-stack" aria-labelledby="analytics-title">
+            <div class="sf-repel">
+              <div><p class="sf-kicker">Analytics</p><h2 class="sf-card__title sf-font-sans" id="analytics-title">Revenue trend</h2></div>
+              <span class="sf-badge">+12%</span>
+            </div>
+            <div class="sf-chart__plot">
+              <svg class="sf-chart__svg" viewBox="0 0 320 160" role="img" aria-labelledby="revenue-chart-title revenue-chart-desc">
+                <title id="revenue-chart-title">Revenue trend for the last six months</title>
+                <desc id="revenue-chart-desc">Revenue rises from twenty eight thousand pounds to seventy eight thousand pounds with one mid-period dip.</desc>
+                <path class="sf-chart__grid" d="M20 30H300M20 75H300M20 120H300"></path>
+                <path class="sf-chart__axis" d="M20 20V140H304"></path>
+                <path class="sf-chart__area" d="M20 124L72 104L124 112L176 76L228 54L280 34L280 140L20 140Z"></path>
+                <path class="sf-chart__line" d="M20 124L72 104L124 112L176 76L228 54L280 34"></path>
+                <circle class="sf-chart__point" cx="280" cy="34" r="4"></circle>
+              </svg>
+            </div>
+            <div class="sf-chart__legend" aria-label="Chart legend">
+              <span class="sf-chart__legend-item"><span class="sf-chart__swatch" aria-hidden="true"></span>Revenue</span>
+              <span class="sf-text-muted">£78k current month</span>
+            </div>
+          </article>
+          <article class="sf-card sf-chart sf-stack" aria-labelledby="capacity-title">
+            <div><p class="sf-kicker">Capacity</p><h2 class="sf-card__title sf-font-sans" id="capacity-title">Usage by area</h2></div>
+            <div class="sf-meter-list">
+              <label class="sf-meter-row"><span class="sf-repel"><strong>Accounts</strong><span class="sf-text-muted">82%</span></span><meter class="sf-meter" min="0" max="100" value="82">82%</meter></label>
+              <label class="sf-meter-row"><span class="sf-repel"><strong>Automation</strong><span class="sf-text-muted">64%</span></span><meter class="sf-meter" min="0" max="100" value="64">64%</meter></label>
+              <label class="sf-meter-row"><span class="sf-repel"><strong>Support</strong><span class="sf-text-muted">48%</span></span><meter class="sf-meter" min="0" max="100" value="48">48%</meter></label>
+            </div>
+          </article>
         </section>
         <section class="sf-metric-grid" id="command">
           <article class="sf-card sf-stack"><div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Command centre</h2><span class="sf-badge">Priority</span></div><p class="sf-card__description">Follow-ups, approvals, and missing next actions stay visible.</p></article>
           <article class="sf-card sf-stack" id="billing"><h2 class="sf-card__title sf-font-sans">Billing watch</h2><p class="sf-card__description">2 overdue payment follow-ups and 1 renewal due this week.</p></article>
           <article class="sf-card sf-stack"><h2 class="sf-card__title sf-font-sans">Relationship pulse</h2><p class="sf-card__description">Three customer timelines need a recent touch point.</p></article>
-        </section>
-        <section class="sf-card sf-stack" id="pipeline">
-          <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Pipeline</h2><a class="sf-link" href="/app/pipeline">View all</a></div>
-          <div class="sf-pipeline">
-            <article class="sf-surface sf-stack"><p class="sf-kicker">Lead</p><strong class="sf-text-h3">3</strong><span class="sf-text-muted">£4,200</span></article>
-            <article class="sf-surface sf-stack"><p class="sf-kicker">Qualified</p><strong class="sf-text-h3">5</strong><span class="sf-text-muted">£18,600</span></article>
-            <article class="sf-surface sf-stack"><p class="sf-kicker">Won</p><strong class="sf-text-h3">2</strong><span class="sf-text-muted">£9,400</span></article>
-            <article class="sf-surface sf-stack"><p class="sf-kicker">In progress</p><strong class="sf-text-h3">4</strong><span class="sf-text-muted">£21,700</span></article>
-            <article class="sf-surface sf-stack"><p class="sf-kicker">Delivered</p><strong class="sf-text-h3">8</strong><span class="sf-text-muted">£34,900</span></article>
-          </div>
         </section>
         <section class="sf-panel-grid" id="customers">
           <article class="sf-card sf-stack">
