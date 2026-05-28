@@ -1,6 +1,6 @@
 # Native Components
 
-Synced Fluid styles modern browser primitives instead of shipping JavaScript
+Synced Flow styles modern browser primitives instead of shipping JavaScript
 components. These patterns are progressive enhancements: use the native markup
 first, then add tiny project or example JavaScript only where state sync is
 needed.
@@ -21,7 +21,7 @@ The matching class selectors are also supported:
 <body class="sf-theme-dark">
 ```
 
-Synced Fluid sets `color-scheme` for native controls, forms, dialogs, and
+Synced Flow sets `color-scheme` for native controls, forms, dialogs, and
 popover-backed UI. Projects can toggle the attribute however they like; the
 package does not ship a JavaScript theme switcher.
 
@@ -87,7 +87,7 @@ for an exclusive accordion in supporting browsers.
 <div class="sf-accordion">
   <details name="pricing">
     <summary>Can I customize the theme?</summary>
-    <p>Yes. Override Synced Fluid tokens before adding custom CSS.</p>
+    <p>Yes. Override Synced Flow tokens before adding custom CSS.</p>
   </details>
   <details name="pricing">
     <summary>Does this need JavaScript?</summary>
@@ -149,7 +149,7 @@ headers.
 
 - Popover API, invoker commands, interest invokers, and anchor positioning are
   modern browser features. Use fallback-safe markup when content is critical.
-- Synced Fluid provides styling and state hooks; it does not polyfill browser
+- Synced Flow provides styling and state hooks; it does not polyfill browser
   APIs.
 - Prefer `dialog`, `popover`, `details`, scroll snap, `:popover-open`,
   `::backdrop`, `:has()`, `color-scheme`, and anchor positioning before custom

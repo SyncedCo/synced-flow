@@ -1,6 +1,6 @@
 # System Primitives
 
-Synced Fluid is meant to cover the common styling decisions needed for a basic
+Synced Flow is meant to cover the common styling decisions needed for a basic
 modern website before a developer reaches for project-specific CSS.
 
 ## Token Layers

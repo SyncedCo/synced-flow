@@ -1,6 +1,6 @@
 # Base Styling Decisions
 
-Synced Fluid uses a conservative reset and modern base layer. The goal is to
+Synced Flow uses a conservative reset and modern base layer. The goal is to
 make new projects consistent without hiding important browser affordances.
 
 ## What Stays Native
@@ -19,13 +19,13 @@ navigation, or bullets on menu lists. Add the optional app layer for those
 project-wide UI defaults:
 
 ```css
-@import "@synced/fluid/app.css";
+@import "@synced/flow/app.css";
 ```
 
 You can also add it later with the CLI:
 
 ```bash
-pnpm exec synced-fluid add app --file src/synced-fluid.css
+pnpm exec synced-flow add app --file src/synced-flow.css
 ```
 
 `app.css` removes raw link underlines, resets `ol`/`ul`/`menu` markers and start
@@ -89,7 +89,7 @@ Use `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-help`, and
 `sf-error` for common form needs. Use `sf-alert` variants for notices and
 feedback.
 
-Synced Fluid also styles accessible states such as `[aria-invalid="true"]`,
+Synced Flow also styles accessible states such as `[aria-invalid="true"]`,
 `[aria-disabled="true"]`, `[aria-busy="true"]`, `[aria-current="page"]`, and
 required-field markers. See [Accessibility CSS](accessibility-css.md) for the
 markup contract.
@@ -109,5 +109,5 @@ they carry meaning.
 The base layer uses cascade layers, logical properties, low-specificity
 `:where()` selectors, OKLCH-aware `color-mix()`, `:focus-visible`, and
 `prefers-reduced-motion`. Utopia informs the fluid type, space, and grid
-tokens; Synced Fluid owns the reset, accessibility helpers, and component
+tokens; Synced Flow owns the reset, accessibility helpers, and component
 defaults.

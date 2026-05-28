@@ -1,6 +1,6 @@
 # Code Of Conduct
 
-Synced Fluid aims to be a practical, respectful open-source project.
+Synced Flow aims to be a practical, respectful open-source project.
 
 ## Expected Behaviour
 

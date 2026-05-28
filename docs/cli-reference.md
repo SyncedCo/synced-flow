@@ -2,10 +2,10 @@
 
 ## init
 
-Scaffold Synced Fluid into a project.
+Scaffold Synced Flow into a project.
 
 ```bash
-pnpm exec synced-fluid init --preset next
+pnpm exec synced-flow init --preset next
 ```
 
 Options:
@@ -33,25 +33,25 @@ Options:
 Install or inspect project-level AI guidance.
 
 ```bash
-pnpm exec synced-fluid agents install
-pnpm exec synced-fluid agents install --target all
-pnpm exec synced-fluid agents install --target cursor --dry-run
-pnpm exec synced-fluid agents status
+pnpm exec synced-flow agents install
+pnpm exec synced-flow agents install --target all
+pnpm exec synced-flow agents install --target cursor --dry-run
+pnpm exec synced-flow agents status
 ```
 
 Targets are `universal`, `cursor`, `codex`, `claude`, `copilot`, `windsurf`,
 `gemini`, `aider`, and `all`. The default target is `universal`, which writes a
-managed Synced Fluid section to `AGENTS.md`. Tool-specific targets add
+managed Synced Flow section to `AGENTS.md`. Tool-specific targets add
 project-local instruction or skill files where the tool supports them.
 
 Use `--force` to refresh managed guidance and `--dry-run` to preview writes.
 
 ## skill
 
-Print the packaged Synced Fluid skill location and the project setup commands.
+Print the packaged Synced Flow skill location and the project setup commands.
 
 ```bash
-pnpm exec synced-fluid skill
+pnpm exec synced-flow skill
 ```
 
 ## add app
@@ -59,7 +59,7 @@ pnpm exec synced-fluid skill
 Add the optional app/site defaults import to an existing CSS entry.
 
 ```bash
-pnpm exec synced-fluid add app --file src/synced-fluid.css
+pnpm exec synced-flow add app --file src/synced-flow.css
 ```
 
 If `--file` is omitted, the CLI looks for the CSS entry created by `init`.
@@ -69,8 +69,8 @@ If `--file` is omitted, the CLI looks for the CSS entry created by `init`.
 Generate project utility CSS.
 
 ```bash
-pnpm exec synced-fluid build
-pnpm exec synced-fluid build --check
+pnpm exec synced-flow build
+pnpm exec synced-flow build --check
 ```
 
 Use `--check` in CI to fail when the generated file is stale.
@@ -83,7 +83,7 @@ overrides, and keyframes needed by scanned animation classes.
 Run `build`, then rebuild when configured scan files change.
 
 ```bash
-pnpm exec synced-fluid watch
+pnpm exec synced-flow watch
 ```
 
 `watch` uses the same config and options as `build`. It is a small development
@@ -92,13 +92,13 @@ loop helper and does not add a bundler or runtime dependency.
 ## lint
 
 Scan configured source files and report unsupported class tokens with nearest
-public Synced Fluid alternatives. It also reports composition warnings for
+public Synced Flow alternatives. It also reports composition warnings for
 common AI-generated structural mistakes.
 
 ```bash
-pnpm exec synced-fluid lint
-pnpm exec synced-fluid lint --json
-pnpm exec synced-fluid lint --json src components
+pnpm exec synced-flow lint
+pnpm exec synced-flow lint --json
+pnpm exec synced-flow lint --json src components
 ```
 
 Use this before handoff when an AI agent or template generator has composed
@@ -117,8 +117,8 @@ composition rules provide guided fixes rather than rewriting source.
 Inspect project setup.
 
 ```bash
-pnpm exec synced-fluid doctor
-pnpm exec synced-fluid validate
+pnpm exec synced-flow doctor
+pnpm exec synced-flow validate
 ```
 
 Checks include package installation, package scripts, config, generated CSS,
@@ -133,8 +133,8 @@ fluid mode is on.
 Print supported tokens, presets, and starter classes.
 
 ```bash
-pnpm exec synced-fluid tokens
-pnpm exec synced-fluid tokens --json
+pnpm exec synced-flow tokens
+pnpm exec synced-flow tokens --json
 ```
 
 Use `--json` when an AI agent or generator needs a machine-readable map.
@@ -145,8 +145,8 @@ Print the public API catalog: CSS files, commands, tokens, classes, native
 component patterns, recipes, and guardrails.
 
 ```bash
-pnpm exec synced-fluid catalog
-pnpm exec synced-fluid catalog --json
+pnpm exec synced-flow catalog
+pnpm exec synced-flow catalog --json
 ```
 
 Use `catalog --json` when an AI agent needs to choose the right recipe or class
@@ -157,15 +157,15 @@ surface before writing markup.
 Return matching recipes and classes for a short site or section brief.
 
 ```bash
-pnpm exec synced-fluid suggest "full page scroll portfolio"
-pnpm exec synced-fluid suggest "native drawer menu and contact form" --json
-pnpm exec synced-fluid suggest "scroll portfolio" --scaffold --framework next --dry-run
+pnpm exec synced-flow suggest "full page scroll portfolio"
+pnpm exec synced-flow suggest "native drawer menu and contact form" --json
+pnpm exec synced-flow suggest "scroll portfolio" --scaffold --framework next --dry-run
 ```
 
 JSON output includes matching section patterns and full-page recipes. Use the
 recipe id with `recipe` when an agent needs copy-ready markup.
 
-With `--scaffold`, Synced Fluid prints or writes a minimal starter for
+With `--scaffold`, Synced Flow prints or writes a minimal starter for
 `next`, `vite`, `astro`, or `plain`. Use `--out <dir>` to choose the project
 directory, `--dry-run` to print the file tree and contents, and `--force` to
 overwrite scaffold-managed files.
@@ -175,9 +175,9 @@ overwrite scaffold-managed files.
 List or print copy-ready interaction patterns.
 
 ```bash
-pnpm exec synced-fluid pattern --list
-pnpm exec synced-fluid pattern mobile-nav-drawer --framework next --markup
-pnpm exec synced-fluid pattern scroll-viewport-sections --json
+pnpm exec synced-flow pattern --list
+pnpm exec synced-flow pattern mobile-nav-drawer --framework next --markup
+pnpm exec synced-flow pattern scroll-viewport-sections --json
 ```
 
 Current interaction patterns include `mobile-nav-drawer`,
@@ -191,12 +191,12 @@ implementation gotchas.
 List or print page-level recipes.
 
 ```bash
-pnpm exec synced-fluid recipe
-pnpm exec synced-fluid recipe saas-landing
-pnpm exec synced-fluid recipe portfolio-scroll --markup
-pnpm exec synced-fluid recipe portfolio-scroll --framework next --markup
-pnpm exec synced-fluid recipe --section hero --framework astro --markup
-pnpm exec synced-fluid recipe coming-soon --json
+pnpm exec synced-flow recipe
+pnpm exec synced-flow recipe saas-landing
+pnpm exec synced-flow recipe portfolio-scroll --markup
+pnpm exec synced-flow recipe portfolio-scroll --framework next --markup
+pnpm exec synced-flow recipe --section hero --framework astro --markup
+pnpm exec synced-flow recipe coming-soon --json
 ```
 
 Current recipes include SaaS landing, scroll portfolio, agency homepage, blog
@@ -216,15 +216,15 @@ Create or validate theme tokens without scattering brand decisions through page
 CSS.
 
 ```bash
-pnpm exec synced-fluid theme init --from brief.md
-pnpm exec synced-fluid theme init --from brief.md --preset-base neutral-saas
-pnpm exec synced-fluid theme init --from brief.md --json
-pnpm exec synced-fluid theme validate
+pnpm exec synced-flow theme init --from brief.md
+pnpm exec synced-flow theme init --from brief.md --preset-base neutral-saas
+pnpm exec synced-flow theme init --from brief.md --json
+pnpm exec synced-flow theme validate
 ```
 
 `theme init --from` reads a simple brief for radius, fonts, colours, card style,
 and density, then prints a validated `theme` block for
-`synced-fluid.config.mjs`. `theme validate` checks the configured theme shape.
+`synced-flow.config.mjs`. `theme validate` checks the configured theme shape.
 Use `--preset-base synced`, `--preset-base neutral-saas`,
 `--preset-base editorial`, or `--preset-base dark-app` to inherit a starting
 preset before applying brief-derived overrides.

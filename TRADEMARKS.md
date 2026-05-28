@@ -1,12 +1,12 @@
 # Trademark And Brand Use
 
-The MIT licence covers the Synced Fluid software. It does not grant trademark,
+The MIT licence covers the Synced Flow software. It does not grant trademark,
 brand, logo, or endorsement rights.
 
-Names such as Synced, SyncedCo, and Synced Fluid may be used to truthfully refer
+Names such as Synced, SyncedCo, and Synced Flow may be used to truthfully refer
 to this project, compatibility, forks, or integrations.
 
-Do not use Synced, SyncedCo, or Synced Fluid names, logos, or branding in a way
+Do not use Synced, SyncedCo, or Synced Flow names, logos, or branding in a way
 that suggests official sponsorship, endorsement, partnership, or ownership
 unless SyncedCo has given written permission.
 

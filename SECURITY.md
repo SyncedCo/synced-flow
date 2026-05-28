@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Synced Fluid is currently pre-1.0. Security fixes target the latest published
+Synced Flow is currently pre-1.0. Security fixes target the latest published
 version and the current `main` branch.
 
 ## Reporting A Vulnerability
@@ -27,4 +27,4 @@ Security reports may include issues in the CLI, generated CSS output, package
 distribution, examples, or WordPress integration guidance.
 
 General support questions, styling issues, and feature requests should use
-[GitHub issues](https://github.com/SyncedCo/synced-fluid/issues).
+[GitHub issues](https://github.com/SyncedCo/synced-flow/issues).

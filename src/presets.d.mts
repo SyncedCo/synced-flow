@@ -1,4 +1,4 @@
-export type SyncedFluidThemePreset = {
+export type SyncedFlowThemePreset = {
   fonts?: Record<string, string>
   colours?: Record<string, string>
   darkColours?: Record<string, string>
@@ -12,10 +12,10 @@ export type SyncedFluidThemePreset = {
 }
 
 export declare const themePresets: {
-  synced: SyncedFluidThemePreset
-  neutralSaas: SyncedFluidThemePreset
-  editorial: SyncedFluidThemePreset
-  darkApp: SyncedFluidThemePreset
+  synced: SyncedFlowThemePreset
+  neutralSaas: SyncedFlowThemePreset
+  editorial: SyncedFlowThemePreset
+  darkApp: SyncedFlowThemePreset
 }
 
 export declare const presetNames: string[]

@@ -40,7 +40,7 @@ if (command === 'add') {
     runAddApp()
     process.exit(0)
   }
-  console.error(`Unknown add target "${addTarget ?? ''}". Use: synced-fluid add app`)
+  console.error(`Unknown add target "${addTarget ?? ''}". Use: synced-flow add app`)
   process.exit(1)
 }
 
@@ -97,7 +97,7 @@ validateConfig(config, configPath ?? 'inline options')
 const checkOnly = args.includes('--check')
 const cwd = resolve(cliCwd ?? config.cwd ?? process.cwd())
 const repoRoot = cwd
-const outFile = resolve(cwd, readOption('out') ?? config.out ?? 'synced-fluid.generated.css')
+const outFile = resolve(cwd, readOption('out') ?? config.out ?? 'synced-flow.generated.css')
 const cliScans = readOptions('scan')
 const positionalSourceDirs = command === 'lint' ? readPositionals() : []
 const sourceDirs = cliScans.length ? cliScans : positionalSourceDirs.length ? positionalSourceDirs : config.scan ?? (command === 'lint' ? ['.'] : [])
@@ -118,7 +118,7 @@ const breakpoints = {
 }
 
 if (!sourceDirs.length) {
-  console.error('No scan directories configured. Add scan to synced-fluid.config.mjs or pass --scan app --scan components.')
+  console.error('No scan directories configured. Add scan to synced-flow.config.mjs or pass --scan app --scan components.')
   process.exit(1)
 }
 
@@ -191,7 +191,7 @@ async function runWatch() {
     if (running) return
     running = true
     const label = reason ? ` after ${reason}` : ''
-    console.log(`synced-fluid build${label}`)
+    console.log(`synced-flow build${label}`)
     const result = spawnSync(process.execPath, [scriptFile, ...buildArgs], {
       cwd: process.cwd(),
       encoding: 'utf8',
@@ -256,7 +256,7 @@ function resolveConfigPath(value, baseCwd) {
     return explicit
   }
 
-  for (const name of ['synced-fluid.config.mjs', 'synced-fluid.config.js', 'synced-fluid.config.cjs']) {
+  for (const name of ['synced-flow.config.mjs', 'synced-flow.config.js', 'synced-flow.config.cjs']) {
     const candidate = resolve(baseCwd, name)
     if (existsSync(candidate)) return candidate
   }
@@ -292,7 +292,7 @@ function validateConfig(config, label) {
   if (config.theme !== undefined) validateTheme(config.theme, errors)
 
   if (errors.length) {
-    console.error(`Invalid Synced Fluid config in ${label}:`)
+    console.error(`Invalid Synced Flow config in ${label}:`)
     for (const error of errors) console.error(`  - ${error}`)
     process.exit(1)
   }
@@ -374,23 +374,23 @@ function isPlainObject(value) {
 
 function printHelp() {
   console.log(`Usage:
-  synced-fluid init [options]
-  synced-fluid agents install [options]
-  synced-fluid agents status [options]
-  synced-fluid skill [options]
-  synced-fluid add app [options]
-  synced-fluid build [options]
-  synced-fluid doctor [options]
-  synced-fluid validate [options]
-  synced-fluid tokens [options]
-  synced-fluid catalog [options]
-  synced-fluid suggest "<site or section brief>" [options]
-  synced-fluid pattern [id] [options]
-  synced-fluid recipe [id] [options]
-  synced-fluid lint [options]
-  synced-fluid watch [options]
-  synced-fluid theme init --from <brief.md> [options]
-  synced-fluid theme validate [options]
+  synced-flow init [options]
+  synced-flow agents install [options]
+  synced-flow agents status [options]
+  synced-flow skill [options]
+  synced-flow add app [options]
+  synced-flow build [options]
+  synced-flow doctor [options]
+  synced-flow validate [options]
+  synced-flow tokens [options]
+  synced-flow catalog [options]
+  synced-flow suggest "<site or section brief>" [options]
+  synced-flow pattern [id] [options]
+  synced-flow recipe [id] [options]
+  synced-flow lint [options]
+  synced-flow watch [options]
+  synced-flow theme init --from <brief.md> [options]
+  synced-flow theme validate [options]
 
 Options:
   --config <file>              Use a specific config file.
@@ -408,7 +408,7 @@ Options:
   --no-include-core            Only generate project tokens and utility CSS.
   --app                        Include app.css opinionated app/site defaults.
   --no-app                     Keep app.css out of init/generated core output.
-  --file <file>                CSS file to update for "synced-fluid add app".
+  --file <file>                CSS file to update for "synced-flow add app".
   --responsive-variants        Enable sm:/md:/lg:/xl: compatibility variants.
   --no-responsive-variants     Treat responsive variants as unsupported.
   --fail-on-unsupported        Fail when class tokens cannot be generated.
@@ -424,7 +424,7 @@ Options:
   --fix                        Accept lint auto-fix mode; current composition rules print guided fixes.
 
 Config:
-  Create synced-fluid.config.mjs and export defineConfig({ scan, out }).`)
+  Create synced-flow.config.mjs and export defineConfig({ scan, out }).`)
 }
 
 async function runInit() {
@@ -443,7 +443,7 @@ async function runInit() {
   const scanDirs = readOptions('scan').length ? readOptions('scan') : defaultScanDirs(targetCwd, preset)
   const outPath = readOption('out') ?? defaultOutputPath(targetCwd, preset)
   const stylePath = includeCore ? outPath : defaultStyleEntryPath(targetCwd, preset, outPath)
-  const configFile = resolve(targetCwd, readOption('config', 'synced-fluid.config.mjs'))
+  const configFile = resolve(targetCwd, readOption('config', 'synced-flow.config.mjs'))
   const generatedFile = resolve(targetCwd, outPath)
   const styleFile = resolve(targetCwd, stylePath)
   const singleCssOutput = generatedFile === styleFile
@@ -452,8 +452,8 @@ async function runInit() {
 
   writeProjectFile(
     configFile,
-    `import { defineConfig } from '@synced/fluid/config'
-import { themePresets } from '@synced/fluid/presets'
+    `import { defineConfig } from '@synced/flow/config'
+import { themePresets } from '@synced/flow/presets'
 
 export default defineConfig({
   scan: ${formatStringArray(scanDirs)},
@@ -468,24 +468,24 @@ ${safelistValues.length ? `  safelist: ${formatStringArray(safelistValues)},\n` 
   if (singleCssOutput) {
     writeProjectFile(
       generatedFile,
-      `/* Generated by @synced/fluid. Run synced-fluid build to refresh this file. */
+      `/* Generated by @synced/flow. Run synced-flow build to refresh this file. */
 `,
       force
     )
   } else {
     writeProjectFile(
       styleFile,
-      `@import "@synced/fluid/styles.css";
-${includeApp ? '@import "@synced/fluid/app.css";\n' : ''}@import "./${relative(dirname(styleFile), generatedFile).replace(/\\/g, '/')}";
+      `@import "@synced/flow/styles.css";
+${includeApp ? '@import "@synced/flow/app.css";\n' : ''}@import "./${relative(dirname(styleFile), generatedFile).replace(/\\/g, '/')}";
 
-/* Prefer synced-fluid.config.mjs theme overrides for reusable project tokens. */
+/* Prefer synced-flow.config.mjs theme overrides for reusable project tokens. */
 `,
       force
     )
 
     writeProjectFile(
       generatedFile,
-      `/* Generated by @synced/fluid. Run synced-fluid build to refresh this file. */
+      `/* Generated by @synced/flow. Run synced-flow build to refresh this file. */
 `,
       force
     )
@@ -501,7 +501,7 @@ ${includeApp ? '@import "@synced/fluid/app.css";\n' : ''}@import "./${relative(d
     })
   }
 
-  console.log(`Synced Fluid initialised for ${preset} with ${kebabThemeName(themeName)} theme.`)
+  console.log(`Synced Flow initialised for ${preset} with ${kebabThemeName(themeName)} theme.`)
   console.log(`Config: ${relative(targetCwd, configFile)}`)
   if (singleCssOutput) {
     console.log(`CSS output: ${relative(targetCwd, generatedFile)}`)
@@ -516,14 +516,14 @@ ${includeApp ? '@import "@synced/fluid/app.css";\n' : ''}@import "./${relative(d
   } else {
     console.log(`  1. Import ${relative(targetCwd, styleFile)} from your app entry/layout.`)
   }
-  console.log('  2. Run pnpm fluid:build')
-  console.log('  3. Run pnpm fluid:doctor')
+  console.log('  2. Run pnpm flow:build')
+  console.log('  3. Run pnpm flow:doctor')
   if (includeApp) {
     console.log('Note: app.css removes raw link underlines and list markers for common app/site UI. Use sf-link, sf-list-disc, or sf-prose when content semantics need them.')
   } else {
-    console.log('Note: base CSS keeps links visibly underlined and list markers intact. Add @synced/fluid/app.css or run synced-fluid add app for app/site defaults.')
+    console.log('Note: base CSS keeps links visibly underlined and list markers intact. Add @synced/flow/app.css or run synced-flow add app for app/site defaults.')
   }
-  console.log('AI setup: run synced-fluid agents install to add project-level agent guidance.')
+  console.log('AI setup: run synced-flow agents install to add project-level agent guidance.')
 }
 
 async function runAgentsCommand() {
@@ -542,27 +542,27 @@ async function runAgentsCommand() {
     return 0
   }
 
-  console.error('Unknown agents command. Use: synced-fluid agents install or synced-fluid agents status')
+  console.error('Unknown agents command. Use: synced-flow agents install or synced-flow agents status')
   return 1
 }
 
 function runSkill() {
-  const skillPath = join(packageRoot, 'skills/synced-fluid/SKILL.md')
-  console.log('Synced Fluid AI skill')
+  const skillPath = join(packageRoot, 'skills/synced-flow/SKILL.md')
+  console.log('Synced Flow AI skill')
   console.log('')
   console.log(`Skill file: ${relative(process.cwd(), skillPath)}`)
-  console.log('Use it to guide AI agents toward Synced Fluid tokens, classes, recipes, patterns, lint, and doctor checks.')
+  console.log('Use it to guide AI agents toward Synced Flow tokens, classes, recipes, patterns, lint, and doctor checks.')
   console.log('')
   console.log('Project setup:')
-  console.log('  synced-fluid agents install')
-  console.log('  synced-fluid agents install --target all')
+  console.log('  synced-flow agents install')
+  console.log('  synced-flow agents install --target all')
   console.log('')
   console.log('Core agent commands:')
-  console.log('  synced-fluid catalog --json')
-  console.log('  synced-fluid pattern --list')
-  console.log('  synced-fluid suggest "site brief" --scaffold --dry-run')
-  console.log('  synced-fluid lint --json')
-  console.log('  synced-fluid doctor')
+  console.log('  synced-flow catalog --json')
+  console.log('  synced-flow pattern --list')
+  console.log('  synced-flow suggest "site brief" --scaffold --dry-run')
+  console.log('  synced-flow lint --json')
+  console.log('  synced-flow doctor')
 }
 
 async function installAgentGuidance({ targetCwd, target = 'universal', force = false, dryRun = false }) {
@@ -585,7 +585,7 @@ async function installAgentGuidance({ targetCwd, target = 'universal', force = f
   }
 
   if (dryRun) console.log('dry-run no files were changed.')
-  else console.log('Synced Fluid agent guidance is ready.')
+  else console.log('Synced Flow agent guidance is ready.')
 }
 
 function expandAgentTargets(target) {
@@ -596,7 +596,7 @@ function expandAgentTargets(target) {
 }
 
 function agentWritesForTarget(targetCwd, target) {
-  const skill = readFileSync(join(packageRoot, 'skills/synced-fluid/SKILL.md'), 'utf8')
+  const skill = readFileSync(join(packageRoot, 'skills/synced-flow/SKILL.md'), 'utf8')
   const commonRules = syncedFluidAgentRules()
 
   if (target === 'universal' || target === 'codex') {
@@ -604,7 +604,7 @@ function agentWritesForTarget(targetCwd, target) {
       {
         file: resolve(targetCwd, 'AGENTS.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
     ]
@@ -613,9 +613,9 @@ function agentWritesForTarget(targetCwd, target) {
   if (target === 'cursor') {
     return [
       {
-        file: resolve(targetCwd, '.cursor/rules/synced-fluid.mdc'),
+        file: resolve(targetCwd, '.cursor/rules/synced-flow.mdc'),
         contents: `---
-description: Use Synced Fluid CSS primitives, recipes, patterns, and guardrails when building UI in this project.
+description: Use Synced Flow CSS primitives, recipes, patterns, and guardrails when building UI in this project.
 alwaysApply: false
 ---
 
@@ -625,7 +625,7 @@ ${commonRules}
       {
         file: resolve(targetCwd, 'AGENTS.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
     ]
@@ -634,13 +634,13 @@ ${commonRules}
   if (target === 'claude') {
     return [
       {
-        file: resolve(targetCwd, '.claude/skills/synced-fluid/SKILL.md'),
+        file: resolve(targetCwd, '.claude/skills/synced-flow/SKILL.md'),
         contents: skill,
       },
       {
         file: resolve(targetCwd, 'CLAUDE.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
     ]
@@ -651,11 +651,11 @@ ${commonRules}
       {
         file: resolve(targetCwd, '.github/copilot-instructions.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
       {
-        file: resolve(targetCwd, '.github/instructions/synced-fluid.instructions.md'),
+        file: resolve(targetCwd, '.github/instructions/synced-flow.instructions.md'),
         contents: `---
 applyTo: "**/*.{html,css,js,jsx,ts,tsx,astro,vue,svelte,php,mdx}"
 ---
@@ -669,10 +669,10 @@ ${commonRules}
   if (target === 'windsurf') {
     return [
       {
-        file: resolve(targetCwd, '.windsurf/rules/synced-fluid.md'),
+        file: resolve(targetCwd, '.windsurf/rules/synced-flow.md'),
         contents: `---
 trigger: model_decision
-description: Use Synced Fluid CSS primitives, recipes, patterns, and guardrails for UI work.
+description: Use Synced Flow CSS primitives, recipes, patterns, and guardrails for UI work.
 ---
 
 ${commonRules}
@@ -681,7 +681,7 @@ ${commonRules}
       {
         file: resolve(targetCwd, 'AGENTS.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
     ]
@@ -692,13 +692,13 @@ ${commonRules}
       {
         file: resolve(targetCwd, 'GEMINI.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
       {
         file: resolve(targetCwd, 'AGENTS.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
     ]
@@ -709,12 +709,12 @@ ${commonRules}
       {
         file: resolve(targetCwd, 'AGENTS.md'),
         mode: 'section',
-        title: 'Synced Fluid',
+        title: 'Synced Flow',
         contents: commonRules,
       },
       {
         file: resolve(targetCwd, '.aider.conf.yml'),
-        contents: `# Read project-level Synced Fluid guidance.
+        contents: `# Read project-level Synced Flow guidance.
 read:
   - AGENTS.md`,
       },
@@ -725,15 +725,15 @@ read:
 }
 
 function syncedFluidAgentRules() {
-  return `Read the Synced Fluid skill before generating UI:
-- Packaged skill: node_modules/@synced/fluid/skills/synced-fluid/SKILL.md
+  return `Read the Synced Flow skill before generating UI:
+- Packaged skill: node_modules/@synced/flow/skills/synced-flow/SKILL.md
 - Prefer sf-* primitives, recipes, and patterns before custom CSS.
 - Do not use Tailwind utilities as the design system surface.
 - Keep class names complete in source; do not build dynamic fragments such as sf-\${...} or text-\${...}.
-- Run synced-fluid catalog --json before choosing recipes or classes.
-- Use synced-fluid pattern --list and synced-fluid pattern <id> --markup for interaction markup.
-- Run synced-fluid lint --json and synced-fluid doctor before finishing.
-- Put brand tokens in synced-fluid.config.mjs, not scattered --sf-* overrides.`
+- Run synced-flow catalog --json before choosing recipes or classes.
+- Use synced-flow pattern --list and synced-flow pattern <id> --markup for interaction markup.
+- Run synced-flow lint --json and synced-flow doctor before finishing.
+- Put brand tokens in synced-flow.config.mjs, not scattered --sf-* overrides.`
 }
 
 function applyAgentWrite(targetCwd, write, { force, dryRun }) {
@@ -743,7 +743,7 @@ function applyAgentWrite(targetCwd, write, { force, dryRun }) {
 
   if (write.mode === 'section') {
     if (next === null) {
-      console.log(`skip ${rel} already has Synced Fluid guidance. Use --force to refresh.`)
+      console.log(`skip ${rel} already has Synced Flow guidance. Use --force to refresh.`)
       return
     }
     if (dryRun) {
@@ -770,8 +770,8 @@ function applyAgentWrite(targetCwd, write, { force, dryRun }) {
 }
 
 function upsertManagedSection(file, title, contents, force, dryRun) {
-  const start = `<!-- synced-fluid:${title}:start -->`
-  const end = `<!-- synced-fluid:${title}:end -->`
+  const start = `<!-- synced-flow:${title}:start -->`
+  const end = `<!-- synced-flow:${title}:end -->`
   const section = `${start}
 ## ${title}
 
@@ -789,22 +789,22 @@ ${end}`
 
 function printAgentsStatus(targetCwd) {
   const entries = [
-    ['universal', 'AGENTS.md', hasManagedSyncedFluidSection(resolve(targetCwd, 'AGENTS.md'))],
-    ['cursor', '.cursor/rules/synced-fluid.mdc', existsSync(resolve(targetCwd, '.cursor/rules/synced-fluid.mdc'))],
-    ['claude', '.claude/skills/synced-fluid/SKILL.md', existsSync(resolve(targetCwd, '.claude/skills/synced-fluid/SKILL.md'))],
-    ['copilot', '.github/copilot-instructions.md', hasManagedSyncedFluidSection(resolve(targetCwd, '.github/copilot-instructions.md'))],
-    ['windsurf', '.windsurf/rules/synced-fluid.md', existsSync(resolve(targetCwd, '.windsurf/rules/synced-fluid.md'))],
-    ['gemini', 'GEMINI.md', hasManagedSyncedFluidSection(resolve(targetCwd, 'GEMINI.md'))],
+    ['universal', 'AGENTS.md', hasManagedSyncedFlowSection(resolve(targetCwd, 'AGENTS.md'))],
+    ['cursor', '.cursor/rules/synced-flow.mdc', existsSync(resolve(targetCwd, '.cursor/rules/synced-flow.mdc'))],
+    ['claude', '.claude/skills/synced-flow/SKILL.md', existsSync(resolve(targetCwd, '.claude/skills/synced-flow/SKILL.md'))],
+    ['copilot', '.github/copilot-instructions.md', hasManagedSyncedFlowSection(resolve(targetCwd, '.github/copilot-instructions.md'))],
+    ['windsurf', '.windsurf/rules/synced-flow.md', existsSync(resolve(targetCwd, '.windsurf/rules/synced-flow.md'))],
+    ['gemini', 'GEMINI.md', hasManagedSyncedFlowSection(resolve(targetCwd, 'GEMINI.md'))],
     ['aider', '.aider.conf.yml', existsSync(resolve(targetCwd, '.aider.conf.yml'))],
   ]
 
-  console.log('Synced Fluid agent setup')
+  console.log('Synced Flow agent setup')
   for (const [name, path, ok] of entries) console.log(`${ok ? 'pass' : 'warn'} ${name}: ${path}${ok ? '' : ' missing'}`)
-  if (!entries.some(([, , ok]) => ok)) console.log('Run: synced-fluid agents install')
+  if (!entries.some(([, , ok]) => ok)) console.log('Run: synced-flow agents install')
 }
 
-function hasManagedSyncedFluidSection(file) {
-  return existsSync(file) && readFileSync(file, 'utf8').includes('<!-- synced-fluid:Synced Fluid:start -->')
+function hasManagedSyncedFlowSection(file) {
+  return existsSync(file) && readFileSync(file, 'utf8').includes('<!-- synced-flow:Synced Flow:start -->')
 }
 
 function escapeRegExp(value) {
@@ -816,7 +816,7 @@ function runAddApp() {
   const cssPath = readOption('file') ?? readOption('css') ?? findStyleEntry(targetCwd)
 
   if (!cssPath) {
-    console.error('Could not find a CSS entry. Pass --file <path>, for example: synced-fluid add app --file src/synced-fluid.css')
+    console.error('Could not find a CSS entry. Pass --file <path>, for example: synced-flow add app --file src/synced-flow.css')
     process.exit(1)
   }
 
@@ -827,24 +827,24 @@ function runAddApp() {
   }
 
   const css = readFileSync(cssFile, 'utf8')
-  if (css.includes('@synced/fluid/app.css')) {
-    console.log(`skip ${relative(targetCwd, cssFile)} already imports @synced/fluid/app.css.`)
+  if (css.includes('@synced/flow/app.css')) {
+    console.log(`skip ${relative(targetCwd, cssFile)} already imports @synced/flow/app.css.`)
     return
   }
 
-  const appImport = '@import "@synced/fluid/app.css";'
+  const appImport = '@import "@synced/flow/app.css";'
   let nextCss
 
-  if (css.includes('@import "@synced/fluid/styles.css";')) {
-    nextCss = css.replace('@import "@synced/fluid/styles.css";', `@import "@synced/fluid/styles.css";\n${appImport}`)
-  } else if (css.includes('@import "@synced/fluid/base.css";')) {
-    nextCss = css.replace('@import "@synced/fluid/base.css";', `@import "@synced/fluid/base.css";\n${appImport}`)
+  if (css.includes('@import "@synced/flow/styles.css";')) {
+    nextCss = css.replace('@import "@synced/flow/styles.css";', `@import "@synced/flow/styles.css";\n${appImport}`)
+  } else if (css.includes('@import "@synced/flow/base.css";')) {
+    nextCss = css.replace('@import "@synced/flow/base.css";', `@import "@synced/flow/base.css";\n${appImport}`)
   } else {
     nextCss = `${appImport}\n${css}`
   }
 
   writeFileSync(cssFile, nextCss)
-  console.log(`update ${relative(targetCwd, cssFile)} with @synced/fluid/app.css`)
+  console.log(`update ${relative(targetCwd, cssFile)} with @synced/flow/app.css`)
 }
 
 async function runDoctor() {
@@ -852,7 +852,7 @@ async function runDoctor() {
   const messages = []
   let failed = false
   let loadedConfig = null
-  const packageSource = isSyncedFluidSource(targetCwd)
+  const packageSource = isSyncedFlowSource(targetCwd)
 
   function pass(message) {
     messages.push(`pass ${message}`)
@@ -873,27 +873,27 @@ async function runDoctor() {
   } else {
     const pkg = JSON.parse(readFileSync(packageFile, 'utf8'))
     if (packageSource) {
-      pass('Running in the @synced/fluid source package.')
+      pass('Running in the @synced/flow source package.')
     } else {
     const allDeps = { ...(pkg.dependencies ?? {}), ...(pkg.devDependencies ?? {}) }
-    if (allDeps['@synced/fluid']) pass('@synced/fluid is installed.')
-    else warn('@synced/fluid is not listed in package.json.')
+    if (allDeps['@synced/flow']) pass('@synced/flow is installed.')
+    else warn('@synced/flow is not listed in package.json.')
 
     const scripts = pkg.scripts ?? {}
-    if (scripts['fluid:build'] === 'synced-fluid build') pass('fluid:build script is configured.')
-    else warn('Add "fluid:build": "synced-fluid build" to package.json.')
+    if (scripts['flow:build'] === 'synced-flow build') pass('flow:build script is configured.')
+    else warn('Add "flow:build": "synced-flow build" to package.json.')
 
-    if (scripts['fluid:check'] === 'synced-fluid build --check') pass('fluid:check script is configured.')
-    else warn('Add "fluid:check": "synced-fluid build --check" to package.json.')
+    if (scripts['flow:check'] === 'synced-flow build --check') pass('flow:check script is configured.')
+    else warn('Add "flow:check": "synced-flow build --check" to package.json.')
 
-    if (scripts['fluid:doctor'] === 'synced-fluid doctor') pass('fluid:doctor script is configured.')
-    else warn('Add "fluid:doctor": "synced-fluid doctor" to package.json.')
+    if (scripts['flow:doctor'] === 'synced-flow doctor') pass('flow:doctor script is configured.')
+    else warn('Add "flow:doctor": "synced-flow doctor" to package.json.')
 
-    if (scripts['fluid:lint'] === 'synced-fluid lint') pass('fluid:lint script is configured.')
-    else warn('Add "fluid:lint": "synced-fluid lint" to package.json so class mistakes are caught before handoff.')
+    if (scripts['flow:lint'] === 'synced-flow lint') pass('flow:lint script is configured.')
+    else warn('Add "flow:lint": "synced-flow lint" to package.json so class mistakes are caught before handoff.')
 
-    if (scripts['fluid:watch'] === 'synced-fluid watch') pass('fluid:watch script is configured.')
-    else warn('Add "fluid:watch": "synced-fluid watch" to package.json for local rebuilds during development.')
+    if (scripts['flow:watch'] === 'synced-flow watch') pass('flow:watch script is configured.')
+    else warn('Add "flow:watch": "synced-flow watch" to package.json for local rebuilds during development.')
 
     const tailwindDeps = ['tailwindcss', '@tailwindcss/postcss', '@tailwindcss/vite', 'tailwind-merge'].filter((name) => allDeps[name])
     if (tailwindDeps.length) warn(`Tailwind packages still present: ${tailwindDeps.join(', ')}.`)
@@ -903,8 +903,8 @@ async function runDoctor() {
 
   const foundConfig = resolveConfigPath(readOption('config'), targetCwd)
   if (!foundConfig) {
-    if (packageSource) pass('Package source does not require a consumer synced-fluid.config.mjs.')
-    else fail('synced-fluid.config.mjs was not found.')
+    if (packageSource) pass('Package source does not require a consumer synced-flow.config.mjs.')
+    else fail('synced-flow.config.mjs was not found.')
   } else {
     pass(`Config found at ${relative(targetCwd, foundConfig)}.`)
     const loaded = await loadConfig(foundConfig)
@@ -918,28 +918,28 @@ async function runDoctor() {
     if (loaded.out) {
       const generated = resolve(targetCwd, loaded.out)
       if (existsSync(generated)) pass(`Generated CSS exists at ${loaded.out}.`)
-      else warn(`Generated CSS missing at ${loaded.out}; run synced-fluid build.`)
+      else warn(`Generated CSS missing at ${loaded.out}; run synced-flow build.`)
     } else {
-      warn('Config has no out path; defaulting to synced-fluid.generated.css.')
+      warn('Config has no out path; defaulting to synced-flow.generated.css.')
     }
 
     const check = spawnSync(process.execPath, [scriptFile, 'build', '--cwd', targetCwd, '--check', '--quiet'], {
       encoding: 'utf8',
     })
     if (check.status === 0) pass('Generated CSS is up to date.')
-    else warn('Generated CSS is out of date or unsupported classes were found; run synced-fluid build and review warnings.')
+    else warn('Generated CSS is out of date or unsupported classes were found; run synced-flow build and review warnings.')
 
     const lint = spawnSync(process.execPath, [scriptFile, 'lint', '--cwd', targetCwd, '--quiet'], {
       encoding: 'utf8',
     })
     if (lint.status === 0) pass('No unsupported class tokens found.')
-    else warn('Unsupported class tokens were found; run synced-fluid lint for nearest supported alternatives.')
+    else warn('Unsupported class tokens were found; run synced-flow lint for nearest supported alternatives.')
 
     const themeErrors = []
-    if (loaded.theme === undefined) warn('No theme configured; add a theme preset or run synced-fluid theme init --from brief.md.')
+    if (loaded.theme === undefined) warn('No theme configured; add a theme preset or run synced-flow theme init --from brief.md.')
     else {
       validateTheme(loaded.theme, themeErrors)
-      if (themeErrors.length) warn(`Theme config has ${themeErrors.length} issue(s); run synced-fluid theme validate.`)
+      if (themeErrors.length) warn(`Theme config has ${themeErrors.length} issue(s); run synced-flow theme validate.`)
       else pass('Theme config is valid.')
     }
 
@@ -950,8 +950,8 @@ async function runDoctor() {
   }
 
   if (loadedConfig?.includeCore) pass('Core CSS is included in generated output.')
-  else if (projectContains(targetCwd, '@synced/fluid/styles.css') || projectContains(targetCwd, '@import "../../styles.css"')) pass('Core stylesheet import found.')
-  else warn('Import @synced/fluid/styles.css from your app CSS or layout entry.')
+  else if (projectContains(targetCwd, '@synced/flow/styles.css') || projectContains(targetCwd, '@import "../../styles.css"')) pass('Core stylesheet import found.')
+  else warn('Import @synced/flow/styles.css from your app CSS or layout entry.')
 
   const duplicateImports = findDuplicateCoreImports(targetCwd)
   if (duplicateImports.length) {
@@ -963,14 +963,14 @@ async function runDoctor() {
   const customTokenFiles = findCustomTokenOverrides(targetCwd, loadedConfig?.out)
   if (customTokenFiles.length) {
     if (packageSource) pass('Package source CSS owns the shipped --sf-* token definitions.')
-    else warn(`Custom --sf-* token overrides found in ${customTokenFiles.join(', ')}. Prefer synced-fluid.config.mjs theme tokens for reusable brand decisions.`)
+    else warn(`Custom --sf-* token overrides found in ${customTokenFiles.join(', ')}. Prefer synced-flow.config.mjs theme tokens for reusable brand decisions.`)
   } else {
     pass('No ad hoc --sf-* token overrides found in project CSS.')
   }
 
-  if (packageSource && existsSync(resolve(targetCwd, 'skills/synced-fluid/SKILL.md'))) pass('Packaged Synced Fluid AI skill found.')
-  else if (hasAnyAgentGuidance(targetCwd)) pass('Synced Fluid AI agent guidance found.')
-  else warn('Synced Fluid AI agent guidance not found; run synced-fluid agents install.')
+  if (packageSource && existsSync(resolve(targetCwd, 'skills/synced-flow/SKILL.md'))) pass('Packaged Synced Flow AI skill found.')
+  else if (hasAnyAgentGuidance(targetCwd)) pass('Synced Flow AI agent guidance found.')
+  else warn('Synced Flow AI agent guidance not found; run synced-flow agents install.')
 
   for (const message of messages) console.log(message)
   return failed ? 1 : 0
@@ -979,24 +979,24 @@ async function runDoctor() {
 function hasAnyAgentGuidance(targetCwd) {
   return [
     'AGENTS.md',
-    '.cursor/rules/synced-fluid.mdc',
-    '.claude/skills/synced-fluid/SKILL.md',
+    '.cursor/rules/synced-flow.mdc',
+    '.claude/skills/synced-flow/SKILL.md',
     '.github/copilot-instructions.md',
-    '.github/instructions/synced-fluid.instructions.md',
-    '.windsurf/rules/synced-fluid.md',
+    '.github/instructions/synced-flow.instructions.md',
+    '.windsurf/rules/synced-flow.md',
     'GEMINI.md',
     '.aider.conf.yml',
   ].some((file) => {
     const full = resolve(targetCwd, file)
-    return existsSync(full) && readFileSync(full, 'utf8').includes('Synced Fluid')
+    return existsSync(full) && readFileSync(full, 'utf8').includes('Synced Flow')
   })
 }
 
-function isSyncedFluidSource(targetCwd) {
+function isSyncedFlowSource(targetCwd) {
   const packageFile = resolve(targetCwd, 'package.json')
   if (!existsSync(packageFile)) return false
   try {
-    return JSON.parse(readFileSync(packageFile, 'utf8')).name === '@synced/fluid'
+    return JSON.parse(readFileSync(packageFile, 'utf8')).name === '@synced/flow'
   } catch {
     return false
   }
@@ -1094,7 +1094,7 @@ function getPublicPatterns() {
       requiresJs: true,
       requiresJsNotes: 'CSS handles layout and snapping. IntersectionObserver is needed when aria-current should update during free scrolling.',
       a11y: ['Update aria-current on the active nav link.', 'Do not rely on colour alone for current state.', 'Respect prefers-reduced-motion for scripted scrolling.'],
-      gotchas: ['Keep the observer script in the consuming app or example, not the Synced Fluid package.', 'Anchor links still work without the optional script.'],
+      gotchas: ['Keep the observer script in the consuming app or example, not the Synced Flow package.', 'Anchor links still work without the optional script.'],
       markup: {
         html: `<nav class="sf-container sf-nav sf-sticky-top" aria-label="Section navigation">
   <a class="sf-nav__link" href="#one" aria-current="location">One</a>
@@ -1273,7 +1273,7 @@ function getPublicRecipes() {
       <div class="sf-stack">
         <p class="sf-kicker">Launch faster</p>
         <h1 class="sf-text-display">A modern product site without page-specific CSS.</h1>
-        <p class="sf-text-lead sf-prose">Compose hero, proof, pricing, FAQ, and contact sections from Synced Fluid primitives.</p>
+        <p class="sf-text-lead sf-prose">Compose hero, proof, pricing, FAQ, and contact sections from Synced Flow primitives.</p>
         <div class="sf-cluster">
           <a class="sf-button sf-button--default" href="#contact">Start free</a>
           <a class="sf-button sf-button--outline" href="#features">View features</a>
@@ -1513,7 +1513,7 @@ function getPublicRecipes() {
       markup: `<main>
   <section class="sf-hero">
     <div class="sf-container sf-split">
-      <div class="sf-stack"><p class="sf-kicker">Agency</p><h1 class="sf-text-display">Strategy, design, and build in one fluid system.</h1><p class="sf-text-lead sf-prose">A complete service homepage using Synced Fluid primitives.</p><a class="sf-button" href="#contact">Plan a project</a></div>
+      <div class="sf-stack"><p class="sf-kicker">Agency</p><h1 class="sf-text-display">Strategy, design, and build in one fluid system.</h1><p class="sf-text-lead sf-prose">A complete service homepage using Synced Flow primitives.</p><a class="sf-button" href="#contact">Plan a project</a></div>
       <aside class="sf-stats"><article class="sf-stat"><strong class="sf-stat__value">12</strong><span class="sf-stat__label">Years</span></article><article class="sf-stat"><strong class="sf-stat__value">80+</strong><span class="sf-stat__label">Launches</span></article></aside>
     </div>
   </section>
@@ -1552,7 +1552,7 @@ function getPublicRecipes() {
     <nav class="sf-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><a href="/articles">Articles</a><span>Theme tokens</span></nav>
     <p class="sf-meta">Guide - 6 min read - Updated today</p>
     <h1>Theme tokens before page CSS</h1>
-    <p class="sf-text-lead">Synced Fluid works best when repeated brand decisions live in config.</p>
+    <p class="sf-text-lead">Synced Flow works best when repeated brand decisions live in config.</p>
     <figure class="sf-figure"><div class="sf-frame"></div><figcaption class="sf-caption">Use real project imagery here.</figcaption></figure>
     <h2>Start with primitives</h2>
     <p>Use semantic colours, fluid spacing, and named components before adding custom CSS.</p>
@@ -1639,7 +1639,7 @@ function getPublicRecipes() {
 function getPublicCatalog() {
   const tokens = getTokenSummary()
   return {
-    name: '@synced/fluid',
+    name: '@synced/flow',
     purpose: 'A dependency-free fluid CSS system for complete modern websites using tokens, layout primitives, native components, recipes, and generated utilities.',
     cssFiles: ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'app.css', 'layout.css', 'components.css', 'utilities.css'],
     commands: ['init', 'agents install', 'agents status', 'skill', 'build', 'watch', 'lint', 'doctor', 'tokens', 'catalog', 'suggest', 'pattern', 'recipe', 'theme init', 'theme validate'],
@@ -1665,7 +1665,7 @@ function runTokens() {
     return
   }
 
-  console.log('Synced Fluid tokens')
+  console.log('Synced Flow tokens')
   console.log('')
   console.log(`Themes: ${tokenSummary.themePresets.join(', ')}`)
   console.log(`Type: sf-step-${fluidConfig.typeMinStep} ... sf-step-${fluidConfig.typeMaxStep}`)
@@ -1684,7 +1684,7 @@ function runCatalog() {
     return
   }
 
-  console.log('Synced Fluid catalog')
+  console.log('Synced Flow catalog')
   console.log('')
   console.log(catalog.purpose)
   console.log('')
@@ -1701,7 +1701,7 @@ function runSuggest() {
   const query = readPositionals().join(' ').trim()
   const scaffold = args.includes('--scaffold')
   if (!query) {
-    console.error('Pass a short brief, for example: synced-fluid suggest "full page scroll portfolio"')
+    console.error('Pass a short brief, for example: synced-flow suggest "full page scroll portfolio"')
     process.exit(1)
   }
 
@@ -1720,7 +1720,7 @@ function runSuggest() {
   }
 
   if (!scored.length && !recipeMatches.length) {
-    console.log('No close recipe match found. Run synced-fluid catalog --json to inspect available patterns.')
+    console.log('No close recipe match found. Run synced-flow catalog --json to inspect available patterns.')
     return
   }
 
@@ -1731,7 +1731,7 @@ function runSuggest() {
     for (const recipe of recipeMatches) {
       console.log(`- ${recipe.id}: ${recipe.name}`)
       console.log(`  Use: ${recipe.whenToUse}`)
-      console.log(`  Command: synced-fluid recipe ${recipe.id}`)
+      console.log(`  Command: synced-flow recipe ${recipe.id}`)
     }
   }
   if (scored.length) {
@@ -1755,10 +1755,10 @@ function runPattern() {
       console.log(JSON.stringify(patterns, null, 2))
       return
     }
-    console.log('Synced Fluid patterns')
+    console.log('Synced Flow patterns')
     for (const pattern of patterns) console.log(`- ${pattern.id}: ${pattern.name}`)
     console.log('')
-    console.log('Run synced-fluid pattern <id> --markup to print copy-ready markup.')
+    console.log('Run synced-flow pattern <id> --markup to print copy-ready markup.')
     return
   }
 
@@ -1826,12 +1826,12 @@ function runSuggestScaffold(query, recipeMatches, patternMatches) {
 function scaffoldFiles({ query, framework, recipe, patterns }) {
   const safeRecipe = recipe ?? getPublicRecipes()[0]
   const htmlMarkup = safeRecipe.markup
-  const config = `import { defineConfig } from '@synced/fluid/config'
-import { themePresets } from '@synced/fluid/presets'
+  const config = `import { defineConfig } from '@synced/flow/config'
+import { themePresets } from '@synced/flow/presets'
 
 export default defineConfig({
   scan: ${framework === 'next' ? "['src/app', 'src/components']" : framework === 'astro' ? "['src', 'components']" : framework === 'plain' ? "['.']" : "['src', 'components']"},
-  out: '${framework === 'next' ? 'src/app/synced-fluid.generated.css' : framework === 'astro' ? 'src/styles/synced-fluid.generated.css' : framework === 'plain' ? 'synced-fluid.generated.css' : 'src/synced-fluid.generated.css'}',
+  out: '${framework === 'next' ? 'src/app/synced-flow.generated.css' : framework === 'astro' ? 'src/styles/synced-flow.generated.css' : framework === 'plain' ? 'synced-flow.generated.css' : 'src/synced-flow.generated.css'}',
   theme: themePresets.synced,
 })
 `
@@ -1839,17 +1839,17 @@ export default defineConfig({
 
   if (framework === 'next') {
     return [
-      { path: 'synced-fluid.config.mjs', contents: config },
+      { path: 'synced-flow.config.mjs', contents: config },
       {
-        path: 'src/app/synced-fluid.css',
-        contents: `@import "@synced/fluid/styles.css";
-@import "@synced/fluid/app.css";
-@import "./synced-fluid.generated.css";
+        path: 'src/app/synced-flow.css',
+        contents: `@import "@synced/flow/styles.css";
+@import "@synced/flow/app.css";
+@import "./synced-flow.generated.css";
 `,
       },
       {
         path: 'src/app/layout.tsx',
-        contents: `import './synced-fluid.css'
+        contents: `import './synced-flow.css'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -1871,18 +1871,18 @@ ${renderMarkup(htmlMarkup, 'next', safeRecipe.name)}
 
   if (framework === 'astro') {
     return [
-      { path: 'synced-fluid.config.mjs', contents: config },
+      { path: 'synced-flow.config.mjs', contents: config },
       {
-        path: 'src/styles/synced-fluid.css',
-        contents: `@import "@synced/fluid/styles.css";
-@import "@synced/fluid/app.css";
-@import "./synced-fluid.generated.css";
+        path: 'src/styles/synced-flow.css',
+        contents: `@import "@synced/flow/styles.css";
+@import "@synced/flow/app.css";
+@import "./synced-flow.generated.css";
 `,
       },
       {
         path: 'src/pages/index.astro',
         contents: `---
-import '../styles/synced-fluid.css'
+import '../styles/synced-flow.css'
 ---
 <!-- ${matchedComment} -->
 ${htmlMarkup}
@@ -1893,17 +1893,17 @@ ${htmlMarkup}
 
   if (framework === 'vite') {
     return [
-      { path: 'synced-fluid.config.mjs', contents: config },
+      { path: 'synced-flow.config.mjs', contents: config },
       {
-        path: 'src/synced-fluid.css',
-        contents: `@import "@synced/fluid/styles.css";
-@import "@synced/fluid/app.css";
-@import "./synced-fluid.generated.css";
+        path: 'src/synced-flow.css',
+        contents: `@import "@synced/flow/styles.css";
+@import "@synced/flow/app.css";
+@import "./synced-flow.generated.css";
 `,
       },
       {
         path: 'src/main.jsx',
-        contents: `import './synced-fluid.css'
+        contents: `import './synced-flow.css'
 
 document.querySelector('#app').innerHTML = \`${htmlMarkup.replace(/`/g, '\\`')}\`
 `,
@@ -1913,12 +1913,12 @@ document.querySelector('#app').innerHTML = \`${htmlMarkup.replace(/`/g, '\\`')}\
 
   if (framework === 'plain' || framework === 'html') {
     return [
-      { path: 'synced-fluid.config.mjs', contents: config },
+      { path: 'synced-flow.config.mjs', contents: config },
       {
-        path: 'synced-fluid.css',
-        contents: `@import "@synced/fluid/styles.css";
-@import "@synced/fluid/app.css";
-@import "./synced-fluid.generated.css";
+        path: 'synced-flow.css',
+        contents: `@import "@synced/flow/styles.css";
+@import "@synced/flow/app.css";
+@import "./synced-flow.generated.css";
 `,
       },
       {
@@ -1928,8 +1928,8 @@ document.querySelector('#app').innerHTML = \`${htmlMarkup.replace(/`/g, '\\`')}\
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Synced Fluid starter</title>
-    <link rel="stylesheet" href="./synced-fluid.css" />
+    <title>Synced Flow starter</title>
+    <link rel="stylesheet" href="./synced-flow.css" />
   </head>
   <body>
     <!-- ${matchedComment} -->
@@ -2006,12 +2006,12 @@ function runRecipe() {
   }
 
   if (!id) {
-    console.log('Synced Fluid recipes')
+    console.log('Synced Flow recipes')
     for (const recipe of recipes) {
       console.log(`- ${recipe.id}: ${recipe.name}`)
     }
     console.log('')
-    console.log('Run synced-fluid recipe <id> --markup to print copy-ready HTML.')
+    console.log('Run synced-flow recipe <id> --markup to print copy-ready HTML.')
     return
   }
 
@@ -2045,7 +2045,7 @@ function renderMarkup(markup, framework, name) {
   if (framework === 'html' || framework === 'astro-html') return markup
   if (framework === 'astro') {
     return `---
-import '../styles/synced-fluid.css'
+import '../styles/synced-flow.css'
 ---
 
 ${markup}`
@@ -2097,7 +2097,7 @@ async function runThemeCommand() {
   if (subcommand === 'init') return runThemeInit()
   if (subcommand === 'validate') return runThemeValidate()
 
-  console.error('Unknown theme command. Use: synced-fluid theme init --from brief.md or synced-fluid theme validate')
+  console.error('Unknown theme command. Use: synced-flow theme init --from brief.md or synced-flow theme validate')
   return 1
 }
 
@@ -2110,7 +2110,7 @@ function runThemeInit() {
     return 1
   }
   if (!from) {
-    console.error('Pass a theme brief with --from <file>, for example: synced-fluid theme init --from brief.md')
+    console.error('Pass a theme brief with --from <file>, for example: synced-flow theme init --from brief.md')
     return 1
   }
 
@@ -2145,7 +2145,7 @@ function runThemeInit() {
     for (const warning of analysis.warnings) console.log(`- ${warning}`)
   }
   console.log('')
-  console.log('Paste this into synced-fluid.config.mjs:')
+  console.log('Paste this into synced-flow.config.mjs:')
   console.log('')
   console.log(`theme: ${formatJsValue(theme, 0)},`)
   return 0
@@ -2155,7 +2155,7 @@ async function runThemeValidate() {
   const targetCwd = resolve(readOption('cwd', process.cwd()))
   const configPath = resolveConfigPath(readOption('config'), targetCwd)
   if (!configPath) {
-    console.error('synced-fluid.config.mjs was not found.')
+    console.error('synced-flow.config.mjs was not found.')
     return 1
   }
 
@@ -2165,7 +2165,7 @@ async function runThemeValidate() {
   else validateTheme(loaded.theme, errors)
 
   if (errors.length) {
-    console.error(`Invalid Synced Fluid theme in ${relative(targetCwd, configPath)}:`)
+    console.error(`Invalid Synced Flow theme in ${relative(targetCwd, configPath)}:`)
     for (const error of errors) console.error(`  - ${error}`)
     return 1
   }
@@ -2186,7 +2186,7 @@ function analyseThemeBrief(brief) {
   ]
   const warnings = checks
     .filter(([, pattern]) => !pattern.test(lower))
-    .map(([label]) => `Brief does not mention ${label}; Synced Fluid used a sensible default.`)
+    .map(([label]) => `Brief does not mention ${label}; Synced Flow used a sensible default.`)
   return { warnings }
 }
 
@@ -2346,19 +2346,19 @@ function defaultScanDirs(targetCwd, preset) {
 
 function defaultOutputPath(targetCwd, preset) {
   if (preset === 'next') {
-    if (existsSync(resolve(targetCwd, 'app'))) return 'app/synced-fluid.generated.css'
-    if (existsSync(resolve(targetCwd, 'src/app'))) return 'src/app/synced-fluid.generated.css'
+    if (existsSync(resolve(targetCwd, 'app'))) return 'app/synced-flow.generated.css'
+    if (existsSync(resolve(targetCwd, 'src/app'))) return 'src/app/synced-flow.generated.css'
   }
-  if (preset === 'wordpress') return 'assets/css/synced-fluid.css'
-  if (preset === 'plain') return 'synced-fluid.generated.css'
-  return 'src/synced-fluid.generated.css'
+  if (preset === 'wordpress') return 'assets/css/synced-flow.css'
+  if (preset === 'plain') return 'synced-flow.generated.css'
+  return 'src/synced-flow.generated.css'
 }
 
 function defaultStyleEntryPath(targetCwd, preset, outPath) {
-  if (preset === 'next') return outPath.replace(/synced-fluid\.generated\.css$/, 'synced-fluid.css')
+  if (preset === 'next') return outPath.replace(/synced-flow\.generated\.css$/, 'synced-flow.css')
   if (preset === 'wordpress') return outPath
-  if (preset === 'plain') return 'synced-fluid.css'
-  return existsSync(resolve(targetCwd, 'src')) ? 'src/synced-fluid.css' : 'synced-fluid.css'
+  if (preset === 'plain') return 'synced-flow.css'
+  return existsSync(resolve(targetCwd, 'src')) ? 'src/synced-flow.css' : 'synced-flow.css'
 }
 
 function defaultIncludeApp(preset) {
@@ -2367,10 +2367,10 @@ function defaultIncludeApp(preset) {
 
 function findStyleEntry(targetCwd) {
   const candidates = [
-    'src/synced-fluid.css',
-    'app/synced-fluid.css',
-    'src/app/synced-fluid.css',
-    'synced-fluid.css',
+    'src/synced-flow.css',
+    'app/synced-flow.css',
+    'src/app/synced-flow.css',
+    'synced-flow.css',
   ]
 
   for (const candidate of candidates) {
@@ -2380,7 +2380,7 @@ function findStyleEntry(targetCwd) {
   const roots = ['app', 'src', 'pages', 'components', 'assets'].filter((dir) => existsSync(resolve(targetCwd, dir)))
   for (const root of roots) {
     const files = listProjectFiles(resolve(targetCwd, root))
-    const match = files.find((file) => file.endsWith('.css') && readFileSync(file, 'utf8').includes('@synced/fluid/'))
+    const match = files.find((file) => file.endsWith('.css') && readFileSync(file, 'utf8').includes('@synced/flow/'))
     if (match) return relative(targetCwd, match)
   }
 
@@ -2413,11 +2413,11 @@ function addPackageScripts(targetCwd) {
 
   const pkg = JSON.parse(readFileSync(packageFile, 'utf8'))
   pkg.scripts ??= {}
-  pkg.scripts['fluid:build'] ??= 'synced-fluid build'
-  pkg.scripts['fluid:check'] ??= 'synced-fluid build --check'
-  pkg.scripts['fluid:doctor'] ??= 'synced-fluid doctor'
-  pkg.scripts['fluid:lint'] ??= 'synced-fluid lint'
-  pkg.scripts['fluid:watch'] ??= 'synced-fluid watch'
+  pkg.scripts['flow:build'] ??= 'synced-flow build'
+  pkg.scripts['flow:check'] ??= 'synced-flow build --check'
+  pkg.scripts['flow:doctor'] ??= 'synced-flow doctor'
+  pkg.scripts['flow:lint'] ??= 'synced-flow lint'
+  pkg.scripts['flow:watch'] ??= 'synced-flow watch'
   writeFileSync(packageFile, `${JSON.stringify(pkg, null, 2)}\n`)
   console.log('update package.json scripts')
 }
@@ -2431,7 +2431,7 @@ function projectContains(targetCwd, needle) {
 }
 
 function allProjectFiles(targetCwd) {
-  const rootFiles = ['synced-fluid.css', 'styles.css', 'style.css', 'app.css', 'global.css', 'globals.css']
+  const rootFiles = ['synced-flow.css', 'styles.css', 'style.css', 'app.css', 'global.css', 'globals.css']
     .map((file) => resolve(targetCwd, file))
     .filter((file) => existsSync(file))
 
@@ -2445,7 +2445,7 @@ function findDuplicateCoreImports(targetCwd) {
     .filter((file) => file.endsWith('.css'))
     .filter((file) => {
       const css = readFileSync(file, 'utf8')
-      return css.includes('@synced/fluid/styles.css') && modularImports.some((name) => css.includes(`@synced/fluid/${name}`))
+      return css.includes('@synced/flow/styles.css') && modularImports.some((name) => css.includes(`@synced/flow/${name}`))
     })
     .map((file) => relative(targetCwd, file))
 }
@@ -2457,7 +2457,7 @@ function findCustomTokenOverrides(targetCwd, generatedOut) {
     .filter((file) => {
       const relativeFile = relative(targetCwd, file)
       if (generatedFile && file === generatedFile) return false
-      if (/synced-fluid\.generated\.css$/.test(relativeFile)) return false
+      if (/synced-flow\.generated\.css$/.test(relativeFile)) return false
       const css = readFileSync(file, 'utf8')
       return /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(css)
     })
@@ -4506,11 +4506,11 @@ function collectCompositionIssues() {
     const isPackageSelf = repoRoot === packageRoot
 
     if (!isCss && /\bpopover(?:=|\s|>)/i.test(source) && !/(popoverTargetAction|popovertargetaction)=["']hide["']|command=["']hide-popover["']/i.test(source)) {
-      issues.push(lintIssue('popover-missing-close', 'warn', rel, source, source.search(/\bpopover/i), 'Popover markup has no native close or hide invoker.', 'Add a close button or hide-on-navigate button. See: synced-fluid pattern mobile-nav-drawer --markup'))
+      issues.push(lintIssue('popover-missing-close', 'warn', rel, source, source.search(/\bpopover/i), 'Popover markup has no native close or hide invoker.', 'Add a close button or hide-on-navigate button. See: synced-flow pattern mobile-nav-drawer --markup'))
     }
 
     if (!isCss && source.includes('sf-nav--mobile') && !/<button\b[^>]*(popoverTarget|popovertarget|commandFor|commandfor)=/i.test(source)) {
-      issues.push(lintIssue('mobile-nav-incomplete', 'warn', rel, source, source.indexOf('sf-nav--mobile'), 'sf-nav--mobile has no menu trigger.', 'Add a button with popoverTarget pointing to an sf-drawer popover. See: synced-fluid pattern mobile-nav-drawer --markup'))
+      issues.push(lintIssue('mobile-nav-incomplete', 'warn', rel, source, source.indexOf('sf-nav--mobile'), 'sf-nav--mobile has no menu trigger.', 'Add a button with popoverTarget pointing to an sf-drawer popover. See: synced-flow pattern mobile-nav-drawer --markup'))
     }
 
     for (const match of isCss ? [] : source.matchAll(/`[^`]*(?:sf-|text-|bg-|border-|p[trblxy]?-|m[trblxy]?-|gap-)\$\{[\s\S]*?`/g)) {
@@ -4521,8 +4521,8 @@ function collectCompositionIssues() {
       issues.push(lintIssue('invalid-popover-on-anchor', 'warn', rel, source, match.index ?? 0, 'popoverTarget is attached to an anchor.', 'Use a button invoker. For hash navigation, use a button with formAction plus popoverTargetAction="hide".'))
     }
 
-    if (isCss && !isPackageSelf && /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(source) && !/synced-fluid\.generated\.css$/.test(rel)) {
-      issues.push(lintIssue('theme-override-in-css', 'warn', rel, source, source.search(/--sf-/), 'Project CSS defines custom --sf-* tokens.', 'Move repeated brand decisions to synced-fluid.config.mjs theme tokens.'))
+    if (isCss && !isPackageSelf && /--sf-(space|colour|color|font|radius|container|gutter|grid|button|card|input)-/.test(source) && !/synced-flow\.generated\.css$/.test(rel)) {
+      issues.push(lintIssue('theme-override-in-css', 'warn', rel, source, source.search(/--sf-/), 'Project CSS defines custom --sf-* tokens.', 'Move repeated brand decisions to synced-flow.config.mjs theme tokens.'))
     }
   }
   return issues
@@ -4564,7 +4564,7 @@ const utilities = buildUtilitiesCss(tokens)
 const coreCss = includeCore ? [buildBaseCss(), includeApp ? buildAppCss() : '', buildLayoutCss(), buildComponentCss(), buildStaticUtilitiesCss()] : []
 const themeCss = buildThemeCss(config.theme)
 const css = [
-  '/* Generated by @synced/fluid. Edit synced-fluid.config.mjs or run synced-fluid build to refresh. */',
+  '/* Generated by @synced/flow. Edit synced-flow.config.mjs or run synced-flow build to refresh. */',
   '@layer reset, tokens, base, app, layout, components, utilities, overrides;',
   buildTokensCss(),
   themeCss,
@@ -4588,7 +4588,7 @@ if (command === 'lint') {
       file: null,
       line: null,
       message: `Unsupported class token "${token}".`,
-      fix: nearestClass(token) ? `Use "${nearestClass(token)}" or run synced-fluid catalog --json for supported classes.` : 'Use a supported Synced Fluid class, a generated utility, or add a safelist entry for unavoidable dynamic output.',
+      fix: nearestClass(token) ? `Use "${nearestClass(token)}" or run synced-flow catalog --json for supported classes.` : 'Use a supported Synced Flow class, a generated utility, or add a safelist entry for unavoidable dynamic output.',
       token,
     })),
     ...collectCompositionIssues(),
@@ -4621,7 +4621,7 @@ if (command === 'lint') {
 if (checkOnly) {
   const current = existsSync(outFile) ? readFileSync(outFile, 'utf8') : ''
   if (current !== css) {
-    console.error(`${relative(repoRoot, outFile)} is out of date. Run synced-fluid build.`)
+    console.error(`${relative(repoRoot, outFile)} is out of date. Run synced-flow build.`)
     process.exit(1)
   }
 } else {

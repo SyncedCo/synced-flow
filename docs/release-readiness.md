@@ -1,6 +1,6 @@
 # Release Readiness
 
-Use this checklist before tagging or publishing Synced Fluid.
+Use this checklist before tagging or publishing Synced Flow.
 
 ## Lean Package Checks
 
@@ -24,7 +24,7 @@ Use this checklist before tagging or publishing Synced Fluid.
 
 ## Accessibility Confidence Pass
 
-Synced Fluid does not run audits for consuming projects, but the package should
+Synced Flow does not run audits for consuming projects, but the package should
 keep the CSS affordances in place.
 
 - Keyboard focus is visible on links, buttons, form fields, summaries, and
@@ -54,9 +54,9 @@ keep the CSS affordances in place.
 pnpm build
 pnpm check
 pnpm test
-node bin/synced-fluid.mjs tokens --json
-node bin/synced-fluid.mjs catalog --json
-node bin/synced-fluid.mjs doctor --cwd examples/plain-html
+node bin/synced-flow.mjs tokens --json
+node bin/synced-flow.mjs catalog --json
+node bin/synced-flow.mjs doctor --cwd examples/plain-html
 ```
 
 If a browser-visible example changes, inspect it at mobile and desktop widths

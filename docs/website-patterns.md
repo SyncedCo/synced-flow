@@ -1,6 +1,6 @@
 # Website Patterns
 
-Synced Fluid pattern classes cover common website sections without turning the
+Synced Flow pattern classes cover common website sections without turning the
 system into a large utility framework. Use them as semantic building blocks, then
 override tokens for brand-specific decisions.
 
@@ -83,7 +83,7 @@ to semantic tokens and local CSS.
 <div class="sf-faq">
   <details class="sf-faq__item">
     <summary>Is this a Tailwind replacement?</summary>
-    <p>No. Synced Fluid uses named primitives and patterns for common website work.</p>
+    <p>No. Synced Flow uses named primitives and patterns for common website work.</p>
   </details>
 </div>
 ```
@@ -105,7 +105,7 @@ to semantic tokens and local CSS.
 
 <footer class="sf-footer">
   <div class="sf-container sf-repel">
-    <p class="sf-text-caption">Synced Fluid</p>
+    <p class="sf-text-caption">Synced Flow</p>
     <a class="sf-link" href="#main">Back to top</a>
   </div>
 </footer>

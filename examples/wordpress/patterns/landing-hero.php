@@ -1,8 +1,8 @@
 <?php
 /**
- * Title: Synced Fluid landing hero
- * Slug: synced-fluid/landing-hero
- * Categories: synced-fluid
+ * Title: Synced Flow landing hero
+ * Slug: synced-flow/landing-hero
+ * Categories: synced-flow
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"sf-section"} -->
@@ -18,7 +18,7 @@
       <h1 class="sf-text-display">A fluid WordPress front page without page-specific CSS.</h1>
       <!-- /wp:heading -->
       <!-- wp:paragraph {"className":"sf-text-lead sf-prose"} -->
-      <p class="sf-text-lead sf-prose">Use Synced Fluid classes in block templates, parts, and PHP patterns.</p>
+      <p class="sf-text-lead sf-prose">Use Synced Flow classes in block templates, parts, and PHP patterns.</p>
       <!-- /wp:paragraph -->
       <!-- wp:buttons {"className":"sf-cluster"} -->
       <div class="wp-block-buttons sf-cluster">

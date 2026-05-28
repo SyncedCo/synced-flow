@@ -1,10 +1,10 @@
 # Support
 
-Synced Fluid is maintained by SyncedCo.
+Synced Flow is maintained by SyncedCo.
 
 - Website: [syncedco.com](https://syncedco.com)
-- GitHub: [github.com/SyncedCo/synced-fluid](https://github.com/SyncedCo/synced-fluid)
-- Issues: [github.com/SyncedCo/synced-fluid/issues](https://github.com/SyncedCo/synced-fluid/issues)
+- GitHub: [github.com/SyncedCo/synced-flow](https://github.com/SyncedCo/synced-flow)
+- Issues: [github.com/SyncedCo/synced-flow/issues](https://github.com/SyncedCo/synced-flow/issues)
 - Security: [SECURITY.md](SECURITY.md)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
 
@@ -17,7 +17,7 @@ Before opening an issue, please include:
 
 - the package version
 - the framework or environment
-- the relevant `synced-fluid.config.mjs`
+- the relevant `synced-flow.config.mjs`
 - the command that failed
 - the expected and actual behaviour
 

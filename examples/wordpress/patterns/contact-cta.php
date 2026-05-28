@@ -1,8 +1,8 @@
 <?php
 /**
- * Title: Synced Fluid contact CTA
- * Slug: synced-fluid/contact-cta
- * Categories: synced-fluid
+ * Title: Synced Flow contact CTA
+ * Slug: synced-flow/contact-cta
+ * Categories: synced-flow
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"sf-section","anchor":"contact"} -->
@@ -10,7 +10,7 @@
   <!-- wp:group {"className":"sf-container sf-cta"} -->
   <div class="wp-block-group sf-container sf-cta">
     <!-- wp:heading {"className":"sf-text-h2"} -->
-    <h2 class="sf-text-h2">Ready to build a WordPress site with Synced Fluid?</h2>
+    <h2 class="sf-text-h2">Ready to build a WordPress site with Synced Flow?</h2>
     <!-- /wp:heading -->
     <!-- wp:paragraph {"className":"sf-prose"} -->
     <p class="sf-prose">Use this pattern as a starting point for contact, booking, or newsletter sections.</p>

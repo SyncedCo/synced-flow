@@ -1,14 +1,14 @@
 # WordPress
 
-Synced Fluid can be used in WordPress themes and plugins without asking
+Synced Flow can be used in WordPress themes and plugins without asking
 WordPress to resolve npm CSS imports in the browser.
 
 ## Setup
 
 ```bash
-pnpm add @synced/fluid
-pnpm exec synced-fluid init --preset wordpress
-pnpm fluid:build
+pnpm add @synced/flow
+pnpm exec synced-flow init --preset wordpress
+pnpm flow:build
 ```
 
 The WordPress preset:
@@ -17,7 +17,7 @@ The WordPress preset:
   and `assets` when those folders exist
 - scans PHP, HTML, JS, TS, JSX, TSX, Twig, Vue, Svelte, Astro, and MDX files
 - enables `includeCore`
-- writes `assets/css/synced-fluid.css`
+- writes `assets/css/synced-flow.css`
 
 See [`examples/wordpress`](../examples/wordpress) for a lean block theme style
 template with `theme.json`, template parts, PHP patterns, enqueue code, and an
@@ -29,8 +29,8 @@ enqueue-ready generated CSS output.
 examples/wordpress/
   functions.php
   theme.json
-  synced-fluid.config.mjs
-  assets/css/synced-fluid.css
+  synced-flow.config.mjs
+  assets/css/synced-flow.css
   parts/header.html
   parts/footer.html
   templates/front-page.html
@@ -44,8 +44,8 @@ examples/wordpress/
 
 ```php
 wp_enqueue_style(
-  'synced-fluid',
-  get_theme_file_uri('assets/css/synced-fluid.css'),
+  'synced-flow',
+  get_theme_file_uri('assets/css/synced-flow.css'),
   [],
   wp_get_theme()->get('Version')
 );
@@ -56,7 +56,7 @@ For plugins, use `plugins_url()` or `plugin_dir_url()` instead of
 
 ## Dynamic Classes
 
-Synced Fluid generates utility CSS from complete class tokens. Keep class names
+Synced Flow generates utility CSS from complete class tokens. Keep class names
 complete in PHP and templates.
 
 ```php

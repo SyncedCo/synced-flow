@@ -1,18 +1,18 @@
 {
-  "name": "synced-fluid-astro-example",
+  "name": "synced-flow-astro-example",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "fluid:build": "synced-fluid build",
-    "fluid:check": "synced-fluid build --check",
-    "fluid:lint": "synced-fluid lint",
-    "fluid:watch": "synced-fluid watch",
-    "fluid:doctor": "synced-fluid doctor"
+    "flow:build": "synced-flow build",
+    "flow:check": "synced-flow build --check",
+    "flow:lint": "synced-flow lint",
+    "flow:watch": "synced-flow watch",
+    "flow:doctor": "synced-flow doctor"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.0",
-    "@synced/fluid": "file:../..",
+    "@synced/flow": "file:../..",
     "astro": "^5.0.0",
     "typescript": "^5.0.0"
   }

@@ -1,12 +1,12 @@
 # Interaction Patterns
 
-Synced Fluid patterns are copy-ready HTML/CSS-native building blocks for common
+Synced Flow patterns are copy-ready HTML/CSS-native building blocks for common
 website interactions. They are not JavaScript components.
 
 ```bash
-pnpm exec synced-fluid pattern --list
-pnpm exec synced-fluid pattern mobile-nav-drawer --framework next --markup
-pnpm exec synced-fluid pattern scroll-viewport-sections --json
+pnpm exec synced-flow pattern --list
+pnpm exec synced-flow pattern mobile-nav-drawer --framework next --markup
+pnpm exec synced-flow pattern scroll-viewport-sections --json
 ```
 
 ## Pattern IDs
@@ -21,7 +21,7 @@ pnpm exec synced-fluid pattern scroll-viewport-sections --json
 
 Pattern JSON includes:
 
-- `classes`: public Synced Fluid classes used by the pattern
+- `classes`: public Synced Flow classes used by the pattern
 - `requiresJs` and `requiresJsNotes`: whether CSS/HTML alone is enough
 - `a11y`: accessibility requirements to preserve when editing
 - `gotchas`: browser or markup details that agents commonly miss

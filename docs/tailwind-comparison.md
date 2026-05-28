@@ -1,33 +1,33 @@
 # Tailwind Migration Context
 
 Tailwind CSS is referenced here only to help teams migrate existing projects.
-Synced Fluid is an independent fluid CSS system, not a Tailwind copy,
+Synced Flow is an independent fluid CSS system, not a Tailwind copy,
 compatibility layer, or one-for-one feature replacement.
 
 ## Developer Expectations During Migration
 
 Teams coming from Tailwind often expect a short install flow, a CLI, generated
 CSS from source files, clear framework setup, safelisting for dynamic class
-names, and setup diagnostics. Synced Fluid supports those expectations while
+names, and setup diagnostics. Synced Flow supports those expectations while
 using its own fluid, token-led styling model.
 
-| Migration expectation | Synced Fluid direction |
+| Migration expectation | Synced Flow direction |
 | --- | --- |
-| Install a package, import one stylesheet, start building | `pnpm add @synced/fluid`, `synced-fluid init`, import the generated CSS entry |
-| CLI builds CSS from scanned source files | `synced-fluid build` scans configured project folders and writes generated utility CSS |
-| Framework-specific setup docs | `synced-fluid init --preset next/vite/astro/plain` |
-| Theme variables as the styling API | CSS custom properties in `@synced/fluid/styles.css` plus project overrides |
+| Install a package, import one stylesheet, start building | `pnpm add @synced/flow`, `synced-flow init`, import the generated CSS entry |
+| CLI builds CSS from scanned source files | `synced-flow build` scans configured project folders and writes generated utility CSS |
+| Framework-specific setup docs | `synced-flow init --preset next/vite/astro/plain` |
+| Theme variables as the styling API | CSS custom properties in `@synced/flow/styles.css` plus project overrides |
 | Source registration and monorepo-friendly paths | `scan` and `cwd` config options |
 | Safelisting for dynamic class names | `safelist` config option and `--safelist` CLI flag |
-| Setup diagnostics | `synced-fluid doctor` |
+| Setup diagnostics | `synced-flow doctor` |
 
-## How Synced Fluid Differs
+## How Synced Flow Differs
 
-Synced Fluid starts with a fluid design system rather than a breakpoint-first
+Synced Flow starts with a fluid design system rather than a breakpoint-first
 utility framework. New projects keep `responsiveVariants` off, then use fluid
 type, spacing, layout primitives, and container-aware component CSS.
 
-For CSS size, Synced Fluid favours modular layer imports and source-scanned
+For CSS size, Synced Flow favours modular layer imports and source-scanned
 utility generation rather than shipping a large universal utility file. See
 [CSS optimisation](css-optimisation.md) for current size measurements and
 marketing-safe claims.
@@ -38,7 +38,7 @@ migration option:
 ```js
 export default defineConfig({
   scan: ['app', 'components', 'lib'],
-  out: 'app/synced-fluid.generated.css',
+  out: 'app/synced-flow.generated.css',
   responsiveVariants: true,
 })
 ```

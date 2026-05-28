@@ -1,8 +1,8 @@
 <?php
 /**
- * Title: Synced Fluid feature grid
- * Slug: synced-fluid/feature-grid
- * Categories: synced-fluid
+ * Title: Synced Flow feature grid
+ * Slug: synced-flow/feature-grid
+ * Categories: synced-flow
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"sf-section"} -->
@@ -15,7 +15,7 @@
       <p class="sf-kicker">Patterns</p>
       <!-- /wp:paragraph -->
       <!-- wp:heading {"className":"sf-text-h2"} -->
-      <h2 class="sf-text-h2">Use block markup with Synced Fluid classes.</h2>
+      <h2 class="sf-text-h2">Use block markup with Synced Flow classes.</h2>
       <!-- /wp:heading -->
     </div>
     <!-- /wp:group -->

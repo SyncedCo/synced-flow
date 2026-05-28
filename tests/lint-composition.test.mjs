@@ -7,22 +7,22 @@ import { fileURLToPath } from 'node:url'
 import test from 'node:test'
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const cli = join(packageRoot, 'bin/synced-fluid.mjs')
+const cli = join(packageRoot, 'bin/synced-flow.mjs')
 
 function tempProject() {
-  const cwd = mkdtempSync(join(tmpdir(), 'synced-fluid-lint-'))
+  const cwd = mkdtempSync(join(tmpdir(), 'synced-flow-lint-'))
   mkdirSync(join(cwd, 'src'), { recursive: true })
   mkdirSync(join(cwd, 'node_modules/@synced'), { recursive: true })
-  symlinkSync(packageRoot, join(cwd, 'node_modules/@synced/fluid'), 'dir')
+  symlinkSync(packageRoot, join(cwd, 'node_modules/@synced/flow'), 'dir')
   writeFileSync(
     join(cwd, 'package.json'),
-    JSON.stringify({ type: 'module', dependencies: { '@synced/fluid': 'file:../synced-fluid' } }, null, 2) + '\n'
+    JSON.stringify({ type: 'module', dependencies: { '@synced/flow': 'file:../synced-flow' } }, null, 2) + '\n'
   )
   writeFileSync(
-    join(cwd, 'synced-fluid.config.mjs'),
+    join(cwd, 'synced-flow.config.mjs'),
     `export default {
   scan: ['src'],
-  out: 'src/synced-fluid.generated.css',
+  out: 'src/synced-flow.generated.css',
 }
 `
   )

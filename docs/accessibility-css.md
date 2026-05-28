@@ -1,6 +1,6 @@
 # Accessibility CSS
 
-Synced Fluid does not run accessibility audits. It provides CSS affordances so
+Synced Flow does not run accessibility audits. It provides CSS affordances so
 semantic HTML and ARIA states are visible, consistent, and easy to compose.
 
 ## Principles
@@ -9,7 +9,7 @@ semantic HTML and ARIA states are visible, consistent, and easy to compose.
   `select`, `textarea`, `details`, `summary`, `nav`, `main`, `section`, and
   `footer`.
 - Use ARIA only when native semantics do not express the state.
-- Keep accessible names and descriptions in markup; Synced Fluid styles the
+- Keep accessible names and descriptions in markup; Synced Flow styles the
   visible states.
 - Use project-level accessibility testing in the consuming app.
 
@@ -79,16 +79,16 @@ Use native `details`/`summary` for FAQ and simple disclosure content.
 ```
 
 For JavaScript-powered menus or toggles, use real buttons and update
-`aria-expanded`, `aria-pressed`, or `aria-selected` as appropriate. Synced Fluid
+`aria-expanded`, `aria-pressed`, or `aria-selected` as appropriate. Synced Flow
 styles those states for `.sf-button` and `.sf-nav__link`.
 
 For native dialog, popover, drawer, tooltip, tabs, and disclosure markup, see
-[Native Components](native-components.md). Synced Fluid styles those browser
+[Native Components](native-components.md). Synced Flow styles those browser
 primitives but does not ship JavaScript components.
 
 ## Alerts And Status
 
-Synced Fluid alert variants are visual styles. Choose the live-region behavior
+Synced Flow alert variants are visual styles. Choose the live-region behavior
 in markup:
 
 ```html
@@ -116,7 +116,7 @@ When an action is in progress, keep the accessible name visible and add state:
 </button>
 ```
 
-Synced Fluid styles this as a busy state, but the consuming app should still
+Synced Flow styles this as a busy state, but the consuming app should still
 manage focus, state changes, and completion messaging.
 
 ## Confidence Checklist

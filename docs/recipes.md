@@ -9,12 +9,12 @@ CSS.
 The CLI also ships page-level recipes for AI agents and template generators:
 
 ```bash
-pnpm exec synced-fluid recipe
-pnpm exec synced-fluid recipe saas-landing --markup
-pnpm exec synced-fluid recipe saas-dashboard --framework next --markup
-pnpm exec synced-fluid recipe saas-landing --framework next --markup
-pnpm exec synced-fluid recipe --section form --framework astro --markup
-pnpm exec synced-fluid suggest "portfolio with full page scroll" --json
+pnpm exec synced-flow recipe
+pnpm exec synced-flow recipe saas-landing --markup
+pnpm exec synced-flow recipe saas-dashboard --framework next --markup
+pnpm exec synced-flow recipe saas-landing --framework next --markup
+pnpm exec synced-flow recipe --section form --framework astro --markup
+pnpm exec synced-flow suggest "portfolio with full page scroll" --json
 ```
 
 Available recipe ids:
@@ -133,7 +133,7 @@ panels, and product workspaces.
         </article>
       </div>
       <blockquote class="sf-testimonial">
-        <p class="sf-testimonial__quote">"Synced Fluid gives us enough structure without locking the brand down."</p>
+        <p class="sf-testimonial__quote">"Synced Flow gives us enough structure without locking the brand down."</p>
         <footer class="sf-testimonial__meta">Example product team</footer>
       </blockquote>
     </div>
@@ -147,9 +147,9 @@ This recipe is CSS and markup only. Authentication, sessions, permissions, and
 providers belong to the consuming app.
 
 ```bash
-pnpm exec synced-fluid recipe saas-dashboard --markup
-pnpm exec synced-fluid recipe saas-dashboard --framework next --markup
-pnpm exec synced-fluid suggest "SaaS dashboard with login and metrics"
+pnpm exec synced-flow recipe saas-dashboard --markup
+pnpm exec synced-flow recipe saas-dashboard --framework next --markup
+pnpm exec synced-flow suggest "SaaS dashboard with login and metrics"
 ```
 
 The recipe includes:
@@ -162,7 +162,7 @@ The recipe includes:
 - traditional SaaS app shell with persistent desktop navigation and a visible stacked mobile navigation rail
 - KPI cards, theme-aware toolbar, filter/search form, customer table, and activity list
 
-It uses Synced Fluid primitives such as `sf-app-shell`, `sf-app-sidebar`,
+It uses Synced Flow primitives such as `sf-app-shell`, `sf-app-sidebar`,
 `sf-app-main`, `sf-toolbar`, `sf-metric-grid`, `sf-panel-grid`, `sf-icon`,
 `sf-chart`, `sf-chart--wide`, `sf-meter`, `sf-card`, `sf-form`, and
 `sf-table-wrap`.
@@ -182,9 +182,9 @@ It uses Synced Fluid primitives such as `sf-app-shell`, `sf-app-sidebar`,
       </nav>
     </aside>
     <article class="sf-sidebar__content sf-prose">
-      <h1 id="install">Install Synced Fluid</h1>
+      <h1 id="install">Install Synced Flow</h1>
       <p>Import the full stylesheet for the smallest setup path, or use modular layers when a project needs tighter control.</p>
-      <pre><code>@import "@synced/fluid/styles.css";</code></pre>
+      <pre><code>@import "@synced/flow/styles.css";</code></pre>
       <h2 id="tokens">Tokens</h2>
       <p>Use <code>--sf-*</code> variables for stable project styling.</p>
       <h2 id="components">Components</h2>

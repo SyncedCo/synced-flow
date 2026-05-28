@@ -6,17 +6,17 @@ decisions first, then recipes, then verification.
 ## 1. Install And Initialise
 
 ```bash
-pnpm add @synced/fluid
-pnpm exec synced-fluid init --preset next --theme synced --agents
+pnpm add @synced/flow
+pnpm exec synced-flow init --preset next --theme synced --agents
 ```
 
 Use the closest preset: `next`, `astro`, `vite`, `wordpress`, or `plain`.
 For WordPress, see [WordPress](wordpress.md) and the
 [`examples/wordpress`](../examples/wordpress) template.
 
-`--agents` adds a project-level `AGENTS.md` Synced Fluid section so AI coding
+`--agents` adds a project-level `AGENTS.md` Synced Flow section so AI coding
 agents can find the packaged skill and the right CLI checks. Existing projects
-can run `pnpm exec synced-fluid agents install`.
+can run `pnpm exec synced-flow agents install`.
 
 ## 2. Write A Theme Brief
 
@@ -35,40 +35,40 @@ Density: spacious sections.
 Generate a validated theme block:
 
 ```bash
-pnpm exec synced-fluid theme init --from brief.md --preset-base neutral-saas
+pnpm exec synced-flow theme init --from brief.md --preset-base neutral-saas
 ```
 
 If the brief misses decisions such as radius, fonts, primary colour, accent
 colour, surface style, or density, the command prints warnings and fills
 sensible defaults. Paste the generated `theme` block into
-`synced-fluid.config.mjs`.
+`synced-flow.config.mjs`.
 
 ## 3. Pick A Recipe
 
-Ask Synced Fluid for matching recipes:
+Ask Synced Flow for matching recipes:
 
 ```bash
-pnpm exec synced-fluid suggest "SaaS landing page with pricing and FAQ"
-pnpm exec synced-fluid suggest "scroll portfolio with contact" --scaffold --framework next --dry-run
+pnpm exec synced-flow suggest "SaaS landing page with pricing and FAQ"
+pnpm exec synced-flow suggest "scroll portfolio with contact" --scaffold --framework next --dry-run
 ```
 
 Print copy-ready markup:
 
 ```bash
-pnpm exec synced-fluid recipe saas-landing --framework next --markup
+pnpm exec synced-flow recipe saas-landing --framework next --markup
 ```
 
 For a single section:
 
 ```bash
-pnpm exec synced-fluid recipe --section form --framework next --markup
+pnpm exec synced-flow recipe --section form --framework next --markup
 ```
 
 For interaction patterns such as mobile drawers or scroll panels:
 
 ```bash
-pnpm exec synced-fluid pattern --list
-pnpm exec synced-fluid pattern mobile-nav-drawer --framework next --markup
+pnpm exec synced-flow pattern --list
+pnpm exec synced-flow pattern mobile-nav-drawer --framework next --markup
 ```
 
 Available page recipes include `saas-landing`, `portfolio-scroll`,
@@ -89,17 +89,17 @@ Keep the `sf-*` structure where possible:
 - components: `sf-button`, `sf-card`, `sf-form`, `sf-nav`, `sf-disclosure`
 - content: `sf-prose`, `sf-meta`, `sf-figure`, `sf-table-wrap`
 
-Use `synced-fluid catalog --json` when an AI agent needs the full public API.
-Use `synced-fluid pattern <id> --json` when it needs accessibility notes,
+Use `synced-flow catalog --json` when an AI agent needs the full public API.
+Use `synced-flow pattern <id> --json` when it needs accessibility notes,
 gotchas, and framework-specific markup for native interactions.
 
 ## 5. Build And Verify
 
 ```bash
-pnpm fluid:build
-pnpm fluid:check
-pnpm exec synced-fluid lint --json
-pnpm fluid:doctor
+pnpm flow:build
+pnpm flow:check
+pnpm exec synced-flow lint --json
+pnpm flow:doctor
 ```
 
 `lint` catches unsupported class tokens, suggests nearest alternatives, and
@@ -113,8 +113,8 @@ ad hoc token overrides, AI guidance, and release-facing guardrails.
 Use the full core import while building:
 
 ```css
-@import "@synced/fluid/styles.css";
-@import "./synced-fluid.generated.css";
+@import "@synced/flow/styles.css";
+@import "./synced-flow.generated.css";
 ```
 
 For tighter loading, switch to modular imports only if the project has a clear

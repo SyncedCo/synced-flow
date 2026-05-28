@@ -1,6 +1,6 @@
 type TokenMap = Record<string, string>
 
-export type SyncedFluidTheme = {
+export type SyncedFlowTheme = {
   /**
    * Project font stacks. Values should be complete CSS font-family values.
    */
@@ -46,7 +46,7 @@ export type SyncedFluidTheme = {
   }
 }
 
-export type SyncedFluidConfig = {
+export type SyncedFlowConfig = {
   /**
    * Directory used to resolve scan and output paths. Defaults to the current
    * working directory.
@@ -67,15 +67,15 @@ export type SyncedFluidConfig = {
   /**
    * Project token overrides emitted into the generated CSS.
    */
-  theme?: SyncedFluidTheme
+  theme?: SyncedFlowTheme
   /**
    * Include reset, base, layout, and component CSS in the generated file.
-   * Most projects should import @synced/fluid/styles.css and leave this false.
+   * Most projects should import @synced/flow/styles.css and leave this false.
    */
   includeCore?: boolean
   /**
    * Include app/site defaults when includeCore is true. For modular projects,
-   * import @synced/fluid/app.css from the CSS entry instead.
+   * import @synced/flow/app.css from the CSS entry instead.
    */
   includeApp?: boolean
   /**
@@ -93,6 +93,6 @@ export type SyncedFluidConfig = {
   quiet?: boolean
 }
 
-export function defineConfig(config: SyncedFluidConfig): SyncedFluidConfig {
+export function defineConfig(config: SyncedFlowConfig): SyncedFlowConfig {
   return config
 }

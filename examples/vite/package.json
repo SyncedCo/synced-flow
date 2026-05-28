@@ -1,17 +1,17 @@
 {
-  "name": "synced-fluid-vite-example",
+  "name": "synced-flow-vite-example",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "fluid:build": "synced-fluid build",
-    "fluid:check": "synced-fluid build --check",
-    "fluid:lint": "synced-fluid lint",
-    "fluid:watch": "synced-fluid watch",
-    "fluid:doctor": "synced-fluid doctor"
+    "flow:build": "synced-flow build",
+    "flow:check": "synced-flow build --check",
+    "flow:lint": "synced-flow lint",
+    "flow:watch": "synced-flow watch",
+    "flow:doctor": "synced-flow doctor"
   },
   "dependencies": {
-    "@synced/fluid": "file:../..",
+    "@synced/flow": "file:../..",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^7.0.0",
     "react": "^19.0.0",

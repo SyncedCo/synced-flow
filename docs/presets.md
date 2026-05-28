@@ -1,16 +1,16 @@
 # Presets
 
-Synced Fluid ships a small set of theme presets. They are intentionally small:
+Synced Flow ships a small set of theme presets. They are intentionally small:
 fonts, semantic colours, layout defaults, and component token adjustments. The
 same public primitives should work across every preset.
 
 ```js
-import { defineConfig } from '@synced/fluid/config'
-import { themePresets } from '@synced/fluid/presets'
+import { defineConfig } from '@synced/flow/config'
+import { themePresets } from '@synced/flow/presets'
 
 export default defineConfig({
   scan: ['src'],
-  out: 'src/synced-fluid.generated.css',
+  out: 'src/synced-flow.generated.css',
   theme: themePresets.neutralSaas,
 })
 ```
@@ -27,10 +27,10 @@ export default defineConfig({
 CLI aliases use kebab case:
 
 ```bash
-synced-fluid init --theme synced
-synced-fluid init --theme neutral-saas
-synced-fluid init --theme editorial
-synced-fluid init --theme dark-app
+synced-flow init --theme synced
+synced-flow init --theme neutral-saas
+synced-flow init --theme editorial
+synced-flow init --theme dark-app
 ```
 
 ## What Presets Override

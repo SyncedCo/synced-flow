@@ -1,16 +1,16 @@
 # Full Page Templates
 
-These templates are copy-ready HTML examples built from Synced Fluid primitives.
+These templates are copy-ready HTML examples built from Synced Flow primitives.
 They intentionally reuse the plain HTML example CSS entry so they do not add to
 the core CSS size.
 
 Use the CLI for framework-specific output:
 
 ```bash
-pnpm exec synced-fluid recipe saas-landing --markup
-pnpm exec synced-fluid recipe saas-landing --framework next --markup
-pnpm exec synced-fluid recipe saas-dashboard --framework next --markup
-pnpm exec synced-fluid recipe portfolio-scroll --framework astro --markup
+pnpm exec synced-flow recipe saas-landing --markup
+pnpm exec synced-flow recipe saas-landing --framework next --markup
+pnpm exec synced-flow recipe saas-dashboard --framework next --markup
+pnpm exec synced-flow recipe portfolio-scroll --framework astro --markup
 ```
 
 Templates:

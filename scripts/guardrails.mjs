@@ -20,7 +20,7 @@ checkCssLayerShape()
 checkRawPxUsage()
 
 if (failures.length) {
-  console.error('Synced Fluid guardrails failed:')
+  console.error('Synced Flow guardrails failed:')
   for (const failure of failures) console.error(`  - ${failure}`)
   process.exit(1)
 }

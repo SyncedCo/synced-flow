@@ -1,4 +1,4 @@
-export { defineConfig, type SyncedFluidConfig, type SyncedFluidTheme } from './config.js'
+export { defineConfig, type SyncedFlowConfig, type SyncedFlowTheme } from './config.js'
 export { presetNames, themePresets } from '../src/presets.mjs'
 
 export type ClassValue = string | number | boolean | null | undefined | ClassValue[] | Record<string, unknown>

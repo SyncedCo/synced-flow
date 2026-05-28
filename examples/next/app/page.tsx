@@ -27,7 +27,7 @@ export default function Page() {
             <p className="sf-badge">Next.js template</p>
             <h1 className="sf-text-display">Build with fluid tokens from the first screen.</h1>
             <p className="sf-text-lead sf-prose">
-              This page composes a sticky nav, split hero, card grid, native disclosure, and contact form with Synced Fluid classes.
+              This page composes a sticky nav, split hero, card grid, native disclosure, and contact form with Synced Flow classes.
             </p>
             <div className="sf-cluster">
               <a className="sf-button sf-button--default" href="#contact">
@@ -69,7 +69,7 @@ export default function Page() {
             <h2 className="sf-text-h2">A styled form without custom field CSS.</h2>
             <details className="sf-disclosure">
               <summary>Can this run without JavaScript components?</summary>
-              <p>Yes. Synced Fluid styles native HTML and CSS primitives; project JavaScript stays optional.</p>
+              <p>Yes. Synced Flow styles native HTML and CSS primitives; project JavaScript stays optional.</p>
             </details>
           </div>
           <form className="sf-form sf-card">

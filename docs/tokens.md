@@ -1,6 +1,6 @@
 # Tokens Guide
 
-Synced Fluid uses a three-layer token model.
+Synced Flow uses a three-layer token model.
 
 ```text
 Primitive -> Semantic -> Component

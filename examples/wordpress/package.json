@@ -1,15 +1,15 @@
 {
-  "name": "synced-fluid-wordpress-example",
+  "name": "synced-flow-wordpress-example",
   "private": true,
   "type": "module",
   "scripts": {
-    "fluid:build": "synced-fluid build",
-    "fluid:check": "synced-fluid build --check",
-    "fluid:lint": "synced-fluid lint",
-    "fluid:watch": "synced-fluid watch",
-    "fluid:doctor": "synced-fluid doctor"
+    "flow:build": "synced-flow build",
+    "flow:check": "synced-flow build --check",
+    "flow:lint": "synced-flow lint",
+    "flow:watch": "synced-flow watch",
+    "flow:doctor": "synced-flow doctor"
   },
   "dependencies": {
-    "@synced/fluid": "file:../.."
+    "@synced/flow": "file:../.."
   }
 }

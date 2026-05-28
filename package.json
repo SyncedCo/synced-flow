@@ -1,16 +1,16 @@
 {
-  "name": "@synced/fluid",
+  "name": "@synced/flow",
   "version": "0.1.0",
   "description": "Standalone fluid CSS design system framework for Synced and reusable projects.",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SyncedCo/synced-fluid.git"
+    "url": "git+https://github.com/SyncedCo/synced-flow.git"
   },
   "homepage": "https://syncedco.com",
   "bugs": {
-    "url": "https://github.com/SyncedCo/synced-fluid/issues"
+    "url": "https://github.com/SyncedCo/synced-flow/issues"
   },
   "sideEffects": [
     "**/*.css"
@@ -54,7 +54,7 @@
     "TRADEMARKS.md"
   ],
   "bin": {
-    "synced-fluid": "./bin/synced-fluid.mjs"
+    "synced-flow": "./bin/synced-flow.mjs"
   },
   "scripts": {
     "build": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",

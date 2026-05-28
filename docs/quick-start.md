@@ -1,20 +1,20 @@
 # Quick Start
 
-Synced Fluid is a small fluid CSS system for projects that want strong design
+Synced Flow is a small fluid CSS system for projects that want strong design
 tokens, generated utility CSS, and no default dependency on viewport breakpoints.
 
 ## Install
 
 ```bash
-pnpm add @synced/fluid
-pnpm exec synced-fluid init --theme synced
+pnpm add @synced/flow
+pnpm exec synced-flow init --theme synced
 ```
 
 For the GitHub repo before registry publishing:
 
 ```bash
-pnpm add git+https://github.com/SyncedCo/synced-fluid.git
-pnpm exec synced-fluid init
+pnpm add git+https://github.com/SyncedCo/synced-flow.git
+pnpm exec synced-flow init
 ```
 
 ## Shape The Theme First
@@ -29,19 +29,19 @@ tokens instead of scattered page CSS.
 - Surface style: flat, raised cards, or subtle panels?
 - Density: compact app UI or more spacious marketing pages?
 
-With an AI assistant, ask it to use the Synced Fluid skill and turn those
-answers into `synced-fluid.config.mjs` theme tokens.
+With an AI assistant, ask it to use the Synced Flow skill and turn those
+answers into `synced-flow.config.mjs` theme tokens.
 
 Example prompt:
 
 ```text
-Use the Synced Fluid skill. Create a website theme with slightly rounded
+Use the Synced Flow skill. Create a website theme with slightly rounded
 controls, Inter for UI, Fraunces for display headings, orange as the primary
 colour, cyan as the accent, light raised cards, and spacious marketing sections.
-Return the Synced Fluid theme config only.
+Return the Synced Flow theme config only.
 ```
 
-Then place the result in `synced-fluid.config.mjs`:
+Then place the result in `synced-flow.config.mjs`:
 
 ```js
 theme: {
@@ -65,21 +65,21 @@ theme: {
 
 ## Import
 
-`init` creates a CSS entry file such as `src/synced-fluid.css` or
-`app/synced-fluid.css`.
+`init` creates a CSS entry file such as `src/synced-flow.css` or
+`app/synced-flow.css`.
 
 Import that file once from your app entry, root layout, or main CSS file.
 
 ```ts
-import './synced-fluid.css'
+import './synced-flow.css'
 ```
 
 Choose one core import strategy. Most projects use the full package stylesheet:
 
 ```css
-@import "@synced/fluid/styles.css";
-@import "@synced/fluid/app.css";
-@import "./synced-fluid.generated.css";
+@import "@synced/flow/styles.css";
+@import "@synced/flow/app.css";
+@import "./synced-flow.generated.css";
 ```
 
 `styles.css` already includes tokens, reset, base, layout, components, and
@@ -89,18 +89,18 @@ For tighter loading, skip `styles.css` and import only the layers the project
 uses:
 
 ```css
-@import "@synced/fluid/tokens.css";
-@import "@synced/fluid/reset.css";
-@import "@synced/fluid/base.css";
-@import "@synced/fluid/app.css";
-@import "@synced/fluid/layout.css";
-@import "@synced/fluid/components.css";
-@import "@synced/fluid/utilities.css";
-@import "./synced-fluid.generated.css";
+@import "@synced/flow/tokens.css";
+@import "@synced/flow/reset.css";
+@import "@synced/flow/base.css";
+@import "@synced/flow/app.css";
+@import "@synced/flow/layout.css";
+@import "@synced/flow/components.css";
+@import "@synced/flow/utilities.css";
+@import "./synced-flow.generated.css";
 ```
 
 `app.css` is optional. It removes raw link underlines and list markers for
-common app/site UI. Leave it out, or run `synced-fluid init --no-app`, when a
+common app/site UI. Leave it out, or run `synced-flow init --no-app`, when a
 project should keep content-style browser defaults.
 
 Keep `utilities.css` out unless the project uses static helpers such as
@@ -122,18 +122,18 @@ For a full project flow, see [Build a site walkthrough](build-a-site-walkthrough
 
 ## Base Defaults
 
-Synced Fluid uses a conservative base: links remain visibly underlined, lists
+Synced Flow uses a conservative base: links remain visibly underlined, lists
 keep their markers, focus styles are visible, and motion preferences are
-respected. Add `@synced/fluid/app.css` or run `synced-fluid add app` when a
+respected. Add `@synced/flow/app.css` or run `synced-flow add app` when a
 site should use app-style defaults globally.
 
 ## Build
 
 ```bash
-pnpm fluid:build
-pnpm fluid:check
-pnpm fluid:lint
-pnpm fluid:doctor
+pnpm flow:build
+pnpm flow:check
+pnpm flow:lint
+pnpm flow:doctor
 ```
 
 In this repository, `pnpm check` also runs package guardrails for dependency
@@ -141,12 +141,12 @@ count, gzip budgets, generated CSS shape, and raw-pixel usage.
 
 ## Theme Tokens
 
-Override reusable project tokens in `synced-fluid.config.mjs`.
+Override reusable project tokens in `synced-flow.config.mjs`.
 
 ```js
 export default defineConfig({
   scan: ['src', 'components'],
-  out: 'src/synced-fluid.generated.css',
+  out: 'src/synced-flow.generated.css',
   theme: {
     fonts: {
       sans: 'Inter, ui-sans-serif, system-ui, sans-serif',
@@ -163,8 +163,8 @@ export default defineConfig({
 Use the CSS entry file for one-off local overrides.
 
 ```css
-@import "@synced/fluid/styles.css";
-@import "./synced-fluid.generated.css";
+@import "@synced/flow/styles.css";
+@import "./synced-flow.generated.css";
 
 :root {
   --sf-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -175,11 +175,11 @@ Use the CSS entry file for one-off local overrides.
 ## Config
 
 ```js
-import { defineConfig } from '@synced/fluid/config'
+import { defineConfig } from '@synced/flow/config'
 
 export default defineConfig({
   scan: ['src', 'components'],
-  out: 'src/synced-fluid.generated.css',
+  out: 'src/synced-flow.generated.css',
   responsiveVariants: false,
   safelist: [],
 })
@@ -188,12 +188,12 @@ export default defineConfig({
 ## Presets
 
 ```bash
-pnpm exec synced-fluid init --preset next
-pnpm exec synced-fluid init --preset vite
-pnpm exec synced-fluid init --preset astro
-pnpm exec synced-fluid init --preset wordpress
-pnpm exec synced-fluid init --preset plain
-pnpm exec synced-fluid init --theme neutral-saas
+pnpm exec synced-flow init --preset next
+pnpm exec synced-flow init --preset vite
+pnpm exec synced-flow init --preset astro
+pnpm exec synced-flow init --preset wordpress
+pnpm exec synced-flow init --preset plain
+pnpm exec synced-flow init --theme neutral-saas
 ```
 
 Use `--responsive-variants` only for migration projects that still contain
@@ -201,7 +201,7 @@ classes like `sm:` or `lg:`.
 
 ## Scanner Limits
 
-Synced Fluid scans source files as text and generates CSS for complete class
+Synced Flow scans source files as text and generates CSS for complete class
 tokens. Keep class names complete in source files.
 
 ```tsx
@@ -224,16 +224,16 @@ The WordPress preset is designed for themes and plugins that enqueue plain CSS.
 It scans PHP and template files, enables `includeCore`, and writes one CSS file:
 
 ```bash
-pnpm exec synced-fluid init --preset wordpress
-pnpm fluid:build
+pnpm exec synced-flow init --preset wordpress
+pnpm flow:build
 ```
 
 Enqueue the generated file from the theme or plugin:
 
 ```php
 wp_enqueue_style(
-  'synced-fluid',
-  get_theme_file_uri('assets/css/synced-fluid.css'),
+  'synced-flow',
+  get_theme_file_uri('assets/css/synced-flow.css'),
   [],
   wp_get_theme()->get('Version')
 );
@@ -242,10 +242,10 @@ wp_enqueue_style(
 ## AI-Friendly Discovery
 
 ```bash
-pnpm exec synced-fluid tokens
-pnpm exec synced-fluid tokens --json
-pnpm exec synced-fluid catalog --json
-pnpm exec synced-fluid suggest "service site with pricing and faq"
+pnpm exec synced-flow tokens
+pnpm exec synced-flow tokens --json
+pnpm exec synced-flow catalog --json
+pnpm exec synced-flow suggest "service site with pricing and faq"
 ```
 
 Use this before generating UI so class names, token names, and presets stay

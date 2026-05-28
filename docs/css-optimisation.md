@@ -4,7 +4,7 @@ Current measurements from `pnpm build` on 2026-05-24.
 
 ## Developer Notes
 
-Synced Fluid keeps CSS loading small through three mechanisms:
+Synced Flow keeps CSS loading small through three mechanisms:
 
 - modular CSS layer exports for projects that do not need the full core file
 - source-scanned utility generation, so project utility CSS is generated from
@@ -20,7 +20,7 @@ OKLCH colour tokens, container-aware layout primitives, and
 
 CSS is not tree-shaken like JavaScript by default. The practical optimisation
 model is to import only the layers a project needs, then let
-`synced-fluid build` generate project-specific utility CSS.
+`synced-flow build` generate project-specific utility CSS.
 
 Choose either the bundled core stylesheet or modular layer imports. Do not
 import `styles.css` alongside `tokens.css`, `reset.css`, `base.css`,
@@ -50,21 +50,21 @@ utility measured 7,031 B raw and 1,943 B gzip.
 Use the full stylesheet when simplicity matters:
 
 ```css
-@import "@synced/fluid/styles.css";
-@import "./synced-fluid.generated.css";
+@import "@synced/flow/styles.css";
+@import "./synced-flow.generated.css";
 ```
 
 Use layer imports instead when a project wants a smaller core surface:
 
 ```css
-@import "@synced/fluid/tokens.css";
-@import "@synced/fluid/reset.css";
-@import "@synced/fluid/base.css";
-@import "@synced/fluid/app.css";
-@import "@synced/fluid/layout.css";
-@import "@synced/fluid/components.css";
-@import "@synced/fluid/utilities.css";
-@import "./synced-fluid.generated.css";
+@import "@synced/flow/tokens.css";
+@import "@synced/flow/reset.css";
+@import "@synced/flow/base.css";
+@import "@synced/flow/app.css";
+@import "@synced/flow/layout.css";
+@import "@synced/flow/components.css";
+@import "@synced/flow/utilities.css";
+@import "./synced-flow.generated.css";
 ```
 
 Leave out `components.css` if the project only uses tokens and layout
@@ -78,18 +78,18 @@ Many WordPress themes and plugins enqueue plain CSS rather than resolving npm CS
 imports through a bundler. Use the WordPress preset for that environment:
 
 ```bash
-pnpm exec synced-fluid init --preset wordpress
-pnpm fluid:build
+pnpm exec synced-flow init --preset wordpress
+pnpm flow:build
 ```
 
 That preset scans PHP and template files, enables `includeCore`, and writes a
-single enqueue-ready file at `assets/css/synced-fluid.css`.
+single enqueue-ready file at `assets/css/synced-flow.css`.
 
 ## Marketing Notes
 
 Safe claims:
 
-- Modern CSS-first: Synced Fluid uses cascade layers, custom properties,
+- Modern CSS-first: Synced Flow uses cascade layers, custom properties,
   `clamp()`, logical properties, OKLCH colour, and container-aware primitives.
 - Compact by default: the full core stylesheet is currently about 10.5 KB gzip.
 - Flexible loading: developers can import only the CSS layers their project

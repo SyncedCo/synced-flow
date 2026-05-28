@@ -1,14 +1,14 @@
 # Config Reference
 
-Create `synced-fluid.config.mjs` in the project root.
+Create `synced-flow.config.mjs` in the project root.
 
 ```js
-import { defineConfig } from '@synced/fluid/config'
-import { themePresets } from '@synced/fluid/presets'
+import { defineConfig } from '@synced/flow/config'
+import { themePresets } from '@synced/flow/presets'
 
 export default defineConfig({
   scan: ['src', 'components'],
-  out: 'src/synced-fluid.generated.css',
+  out: 'src/synced-flow.generated.css',
   responsiveVariants: false,
   includeApp: true,
   safelist: [],
@@ -38,7 +38,7 @@ also remove raw link underlines and list markers for app/site UI.
 
 ## Theme
 
-Theme values become CSS custom properties in the generated file. Synced Fluid
+Theme values become CSS custom properties in the generated file. Synced Flow
 emits both the public `--sf-*` token and the utility-compatible alias where
 needed.
 
