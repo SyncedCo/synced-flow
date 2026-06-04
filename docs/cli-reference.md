@@ -23,7 +23,7 @@ Options:
 | `--out <file>` | Choose generated CSS output path. |
 | `--safelist <classes>` | Add always-generated classes. |
 | `--include-core` | Write a single CSS output that includes tokens, reset, base, layout, and components. |
-| `--app` / `--no-app` | Include or exclude optional app/site defaults during init. |
+| `--defaults` / `--no-defaults` | Include or exclude optional site/UI defaults during init. |
 | `--responsive-variants` | Enable migration support for `sm:`/`lg:` classes. |
 | `--no-scripts` | Do not update `package.json`. |
 | `--force` | Overwrite init-managed files. |
@@ -54,12 +54,12 @@ Print the packaged Synced Flow skill location and the project setup commands.
 pnpm exec synced-flow skill
 ```
 
-## add app
+## add defaults
 
-Add the optional app/site defaults import to an existing CSS entry.
+Add the optional site/UI defaults import to an existing CSS entry.
 
 ```bash
-pnpm exec synced-flow add app --file src/synced-flow.css
+pnpm exec synced-flow add defaults --file src/synced-flow.css
 ```
 
 If `--file` is omitted, the CLI looks for the CSS entry created by `init`.

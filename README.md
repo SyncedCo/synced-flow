@@ -90,14 +90,14 @@ Use the full stylesheet when simplicity matters:
 
 ```css
 @import "@synced/flow/styles.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 ```
 
 `styles.css` already includes the tokens, reset, base, layout, components, and
 static utilities layers. Do not also import those modular layer files alongside
 `styles.css`.
 
-`app.css` is optional. It applies common app/site defaults such as removing raw
+`defaults.css` is optional. It applies common site/UI defaults such as removing raw
 link underlines and list markers. Leave it out for content-heavy pages that
 should keep browser affordances by default.
 
@@ -108,7 +108,7 @@ project uses:
 @import "@synced/flow/tokens.css";
 @import "@synced/flow/reset.css";
 @import "@synced/flow/base.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "@synced/flow/layout.css";
 @import "@synced/flow/components.css";
 @import "@synced/flow/utilities.css";
@@ -122,7 +122,7 @@ It uses modern CSS techniques and keeps CSS loading compact in three ways:
 - the CLI scans source files and generates utility CSS only for discovered class
   tokens
 - CSS layers are exported separately, so projects can import only tokens, reset,
-  base, app defaults, layout, components, or static utilities as needed
+  base, defaults, layout, components, or static utilities as needed
 - generated animation keyframes are emitted only when scanned animation classes
   need them
 
@@ -139,7 +139,7 @@ Current built CSS sizes from `pnpm build` on 2026-05-28:
 | `tokens.css` | 9.5 KB | 2.2 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
 | `base.css` | 3.4 KB | 1.2 KB | Base element styles. |
-| `app.css` | 0.5 KB | 0.3 KB | Optional app/site defaults for links, lists, and native controls. |
+| `defaults.css` | 0.5 KB | 0.3 KB | Optional site/UI defaults for links, lists, and native controls. |
 | `layout.css` | 7.5 KB | 1.9 KB | Fluid layout, app shell, scroll, sticky, media, and split primitives. |
 | `components.css` | 31.3 KB | 5.0 KB | Button, icon, avatar, chart, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
 | `utilities.css` | 7.5 KB | 1.9 KB | Static `sf-*` content, positioning, motion, and helper utilities. |
@@ -168,8 +168,8 @@ Synced Flow keeps the browser affordances people rely on:
 Use opt-in helpers when UI needs a different treatment: `sf-link-plain` for
 navigation links, `sf-list-reset` for menu lists, `sr-only` for assistive text,
 `sf-skip-link` for skip navigation, and `sf-touch-target` for compact controls.
-For app/site projects, include `@synced/flow/app.css` or run
-`synced-flow add app` to apply those common UI defaults globally.
+For site/UI projects, include `@synced/flow/defaults.css` or run
+`synced-flow add defaults` to apply those common UI defaults globally.
 
 See [Base styling decisions](docs/base-styling.md).
 

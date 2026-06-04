@@ -36,7 +36,7 @@ Sizes are raw bytes and gzip bytes from `gzip -c`.
 | `tokens.css` | 9,505 B | 2,232 B | Design tokens only. |
 | `reset.css` | 713 B | 430 B | Reset layer only. |
 | `base.css` | 3,455 B | 1,152 B | Base element styles. |
-| `app.css` | 505 B | 296 B | Optional app/site defaults for raw links, lists, and controls. |
+| `defaults.css` | 505 B | 296 B | Optional site/UI defaults for raw links, lists, and controls. |
 | `layout.css` | 7,510 B | 1,866 B | Layout primitives such as container, stack, grid, app shell, sidebar, scroll snap, sticky, media object, and split. |
 | `components.css` | 31,195 B | 5,001 B | Component primitives such as button, icon, avatar, chart, card, surface, nav, form, alert, native overlays, disclosure, tabs, website patterns, accessibility states, and input. |
 | `utilities.css` | 7,498 B | 1,886 B | Static type, prose, content, positioning, motion, accessibility, link, list, colour, border, and shadow helpers. |
@@ -60,7 +60,7 @@ Use layer imports instead when a project wants a smaller core surface:
 @import "@synced/flow/tokens.css";
 @import "@synced/flow/reset.css";
 @import "@synced/flow/base.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "@synced/flow/layout.css";
 @import "@synced/flow/components.css";
 @import "@synced/flow/utilities.css";
@@ -68,7 +68,7 @@ Use layer imports instead when a project wants a smaller core surface:
 ```
 
 Leave out `components.css` if the project only uses tokens and layout
-primitives. Leave out `app.css` when content-style browser affordances should
+primitives. Leave out `defaults.css` when content-style browser affordances should
 stay intact. Leave out `utilities.css` unless the project uses static type,
 prose, accessibility, link, list, or full-bleed helpers.
 

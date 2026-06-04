@@ -9,9 +9,10 @@ const budgets = {
   'layout.css': 2450,
   'utilities.css': 2200,
   'tokens.css': 2600,
+  'defaults.css': 650,
 }
 
-const cssFiles = ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'app.css', 'layout.css', 'components.css', 'utilities.css']
+const cssFiles = ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'defaults.css', 'layout.css', 'components.css', 'utilities.css']
 const failures = []
 
 checkRuntimeDependencies()

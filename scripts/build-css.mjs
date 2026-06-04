@@ -295,7 +295,7 @@ function buildBaseCss() {
 }`
 }
 
-function buildAppCss() {
+function buildDefaultsCss() {
   return `@layer app {
   :where(a) {
     color: inherit;
@@ -2353,7 +2353,7 @@ function buildCssOutputs() {
     'tokens.css': buildCssFile([buildTokensCss()]),
     'reset.css': buildCssFile([buildResetCss()]),
     'base.css': buildCssFile([buildBaseCss()]),
-    'app.css': buildCssFile([buildAppCss()]),
+    'defaults.css': buildCssFile([buildDefaultsCss()]),
     'layout.css': buildCssFile([buildLayoutCss()]),
     'components.css': buildCssFile([buildComponentCss()]),
     'utilities.css': buildCssFile([buildUtilityCss()]),

@@ -74,10 +74,10 @@ export type SyncedFlowConfig = {
    */
   includeCore?: boolean
   /**
-   * Include app/site defaults when includeCore is true. For modular projects,
-   * import @synced/flow/app.css from the CSS entry instead.
+   * Include site/UI defaults when includeCore is true. For modular projects,
+   * import @synced/flow/defaults.css from the CSS entry instead.
    */
-  includeApp?: boolean
+  includeDefaults?: boolean
   /**
    * Enable breakpoint-style variants such as sm:, md:, lg:, and xl:.
    * Leave false for strict fluid projects; enable only during migrations.

@@ -61,7 +61,7 @@ For simple bundled apps:
 
 ```css
 @import "@synced/flow/styles.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "./synced-flow.generated.css";
 ```
 
@@ -71,14 +71,14 @@ For smaller core loading, import only the layers needed:
 @import "@synced/flow/tokens.css";
 @import "@synced/flow/reset.css";
 @import "@synced/flow/base.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "@synced/flow/layout.css";
 @import "@synced/flow/components.css";
 @import "./synced-flow.generated.css";
 ```
 
 Leave out `components.css` if the project only uses tokens and layout
-primitives. Leave out `app.css` when content-style browser defaults should stay
+primitives. Leave out `defaults.css` when content-style browser defaults should stay
 intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
 `sf-prose`, `sr-only`, `not-sr-only`, `sf-skip-link`, `sf-focus-ring`,
 `sf-touch-target`, `sf-list-reset`, `sf-link`, or `sf-full-bleed` are used.
@@ -105,8 +105,8 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
 - Keep browser affordances by default: body links stay underlined, content
   lists keep markers, focus styles stay visible, and reduced-motion preferences
   are respected.
-- Include `@synced/flow/app.css`, or run `synced-flow add app`, when an
-  app/site should remove raw link underlines and list markers globally.
+- Include `@synced/flow/defaults.css`, or run `synced-flow add defaults`, when a
+  site or app should remove raw link underlines and list markers globally.
 - Use `sr-only` / `not-sr-only`, `sf-skip-link`, `sf-focus-ring`,
   `sf-touch-target`, `sf-list-reset`, `sf-link`, and `sf-link-plain` for
   accessibility and explicit UI styling.

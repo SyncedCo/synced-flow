@@ -36,11 +36,11 @@ if (command === 'skill') {
 
 if (command === 'add') {
   const addTarget = args.shift()
-  if (addTarget === 'app') {
-    runAddApp()
+  if (addTarget === 'defaults') {
+    runAddDefaults()
     process.exit(0)
   }
-  console.error(`Unknown add target "${addTarget ?? ''}". Use: synced-flow add app`)
+  console.error(`Unknown add target "${addTarget ?? ''}". Use: synced-flow add defaults`)
   process.exit(1)
 }
 
@@ -102,7 +102,7 @@ const cliScans = readOptions('scan')
 const positionalSourceDirs = command === 'lint' ? readPositionals() : []
 const sourceDirs = cliScans.length ? cliScans : positionalSourceDirs.length ? positionalSourceDirs : config.scan ?? (command === 'lint' ? ['.'] : [])
 const includeCore = readBooleanOption('include-core') ?? config.includeCore ?? false
-const includeApp = readBooleanOption('app') ?? config.includeApp ?? false
+const includeDefaults = readBooleanOption('defaults') ?? config.includeDefaults ?? false
 const responsiveVariants = readBooleanOption('responsive-variants') ?? config.responsiveVariants ?? false
 const failOnUnsupported = readBooleanOption('fail-on-unsupported') ?? config.failOnUnsupported ?? true
 const quiet = args.includes('--quiet') || config.quiet === true
@@ -282,7 +282,7 @@ function validateConfig(config, label) {
   assertOptionalString(config, 'cwd', errors)
   assertOptionalString(config, 'out', errors)
   assertOptionalBoolean(config, 'includeCore', errors)
-  assertOptionalBoolean(config, 'includeApp', errors)
+  assertOptionalBoolean(config, 'includeDefaults', errors)
   assertOptionalBoolean(config, 'responsiveVariants', errors)
   assertOptionalBoolean(config, 'failOnUnsupported', errors)
   assertOptionalBoolean(config, 'quiet', errors)
@@ -378,7 +378,7 @@ function printHelp() {
   synced-flow agents install [options]
   synced-flow agents status [options]
   synced-flow skill [options]
-  synced-flow add app [options]
+  synced-flow add defaults [options]
   synced-flow build [options]
   synced-flow doctor [options]
   synced-flow validate [options]
@@ -406,9 +406,9 @@ Options:
   --check                      Fail if the generated CSS is out of date.
   --include-core               Include reset, base, layout, and component CSS in output.
   --no-include-core            Only generate project tokens and utility CSS.
-  --app                        Include app.css opinionated app/site defaults.
-  --no-app                     Keep app.css out of init/generated core output.
-  --file <file>                CSS file to update for "synced-flow add app".
+  --defaults                   Include defaults.css opinionated site/UI defaults.
+  --no-defaults                Keep defaults.css out of init/generated core output.
+  --file <file>                CSS file to update for "synced-flow add defaults".
   --responsive-variants        Enable sm:/md:/lg:/xl: compatibility variants.
   --no-responsive-variants     Treat responsive variants as unsupported.
   --fail-on-unsupported        Fail when class tokens cannot be generated.
@@ -439,7 +439,7 @@ async function runInit() {
   const noScripts = args.includes('--no-scripts')
   const responsive = readBooleanOption('responsive-variants') ?? preset === 'legacy'
   const includeCore = readBooleanOption('include-core') ?? preset === 'wordpress'
-  const includeApp = readBooleanOption('app') ?? defaultIncludeApp(preset)
+  const includeDefaults = readBooleanOption('defaults') ?? defaultIncludeDefaults(preset)
   const scanDirs = readOptions('scan').length ? readOptions('scan') : defaultScanDirs(targetCwd, preset)
   const outPath = readOption('out') ?? defaultOutputPath(targetCwd, preset)
   const stylePath = includeCore ? outPath : defaultStyleEntryPath(targetCwd, preset, outPath)
@@ -459,7 +459,7 @@ export default defineConfig({
   scan: ${formatStringArray(scanDirs)},
   out: '${outPath}',
   responsiveVariants: ${responsive},
-${includeCore ? '  includeCore: true,\n' : ''}${includeCore && includeApp ? '  includeApp: true,\n' : ''}  theme: themePresets.${themeName},
+${includeCore ? '  includeCore: true,\n' : ''}${includeCore && includeDefaults ? '  includeDefaults: true,\n' : ''}  theme: themePresets.${themeName},
 ${safelistValues.length ? `  safelist: ${formatStringArray(safelistValues)},\n` : ''}})
 `,
     force
@@ -476,7 +476,7 @@ ${safelistValues.length ? `  safelist: ${formatStringArray(safelistValues)},\n` 
     writeProjectFile(
       styleFile,
       `@import "@synced/flow/styles.css";
-${includeApp ? '@import "@synced/flow/app.css";\n' : ''}@import "./${relative(dirname(styleFile), generatedFile).replace(/\\/g, '/')}";
+${includeDefaults ? '@import "@synced/flow/defaults.css";\n' : ''}@import "./${relative(dirname(styleFile), generatedFile).replace(/\\/g, '/')}";
 
 /* Prefer synced-flow.config.mjs theme overrides for reusable project tokens. */
 `,
@@ -518,10 +518,10 @@ ${includeApp ? '@import "@synced/flow/app.css";\n' : ''}@import "./${relative(di
   }
   console.log('  2. Run pnpm flow:build')
   console.log('  3. Run pnpm flow:doctor')
-  if (includeApp) {
-    console.log('Note: app.css removes raw link underlines and list markers for common app/site UI. Use sf-link, sf-list-disc, or sf-prose when content semantics need them.')
+  if (includeDefaults) {
+    console.log('Note: defaults.css removes raw link underlines and list markers for common site/UI surfaces. Use sf-link, sf-list-disc, or sf-prose when content semantics need them.')
   } else {
-    console.log('Note: base CSS keeps links visibly underlined and list markers intact. Add @synced/flow/app.css or run synced-flow add app for app/site defaults.')
+    console.log('Note: base CSS keeps links visibly underlined and list markers intact. Add @synced/flow/defaults.css or run synced-flow add defaults for site/UI defaults.')
   }
   console.log('AI setup: run synced-flow agents install to add project-level agent guidance.')
 }
@@ -811,12 +811,12 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-function runAddApp() {
+function runAddDefaults() {
   const targetCwd = resolve(readOption('cwd', process.cwd()))
   const cssPath = readOption('file') ?? readOption('css') ?? findStyleEntry(targetCwd)
 
   if (!cssPath) {
-    console.error('Could not find a CSS entry. Pass --file <path>, for example: synced-flow add app --file src/synced-flow.css')
+    console.error('Could not find a CSS entry. Pass --file <path>, for example: synced-flow add defaults --file src/synced-flow.css')
     process.exit(1)
   }
 
@@ -827,24 +827,24 @@ function runAddApp() {
   }
 
   const css = readFileSync(cssFile, 'utf8')
-  if (css.includes('@synced/flow/app.css')) {
-    console.log(`skip ${relative(targetCwd, cssFile)} already imports @synced/flow/app.css.`)
+  if (css.includes('@synced/flow/defaults.css')) {
+    console.log(`skip ${relative(targetCwd, cssFile)} already imports @synced/flow/defaults.css.`)
     return
   }
 
-  const appImport = '@import "@synced/flow/app.css";'
+  const defaultsImport = '@import "@synced/flow/defaults.css";'
   let nextCss
 
   if (css.includes('@import "@synced/flow/styles.css";')) {
-    nextCss = css.replace('@import "@synced/flow/styles.css";', `@import "@synced/flow/styles.css";\n${appImport}`)
+    nextCss = css.replace('@import "@synced/flow/styles.css";', `@import "@synced/flow/styles.css";\n${defaultsImport}`)
   } else if (css.includes('@import "@synced/flow/base.css";')) {
-    nextCss = css.replace('@import "@synced/flow/base.css";', `@import "@synced/flow/base.css";\n${appImport}`)
+    nextCss = css.replace('@import "@synced/flow/base.css";', `@import "@synced/flow/base.css";\n${defaultsImport}`)
   } else {
-    nextCss = `${appImport}\n${css}`
+    nextCss = `${defaultsImport}\n${css}`
   }
 
   writeFileSync(cssFile, nextCss)
-  console.log(`update ${relative(targetCwd, cssFile)} with @synced/flow/app.css`)
+  console.log(`update ${relative(targetCwd, cssFile)} with @synced/flow/defaults.css`)
 }
 
 async function runDoctor() {
@@ -1641,7 +1641,7 @@ function getPublicCatalog() {
   return {
     name: '@synced/flow',
     purpose: 'A dependency-free fluid CSS system for complete modern websites using tokens, layout primitives, native components, recipes, and generated utilities.',
-    cssFiles: ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'app.css', 'layout.css', 'components.css', 'utilities.css'],
+    cssFiles: ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'defaults.css', 'layout.css', 'components.css', 'utilities.css'],
     commands: ['init', 'agents install', 'agents status', 'skill', 'build', 'watch', 'lint', 'doctor', 'tokens', 'catalog', 'suggest', 'pattern', 'recipe', 'theme init', 'theme validate'],
     tokens,
     classes: tokens.starterClasses,
@@ -1843,7 +1843,7 @@ export default defineConfig({
       {
         path: 'src/app/synced-flow.css',
         contents: `@import "@synced/flow/styles.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "./synced-flow.generated.css";
 `,
       },
@@ -1875,7 +1875,7 @@ ${renderMarkup(htmlMarkup, 'next', safeRecipe.name)}
       {
         path: 'src/styles/synced-flow.css',
         contents: `@import "@synced/flow/styles.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "./synced-flow.generated.css";
 `,
       },
@@ -1897,7 +1897,7 @@ ${htmlMarkup}
       {
         path: 'src/synced-flow.css',
         contents: `@import "@synced/flow/styles.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "./synced-flow.generated.css";
 `,
       },
@@ -1917,7 +1917,7 @@ document.querySelector('#app').innerHTML = \`${htmlMarkup.replace(/`/g, '\\`')}\
       {
         path: 'synced-flow.css',
         contents: `@import "@synced/flow/styles.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "./synced-flow.generated.css";
 `,
       },
@@ -2361,7 +2361,7 @@ function defaultStyleEntryPath(targetCwd, preset, outPath) {
   return existsSync(resolve(targetCwd, 'src')) ? 'src/synced-flow.css' : 'synced-flow.css'
 }
 
-function defaultIncludeApp(preset) {
+function defaultIncludeDefaults(preset) {
   return ['next', 'vite', 'react', 'astro', 'plain'].includes(preset)
 }
 
@@ -2440,12 +2440,12 @@ function allProjectFiles(targetCwd) {
 }
 
 function findDuplicateCoreImports(targetCwd) {
-  const modularImports = ['tokens.css', 'reset.css', 'base.css', 'app.css', 'layout.css', 'components.css', 'utilities.css']
+  const modularCoreImports = ['tokens.css', 'reset.css', 'base.css', 'layout.css', 'components.css', 'utilities.css']
   return allProjectFiles(targetCwd)
     .filter((file) => file.endsWith('.css'))
     .filter((file) => {
       const css = readFileSync(file, 'utf8')
-      return css.includes('@synced/flow/styles.css') && modularImports.some((name) => css.includes(`@synced/flow/${name}`))
+      return css.includes('@synced/flow/styles.css') && modularCoreImports.some((name) => css.includes(`@synced/flow/${name}`))
     })
     .map((file) => relative(targetCwd, file))
 }
@@ -3796,7 +3796,7 @@ function buildBaseCss() {
 }`
 }
 
-function buildAppCss() {
+function buildDefaultsCss() {
   return `@layer app {
   :where(a) {
     color: inherit;
@@ -4567,7 +4567,7 @@ function levenshtein(a, b) {
 
 const tokens = collectClassTokens()
 const utilities = buildUtilitiesCss(tokens)
-const coreCss = includeCore ? [buildBaseCss(), includeApp ? buildAppCss() : '', buildLayoutCss(), buildComponentCss(), buildStaticUtilitiesCss()] : []
+const coreCss = includeCore ? [buildBaseCss(), includeDefaults ? buildDefaultsCss() : '', buildLayoutCss(), buildComponentCss(), buildStaticUtilitiesCss()] : []
 const themeCss = buildThemeCss(config.theme)
 const css = [
   '/* Generated by @synced/flow. Edit synced-flow.config.mjs or run synced-flow build to refresh. */',

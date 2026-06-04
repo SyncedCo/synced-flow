@@ -15,20 +15,20 @@ make new projects consistent without hiding important browser affordances.
 ## Optional App Defaults
 
 Most app and marketing-site interfaces do not want raw link underlines in
-navigation, or bullets on menu lists. Add the optional app layer for those
+navigation, or bullets on menu lists. Add the optional defaults layer for those
 project-wide UI defaults:
 
 ```css
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 ```
 
 You can also add it later with the CLI:
 
 ```bash
-pnpm exec synced-flow add app --file src/synced-flow.css
+pnpm exec synced-flow add defaults --file src/synced-flow.css
 ```
 
-`app.css` removes raw link underlines, resets `ol`/`ul`/`menu` markers and start
+`defaults.css` removes raw link underlines, resets `ol`/`ul`/`menu` markers and start
 padding, and strips basic button/fieldset chrome. Use `sf-link`, `sf-list-disc`,
 `sf-list-decimal`, or `sf-prose` where content needs visible semantics again.
 

@@ -78,7 +78,7 @@ Choose one core import strategy. Most projects use the full package stylesheet:
 
 ```css
 @import "@synced/flow/styles.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "./synced-flow.generated.css";
 ```
 
@@ -92,15 +92,15 @@ uses:
 @import "@synced/flow/tokens.css";
 @import "@synced/flow/reset.css";
 @import "@synced/flow/base.css";
-@import "@synced/flow/app.css";
+@import "@synced/flow/defaults.css";
 @import "@synced/flow/layout.css";
 @import "@synced/flow/components.css";
 @import "@synced/flow/utilities.css";
 @import "./synced-flow.generated.css";
 ```
 
-`app.css` is optional. It removes raw link underlines and list markers for
-common app/site UI. Leave it out, or run `synced-flow init --no-app`, when a
+`defaults.css` is optional. It removes raw link underlines and list markers for
+common site/UI surfaces. Leave it out, or run `synced-flow init --no-defaults`, when a
 project should keep content-style browser defaults.
 
 Keep `utilities.css` out unless the project uses static helpers such as
@@ -124,7 +124,7 @@ For a full project flow, see [Build a site walkthrough](build-a-site-walkthrough
 
 Synced Flow uses a conservative base: links remain visibly underlined, lists
 keep their markers, focus styles are visible, and motion preferences are
-respected. Add `@synced/flow/app.css` or run `synced-flow add app` when a
+respected. Add `@synced/flow/defaults.css` or run `synced-flow add defaults` when a
 site should use app-style defaults globally.
 
 ## Build
