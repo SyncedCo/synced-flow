@@ -44,6 +44,7 @@ brand drift, or generated class chaos.
 ## Links
 
 - GitHub: [github.com/SyncedCo/synced-flow](https://github.com/SyncedCo/synced-flow)
+- Docs: [docs.syncedflow.dev](https://docs.syncedflow.dev)
 - Website: [syncedco.com](https://syncedco.com)
 - Issues: [github.com/SyncedCo/synced-flow/issues](https://github.com/SyncedCo/synced-flow/issues)
 - Support: [SUPPORT.md](SUPPORT.md)
