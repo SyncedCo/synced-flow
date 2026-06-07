@@ -61,3 +61,21 @@ node bin/synced-flow.mjs doctor --cwd examples/plain-html
 
 If a browser-visible example changes, inspect it at mobile and desktop widths
 before calling the release ready.
+
+## npm Trusted Publishing
+
+Publishing is handled by `.github/workflows/npm-publish.yml` when a `v*` tag is
+pushed. The workflow checks that the tag matches `package.json`, installs with
+pnpm, runs tests, verifies package contents, and publishes with npm trusted
+publishing.
+
+Configure npm package trusted publishing for `@syncedco/flow` with:
+
+- Provider: GitHub Actions
+- Organization or user: `SyncedCo`
+- Repository: `synced-flow`
+- Workflow filename: `npm-publish.yml`
+- Allowed action: `npm publish`
+
+After this is verified, prefer npm's package setting to require two-factor
+authentication and disallow token publishing.
