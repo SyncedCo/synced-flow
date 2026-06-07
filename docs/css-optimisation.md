@@ -50,20 +50,20 @@ utility measured 7,031 B raw and 1,943 B gzip.
 Use the full stylesheet when simplicity matters:
 
 ```css
-@import "@synced/flow/styles.css";
+@import "@syncedco/flow/styles.css";
 @import "./synced-flow.generated.css";
 ```
 
 Use layer imports instead when a project wants a smaller core surface:
 
 ```css
-@import "@synced/flow/tokens.css";
-@import "@synced/flow/reset.css";
-@import "@synced/flow/base.css";
-@import "@synced/flow/defaults.css";
-@import "@synced/flow/layout.css";
-@import "@synced/flow/components.css";
-@import "@synced/flow/utilities.css";
+@import "@syncedco/flow/tokens.css";
+@import "@syncedco/flow/reset.css";
+@import "@syncedco/flow/base.css";
+@import "@syncedco/flow/defaults.css";
+@import "@syncedco/flow/layout.css";
+@import "@syncedco/flow/components.css";
+@import "@syncedco/flow/utilities.css";
 @import "./synced-flow.generated.css";
 ```
 

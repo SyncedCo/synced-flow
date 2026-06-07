@@ -6,7 +6,7 @@ tokens, generated utility CSS, and no default dependency on viewport breakpoints
 ## Install
 
 ```bash
-pnpm add @synced/flow
+pnpm add @syncedco/flow
 pnpm exec synced-flow init --theme synced
 ```
 
@@ -77,8 +77,8 @@ import './synced-flow.css'
 Choose one core import strategy. Most projects use the full package stylesheet:
 
 ```css
-@import "@synced/flow/styles.css";
-@import "@synced/flow/defaults.css";
+@import "@syncedco/flow/styles.css";
+@import "@syncedco/flow/defaults.css";
 @import "./synced-flow.generated.css";
 ```
 
@@ -89,13 +89,13 @@ For tighter loading, skip `styles.css` and import only the layers the project
 uses:
 
 ```css
-@import "@synced/flow/tokens.css";
-@import "@synced/flow/reset.css";
-@import "@synced/flow/base.css";
-@import "@synced/flow/defaults.css";
-@import "@synced/flow/layout.css";
-@import "@synced/flow/components.css";
-@import "@synced/flow/utilities.css";
+@import "@syncedco/flow/tokens.css";
+@import "@syncedco/flow/reset.css";
+@import "@syncedco/flow/base.css";
+@import "@syncedco/flow/defaults.css";
+@import "@syncedco/flow/layout.css";
+@import "@syncedco/flow/components.css";
+@import "@syncedco/flow/utilities.css";
 @import "./synced-flow.generated.css";
 ```
 
@@ -124,7 +124,7 @@ For a full project flow, see [Build a site walkthrough](build-a-site-walkthrough
 
 Synced Flow uses a conservative base: links remain visibly underlined, lists
 keep their markers, focus styles are visible, and motion preferences are
-respected. Add `@synced/flow/defaults.css` or run `synced-flow add defaults` when a
+respected. Add `@syncedco/flow/defaults.css` or run `synced-flow add defaults` when a
 site should use app-style defaults globally.
 
 ## Build
@@ -163,7 +163,7 @@ export default defineConfig({
 Use the CSS entry file for one-off local overrides.
 
 ```css
-@import "@synced/flow/styles.css";
+@import "@syncedco/flow/styles.css";
 @import "./synced-flow.generated.css";
 
 :root {
@@ -175,7 +175,7 @@ Use the CSS entry file for one-off local overrides.
 ## Config
 
 ```js
-import { defineConfig } from '@synced/flow/config'
+import { defineConfig } from '@syncedco/flow/config'
 
 export default defineConfig({
   scan: ['src', 'components'],

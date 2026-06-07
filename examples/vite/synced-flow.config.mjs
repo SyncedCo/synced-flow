@@ -1,5 +1,5 @@
-import { defineConfig } from '@synced/flow/config'
-import { themePresets } from '@synced/flow/presets'
+import { defineConfig } from '@syncedco/flow/config'
+import { themePresets } from '@syncedco/flow/presets'
 
 export default defineConfig({
   scan: ['src'],

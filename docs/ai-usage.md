@@ -57,7 +57,7 @@ before finalising the theme.
 - Keep browser affordances unless the UI intentionally replaces them: body
   links stay underlined, content lists keep markers, and focus states remain
   visible.
-- Use `@synced/flow/defaults.css` for common site/UI defaults when raw links should
+- Use `@syncedco/flow/defaults.css` for common site/UI defaults when raw links should
   not be underlined and menu lists should not show bullets. Add it with
   `synced-flow add defaults` if a project was initialised without it.
 - Use `sr-only` / `not-sr-only`, `sf-skip-link`, `sf-focus-ring`,

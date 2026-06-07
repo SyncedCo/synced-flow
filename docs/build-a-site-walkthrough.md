@@ -6,7 +6,7 @@ decisions first, then recipes, then verification.
 ## 1. Install And Initialise
 
 ```bash
-pnpm add @synced/flow
+pnpm add @syncedco/flow
 pnpm exec synced-flow init --preset next --theme synced --agents
 ```
 
@@ -113,7 +113,7 @@ ad hoc token overrides, AI guidance, and release-facing guardrails.
 Use the full core import while building:
 
 ```css
-@import "@synced/flow/styles.css";
+@import "@syncedco/flow/styles.css";
 @import "./synced-flow.generated.css";
 ```
 

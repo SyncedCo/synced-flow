@@ -70,12 +70,12 @@ export type SyncedFlowConfig = {
   theme?: SyncedFlowTheme
   /**
    * Include reset, base, layout, and component CSS in the generated file.
-   * Most projects should import @synced/flow/styles.css and leave this false.
+   * Most projects should import @syncedco/flow/styles.css and leave this false.
    */
   includeCore?: boolean
   /**
    * Include site/UI defaults when includeCore is true. For modular projects,
-   * import @synced/flow/defaults.css from the CSS entry instead.
+   * import @syncedco/flow/defaults.css from the CSS entry instead.
    */
   includeDefaults?: boolean
   /**

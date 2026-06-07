@@ -6,7 +6,7 @@ WordPress to resolve npm CSS imports in the browser.
 ## Setup
 
 ```bash
-pnpm add @synced/flow
+pnpm add @syncedco/flow
 pnpm exec synced-flow init --preset wordpress
 pnpm flow:build
 ```

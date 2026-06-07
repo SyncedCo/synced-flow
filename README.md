@@ -68,7 +68,7 @@ SyncedCo, or Synced Flow branding in a way that implies official endorsement.
 ## Install
 
 ```bash
-pnpm add @synced/flow
+pnpm add @syncedco/flow
 pnpm exec synced-flow init --preset next --theme synced --agents
 ```
 
@@ -89,8 +89,8 @@ Most projects should choose one core import strategy.
 Use the full stylesheet when simplicity matters:
 
 ```css
-@import "@synced/flow/styles.css";
-@import "@synced/flow/defaults.css";
+@import "@syncedco/flow/styles.css";
+@import "@syncedco/flow/defaults.css";
 ```
 
 `styles.css` already includes the tokens, reset, base, layout, components, and
@@ -105,13 +105,13 @@ For tighter CSS loading, skip `styles.css` and import only the layers the
 project uses:
 
 ```css
-@import "@synced/flow/tokens.css";
-@import "@synced/flow/reset.css";
-@import "@synced/flow/base.css";
-@import "@synced/flow/defaults.css";
-@import "@synced/flow/layout.css";
-@import "@synced/flow/components.css";
-@import "@synced/flow/utilities.css";
+@import "@syncedco/flow/tokens.css";
+@import "@syncedco/flow/reset.css";
+@import "@syncedco/flow/base.css";
+@import "@syncedco/flow/defaults.css";
+@import "@syncedco/flow/layout.css";
+@import "@syncedco/flow/components.css";
+@import "@syncedco/flow/utilities.css";
 ```
 
 ## CSS Size And Loading
@@ -168,7 +168,7 @@ Synced Flow keeps the browser affordances people rely on:
 Use opt-in helpers when UI needs a different treatment: `sf-link-plain` for
 navigation links, `sf-list-reset` for menu lists, `sr-only` for assistive text,
 `sf-skip-link` for skip navigation, and `sf-touch-target` for compact controls.
-For site/UI projects, include `@synced/flow/defaults.css` or run
+For site/UI projects, include `@syncedco/flow/defaults.css` or run
 `synced-flow add defaults` to apply those common UI defaults globally.
 
 See [Base styling decisions](docs/base-styling.md).
@@ -214,8 +214,8 @@ building pages.
 You can also create the config by hand:
 
 ```js
-import { defineConfig } from '@synced/flow/config'
-import { themePresets } from '@synced/flow/presets'
+import { defineConfig } from '@syncedco/flow/config'
+import { themePresets } from '@syncedco/flow/presets'
 
 export default defineConfig({
   scan: ['app', 'components', 'lib'],
@@ -229,7 +229,7 @@ export default defineConfig({
 Import the generated file after the core stylesheet:
 
 ```ts
-import '@synced/flow/styles.css'
+import '@syncedco/flow/styles.css'
 import './synced-flow.generated.css'
 ```
 
@@ -287,7 +287,7 @@ synced-flow build --scan app --scan components --out app/synced-flow.generated.c
 
 Use `--include-core` only when you want the generated CSS file to contain the
 reset, base, layout, and component layers instead of importing
-`@synced/flow/styles.css` separately.
+`@syncedco/flow/styles.css` separately.
 
 For WordPress themes or plugins, use the WordPress preset. It scans PHP and
 template files and writes one CSS file that can be enqueued directly:

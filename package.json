@@ -1,9 +1,22 @@
 {
-  "name": "@synced/flow",
+  "name": "@syncedco/flow",
   "version": "0.1.0",
   "description": "AI-native fluid CSS design system for brand-consistent websites and agency builds.",
   "type": "module",
   "license": "MIT",
+  "keywords": [
+    "css",
+    "design-system",
+    "fluid-css",
+    "design-tokens",
+    "oklch",
+    "cli",
+    "ai",
+    "wordpress",
+    "nextjs",
+    "astro",
+    "vite"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SyncedCo/synced-flow.git"
@@ -11,6 +24,9 @@
   "homepage": "https://syncedco.com",
   "bugs": {
     "url": "https://github.com/SyncedCo/synced-flow/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "sideEffects": [
     "**/*.css"
@@ -54,7 +70,7 @@
     "TRADEMARKS.md"
   ],
   "bin": {
-    "synced-flow": "./bin/synced-flow.mjs"
+    "synced-flow": "bin/synced-flow.mjs"
   },
   "scripts": {
     "build": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",

@@ -14,7 +14,7 @@ should only support migration from existing projects.
 
 ## First Moves
 
-1. Check whether `@synced/flow` is installed.
+1. Check whether `@syncedco/flow` is installed.
 2. Check for `synced-flow.config.mjs`.
 3. Run or recommend `synced-flow agents status` to see whether project-level
    guidance is installed.
@@ -60,20 +60,20 @@ template files, enables `includeCore`, and writes an enqueue-ready CSS file at
 For simple bundled apps:
 
 ```css
-@import "@synced/flow/styles.css";
-@import "@synced/flow/defaults.css";
+@import "@syncedco/flow/styles.css";
+@import "@syncedco/flow/defaults.css";
 @import "./synced-flow.generated.css";
 ```
 
 For smaller core loading, import only the layers needed:
 
 ```css
-@import "@synced/flow/tokens.css";
-@import "@synced/flow/reset.css";
-@import "@synced/flow/base.css";
-@import "@synced/flow/defaults.css";
-@import "@synced/flow/layout.css";
-@import "@synced/flow/components.css";
+@import "@syncedco/flow/tokens.css";
+@import "@syncedco/flow/reset.css";
+@import "@syncedco/flow/base.css";
+@import "@syncedco/flow/defaults.css";
+@import "@syncedco/flow/layout.css";
+@import "@syncedco/flow/components.css";
 @import "./synced-flow.generated.css";
 ```
 
@@ -105,7 +105,7 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
 - Keep browser affordances by default: body links stay underlined, content
   lists keep markers, focus styles stay visible, and reduced-motion preferences
   are respected.
-- Include `@synced/flow/defaults.css`, or run `synced-flow add defaults`, when a
+- Include `@syncedco/flow/defaults.css`, or run `synced-flow add defaults`, when a
   site or app should remove raw link underlines and list markers globally.
 - Use `sr-only` / `not-sr-only`, `sf-skip-link`, `sf-focus-ring`,
   `sf-touch-target`, `sf-list-reset`, `sf-link`, and `sf-link-plain` for

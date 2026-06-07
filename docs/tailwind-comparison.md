@@ -13,10 +13,10 @@ using its own fluid, token-led styling model.
 
 | Migration expectation | Synced Flow direction |
 | --- | --- |
-| Install a package, import one stylesheet, start building | `pnpm add @synced/flow`, `synced-flow init`, import the generated CSS entry |
+| Install a package, import one stylesheet, start building | `pnpm add @syncedco/flow`, `synced-flow init`, import the generated CSS entry |
 | CLI builds CSS from scanned source files | `synced-flow build` scans configured project folders and writes generated utility CSS |
 | Framework-specific setup docs | `synced-flow init --preset next/vite/astro/plain` |
-| Theme variables as the styling API | CSS custom properties in `@synced/flow/styles.css` plus project overrides |
+| Theme variables as the styling API | CSS custom properties in `@syncedco/flow/styles.css` plus project overrides |
 | Source registration and monorepo-friendly paths | `scan` and `cwd` config options |
 | Safelisting for dynamic class names | `safelist` config option and `--safelist` CLI flag |
 | Setup diagnostics | `synced-flow doctor` |

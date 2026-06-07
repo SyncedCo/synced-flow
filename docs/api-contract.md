@@ -10,7 +10,7 @@ These are intended for application code and examples.
 
 | Surface | Public API |
 | --- | --- |
-| Imports | `@synced/flow/styles.css`, `tokens.css`, `reset.css`, `base.css`, `defaults.css`, `layout.css`, `components.css`, `utilities.css` |
+| Imports | `@syncedco/flow/styles.css`, `tokens.css`, `reset.css`, `base.css`, `defaults.css`, `layout.css`, `components.css`, `utilities.css` |
 | Tokens | `--sf-*` custom properties emitted by `tokens.css` |
 | Theme config | `theme.fonts`, `theme.colours`, `theme.darkColours`, `theme.radii`, `theme.layout`, `theme.components` |
 | Layout classes | `sf-container`, `sf-section`, `sf-stack`, `sf-flow`, `sf-cluster`, `sf-repel`, `sf-toolbar`, `sf-app-shell`, `sf-app-sidebar`, `sf-app-main`, `sf-auto-grid`, `sf-switcher`, `sf-sidebar`, `sf-split`, `sf-frame`, `sf-cover`, `sf-metric-grid`, `sf-pipeline` |

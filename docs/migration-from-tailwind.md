@@ -10,7 +10,7 @@ Remove Tailwind packages when the project no longer needs them:
 
 ```bash
 pnpm remove tailwindcss @tailwindcss/postcss @tailwindcss/vite tailwind-merge
-pnpm add @synced/flow
+pnpm add @syncedco/flow
 pnpm exec synced-flow init
 ```
 

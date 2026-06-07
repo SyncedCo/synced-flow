@@ -184,7 +184,7 @@ It uses Synced Flow primitives such as `sf-app-shell`, `sf-app-sidebar`,
     <article class="sf-sidebar__content sf-prose">
       <h1 id="install">Install Synced Flow</h1>
       <p>Import the full stylesheet for the smallest setup path, or use modular layers when a project needs tighter control.</p>
-      <pre><code>@import "@synced/flow/styles.css";</code></pre>
+      <pre><code>@import "@syncedco/flow/styles.css";</code></pre>
       <h2 id="tokens">Tokens</h2>
       <p>Use <code>--sf-*</code> variables for stable project styling.</p>
       <h2 id="components">Components</h2>

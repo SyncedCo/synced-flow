@@ -12,11 +12,11 @@ const cli = join(packageRoot, 'bin/synced-flow.mjs')
 function tempProject() {
   const cwd = mkdtempSync(join(tmpdir(), 'synced-flow-lint-'))
   mkdirSync(join(cwd, 'src'), { recursive: true })
-  mkdirSync(join(cwd, 'node_modules/@synced'), { recursive: true })
-  symlinkSync(packageRoot, join(cwd, 'node_modules/@synced/flow'), 'dir')
+  mkdirSync(join(cwd, 'node_modules/@syncedco'), { recursive: true })
+  symlinkSync(packageRoot, join(cwd, 'node_modules/@syncedco/flow'), 'dir')
   writeFileSync(
     join(cwd, 'package.json'),
-    JSON.stringify({ type: 'module', dependencies: { '@synced/flow': 'file:../synced-flow' } }, null, 2) + '\n'
+    JSON.stringify({ type: 'module', dependencies: { '@syncedco/flow': 'file:../synced-flow' } }, null, 2) + '\n'
   )
   writeFileSync(
     join(cwd, 'synced-flow.config.mjs'),

@@ -11,7 +11,7 @@
     "flow:doctor": "synced-flow doctor"
   },
   "dependencies": {
-    "@synced/flow": "file:../..",
+    "@syncedco/flow": "file:../..",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^7.0.0",
     "react": "^19.0.0",

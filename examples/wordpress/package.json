@@ -10,6 +10,6 @@
     "flow:doctor": "synced-flow doctor"
   },
   "dependencies": {
-    "@synced/flow": "file:../.."
+    "@syncedco/flow": "file:../.."
   }
 }

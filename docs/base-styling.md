@@ -19,7 +19,7 @@ navigation, or bullets on menu lists. Add the optional defaults layer for those
 project-wide UI defaults:
 
 ```css
-@import "@synced/flow/defaults.css";
+@import "@syncedco/flow/defaults.css";
 ```
 
 You can also add it later with the CLI:
