@@ -3,12 +3,65 @@
   "version": 3,
   "settings": {
     "appearanceTools": true,
+    "color": {
+      "palette": [
+        {
+          "slug": "base",
+          "name": "Base",
+          "color": "var(--sf-colour-background)"
+        },
+        {
+          "slug": "foreground",
+          "name": "Foreground",
+          "color": "var(--sf-colour-foreground)"
+        },
+        {
+          "slug": "muted",
+          "name": "Muted",
+          "color": "var(--sf-colour-muted)"
+        },
+        {
+          "slug": "surface",
+          "name": "Surface",
+          "color": "var(--sf-colour-surface)"
+        },
+        {
+          "slug": "surface-alt",
+          "name": "Surface Alt",
+          "color": "var(--sf-colour-surface-alt)"
+        },
+        {
+          "slug": "surface-elevated",
+          "name": "Surface Elevated",
+          "color": "var(--sf-colour-surface-elevated, var(--sf-colour-surface-raised))"
+        },
+        {
+          "slug": "border",
+          "name": "Border",
+          "color": "var(--sf-colour-border)"
+        },
+        {
+          "slug": "primary",
+          "name": "Primary",
+          "color": "var(--sf-colour-primary)"
+        },
+        {
+          "slug": "primary-foreground",
+          "name": "Primary Foreground",
+          "color": "var(--sf-colour-primary-foreground)"
+        }
+      ]
+    },
     "layout": {
       "contentSize": "72rem",
       "wideSize": "90rem"
     }
   },
   "styles": {
+    "color": {
+      "background": "var(--sf-colour-background)",
+      "text": "var(--sf-colour-foreground)"
+    },
     "spacing": {
       "blockGap": "var(--space-s-l)"
     },

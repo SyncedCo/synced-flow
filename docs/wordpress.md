@@ -18,6 +18,8 @@ The WordPress preset:
 - scans PHP, HTML, JS, TS, JSX, TSX, Twig, Vue, Svelte, Astro, and MDX files
 - enables `includeCore`
 - writes `assets/css/synced-flow.css`
+- writes a `theme.json` palette that maps WordPress colour presets to Synced
+  Flow semantic tokens
 
 See [`examples/wordpress`](../examples/wordpress) for a lean block theme style
 template with `theme.json`, template parts, PHP patterns, enqueue code, and an
@@ -53,6 +55,37 @@ wp_enqueue_style(
 
 For plugins, use `plugins_url()` or `plugin_dir_url()` instead of
 `get_theme_file_uri()`.
+
+## WordPress Presets
+
+WordPress emits editor preset classes such as `.has-base-background-color`,
+`.has-primary-color`, and `.has-large-font-size` with `!important`. Treat those
+classes as the editor's chosen design value.
+
+Do not override `.has-*` preset classes in project CSS. Add or choose a better
+semantic preset instead, then use that preset on the block.
+
+The generated `theme.json` maps common WordPress colour presets to Synced Flow
+tokens:
+
+```json
+{
+  "slug": "surface-elevated",
+  "name": "Surface Elevated",
+  "color": "var(--sf-colour-surface-elevated, var(--sf-colour-surface-raised))"
+}
+```
+
+Use those presets for any block that needs an editor-visible design role:
+
+- `base` for page backgrounds
+- `surface` and `surface-alt` for standard panels
+- `surface-elevated` for chrome, mastheads, footers, sticky bars, and raised
+  regions
+- `primary` and `primary-foreground` for branded actions
+
+If a new visual role appears repeatedly, add it to `synced-flow.config.mjs` and
+expose it in `theme.json`; avoid adding `!important` overrides.
 
 ## Dynamic Classes
 

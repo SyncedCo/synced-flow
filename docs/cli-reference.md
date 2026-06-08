@@ -28,6 +28,11 @@ Options:
 | `--no-scripts` | Do not update `package.json`. |
 | `--force` | Overwrite init-managed files. |
 
+The WordPress preset also writes a `theme.json` colour palette that maps
+WordPress editor presets such as `base`, `surface`, `surface-elevated`, and
+`primary` to Synced Flow semantic tokens. Use those presets on blocks instead of
+overriding WordPress `.has-*` preset classes in CSS.
+
 ## agents
 
 Install or inspect project-level AI guidance.

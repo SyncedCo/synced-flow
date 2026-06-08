@@ -491,6 +491,10 @@ ${includeDefaults ? '@import "@syncedco/flow/defaults.css";\n' : ''}@import "./$
     )
   }
 
+  if (preset === 'wordpress') {
+    writeProjectFile(resolve(targetCwd, 'theme.json'), buildWordPressThemeJson(), force)
+  }
+
   if (!noScripts) addPackageScripts(targetCwd)
   if (agentsTarget !== undefined || args.includes('--agents')) {
     await installAgentGuidance({
@@ -2424,6 +2428,45 @@ function addPackageScripts(targetCwd) {
 
 function formatStringArray(values) {
   return `[${values.map((value) => `'${value}'`).join(', ')}]`
+}
+
+function buildWordPressThemeJson() {
+  return `${JSON.stringify({
+    $schema: 'https://schemas.wp.org/trunk/theme.json',
+    version: 3,
+    settings: {
+      appearanceTools: true,
+      color: {
+        palette: [
+          { slug: 'base', name: 'Base', color: 'var(--sf-colour-background)' },
+          { slug: 'foreground', name: 'Foreground', color: 'var(--sf-colour-foreground)' },
+          { slug: 'muted', name: 'Muted', color: 'var(--sf-colour-muted)' },
+          { slug: 'surface', name: 'Surface', color: 'var(--sf-colour-surface)' },
+          { slug: 'surface-alt', name: 'Surface Alt', color: 'var(--sf-colour-surface-alt)' },
+          { slug: 'surface-elevated', name: 'Surface Elevated', color: 'var(--sf-colour-surface-elevated, var(--sf-colour-surface-raised))' },
+          { slug: 'border', name: 'Border', color: 'var(--sf-colour-border)' },
+          { slug: 'primary', name: 'Primary', color: 'var(--sf-colour-primary)' },
+          { slug: 'primary-foreground', name: 'Primary Foreground', color: 'var(--sf-colour-primary-foreground)' },
+        ],
+      },
+      layout: {
+        contentSize: '72rem',
+        wideSize: '90rem',
+      },
+    },
+    styles: {
+      color: {
+        background: 'var(--sf-colour-background)',
+        text: 'var(--sf-colour-foreground)',
+      },
+      spacing: {
+        blockGap: 'var(--space-s-l)',
+      },
+      typography: {
+        fontFamily: 'var(--sf-font-sans)',
+      },
+    },
+  }, null, 2)}\n`
 }
 
 function projectContains(targetCwd, needle) {

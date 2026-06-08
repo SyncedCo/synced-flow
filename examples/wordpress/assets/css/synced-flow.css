@@ -168,6 +168,8 @@
     --color-surface: var(--sf-colour-surface);
     --sf-colour-surface-alt: oklch(96.4% 0.011 80);
     --color-surface-alt: var(--sf-colour-surface-alt);
+    --sf-colour-surface-elevated: var(--sf-colour-surface-raised);
+    --color-surface-elevated: var(--sf-colour-surface-elevated);
     --sf-colour-border: oklch(18% 0.026 250 / 0.12);
     --color-border: var(--sf-colour-border);
     --sf-colour-primary: oklch(68% 0.18 44);
