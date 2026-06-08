@@ -145,7 +145,7 @@ ${shadowTokens.join('\n')}
     --sf-icon-stroke: 2;
   }
 
-  :where(.sf-theme-light, [data-sf-theme="light"]) {
+  .sf-theme-light, [data-sf-theme="light"] {
     color-scheme: light;
     --sf-colour-background: var(--sf-colour-neutral-50);
     --sf-colour-foreground: var(--sf-colour-neutral-900);
@@ -161,7 +161,7 @@ ${shadowTokens.join('\n')}
     --sf-colour-link-hover: var(--sf-colour-orange-600);
   }
 
-  :where(.sf-theme-dark, [data-sf-theme="dark"]) {
+  .sf-theme-dark, [data-sf-theme="dark"] {
     color-scheme: dark;
     --sf-colour-background: var(--sf-colour-neutral-950);
     --sf-colour-foreground: oklch(96% 0.008 86);

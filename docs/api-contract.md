@@ -53,6 +53,10 @@ layers for reset, base, layout, components, and utilities, but foundational
 theme variables need the normal cascade so values from `synced-flow.config.mjs`
 are not weaker than unlayered project CSS.
 
+Theme selectors such as `.sf-theme-dark` and `[data-sf-theme="dark"]` are
+emitted with normal class/attribute specificity, not inside `:where()`, so they
+can override the default `:root` token values.
+
 Put reusable brand decisions in `theme.colours`, `theme.darkColours`,
 `theme.radii`, `theme.layout`, and `theme.components`. Theme switcher CSS should
 only style the toggle/control UI; it should not redefine `--sf-*` colour tokens.

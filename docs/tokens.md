@@ -33,6 +33,10 @@ source of truth for brand colours, radius, layout, and component decisions.
 Use `theme.darkColours` for dark-mode values instead of maintaining a separate
 CSS file that redefines `--sf-*` variables.
 
+Theme overrides use `.sf-theme-dark`, `[data-sf-theme="dark"]`,
+`.sf-theme-light`, and `[data-sf-theme="light"]` selectors directly so they have
+enough specificity to override default `:root` values.
+
 Use semantic utilities in projects:
 
 ```html
