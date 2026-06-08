@@ -28,6 +28,11 @@ Semantic tokens describe intent.
 --sf-colour-success-soft: oklch(62% 0.13 150 / 0.12);
 ```
 
+Tokens are emitted outside CSS layers so configured themes can act as the
+source of truth for brand colours, radius, layout, and component decisions.
+Use `theme.darkColours` for dark-mode values instead of maintaining a separate
+CSS file that redefines `--sf-*` variables.
+
 Use semantic utilities in projects:
 
 ```html
@@ -77,3 +82,9 @@ The generated core includes enough semantic variables for common website UI:
   `--sf-radius-control`, `--sf-radius-panel`, `--sf-shadow-*`
 
 For class-level usage, see [System primitives](system-primitives.md).
+
+Custom semantic colour names from `theme.colours`, such as `secondary` or
+`tertiary`, are emitted as CSS variables and can be consumed directly with
+`var(--sf-colour-tertiary)`. Generated colour utilities are available when the
+class token is present in scanned source, for example `text-tertiary` or
+`bg-tertiary`.

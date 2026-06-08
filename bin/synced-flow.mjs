@@ -2909,13 +2909,23 @@ function selectorFor(token, variants) {
 function colourValue(name) {
   const [raw, opacity] = name.split('/')
   const paletteMatch = raw.match(/^([a-z]+)-(\d+)$/)
-  const base = semanticColours[raw] ?? (paletteMatch ? palette[paletteMatch[1]]?.[paletteMatch[2]] : null)
+  const base = semanticColours[raw] ?? configuredThemeColourValue(raw) ?? (paletteMatch ? palette[paletteMatch[1]]?.[paletteMatch[2]] : null)
   if (!base) return null
   if (!opacity) return base
   const amount = Number(opacity)
   if (Number.isNaN(amount)) return base
   if (base === 'transparent' || base === 'currentColor' || base === 'inherit') return base
   return `color-mix(in oklch, ${base} ${amount}%, transparent)`
+}
+
+function configuredThemeColourValue(name) {
+  const token = cssTokenName(name)
+  const colourNames = [
+    ...Object.keys(config.theme?.colours ?? {}),
+    ...Object.keys(config.theme?.darkColours ?? {}),
+  ].map(cssTokenName)
+
+  return colourNames.includes(token) ? `var(--color-${token}, var(--sf-colour-${token}))` : null
 }
 
 function declarationsFor(base) {
@@ -3562,7 +3572,7 @@ function buildThemeCss(theme) {
     sections.push(`  :where(.sf-theme-dark, [data-sf-theme="dark"]) {\n${dark.join('\n')}\n  }`)
   }
 
-  return `@layer tokens {\n${sections.join('\n\n')}\n}`
+  return sections.join('\n\n')
 }
 
 function buildTokensCss() {
@@ -3604,8 +3614,7 @@ function buildTokensCss() {
 
   const colours = fluidConfig.colours
 
-  return `@layer tokens {
-  :root {
+  return `:root {
     color-scheme: light;
     --font-sans: var(--sf-font-sans, ui-sans-serif, system-ui, sans-serif);
     --font-display: var(--sf-font-display, ui-serif, Georgia, serif);
@@ -3725,8 +3734,7 @@ ${pairs.join('\n')}
     --ease-standard: cubic-bezier(.2, 0, 0, 1);
     --icon-size: 1em;
     --icon-stroke: 2;
-  }
-}`
+  }`
 }
 
 function buildBaseCss() {

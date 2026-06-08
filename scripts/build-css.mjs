@@ -82,8 +82,7 @@ function buildTokensCss() {
   const radiusTokens = Object.entries(primitiveTokens.radii).map(([name, value]) => `    --sf-radius-${name}: ${value};`)
   const shadowTokens = Object.entries(primitiveTokens.shadows).map(([name, value]) => `    --sf-shadow-${name}: ${value};`)
 
-  return `@layer tokens {
-  :root {
+  return `:root {
     color-scheme: light;
 
 ${fontTokens.join('\n')}
@@ -176,8 +175,7 @@ ${shadowTokens.join('\n')}
     --sf-colour-border-strong: oklch(100% 0 0 / 0.24);
     --sf-colour-link: var(--sf-colour-orange-500);
     --sf-colour-link-hover: oklch(80% 0.14 50);
-  }
-}`
+  }`
 }
 
 function buildResetCss() {

@@ -78,6 +78,10 @@ Use `--check` in CI to fail when the generated file is stale.
 Generated CSS only includes source-scanned utility classes, configured theme
 overrides, and keyframes needed by scanned animation classes.
 
+Configured theme tokens are emitted outside CSS layers so they are not weaker
+than unlayered project CSS. Use `theme.darkColours` for dark theme values rather
+than maintaining duplicate colour overrides in a theme switcher stylesheet.
+
 ## watch
 
 Run `build`, then rebuild when configured scan files change.

@@ -11,7 +11,7 @@ These are intended for application code and examples.
 | Surface | Public API |
 | --- | --- |
 | Imports | `@syncedco/flow/styles.css`, `tokens.css`, `reset.css`, `base.css`, `defaults.css`, `layout.css`, `components.css`, `utilities.css` |
-| Tokens | `--sf-*` custom properties emitted by `tokens.css` |
+| Tokens | Unlayered `--sf-*` custom properties emitted by `tokens.css` |
 | Theme config | `theme.fonts`, `theme.colours`, `theme.darkColours`, `theme.radii`, `theme.layout`, `theme.components` |
 | Layout classes | `sf-container`, `sf-section`, `sf-stack`, `sf-flow`, `sf-cluster`, `sf-repel`, `sf-toolbar`, `sf-app-shell`, `sf-app-sidebar`, `sf-app-main`, `sf-auto-grid`, `sf-switcher`, `sf-sidebar`, `sf-split`, `sf-frame`, `sf-cover`, `sf-metric-grid`, `sf-pipeline` |
 | Components | `sf-button`, `sf-icon`, `sf-icon-button`, `sf-avatar`, `sf-chart`, `sf-meter`, `sf-card`, `sf-surface`, `sf-hero`, `sf-nav`, `sf-form`, `sf-field`, `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-alert`, `sf-badge`, `sf-section-header`, `sf-kicker` |
@@ -45,6 +45,17 @@ These can change more freely.
 - Utility-compatible aliases such as `--color-*`, `--font-*`, and `--radius-*`.
   They are useful for migration output, but `--sf-*` tokens are the preferred
   long-term API.
+
+## Theme Cascade Policy
+
+Design tokens are intentionally emitted outside CSS layers. Synced Flow uses
+layers for reset, base, layout, components, and utilities, but foundational
+theme variables need the normal cascade so values from `synced-flow.config.mjs`
+are not weaker than unlayered project CSS.
+
+Put reusable brand decisions in `theme.colours`, `theme.darkColours`,
+`theme.radii`, `theme.layout`, and `theme.components`. Theme switcher CSS should
+only style the toggle/control UI; it should not redefine `--sf-*` colour tokens.
 
 ## Unit Policy
 

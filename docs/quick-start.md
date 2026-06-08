@@ -154,7 +154,13 @@ export default defineConfig({
     },
     colours: {
       primary: 'oklch(68% 0.18 44)',
+      secondary: 'oklch(62% 0.12 205)',
+      tertiary: 'oklch(64% 0.14 185)',
       primaryForeground: 'oklch(100% 0 0)',
+    },
+    darkColours: {
+      primary: 'oklch(76% 0.14 44)',
+      tertiary: 'oklch(82% 0.12 205)',
     },
   },
 })
@@ -171,6 +177,10 @@ Use the CSS entry file for one-off local overrides.
   --sf-colour-primary: oklch(68% 0.18 44);
 }
 ```
+
+Synced Flow emits theme tokens outside CSS layers so config values are the site
+theme source of truth. Keep theme switcher styles focused on the toggle UI; do
+not mirror colour tokens into a separate `theme-switcher.css` file.
 
 ## Config
 

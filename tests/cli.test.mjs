@@ -101,7 +101,7 @@ test('add defaults inserts the optional defaults import', () => {
 
 test('build emits safelist classes and theme overrides', () => {
   const cwd = tempProject()
-  writeFileSync(join(cwd, 'src/App.jsx'), '<div class="sf-container text-primary"></div>\n')
+  writeFileSync(join(cwd, 'src/App.jsx'), '<div class="sf-container text-primary text-tertiary bg-tertiary"></div>\n')
   writeFileSync(
     join(cwd, 'synced-flow.config.mjs'),
     `import { defineConfig } from '@syncedco/flow/config'
@@ -112,7 +112,14 @@ export default defineConfig({
   safelist: ['hidden'],
   theme: {
     fonts: { sans: 'Example Sans, sans-serif' },
-    colours: { primary: 'oklch(70% 0.2 40)' },
+    colours: {
+      primary: 'oklch(70% 0.2 40)',
+      tertiary: 'oklch(62% 0.15 185)',
+    },
+    darkColours: {
+      primary: 'oklch(76% 0.14 185)',
+      tertiary: 'oklch(82% 0.12 205)',
+    },
     layout: { containerMax: '68rem' },
   },
 })
@@ -124,9 +131,14 @@ export default defineConfig({
   const css = readFileSync(join(cwd, 'src/synced-flow.generated.css'), 'utf8')
   assert.match(css, /--sf-font-sans: Example Sans, sans-serif;/)
   assert.match(css, /--sf-colour-primary: oklch\(70% 0\.2 40\);/)
+  assert.match(css, /--sf-colour-tertiary: oklch\(62% 0\.15 185\);/)
+  assert.match(css, /--sf-colour-tertiary: oklch\(82% 0\.12 205\);/)
   assert.match(css, /--grid-max-width: 68rem;/)
+  assert.doesNotMatch(css, /@layer tokens\s*\{\s*:root/)
   assert.match(css, /\[class~="hidden"\]\{display:none\}/)
   assert.match(css, /\[class~="text-primary"\]\{color:var\(--color-primary\)\}/)
+  assert.match(css, /\[class~="text-tertiary"\]\{color:var\(--color-tertiary, var\(--sf-colour-tertiary\)\)\}/)
+  assert.match(css, /\[class~="bg-tertiary"\]\{background-color:var\(--color-tertiary, var\(--sf-colour-tertiary\)\)\}/)
 })
 
 test('strict mode rejects responsive variants by default', () => {
@@ -564,6 +576,8 @@ test('package exposes modular CSS layer files', () => {
   const tokensCss = readFileSync(join(packageRoot, 'tokens.css'), 'utf8')
   assert.match(tokensCss, /\.sf-theme-light/)
   assert.match(tokensCss, /--sf-icon-size/)
+  assert.doesNotMatch(tokensCss, /@layer tokens\s*\{/)
+  assert.ok(tokensCss.indexOf(':root {') > tokensCss.indexOf('@layer reset, tokens, base, app, layout, components, utilities;'))
   assert.match(layoutCss, /\.sf-app-shell/)
   assert.match(layoutCss, /\.sf-app-sidebar/)
   assert.match(layoutCss, /\.sf-toolbar/)
