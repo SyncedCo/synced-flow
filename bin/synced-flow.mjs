@@ -1025,7 +1025,7 @@ function getTokenSummary() {
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
       layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-container--full', 'sf-rail-shell', 'sf-rail-shell__rail', 'sf-rail-shell__body', 'sf-rail-shell__mark', 'sf-rail-shell__label', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-auto-grid--xs', 'sf-auto-grid--sm', 'sf-auto-grid--lg', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-chapter', 'sf-chapter__copy', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-filter-bar', 'sf-data-table', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-progress', 'sf-skeleton', 'sf-filter-bar', 'sf-data-table', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -1240,9 +1240,9 @@ export default function DialogExample() {
       keywords: ['blog', 'article', 'prose', 'legal', 'docs', 'case-study', 'table', 'figure', 'seo'],
     },
     {
-      id: 'saas-filter-toolbar',
-      name: 'SaaS filter toolbar',
-      whenToUse: 'Search, status filters, quick actions, and exports above SaaS lists, tables, queues, and admin screens.',
+      id: 'filter-toolbar',
+      name: 'Filter toolbar',
+      whenToUse: 'Search, status filters, quick actions, and exports above lists, tables, queues, directories, and admin screens.',
       classes: ['sf-filter-bar', 'sf-field', 'sf-label', 'sf-input', 'sf-select', 'sf-button', 'sf-button--outline'],
       requiresJs: false,
       requiresJsNotes: 'Use native form submit, GET params, or app-owned state. Synced Flow only styles the shell and controls.',
@@ -1265,9 +1265,47 @@ export default function DialogExample() {
       keywords: ['saas', 'filter', 'toolbar', 'search', 'status', 'table', 'list', 'admin', 'crm'],
     },
     {
-      id: 'saas-data-table',
-      name: 'SaaS data table',
-      whenToUse: 'Account lists, activity logs, invoices, users, queues, and operational tables that should keep native table semantics.',
+      id: 'date-filter-form',
+      name: 'Native date filter',
+      whenToUse: 'Date ranges, billing periods, export windows, audit logs, appointments, and reporting filters that can use browser-native date/time controls.',
+      classes: ['sf-filter-bar', 'sf-field', 'sf-label', 'sf-input', 'sf-select', 'sf-button', 'sf-button--outline'],
+      requiresJs: false,
+      requiresJsNotes: 'Native date, time, month, week, and datetime-local inputs submit through normal forms. Custom calendar widgets and availability logic belong to the app.',
+      a11y: ['Use explicit visible labels for each date or time input.', 'Prefer separate start and end fields for ranges.', 'Use server or app validation for invalid ranges.'],
+      gotchas: ['Native picker UI varies by browser and operating system.', 'Use a dedicated calendar library only when the product needs custom scheduling behavior.'],
+      markup: {
+        html: `<form class="sf-filter-bar" action="/app/reports" method="get">
+  <label class="sf-field"><span class="sf-label">From</span><input class="sf-input" name="from" type="date"></label>
+  <label class="sf-field"><span class="sf-label">To</span><input class="sf-input" name="to" type="date"></label>
+  <label class="sf-field"><span class="sf-label">Period</span><select class="sf-select" name="period"><option>Custom</option><option>This month</option><option>Last month</option></select></label>
+  <button class="sf-button" type="submit">Apply</button>
+  <a class="sf-button sf-button--outline" href="/app/reports">Reset</a>
+</form>`,
+      },
+      keywords: ['saas', 'date', 'time', 'calendar', 'filter', 'range', 'reports', 'billing', 'native'],
+    },
+    {
+      id: 'active-filter-tags',
+      name: 'Active filter tags',
+      whenToUse: 'Visible selected filters below a search/filter toolbar, with clear-all and individual removal actions owned by the app.',
+      classes: ['sf-cluster', 'sf-badge', 'sf-button', 'sf-button--ghost', 'sf-button--sm', 'sf-link'],
+      requiresJs: false,
+      requiresJsNotes: 'Links can remove filters through URL params without JavaScript. Client-side filter state belongs to the consuming app.',
+      a11y: ['Use clear link text that names the filter being removed.', 'Keep the active filter value visible as text.', 'Provide a clear-all action when several filters can be active.'],
+      gotchas: ['Use buttons only when client-side state changes in place.', 'Use links for URL-driven filters so filtered views remain shareable.'],
+      markup: {
+        html: `<div class="sf-cluster" aria-label="Active filters">
+  <span class="sf-badge">Status: Healthy <a class="sf-link" href="?plan=team" aria-label="Remove status filter">Remove</a></span>
+  <span class="sf-badge">Plan: Team <a class="sf-link" href="?status=healthy" aria-label="Remove plan filter">Remove</a></span>
+  <a class="sf-button sf-button--ghost sf-button--sm" href="/app/customers">Clear filters</a>
+</div>`,
+      },
+      keywords: ['saas', 'filter', 'filters', 'chips', 'tags', 'badge', 'selected', 'active'],
+    },
+    {
+      id: 'data-table',
+      name: 'Data table',
+      whenToUse: 'Account lists, activity logs, invoices, users, queues, directories, and operational tables that should keep native table semantics.',
       classes: ['sf-table-wrap', 'sf-data-table', 'sf-status', 'sf-avatar', 'sf-link'],
       requiresJs: false,
       requiresJsNotes: 'Sorting, pagination state, and row actions belong to the consuming app.',
@@ -1287,9 +1325,9 @@ export default function DialogExample() {
       keywords: ['saas', 'table', 'data', 'customers', 'accounts', 'admin', 'crm', 'status', 'list'],
     },
     {
-      id: 'saas-empty-state',
-      name: 'SaaS empty state',
-      whenToUse: 'Empty queues, no search results, first-run screens, and dashboards before data is available.',
+      id: 'empty-state',
+      name: 'Empty state',
+      whenToUse: 'Empty queues, no search results, first-run screens, directories, and dashboards before data is available.',
       classes: ['sf-empty-state', 'sf-button', 'sf-button--outline', 'sf-text-muted'],
       requiresJs: false,
       requiresJsNotes: 'No JavaScript is required unless the consuming app opens a creation flow.',
@@ -1308,9 +1346,9 @@ export default function DialogExample() {
       keywords: ['saas', 'empty', 'state', 'first-run', 'onboarding', 'no-results', 'zero'],
     },
     {
-      id: 'saas-settings-section',
-      name: 'SaaS settings section',
-      whenToUse: 'Account, team, billing, security, notification, and integration settings screens.',
+      id: 'settings-section',
+      name: 'Settings section',
+      whenToUse: 'Account, team, billing, security, notification, integration, profile, and site settings screens.',
       classes: ['sf-settings-section', 'sf-detail-panel', 'sf-data-list', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-button'],
       requiresJs: false,
       requiresJsNotes: 'Form submission, optimistic saves, and validation belong to the consuming app.',
@@ -1451,8 +1489,8 @@ function getPublicRecipes() {
       id: 'saas-dashboard',
       name: 'SaaS dashboard',
       whenToUse: 'Authenticated SaaS apps, admin panels, customer portals, CRMs, analytics dashboards, and product workspaces.',
-      sections: ['sticky-navigation', 'mobile-nav-drawer', 'card-grid', 'contact-form', 'long-form-content', 'saas-filter-toolbar', 'saas-data-table', 'saas-empty-state', 'saas-settings-section'],
-      classes: ['sf-skip-link', 'sf-theme-light', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-stack--tight', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-icon', 'sf-card', 'sf-surface', 'sf-stat', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-filter-bar', 'sf-data-table', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-button', 'sf-button--outline', 'sf-button--icon', 'sf-form', 'sf-field', 'sf-input', 'sf-select', 'sf-check', 'sf-table-wrap', 'sf-font-sans', 'sf-visually-hidden'],
+      sections: ['sticky-navigation', 'mobile-nav-drawer', 'card-grid', 'contact-form', 'long-form-content', 'filter-toolbar', 'date-filter-form', 'active-filter-tags', 'data-table', 'empty-state', 'settings-section'],
+      classes: ['sf-skip-link', 'sf-theme-light', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-stack--tight', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-icon', 'sf-card', 'sf-surface', 'sf-stat', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-progress', 'sf-skeleton', 'sf-filter-bar', 'sf-data-table', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-button', 'sf-button--outline', 'sf-button--icon', 'sf-form', 'sf-field', 'sf-input', 'sf-select', 'sf-check', 'sf-table-wrap', 'sf-font-sans', 'sf-visually-hidden'],
       keywords: ['saas', 'dashboard', 'admin', 'panel', 'portal', 'crm', 'analytics', 'app', 'auth', 'login', 'signin', 'sign-in', 'user', 'account', 'metrics', 'pipeline', 'activity', 'customers', 'accounts', 'tasks', 'tickets', 'revenue'],
       markup: `<a class="sf-skip-link" href="#dashboard-main">Skip to dashboard</a>
 <div class="sf-app-shell sf-theme-light">
@@ -1549,6 +1587,7 @@ function getPublicRecipes() {
           <label class="sf-meter-row"><span class="sf-repel"><strong>Accounts</strong><span class="sf-text-muted">82%</span></span><meter class="sf-meter" min="0" max="100" value="82">82%</meter></label>
           <label class="sf-meter-row"><span class="sf-repel"><strong>Automation</strong><span class="sf-text-muted">64%</span></span><meter class="sf-meter" min="0" max="100" value="64">64%</meter></label>
           <label class="sf-meter-row"><span class="sf-repel"><strong>Support</strong><span class="sf-text-muted">48%</span></span><meter class="sf-meter" min="0" max="100" value="48">48%</meter></label>
+          <label class="sf-meter-row"><span class="sf-repel"><strong>Import job</strong><span class="sf-text-muted">36%</span></span><progress class="sf-progress" max="100" value="36">36%</progress></label>
         </div>
       </article>
     </section>
@@ -1563,8 +1602,10 @@ function getPublicRecipes() {
         <form class="sf-filter-bar" role="search" action="/app/activity" method="get">
           <label class="sf-field"><span class="sf-label">Search</span><input class="sf-input" name="q" type="search" placeholder="Search activity"></label>
           <label class="sf-field"><span class="sf-label">Status</span><select class="sf-select" name="status"><option>Any status</option><option>Active</option><option>Scheduled</option><option>Complete</option></select></label>
+          <label class="sf-field"><span class="sf-label">From</span><input class="sf-input" name="from" type="date"></label>
           <button class="sf-button" type="submit">Apply</button>
         </form>
+        <div class="sf-cluster" aria-label="Active filters"><span class="sf-badge">Status: Active <a class="sf-link" href="/app/activity" aria-label="Remove status filter">Remove</a></span><a class="sf-button sf-button--ghost sf-button--sm" href="/app/activity">Clear filters</a></div>
         <div class="sf-table-wrap">
           <table class="sf-data-table" aria-label="Recent activity">
             <thead><tr><th>Item</th><th>Status</th><th>Value</th><th>Date</th></tr></thead>
@@ -1578,6 +1619,7 @@ function getPublicRecipes() {
       </article>
       <article class="sf-card sf-stack sf-detail-panel" id="activity">
         <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Recent customers</h2><a class="sf-link" href="/app/customers">View all</a></div>
+        <div class="sf-skeleton" aria-hidden="true">Loading customer details</div>
         <ul class="sf-list-reset sf-data-list">
           <li><span><strong>Northstar Labs</strong><br><span class="sf-text-muted">Growth workspace</span></span><span class="sf-status" data-tone="success">Healthy</span></li>
           <li><span><strong>Willow Group</strong><br><span class="sf-text-muted">Operations workspace</span></span><span class="sf-status" data-tone="warning">Needs review</span></li>
@@ -4405,6 +4447,40 @@ function buildComponentCss() {
     border-radius: var(--radius-full);
     inline-size: 100%;
     overflow: hidden;
+  }
+
+  .sf-progress {
+    accent-color: var(--progress-color, var(--color-primary));
+    block-size: var(--progress-size, .625rem);
+    inline-size: 100%;
+  }
+
+  .sf-progress::-webkit-progress-bar {
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-full);
+  }
+
+  .sf-progress::-webkit-progress-value,
+  .sf-progress::-moz-progress-bar {
+    background: var(--progress-color, var(--color-primary));
+    border-radius: var(--radius-full);
+  }
+
+  .sf-skeleton {
+    background: color-mix(in oklch, var(--color-surface-alt) 82%, var(--color-foreground));
+    border-radius: var(--skeleton-radius, var(--radius-md));
+    color: transparent;
+    min-block-size: var(--skeleton-block-size, 1em);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sf-skeleton {
+      animation: sf-skeleton-pulse 1.4s var(--ease-standard) infinite alternate;
+    }
+  }
+
+  @keyframes sf-skeleton-pulse {
+    to { opacity: .62; }
   }
 
   .sf-filter-bar {

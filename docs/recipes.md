@@ -160,13 +160,13 @@ The recipe includes:
 - Generic account initials using `sf-avatar`
 - Inline SVG and native meter analytics using `sf-chart` and `sf-meter`
 - traditional SaaS app shell with persistent desktop navigation and a visible stacked mobile navigation rail
-- KPI cards, theme-aware toolbar, filter/search form, data table, status pills, empty state, and activity list
+- KPI cards, theme-aware toolbar, filter/search form, native date input, active filter tags, data table, status pills, progress, skeleton loading, empty state, and activity list
 
 It uses Synced Flow primitives such as `sf-app-shell`, `sf-app-sidebar`,
 `sf-app-main`, `sf-toolbar`, `sf-metric-grid`, `sf-panel-grid`, `sf-icon`,
-`sf-chart`, `sf-chart--wide`, `sf-meter`, `sf-card`, `sf-form`, and
-`sf-filter-bar`, `sf-data-table`, `sf-status`, `sf-data-list`,
-`sf-empty-state`, `sf-detail-panel`, and `sf-table-wrap`.
+`sf-chart`, `sf-chart--wide`, `sf-meter`, `sf-progress`, `sf-skeleton`,
+`sf-card`, `sf-form`, `sf-filter-bar`, `sf-data-table`, `sf-status`,
+`sf-data-list`, `sf-empty-state`, `sf-detail-panel`, and `sf-table-wrap`.
 
 ## Documentation Page
 

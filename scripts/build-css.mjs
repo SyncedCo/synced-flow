@@ -1489,6 +1489,40 @@ function buildComponentCss() {
     overflow: hidden;
   }
 
+  .sf-progress {
+    accent-color: var(--sf-progress-colour, var(--sf-colour-primary));
+    block-size: var(--sf-progress-size, .625rem);
+    inline-size: 100%;
+  }
+
+  .sf-progress::-webkit-progress-bar {
+    background: var(--sf-colour-surface-alt);
+    border-radius: var(--sf-radius-full);
+  }
+
+  .sf-progress::-webkit-progress-value,
+  .sf-progress::-moz-progress-bar {
+    background: var(--sf-progress-colour, var(--sf-colour-primary));
+    border-radius: var(--sf-radius-full);
+  }
+
+  .sf-skeleton {
+    background: color-mix(in oklch, var(--sf-colour-surface-alt) 82%, var(--sf-colour-foreground));
+    border-radius: var(--sf-skeleton-radius, var(--sf-radius-md));
+    color: transparent;
+    min-block-size: var(--sf-skeleton-block-size, 1em);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sf-skeleton {
+      animation: sf-skeleton-pulse 1.4s var(--sf-ease-standard) infinite alternate;
+    }
+  }
+
+  @keyframes sf-skeleton-pulse {
+    to { opacity: .62; }
+  }
+
   .sf-filter-bar {
     align-items: end;
     background: var(--sf-colour-surface);

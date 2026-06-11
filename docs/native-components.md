@@ -128,6 +128,26 @@ Use `sf-nav--mobile` with a popover drawer for mobile navigation. Use
 </nav>
 ```
 
+## Native Date And Time Inputs
+
+Use browser-native inputs for simple date, time, month, week, and datetime
+fields. Synced Flow styles the control shell with `sf-input`; validation,
+range rules, and custom scheduling behavior belong to the app.
+
+```html
+<form class="sf-filter-bar" action="/app/reports" method="get">
+  <label class="sf-field">
+    <span class="sf-label">From</span>
+    <input class="sf-input" name="from" type="date">
+  </label>
+  <label class="sf-field">
+    <span class="sf-label">To</span>
+    <input class="sf-input" name="to" type="date">
+  </label>
+  <button class="sf-button" type="submit">Apply</button>
+</form>
+```
+
 ## Scroll And Sticky
 
 Use CSS scroll snap and sticky positioning for full-page sections and sticky
