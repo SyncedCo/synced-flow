@@ -75,6 +75,7 @@ The generated core includes enough semantic variables for common website UI:
 
 - surfaces: `--sf-colour-background`, `--sf-colour-surface`,
   `--sf-colour-surface-alt`, `--sf-colour-surface-raised`,
+  `--sf-colour-surface-raised-2`, `--sf-colour-surface-hover`,
   `--sf-colour-surface-inset`
 - text and links: `--sf-colour-foreground`, `--sf-colour-muted`,
   `--sf-colour-subtle`, `--sf-colour-link`, `--sf-colour-link-hover`
@@ -82,8 +83,11 @@ The generated core includes enough semantic variables for common website UI:
   `--sf-colour-primary-foreground`, `--sf-colour-primary-soft`
 - state feedback: `--sf-colour-success`, `--sf-colour-warning`,
   `--sf-colour-danger`, `--sf-colour-info`, plus matching soft variants
-- structure: `--sf-colour-border`, `--sf-colour-border-strong`,
+- structure: `--sf-colour-border-subtle`, `--sf-colour-border`,
+  `--sf-colour-border-strong`, `--sf-colour-backdrop`,
   `--sf-radius-control`, `--sf-radius-panel`, `--sf-shadow-*`
+- data accents: `--sf-colour-categorical-1` through
+  `--sf-colour-categorical-6`
 
 For class-level usage, see [System primitives](system-primitives.md).
 

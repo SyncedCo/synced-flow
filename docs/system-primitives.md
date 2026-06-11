@@ -14,6 +14,8 @@ Use the `--sf-*` variables as the stable CSS foundation.
 | Space | `--sf-space-s`, `--sf-space-m-l`, `--sf-space-xl-2xl` | Fluid padding, margin, and gaps. |
 | Radius | `--sf-radius-control`, `--sf-radius-panel`, `--sf-radius-full` | Controls, panels, pills. |
 | Colour | `--sf-colour-background`, `--sf-colour-surface`, `--sf-colour-primary` | Semantic UI colour roles. |
+| App colour | `--sf-colour-surface-hover`, `--sf-colour-surface-raised-2`, `--sf-colour-border-subtle`, `--sf-colour-backdrop` | App surfaces, hover states, subtle dividers, and overlays. |
+| Categorical colour | `--sf-colour-categorical-1` ... `--sf-colour-categorical-6` | Charts, stages, labels, and recurring data accents. |
 | State | `--sf-colour-success`, `--sf-colour-warning`, `--sf-colour-danger`, `--sf-colour-info` | Feedback and notices. |
 | Motion | `--sf-duration-fast`, `--sf-duration-normal`, `--sf-ease-standard` | Consistent transitions. |
 | Component | `--sf-button-*`, `--sf-card-*`, `--sf-input-*`, `--sf-alert-*` | Reusable component defaults. |
@@ -36,7 +38,7 @@ These classes are the first choice for page structure.
 | `sf-cluster` | Wrapping inline groups such as actions or tags. |
 | `sf-repel` | Space-between layout that wraps safely. |
 | `sf-toolbar` | Dense app/page toolbar that wraps actions safely. |
-| `sf-app-shell`, `sf-app-sidebar`, `sf-app-sidebar__brand`, `sf-app-main` | Product app shell with persistent sidebar and main workspace. |
+| `sf-app-shell`, `sf-app-header`, `sf-app-sidebar`, `sf-app-sidebar__brand`, `sf-app-backdrop`, `sf-app-main` | Product app shell with optional fixed header, collapsed sidebar, mobile drawer, and main workspace. |
 | `sf-split` | Responsive two-column layout. |
 | `sf-split--reverse` | Reverses split layout visual order. |
 | `sf-auto-grid`, `sf-panel-grid`, `sf-metric-grid`, `sf-pipeline` | Responsive card, metric, and operational grids. |
@@ -62,16 +64,16 @@ These cover the common UI elements needed for a simple site.
 | `sf-nav`, `sf-nav__list`, `sf-nav__link` | Navigation basics. |
 | `sf-nav--mobile`, `sf-menu`, `sf-breadcrumb`, `sf-pagination` | Mobile, menu, breadcrumb, and paginated navigation. |
 | `sf-dialog`, `sf-dialog__header`, `sf-dialog__body`, `sf-dialog__footer` | Native `<dialog>` styling. |
-| `sf-popover`, `sf-tooltip`, `sf-tooltip-trigger`, `sf-menu-popover`, `sf-toast`, `sf-banner`, `sf-drawer` | Popover-backed native overlays. |
+| `sf-popover`, `sf-tooltip`, `sf-tooltip-trigger`, `sf-menu-popover`, `sf-toast`, `sf-toast-stack`, `sf-banner`, `sf-drawer` | Popover-backed native overlays and app feedback stacks. |
 | `sf-disclosure`, `sf-accordion` | Native `details`/`summary` disclosure patterns. |
-| `sf-tabs`, `sf-tab-list`, `sf-tab`, `sf-tab-panel` | HTML/CSS-first tab styling. |
+| `sf-tabs`, `sf-tab-list`, `sf-tab`, `sf-tab__count`, `sf-tab-panel` | HTML/CSS-first tab styling, including counted pill tabs. |
 | `sf-form`, `sf-fieldset`, `sf-field`, `sf-label`, `sf-help`, `sf-error` | Form structure and messaging. |
-| `sf-input`, `sf-select`, `sf-textarea`, `sf-check` | Form controls. |
+| `sf-input`, `sf-select`, `sf-textarea`, `sf-search`, `sf-check` | Form controls, including search input shell. |
 | `sf-alert`, `sf-alert--info`, `sf-alert--success`, `sf-alert--warning`, `sf-alert--danger`, `sf-alert__title` | Notices and feedback. |
 | `sf-section-header`, `sf-kicker`, `sf-badge`, `sf-avatar` | Common marketing/content and account patterns. |
 | `sf-chart`, `sf-chart__plot`, `sf-chart__svg`, `sf-chart__legend`, `sf-meter-list`, `sf-meter` | Lightweight chart shells for app-owned SVG charts and native meter bars. |
 | `sf-progress`, `sf-skeleton` | Native progress bars and CSS-only loading placeholders for async app states. |
-| `sf-filter-bar`, `sf-data-table`, `sf-status`, `sf-data-list`, `sf-empty-state`, `sf-settings-section`, `sf-detail-panel` | Lean application primitives for filters, operational data, status, empty states, and settings/detail screens. |
+| `sf-filter-bar`, `sf-data-table`, `sf-table-sort`, `sf-status`, `sf-data-list`, `sf-empty-state`, `sf-settings-section`, `sf-detail-panel` | Lean application primitives for filters, operational data, status, empty states, and settings/detail screens. |
 
 ## Utility Classes
 

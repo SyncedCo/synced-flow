@@ -1024,8 +1024,8 @@ function getTokenSummary() {
     components: componentTokens,
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
-      layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-container--full', 'sf-rail-shell', 'sf-rail-shell__rail', 'sf-rail-shell__body', 'sf-rail-shell__mark', 'sf-rail-shell__label', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-auto-grid--xs', 'sf-auto-grid--sm', 'sf-auto-grid--lg', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-chapter', 'sf-chapter__copy', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-progress', 'sf-skeleton', 'sf-filter-bar', 'sf-data-table', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-container--full', 'sf-rail-shell', 'sf-rail-shell__rail', 'sf-rail-shell__body', 'sf-rail-shell__mark', 'sf-rail-shell__label', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-header', 'sf-app-backdrop', 'sf-app-main', 'sf-auto-grid', 'sf-auto-grid--xs', 'sf-auto-grid--sm', 'sf-auto-grid--lg', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-chapter', 'sf-chapter__copy', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-progress', 'sf-skeleton', 'sf-filter-bar', 'sf-search', 'sf-data-table', 'sf-table-sort', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-toast-stack', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab__count', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -1238,6 +1238,133 @@ export default function DialogExample() {
       classes: ['sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-breadcrumb'],
       markup: '<article class="sf-container sf-prose sf-prose--blog">...</article>',
       keywords: ['blog', 'article', 'prose', 'legal', 'docs', 'case-study', 'table', 'figure', 'seo'],
+    },
+    {
+      id: 'app-shell-layout',
+      name: 'App shell layout',
+      whenToUse: 'Product apps, portals, admin tools, and dashboards that need a header, sidebar, main workspace, optional collapsed sidebar, and mobile drawer mode.',
+      classes: ['sf-app-shell', 'sf-app-header', 'sf-app-sidebar', 'sf-app-backdrop', 'sf-app-main', 'sf-nav', 'sf-nav__link'],
+      requiresJs: false,
+      requiresJsNotes: 'CSS handles layout states. The consuming app owns toggling data-collapsed and data-sidebar-open attributes.',
+      a11y: ['Keep the sidebar inside a named nav or aside.', 'Use a real button to toggle drawer/collapsed states.', 'Move focus into the drawer when app JavaScript opens it.'],
+      gotchas: ['Use data-mobile="drawer" only for app layouts that need overlay navigation on small screens.', 'Keep data-hide-collapsed text available through aria-labels on icon-only links.'],
+      markup: {
+        html: `<div class="sf-app-shell" data-layout="fixed-header" data-mobile="drawer">
+  <header class="sf-app-header"><button class="sf-button sf-button--ghost" type="button" aria-label="Open navigation">Menu</button><strong>Workspace</strong></header>
+  <aside class="sf-app-sidebar" aria-label="Workspace navigation"><nav class="sf-nav"><a class="sf-nav__link" href="/app" aria-current="page">Dashboard</a></nav></aside>
+  <button class="sf-app-backdrop" type="button" aria-label="Close navigation"></button>
+  <main class="sf-app-main">...</main>
+</div>`,
+      },
+      keywords: ['app', 'shell', 'layout', 'sidebar', 'header', 'drawer', 'collapsed', 'dashboard', 'admin', 'portal'],
+    },
+    {
+      id: 'row-action-menu',
+      name: 'Row action menu',
+      whenToUse: 'Kebab, overflow, and per-row action menus using native popover markup and destructive item styling.',
+      classes: ['sf-menu-popover', 'sf-menu', 'sf-button', 'sf-button--ghost', 'sf-button--icon'],
+      requiresJs: false,
+      requiresJsNotes: 'Native popover handles open, backdrop dismiss, and light-dismiss where supported. App JavaScript may add keyboard roving for complex menus.',
+      a11y: ['Use a button trigger with an accessible label.', 'Keep destructive actions visibly labelled.', 'Use links for navigation and buttons for actions.'],
+      gotchas: ['Use popovertarget on buttons, not anchors.', 'The app owns confirmation flows for destructive actions.'],
+      markup: {
+        html: `<button class="sf-button sf-button--ghost sf-button--icon" type="button" popovertarget="row-actions-1" aria-label="Open row actions">...</button>
+<div class="sf-menu-popover" id="row-actions-1" popover="auto">
+  <nav class="sf-menu" aria-label="Row actions">
+    <a href="/items/1">Open</a>
+    <button type="button">Archive</button>
+    <button type="button" data-variant="danger">Delete</button>
+  </nav>
+</div>`,
+      },
+      keywords: ['menu', 'row', 'actions', 'kebab', 'popover', 'destructive', 'table'],
+    },
+    {
+      id: 'tabs-with-counts',
+      name: 'Tabs with counts',
+      whenToUse: 'Filtered app views, inboxes, queues, and reports where each tab needs a compact count.',
+      classes: ['sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab__count', 'sf-tab-panel'],
+      requiresJs: false,
+      requiresJsNotes: 'CSS styles state. The app owns aria-selected, routing, or tab panel switching for dynamic interfaces.',
+      a11y: ['Use role="tablist" only when implementing full keyboard tab behavior.', 'Use aria-selected on active tabs.', 'Keep counts textual and not colour-only.'],
+      gotchas: ['Use data-variant="pill" for pill tabs.', 'Use links for route-backed tabs and buttons for in-page tab switching.'],
+      markup: {
+        html: `<nav class="sf-tab-list" aria-label="Views">
+  <a class="sf-tab" data-variant="pill" href="?view=open" aria-selected="true">Open <span class="sf-tab__count">12</span></a>
+  <a class="sf-tab" data-variant="pill" href="?view=closed">Closed <span class="sf-tab__count">8</span></a>
+</nav>`,
+      },
+      keywords: ['tabs', 'counts', 'queue', 'views', 'filters', 'pill'],
+    },
+    {
+      id: 'data-table-actions',
+      name: 'Data table actions',
+      whenToUse: 'Operational tables that need sortable header controls, clickable rows, and a responsive card view fallback.',
+      classes: ['sf-table-wrap', 'sf-data-table', 'sf-table-sort', 'sf-status', 'sf-link'],
+      requiresJs: false,
+      requiresJsNotes: 'Sorting and row navigation are app behavior. Synced Flow only styles controls, focus state, and responsive card layout.',
+      a11y: ['Use aria-sort on sorted columns.', 'Keep the row destination as a real link.', 'Add data-label to cells when using card fallback.'],
+      gotchas: ['Set data-view="cards" on sf-table-wrap for the responsive card fallback.', 'Do not put interactive controls inside a stretched row link.'],
+      markup: {
+        html: `<div class="sf-table-wrap" data-view="cards">
+  <table class="sf-data-table">
+    <thead><tr><th><button class="sf-table-sort" type="button" aria-sort="ascending">Name</button></th><th>Status</th></tr></thead>
+    <tbody><tr data-clickable="true"><td data-label="Name"><a class="sf-link" href="/items/1">Northstar</a></td><td data-label="Status"><span class="sf-status" data-size="sm" data-tone="success">Active</span></td></tr></tbody>
+  </table>
+</div>`,
+      },
+      keywords: ['table', 'sort', 'sortable', 'responsive', 'card', 'clickable', 'data'],
+    },
+    {
+      id: 'search-field',
+      name: 'Search field',
+      whenToUse: 'Search inputs in filters, headers, command surfaces, and dense app interfaces.',
+      classes: ['sf-search', 'sf-field', 'sf-label', 'sf-input'],
+      requiresJs: false,
+      requiresJsNotes: 'Native form submit works without JavaScript. Debounce, suggestions, and command logic belong to the app.',
+      a11y: ['Keep a label available, visible or visually hidden.', 'Use type="search".', 'Do not use placeholder text as the only label.'],
+      gotchas: ['Use sf-field data-density="compact" for dense interfaces.', 'Autocomplete and combobox behavior is app-owned.'],
+      markup: {
+        html: `<label class="sf-field sf-search" data-density="compact">
+  <span class="sf-label">Search</span>
+  <input class="sf-input" type="search" name="q" placeholder="Search records">
+</label>`,
+      },
+      keywords: ['search', 'input', 'filter', 'command', 'dense'],
+    },
+    {
+      id: 'modal-form',
+      name: 'Modal form',
+      whenToUse: 'Dialog-based create, edit, confirmation, and settings flows with form body and footer actions.',
+      classes: ['sf-dialog', 'sf-dialog__header', 'sf-dialog__body', 'sf-dialog__footer', 'sf-form', 'sf-field', 'sf-input', 'sf-button'],
+      requiresJs: true,
+      requiresJsNotes: 'Native dialog provides modal behavior. Broad support still needs a tiny app handler for showModal() until commandfor is universal.',
+      a11y: ['Use a visible dialog heading.', 'Keep footer actions inside the form or associated with form attribute.', 'Return focus to the trigger after closing.'],
+      gotchas: ['Use data-layout="form" for form spacing.', 'Validation and persistence belong to the app.'],
+      markup: {
+        html: `<dialog class="sf-dialog" data-layout="form" id="edit-dialog" aria-labelledby="edit-title">
+  <header class="sf-dialog__header"><h2 id="edit-title">Edit record</h2></header>
+  <form class="sf-form sf-dialog__body" id="edit-form"><label class="sf-field"><span class="sf-label">Name</span><input class="sf-input" name="name"></label></form>
+  <footer class="sf-dialog__footer"><button class="sf-button sf-button--outline" formmethod="dialog">Cancel</button><button class="sf-button" form="edit-form">Save</button></footer>
+</dialog>`,
+      },
+      keywords: ['dialog', 'modal', 'form', 'drawer', 'actions', 'footer'],
+    },
+    {
+      id: 'toast-stack',
+      name: 'Toast stack',
+      whenToUse: 'Non-blocking app feedback where multiple toast messages need a consistent fixed stack layout.',
+      classes: ['sf-toast-stack', 'sf-toast', 'sf-alert', 'sf-alert__title'],
+      requiresJs: false,
+      requiresJsNotes: 'Stack layout is CSS. Queuing, dismissal timing, and live-region announcements belong to the app.',
+      a11y: ['Use an aria-live region for dynamic messages.', 'Do not auto-dismiss critical errors too quickly.', 'Provide a close control when messages persist.'],
+      gotchas: ['Use sf-toast-stack for layout and sf-toast or sf-alert for each item.', 'Keep queue state outside Synced Flow.'],
+      markup: {
+        html: `<div class="sf-toast-stack" aria-live="polite" aria-label="Notifications">
+  <section class="sf-toast sf-alert" role="status"><strong class="sf-alert__title">Saved</strong><p>Changes were updated.</p></section>
+</div>`,
+      },
+      keywords: ['toast', 'notification', 'stack', 'feedback', 'alert'],
     },
     {
       id: 'filter-toolbar',
@@ -2174,8 +2301,14 @@ function runRecipe() {
 
 function findPattern(value, patterns) {
   const normal = value.toLowerCase()
+  const aliases = {
+    form: 'contact-form',
+  }
+
   return (
+    patterns.find((pattern) => pattern.id === aliases[normal]) ??
     patterns.find((pattern) => pattern.id === normal) ??
+    patterns.find((pattern) => pattern.id.endsWith(`-${normal}`)) ??
     patterns.find((pattern) => pattern.keywords.some((keyword) => keyword === normal)) ??
     patterns.find((pattern) => pattern.name.toLowerCase().includes(normal))
   )
@@ -2685,7 +2818,9 @@ const semanticColours = {
   destructive: 'var(--color-destructive)',
   'destructive-foreground': 'var(--color-destructive-foreground)',
   border: 'var(--color-border)',
+  'border-subtle': 'var(--color-border-subtle)',
   input: 'var(--color-input)',
+  backdrop: 'var(--color-backdrop)',
   ring: 'var(--color-ring)',
   heading: 'var(--color-heading)',
   'page-text': 'var(--color-page-text)',
@@ -2694,7 +2829,15 @@ const semanticColours = {
   subdued: 'var(--color-subdued)',
   surface: 'var(--color-surface)',
   'surface-alt': 'var(--color-surface-alt)',
+  'surface-hover': 'var(--color-surface-hover)',
+  'surface-raised-2': 'var(--color-surface-raised-2)',
   'hero-bg': 'var(--color-hero-bg)',
+  'categorical-1': 'var(--color-categorical-1)',
+  'categorical-2': 'var(--color-categorical-2)',
+  'categorical-3': 'var(--color-categorical-3)',
+  'categorical-4': 'var(--color-categorical-4)',
+  'categorical-5': 'var(--color-categorical-5)',
+  'categorical-6': 'var(--color-categorical-6)',
   green: 'var(--color-green)',
   'green-dark': 'var(--color-green-dark)',
   'green-muted': 'var(--color-green-muted)',
@@ -3800,6 +3943,7 @@ function buildTokensCss() {
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
 ${steps.join('\n')}
+    --type-caption-sm: var(--step--2);
 
 ${spaces.join('\n')}
 ${pairs.join('\n')}
@@ -3850,7 +3994,9 @@ ${pairs.join('\n')}
     --color-destructive: var(--sf-colour-destructive, ${colours.red600});
     --color-destructive-foreground: var(--sf-colour-destructive-foreground, oklch(98% 0.01 95));
     --color-border: var(--sf-colour-border, oklch(100% 0 0 / 0.12));
+    --color-border-subtle: var(--sf-colour-border-subtle, oklch(100% 0 0 / 0.08));
     --color-input: var(--sf-colour-input, oklch(100% 0 0 / 0.12));
+    --color-backdrop: var(--sf-colour-backdrop, oklch(0% 0 0 / 0.56));
     --color-ring: var(--sf-colour-ring, ${colours.orange600});
     --color-heading: var(--sf-colour-heading, oklch(20% 0.02 18));
     --color-page-text: var(--sf-colour-page-text, oklch(23% 0.02 18));
@@ -3859,6 +4005,14 @@ ${pairs.join('\n')}
     --color-subdued: var(--sf-colour-subdued, oklch(42% 0.02 20));
     --color-surface: var(--sf-colour-surface, ${colours.surfaceAlt});
     --color-surface-alt: var(--sf-colour-surface-alt, ${colours.paperAlt});
+    --color-surface-hover: var(--sf-colour-surface-hover, color-mix(in oklch, var(--color-surface-alt) 86%, var(--color-primary)));
+    --color-surface-raised-2: var(--sf-colour-surface-raised-2, color-mix(in oklch, var(--color-surface) 86%, white));
+    --color-categorical-1: var(--sf-colour-categorical-1, var(--color-primary));
+    --color-categorical-2: var(--sf-colour-categorical-2, var(--color-green));
+    --color-categorical-3: var(--sf-colour-categorical-3, var(--color-deco-blue));
+    --color-categorical-4: var(--sf-colour-categorical-4, var(--color-deco-lime));
+    --color-categorical-5: var(--sf-colour-categorical-5, var(--color-warm-icon));
+    --color-categorical-6: var(--sf-colour-categorical-6, var(--color-purple-icon));
     --color-hero-bg: oklch(8% 0.02 260);
     --color-green: var(--sf-colour-green, ${colours.green600});
     --color-green-dark: var(--sf-colour-green-dark, ${colours.green700});
@@ -4052,11 +4206,47 @@ function buildLayoutCss() {
   }
 
   .sf-app-shell {
+    --sf-app-header-height: 4rem;
+    --sf-app-sidebar-collapsed-width: 4.75rem;
     background: var(--color-background);
     color: var(--color-foreground);
     display: grid;
     grid-template-columns: minmax(14rem, var(--sf-app-sidebar-width, 16rem)) minmax(0, 1fr);
     min-block-size: 100dvh;
+    position: relative;
+    transition: grid-template-columns var(--duration-normal) var(--ease-standard);
+  }
+
+  .sf-app-header {
+    align-items: center;
+    background: var(--color-card);
+    border-block-end: 1px solid var(--color-border);
+    display: flex;
+    gap: var(--space-s);
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    min-block-size: var(--sf-app-header-height);
+    padding-inline: var(--space-s-m);
+    z-index: 20;
+  }
+
+  .sf-app-shell[data-layout~="fixed-header"] {
+    grid-template-rows: var(--sf-app-header-height) minmax(0, 1fr);
+  }
+
+  .sf-app-shell[data-layout~="fixed-header"] .sf-app-header {
+    inset-block-start: 0;
+    position: sticky;
+  }
+
+  .sf-app-shell[data-layout~="fixed-header"] .sf-app-sidebar {
+    inset-block-start: var(--sf-app-header-height);
+    max-block-size: calc(100dvh - var(--sf-app-header-height));
+    min-block-size: calc(100dvh - var(--sf-app-header-height));
+  }
+
+  .sf-app-shell[data-collapsed="true"] {
+    grid-template-columns: var(--sf-app-sidebar-collapsed-width) minmax(0, 1fr);
   }
 
   .sf-app-sidebar {
@@ -4072,6 +4262,7 @@ function buildLayoutCss() {
     padding: var(--space-s);
     position: sticky;
     inset-block-start: 0;
+    transition: transform var(--duration-normal) var(--ease-standard), inline-size var(--duration-normal) var(--ease-standard);
   }
 
   .sf-app-sidebar__brand {
@@ -4122,6 +4313,58 @@ function buildLayoutCss() {
   .sf-app-main {
     min-inline-size: 0;
     padding: var(--sf-app-main-padding, var(--space-m-l));
+  }
+
+  .sf-app-shell[data-collapsed="true"] .sf-app-sidebar {
+    overflow-x: hidden;
+  }
+
+  .sf-app-shell[data-collapsed="true"] .sf-app-sidebar__brand,
+  .sf-app-shell[data-collapsed="true"] .sf-app-sidebar .sf-nav__link {
+    justify-content: center;
+  }
+
+  .sf-app-shell[data-collapsed="true"] [data-hide-collapsed="true"] {
+    display: none;
+  }
+
+  .sf-app-backdrop {
+    display: none;
+  }
+
+  @media (max-width: 48rem) {
+    .sf-app-shell[data-mobile="drawer"] {
+      display: block;
+    }
+
+    .sf-app-shell[data-mobile="drawer"] .sf-app-header {
+      position: sticky;
+      inset-block-start: 0;
+    }
+
+    .sf-app-shell[data-mobile="drawer"] .sf-app-sidebar {
+      box-shadow: var(--shadow-xl);
+      inline-size: min(18rem, calc(100vw - var(--space-l)));
+      inset-block: 0;
+      inset-inline-start: 0;
+      max-block-size: none;
+      min-block-size: 100dvh;
+      position: fixed;
+      transform: translateX(-100%);
+      z-index: 30;
+    }
+
+    .sf-app-shell[data-mobile="drawer"][data-sidebar-open="true"] .sf-app-sidebar {
+      transform: translateX(0);
+    }
+
+    .sf-app-shell[data-mobile="drawer"][data-sidebar-open="true"] .sf-app-backdrop {
+      background: var(--color-backdrop);
+      display: block;
+      inset: 0;
+      position: fixed;
+      z-index: 25;
+    }
   }
 
   .sf-grid {
@@ -4532,6 +4775,76 @@ function buildComponentCss() {
     --data-table-padding-inline: var(--space-xs);
   }
 
+  .sf-data-table :where(th button, .sf-table-sort) {
+    align-items: center;
+    color: inherit;
+    display: inline-flex;
+    font: inherit;
+    font-weight: inherit;
+    gap: var(--space-3xs);
+    padding: 0;
+  }
+
+  .sf-data-table :where(th button, .sf-table-sort)[aria-sort]::after {
+    color: var(--color-muted-foreground);
+    content: "\\2195";
+    font-size: var(--step--2);
+  }
+
+  .sf-data-table :where(th button, .sf-table-sort)[aria-sort="ascending"]::after { content: "\\2191"; }
+  .sf-data-table :where(th button, .sf-table-sort)[aria-sort="descending"]::after { content: "\\2193"; }
+
+  .sf-data-table tr[data-clickable="true"] {
+    cursor: pointer;
+  }
+
+  .sf-data-table tr[data-clickable="true"]:focus-within {
+    outline: 0.125rem solid var(--color-ring);
+    outline-offset: -0.125rem;
+  }
+
+  @container (max-width: 38rem) {
+    .sf-table-wrap[data-view="cards"] {
+      border: 0;
+      overflow: visible;
+    }
+
+    .sf-table-wrap[data-view="cards"] .sf-data-table,
+    .sf-table-wrap[data-view="cards"] .sf-data-table :where(thead, tbody, tr, th, td) {
+      display: block;
+      min-inline-size: 0;
+    }
+
+    .sf-table-wrap[data-view="cards"] .sf-data-table thead {
+      display: none;
+    }
+
+    .sf-table-wrap[data-view="cards"] .sf-data-table tr {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-block-end: var(--space-xs);
+      padding: var(--space-xs);
+    }
+
+    .sf-table-wrap[data-view="cards"] .sf-data-table td {
+      align-items: center;
+      border: 0;
+      display: flex;
+      gap: var(--space-s);
+      justify-content: space-between;
+      padding-block: var(--space-2xs);
+      padding-inline: 0;
+    }
+
+    .sf-table-wrap[data-view="cards"] .sf-data-table td::before {
+      color: var(--color-muted-foreground);
+      content: attr(data-label);
+      font-size: var(--step--1);
+      font-weight: 800;
+    }
+  }
+
   .sf-status {
     align-items: center;
     background: var(--status-bg, var(--color-surface-alt));
@@ -4545,6 +4858,12 @@ function buildComponentCss() {
     line-height: 1;
     min-block-size: 1.75rem;
     padding-inline: .7em;
+  }
+
+  .sf-status[data-size="sm"] {
+    font-size: var(--step--2);
+    min-block-size: 1.35rem;
+    padding-inline: .55em;
   }
 
   .sf-status::before {
@@ -4629,6 +4948,12 @@ function buildComponentCss() {
     gap: var(--space-2xs);
   }
 
+  .sf-form[data-density="compact"],
+  .sf-field[data-density="compact"] {
+    --input-block-size: 2.25rem;
+    --input-padding-inline: var(--space-xs);
+  }
+
   .sf-field > label {
     color: var(--color-muted-foreground);
     font-size: var(--step--1);
@@ -4641,7 +4966,41 @@ function buildComponentCss() {
     border-radius: var(--input-radius, var(--radius-md));
     color: var(--color-foreground);
     min-block-size: var(--input-block-size, 2.75rem);
-    padding-inline: var(--space-s);
+    padding-inline: var(--input-padding-inline, var(--space-s));
+  }
+
+  .sf-search {
+    position: relative;
+  }
+
+  .sf-search::before {
+    block-size: .75em;
+    border: 0.125em solid currentColor;
+    border-radius: var(--radius-full);
+    color: var(--color-muted-foreground);
+    content: "";
+    inline-size: .75em;
+    inset-block-start: 50%;
+    inset-inline-start: var(--space-xs);
+    line-height: 1;
+    position: absolute;
+    transform: translateY(-58%);
+  }
+
+  .sf-search::after {
+    background: var(--color-muted-foreground);
+    block-size: .125em;
+    content: "";
+    inline-size: .45em;
+    inset-block-start: 50%;
+    inset-inline-start: calc(var(--space-xs) + .58em);
+    position: absolute;
+    transform: translateY(120%) rotate(45deg);
+    transform-origin: inline-start center;
+  }
+
+  .sf-search > .sf-input {
+    padding-inline-start: var(--space-l);
   }
 
   .sf-input:focus-visible {

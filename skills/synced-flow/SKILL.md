@@ -1,6 +1,6 @@
 ---
 name: synced-flow
-description: Use Synced Flow to set up and build modern fluid CSS systems with the CLI, tokens, presets, WordPress support, and source-scanned utility CSS.
+description: Use Synced Flow to set up and build modern fluid CSS systems with the CLI, tokens, presets, app UI primitives, WordPress support, and source-scanned utility CSS.
 ---
 
 # Synced Flow
@@ -87,12 +87,25 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
 
 - Prefer primitives first: `sf-container`, `sf-section`, `sf-stack`,
   `sf-cluster`, `sf-repel`, `sf-auto-grid`, `sf-split`, `sf-sidebar`,
-  `sf-frame`, and `sf-flow`.
+  `sf-app-shell`, `sf-app-header`, `sf-app-sidebar`, `sf-app-main`,
+  `sf-app-backdrop`, `sf-frame`, and `sf-flow`.
 - Prefer component primitives for common UI: `sf-button`, `sf-card`,
-  `sf-badge`, `sf-field`, and `sf-input`.
-- Use `saas-landing` for public SaaS marketing pages. Use `saas-dashboard` for
-  authenticated app UI, admin panels, portals, CRMs, analytics dashboards,
-  metrics, tables, account menus, and login state.
+  `sf-badge`, `sf-status`, `sf-field`, `sf-input`, `sf-search`,
+  `sf-data-table`, `sf-table-sort`, `sf-tab__count`, and `sf-toast-stack`.
+- Use `saas-landing` for public SaaS marketing pages. Use `saas-dashboard` when
+  a full authenticated starter is useful, but prefer neutral app patterns for
+  reusable UI in admin panels, portals, CRMs, analytics dashboards, internal
+  tools, account areas, and product workspaces.
+- Use app patterns before writing project CSS:
+  `app-shell-layout`, `row-action-menu`, `tabs-with-counts`,
+  `data-table-actions`, `search-field`, `modal-form`, and `toast-stack`.
+- Use app shell states instead of bespoke layout CSS: `data-layout="fixed-header"`
+  for fixed app headers, `data-collapsed="true"` for collapsed sidebars, and
+  `data-mobile="drawer"` with `data-sidebar-open="true"` for mobile drawer
+  navigation.
+- Keep product-specific structures out of Synced Flow. Kanban boards, invoices,
+  proposal builders, scheduling workflows, and complex editable grids should stay
+  in the consuming app unless they become broadly reusable primitives.
 - Do not implement authentication logic in Synced Flow markup. Wire sessions,
   providers, permissions, and sign-out actions in the consuming app.
 - Prefer native component patterns for common interaction: `sf-dialog`,
@@ -112,6 +125,10 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
   accessibility and explicit UI styling.
 - Put brand choices in `theme` config or theme presets rather than scattered
   one-off CSS.
+- Use semantic app tokens before local overrides: `surfaceRaised2`,
+  `surfaceHover`, `borderSubtle`, `backdrop`, and `categorical1` through
+  `categorical6`. Devs may still supply valid CSS colour formats such as hex,
+  RGB, HSL, or OKLCH in their own theme config.
 - Use modern CSS techniques already in the system: cascade layers, custom
   properties, logical properties, `clamp()`, OKLCH colour, container-aware
   layout, and `prefers-reduced-motion`.
