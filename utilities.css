@@ -84,6 +84,7 @@
   .sf-table-wrap {
     border: 1px solid var(--sf-colour-border);
     border-radius: var(--sf-radius-panel);
+    container-type: inline-size;
     overflow-x: auto;
   }
 

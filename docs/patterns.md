@@ -18,6 +18,13 @@ pnpm exec synced-flow pattern scroll-viewport-sections --json
 | `scroll-viewport-with-spy` | Scroll snap panels with optional IntersectionObserver active-state notes. |
 | `native-dialog-react` | Native `<dialog>` markup plus React/Next fallback shape. |
 | `popover-drawer-layout` | Popover-backed drawer or filter panel with `sf-drawer--stack`. |
+| `app-shell-layout` | Fixed header, sidebar, collapsed state, and mobile drawer app shell. |
+| `row-action-menu` | Native popover row actions with destructive menu item styling. |
+| `tabs-with-counts` | Pill tabs with compact count chips. |
+| `data-table-actions` | Sortable header controls, clickable rows, and responsive card fallback. |
+| `search-field` | Labelled native search input with icon shell and compact density. |
+| `modal-form` | Native dialog layout for form body and footer actions. |
+| `toast-stack` | Fixed app notification stack layout. |
 | `filter-toolbar` | Search, filters, and actions above app lists and tables. |
 | `date-filter-form` | Native date/time inputs inside filter forms. |
 | `active-filter-tags` | Visible selected filter tags with remove and clear actions. |
