@@ -1468,6 +1468,147 @@
     overflow: hidden;
   }
 
+  .sf-filter-bar {
+    align-items: end;
+    background: var(--sf-colour-surface);
+    border: 1px solid var(--sf-colour-border);
+    border-radius: var(--sf-radius-panel);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sf-space-xs);
+    padding: var(--sf-space-s);
+  }
+
+  .sf-filter-bar > :where(.sf-field, form, label) {
+    flex: 1 1 min(100%, 14rem);
+  }
+
+  .sf-filter-bar > :where(.sf-button, button, a) {
+    flex: 0 0 auto;
+  }
+
+  .sf-data-table {
+    border-collapse: collapse;
+    inline-size: 100%;
+    min-inline-size: var(--sf-data-table-min, 44rem);
+  }
+
+  .sf-data-table :where(th, td) {
+    border-block-end: 1px solid var(--sf-colour-border);
+    padding-block: var(--sf-data-table-padding-block, var(--sf-space-xs));
+    padding-inline: var(--sf-data-table-padding-inline, var(--sf-space-s));
+    text-align: start;
+    vertical-align: middle;
+  }
+
+  .sf-data-table :where(th) {
+    background: var(--sf-colour-surface-alt);
+    color: var(--sf-colour-muted);
+    font-size: var(--sf-step--1);
+    font-weight: 800;
+  }
+
+  .sf-data-table :where(tbody tr:hover) {
+    background: color-mix(in oklch, var(--sf-colour-primary) 6%, transparent);
+  }
+
+  .sf-data-table[data-density="compact"] {
+    --sf-data-table-padding-block: var(--sf-space-2xs);
+    --sf-data-table-padding-inline: var(--sf-space-xs);
+  }
+
+  .sf-status {
+    align-items: center;
+    background: var(--sf-status-bg, var(--sf-colour-surface-alt));
+    border: 1px solid var(--sf-status-border, var(--sf-colour-border));
+    border-radius: var(--sf-radius-full);
+    color: var(--sf-status-colour, var(--sf-colour-foreground));
+    display: inline-flex;
+    font-size: var(--sf-step--1);
+    font-weight: 700;
+    gap: var(--sf-space-3xs);
+    line-height: 1;
+    min-block-size: 1.75rem;
+    padding-inline: .7em;
+  }
+
+  .sf-status::before {
+    background: currentColor;
+    block-size: .42em;
+    border-radius: var(--sf-radius-full);
+    content: "";
+    inline-size: .42em;
+  }
+
+  .sf-status[data-tone="success"] {
+    --sf-status-bg: var(--sf-colour-success-soft);
+    --sf-status-border: color-mix(in oklch, var(--sf-colour-success) 34%, transparent);
+    --sf-status-colour: color-mix(in oklch, var(--sf-colour-success) 76%, var(--sf-colour-foreground));
+  }
+
+  .sf-status[data-tone="warning"] {
+    --sf-status-bg: var(--sf-colour-warning-soft);
+    --sf-status-border: color-mix(in oklch, var(--sf-colour-warning) 38%, transparent);
+    --sf-status-colour: color-mix(in oklch, var(--sf-colour-warning) 70%, var(--sf-colour-foreground));
+  }
+
+  .sf-status[data-tone="danger"] {
+    --sf-status-bg: var(--sf-colour-danger-soft);
+    --sf-status-border: color-mix(in oklch, var(--sf-colour-danger) 34%, transparent);
+    --sf-status-colour: color-mix(in oklch, var(--sf-colour-danger) 76%, var(--sf-colour-foreground));
+  }
+
+  .sf-status[data-tone="info"] {
+    --sf-status-bg: var(--sf-colour-info-soft);
+    --sf-status-border: color-mix(in oklch, var(--sf-colour-info) 34%, transparent);
+    --sf-status-colour: color-mix(in oklch, var(--sf-colour-info) 76%, var(--sf-colour-foreground));
+  }
+
+  .sf-data-list {
+    display: grid;
+  }
+
+  .sf-data-list > * {
+    align-items: center;
+    border-block-end: 1px solid var(--sf-colour-border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sf-space-xs);
+    justify-content: space-between;
+    padding-block: var(--sf-space-xs);
+  }
+
+  .sf-data-list > :last-child {
+    border-block-end: 0;
+  }
+
+  .sf-empty-state {
+    align-items: center;
+    background: var(--sf-colour-surface-alt);
+    border: 1px dashed var(--sf-colour-border-strong);
+    border-radius: var(--sf-radius-panel);
+    color: var(--sf-colour-muted);
+    display: grid;
+    gap: var(--sf-space-xs);
+    justify-items: center;
+    padding: var(--sf-space-l);
+    text-align: center;
+  }
+
+  .sf-settings-section,
+  .sf-detail-panel {
+    background: var(--sf-colour-surface);
+    border: 1px solid var(--sf-colour-border);
+    border-radius: var(--sf-radius-panel);
+    display: grid;
+    gap: var(--sf-space-s);
+    padding: var(--sf-space-m);
+  }
+
+  .sf-detail-panel {
+    background: var(--sf-colour-surface-alt);
+  }
+
   .sf-nav {
     align-items: center;
     display: flex;

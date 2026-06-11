@@ -70,6 +70,7 @@ These cover the common UI elements needed for a simple site.
 | `sf-alert`, `sf-alert--info`, `sf-alert--success`, `sf-alert--warning`, `sf-alert--danger`, `sf-alert__title` | Notices and feedback. |
 | `sf-section-header`, `sf-kicker`, `sf-badge`, `sf-avatar` | Common marketing/content and account patterns. |
 | `sf-chart`, `sf-chart__plot`, `sf-chart__svg`, `sf-chart__legend`, `sf-meter-list`, `sf-meter` | Lightweight chart shells for app-owned SVG charts and native meter bars. |
+| `sf-filter-bar`, `sf-data-table`, `sf-status`, `sf-data-list`, `sf-empty-state`, `sf-settings-section`, `sf-detail-panel` | Lean SaaS application primitives for filters, operational data, status, empty states, and settings/detail screens. |
 
 ## Utility Classes
 

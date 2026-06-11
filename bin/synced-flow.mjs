@@ -1025,7 +1025,7 @@ function getTokenSummary() {
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
       layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-container--full', 'sf-rail-shell', 'sf-rail-shell__rail', 'sf-rail-shell__body', 'sf-rail-shell__mark', 'sf-rail-shell__label', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-auto-grid', 'sf-auto-grid--xs', 'sf-auto-grid--sm', 'sf-auto-grid--lg', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-chapter', 'sf-chapter__copy', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-filter-bar', 'sf-data-table', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -1240,6 +1240,95 @@ export default function DialogExample() {
       keywords: ['blog', 'article', 'prose', 'legal', 'docs', 'case-study', 'table', 'figure', 'seo'],
     },
     {
+      id: 'saas-filter-toolbar',
+      name: 'SaaS filter toolbar',
+      whenToUse: 'Search, status filters, quick actions, and exports above SaaS lists, tables, queues, and admin screens.',
+      classes: ['sf-filter-bar', 'sf-field', 'sf-label', 'sf-input', 'sf-select', 'sf-button', 'sf-button--outline'],
+      requiresJs: false,
+      requiresJsNotes: 'Use native form submit, GET params, or app-owned state. Synced Flow only styles the shell and controls.',
+      a11y: ['Keep every field labelled.', 'Use button type="submit" for applied filters.', 'Announce result count in app markup when filtering changes content dynamically.'],
+      gotchas: ['Do not hide labels without keeping them accessible.', 'Use app logic for debounced search, saved views, and live result counts.'],
+      markup: {
+        html: `<form class="sf-filter-bar" role="search" action="/app/customers" method="get">
+  <label class="sf-field">
+    <span class="sf-label">Search</span>
+    <input class="sf-input" name="q" type="search" placeholder="Search customers">
+  </label>
+  <label class="sf-field">
+    <span class="sf-label">Status</span>
+    <select class="sf-select" name="status"><option>Any status</option><option>Healthy</option><option>Needs review</option></select>
+  </label>
+  <button class="sf-button" type="submit">Apply</button>
+  <a class="sf-button sf-button--outline" href="/app/customers/export">Export</a>
+</form>`,
+      },
+      keywords: ['saas', 'filter', 'toolbar', 'search', 'status', 'table', 'list', 'admin', 'crm'],
+    },
+    {
+      id: 'saas-data-table',
+      name: 'SaaS data table',
+      whenToUse: 'Account lists, activity logs, invoices, users, queues, and operational tables that should keep native table semantics.',
+      classes: ['sf-table-wrap', 'sf-data-table', 'sf-status', 'sf-avatar', 'sf-link'],
+      requiresJs: false,
+      requiresJsNotes: 'Sorting, pagination state, and row actions belong to the consuming app.',
+      a11y: ['Use a caption or labelled section.', 'Use real table headers.', 'Do not replace table markup with divs for tabular data.'],
+      gotchas: ['Wrap wide tables in sf-table-wrap.', 'Use sf-status for display only; keep actual status text in the element.'],
+      markup: {
+        html: `<div class="sf-table-wrap">
+  <table class="sf-data-table" aria-label="Customers">
+    <thead><tr><th>Customer</th><th>Status</th><th>Plan</th><th>Updated</th></tr></thead>
+    <tbody>
+      <tr><td><a class="sf-link" href="/app/customers/northstar">Northstar Labs</a></td><td><span class="sf-status" data-tone="success">Healthy</span></td><td>Growth</td><td>Today</td></tr>
+      <tr><td>Willow Group</td><td><span class="sf-status" data-tone="warning">Needs review</span></td><td>Operations</td><td>Yesterday</td></tr>
+    </tbody>
+  </table>
+</div>`,
+      },
+      keywords: ['saas', 'table', 'data', 'customers', 'accounts', 'admin', 'crm', 'status', 'list'],
+    },
+    {
+      id: 'saas-empty-state',
+      name: 'SaaS empty state',
+      whenToUse: 'Empty queues, no search results, first-run screens, and dashboards before data is available.',
+      classes: ['sf-empty-state', 'sf-button', 'sf-button--outline', 'sf-text-muted'],
+      requiresJs: false,
+      requiresJsNotes: 'No JavaScript is required unless the consuming app opens a creation flow.',
+      a11y: ['Use a heading that explains the missing state.', 'Keep primary action text specific.', 'Do not rely on illustration-only meaning.'],
+      gotchas: ['Keep it short; empty states should unblock the next action.', 'Use sf-card around it only when the surrounding layout needs a card surface.'],
+      markup: {
+        html: `<div class="sf-empty-state">
+  <h2 class="sf-text-h4">No matching customers</h2>
+  <p class="sf-text-muted">Adjust the filters or add the first customer.</p>
+  <div class="sf-cluster">
+    <a class="sf-button" href="/app/customers/new">Add customer</a>
+    <a class="sf-button sf-button--outline" href="/app/customers">Reset filters</a>
+  </div>
+</div>`,
+      },
+      keywords: ['saas', 'empty', 'state', 'first-run', 'onboarding', 'no-results', 'zero'],
+    },
+    {
+      id: 'saas-settings-section',
+      name: 'SaaS settings section',
+      whenToUse: 'Account, team, billing, security, notification, and integration settings screens.',
+      classes: ['sf-settings-section', 'sf-detail-panel', 'sf-data-list', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-button'],
+      requiresJs: false,
+      requiresJsNotes: 'Form submission, optimistic saves, and validation belong to the consuming app.',
+      a11y: ['Group related settings under a heading.', 'Use fieldsets when settings are tightly related.', 'Describe destructive settings before the action.'],
+      gotchas: ['Avoid putting unrelated settings in one panel.', 'Use sf-detail-panel for read-only metadata next to editable fields.'],
+      markup: {
+        html: `<section class="sf-settings-section" aria-labelledby="workspace-settings-title">
+  <header class="sf-repel"><div><h2 id="workspace-settings-title">Workspace settings</h2><p class="sf-text-muted">Manage visible account details.</p></div><button class="sf-button" type="submit" form="workspace-settings">Save</button></header>
+  <form class="sf-form" id="workspace-settings">
+    <label class="sf-field"><span class="sf-label">Workspace name</span><input class="sf-input" name="name" value="Product Suite"></label>
+    <label class="sf-check"><input type="checkbox" name="weekly_summary" checked> <span>Email weekly summary</span></label>
+  </form>
+  <aside class="sf-detail-panel"><dl class="sf-data-list"><div><dt>Plan</dt><dd>Team</dd></div><div><dt>Seats</dt><dd>12 active</dd></div></dl></aside>
+</section>`,
+      },
+      keywords: ['saas', 'settings', 'section', 'billing', 'team', 'security', 'account', 'detail'],
+    },
+    {
       id: 'contact-form',
       name: 'Accessible contact form',
       whenToUse: 'Contact forms, sign-up forms, newsletter forms, and simple application flows.',
@@ -1362,8 +1451,8 @@ function getPublicRecipes() {
       id: 'saas-dashboard',
       name: 'SaaS dashboard',
       whenToUse: 'Authenticated SaaS apps, admin panels, customer portals, CRMs, analytics dashboards, and product workspaces.',
-      sections: ['sticky-navigation', 'mobile-nav-drawer', 'card-grid', 'contact-form', 'long-form-content'],
-      classes: ['sf-skip-link', 'sf-theme-light', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-stack--tight', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-icon', 'sf-card', 'sf-surface', 'sf-stat', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-button', 'sf-button--outline', 'sf-button--icon', 'sf-form', 'sf-field', 'sf-input', 'sf-check', 'sf-table-wrap', 'sf-font-sans', 'sf-visually-hidden'],
+      sections: ['sticky-navigation', 'mobile-nav-drawer', 'card-grid', 'contact-form', 'long-form-content', 'saas-filter-toolbar', 'saas-data-table', 'saas-empty-state', 'saas-settings-section'],
+      classes: ['sf-skip-link', 'sf-theme-light', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-main', 'sf-toolbar', 'sf-stack', 'sf-stack--tight', 'sf-repel', 'sf-cluster', 'sf-panel-grid', 'sf-metric-grid', 'sf-nav', 'sf-nav__list', 'sf-nav__link', 'sf-icon', 'sf-card', 'sf-surface', 'sf-stat', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-filter-bar', 'sf-data-table', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-button', 'sf-button--outline', 'sf-button--icon', 'sf-form', 'sf-field', 'sf-input', 'sf-select', 'sf-check', 'sf-table-wrap', 'sf-font-sans', 'sf-visually-hidden'],
       keywords: ['saas', 'dashboard', 'admin', 'panel', 'portal', 'crm', 'analytics', 'app', 'auth', 'login', 'signin', 'sign-in', 'user', 'account', 'metrics', 'pipeline', 'activity', 'customers', 'accounts', 'tasks', 'tickets', 'revenue'],
       markup: `<a class="sf-skip-link" href="#dashboard-main">Skip to dashboard</a>
 <div class="sf-app-shell sf-theme-light">
@@ -1466,32 +1555,37 @@ function getPublicRecipes() {
     <section class="sf-metric-grid" id="command">
       <article class="sf-card sf-stack"><div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Command centre</h2><span class="sf-badge">Priority</span></div><p class="sf-card__description">Follow-ups, approvals, and missing next actions stay visible.</p></article>
       <article class="sf-card sf-stack" id="billing"><h2 class="sf-card__title sf-font-sans">Billing watch</h2><p class="sf-card__description">2 overdue payment follow-ups and 1 renewal due this week.</p></article>
-      <article class="sf-card sf-stack"><h2 class="sf-card__title sf-font-sans">Relationship pulse</h2><p class="sf-card__description">Three customer timelines need a recent touch point.</p></article>
+      <article class="sf-card sf-stack"><h2 class="sf-card__title sf-font-sans">Relationship pulse</h2><p class="sf-card__description">Three customer timelines need a recent touch point.</p><div class="sf-empty-state"><strong>No urgent escalations</strong><span class="sf-text-muted">New priority work will appear here.</span></div></article>
     </section>
     <section class="sf-panel-grid" id="customers">
       <article class="sf-card sf-stack">
         <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Recent activity</h2><a class="sf-link" href="/app/activity">View all</a></div>
+        <form class="sf-filter-bar" role="search" action="/app/activity" method="get">
+          <label class="sf-field"><span class="sf-label">Search</span><input class="sf-input" name="q" type="search" placeholder="Search activity"></label>
+          <label class="sf-field"><span class="sf-label">Status</span><select class="sf-select" name="status"><option>Any status</option><option>Active</option><option>Scheduled</option><option>Complete</option></select></label>
+          <button class="sf-button" type="submit">Apply</button>
+        </form>
         <div class="sf-table-wrap">
-          <table>
+          <table class="sf-data-table" aria-label="Recent activity">
             <thead><tr><th>Item</th><th>Status</th><th>Value</th><th>Date</th></tr></thead>
             <tbody>
-              <tr><td>Enterprise onboarding</td><td><span class="sf-badge">Active</span></td><td>£7,800</td><td>Today</td></tr>
-              <tr><td>Usage review</td><td><span class="sf-badge">Scheduled</span></td><td>£4,050</td><td>Yesterday</td></tr>
-              <tr><td>Renewal workflow</td><td><span class="sf-badge">Complete</span></td><td>£3,250</td><td>17 May</td></tr>
+              <tr><td>Enterprise onboarding</td><td><span class="sf-status" data-tone="success">Active</span></td><td>£7,800</td><td>Today</td></tr>
+              <tr><td>Usage review</td><td><span class="sf-status" data-tone="info">Scheduled</span></td><td>£4,050</td><td>Yesterday</td></tr>
+              <tr><td>Renewal workflow</td><td><span class="sf-status" data-tone="warning">Review</span></td><td>£3,250</td><td>17 May</td></tr>
             </tbody>
           </table>
         </div>
       </article>
-      <article class="sf-card sf-stack" id="activity">
+      <article class="sf-card sf-stack sf-detail-panel" id="activity">
         <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Recent customers</h2><a class="sf-link" href="/app/customers">View all</a></div>
-        <ul class="sf-list-reset sf-stack">
-          <li class="sf-repel"><span><strong>Northstar Labs</strong><br><span class="sf-text-muted">Growth workspace</span></span><span class="sf-text-muted">Healthy</span></li>
-          <li class="sf-repel"><span><strong>Willow Group</strong><br><span class="sf-text-muted">Operations workspace</span></span><span class="sf-text-muted">Needs review</span></li>
-          <li class="sf-repel"><span><strong>Harbour Systems</strong><br><span class="sf-text-muted">Platform workspace</span></span><span class="sf-text-muted">Healthy</span></li>
+        <ul class="sf-list-reset sf-data-list">
+          <li><span><strong>Northstar Labs</strong><br><span class="sf-text-muted">Growth workspace</span></span><span class="sf-status" data-tone="success">Healthy</span></li>
+          <li><span><strong>Willow Group</strong><br><span class="sf-text-muted">Operations workspace</span></span><span class="sf-status" data-tone="warning">Needs review</span></li>
+          <li><span><strong>Harbour Systems</strong><br><span class="sf-text-muted">Platform workspace</span></span><span class="sf-status" data-tone="success">Healthy</span></li>
         </ul>
       </article>
     </section>
-    <section class="sf-card sf-form" aria-labelledby="signin-title">
+    <section class="sf-card sf-form sf-settings-section" aria-labelledby="signin-title">
       <!-- Example unauthenticated state. Wire this form to your app auth provider. -->
       <div class="sf-repel">
         <div><p class="sf-kicker">Signed out state</p><h2 class="sf-card__title sf-font-sans" id="signin-title">Sign in to your workspace</h2></div>
@@ -1684,7 +1778,7 @@ function runTokens() {
 function runCatalog() {
   const catalog = getPublicCatalog()
   if (args.includes('--json')) {
-    console.log(JSON.stringify(catalog, null, 2))
+    writeFileSync(1, `${JSON.stringify(catalog, null, 2)}\n`)
     return
   }
 
@@ -4311,6 +4405,147 @@ function buildComponentCss() {
     border-radius: var(--radius-full);
     inline-size: 100%;
     overflow: hidden;
+  }
+
+  .sf-filter-bar {
+    align-items: end;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    padding: var(--space-s);
+  }
+
+  .sf-filter-bar > :where(.sf-field, form, label) {
+    flex: 1 1 min(100%, 14rem);
+  }
+
+  .sf-filter-bar > :where(.sf-button, button, a) {
+    flex: 0 0 auto;
+  }
+
+  .sf-data-table {
+    border-collapse: collapse;
+    inline-size: 100%;
+    min-inline-size: var(--data-table-min, 44rem);
+  }
+
+  .sf-data-table :where(th, td) {
+    border-block-end: 1px solid var(--color-border);
+    padding-block: var(--data-table-padding-block, var(--space-xs));
+    padding-inline: var(--data-table-padding-inline, var(--space-s));
+    text-align: start;
+    vertical-align: middle;
+  }
+
+  .sf-data-table :where(th) {
+    background: var(--color-surface-alt);
+    color: var(--color-muted-foreground);
+    font-size: var(--step--1);
+    font-weight: 800;
+  }
+
+  .sf-data-table :where(tbody tr:hover) {
+    background: color-mix(in oklch, var(--color-primary) 6%, transparent);
+  }
+
+  .sf-data-table[data-density="compact"] {
+    --data-table-padding-block: var(--space-2xs);
+    --data-table-padding-inline: var(--space-xs);
+  }
+
+  .sf-status {
+    align-items: center;
+    background: var(--status-bg, var(--color-surface-alt));
+    border: 1px solid var(--status-border, var(--color-border));
+    border-radius: var(--radius-full);
+    color: var(--status-color, var(--color-foreground));
+    display: inline-flex;
+    font-size: var(--step--1);
+    font-weight: 700;
+    gap: var(--space-3xs);
+    line-height: 1;
+    min-block-size: 1.75rem;
+    padding-inline: .7em;
+  }
+
+  .sf-status::before {
+    background: currentColor;
+    block-size: .42em;
+    border-radius: var(--radius-full);
+    content: "";
+    inline-size: .42em;
+  }
+
+  .sf-status[data-tone="success"] {
+    --status-bg: var(--sf-colour-success-soft, oklch(62% 0.13 150 / 0.12));
+    --status-border: color-mix(in oklch, var(--sf-colour-success, oklch(62% 0.13 150)) 34%, transparent);
+    --status-color: color-mix(in oklch, var(--sf-colour-success, oklch(62% 0.13 150)) 76%, var(--color-foreground));
+  }
+
+  .sf-status[data-tone="warning"] {
+    --status-bg: var(--sf-colour-warning-soft, oklch(78% 0.15 82 / 0.16));
+    --status-border: color-mix(in oklch, var(--sf-colour-warning, oklch(78% 0.15 82)) 38%, transparent);
+    --status-color: color-mix(in oklch, var(--sf-colour-warning, oklch(78% 0.15 82)) 70%, var(--color-foreground));
+  }
+
+  .sf-status[data-tone="danger"] {
+    --status-bg: var(--sf-colour-danger-soft, oklch(56% 0.2 28 / 0.12));
+    --status-border: color-mix(in oklch, var(--sf-colour-danger, var(--color-destructive)) 34%, transparent);
+    --status-color: color-mix(in oklch, var(--sf-colour-danger, var(--color-destructive)) 76%, var(--color-foreground));
+  }
+
+  .sf-status[data-tone="info"] {
+    --status-bg: var(--sf-colour-info-soft, oklch(70% 0.12 205 / 0.14));
+    --status-border: color-mix(in oklch, var(--sf-colour-info, oklch(70% 0.12 205)) 34%, transparent);
+    --status-color: color-mix(in oklch, var(--sf-colour-info, oklch(70% 0.12 205)) 76%, var(--color-foreground));
+  }
+
+  .sf-data-list {
+    display: grid;
+  }
+
+  .sf-data-list > * {
+    align-items: center;
+    border-block-end: 1px solid var(--color-border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    justify-content: space-between;
+    padding-block: var(--space-xs);
+  }
+
+  .sf-data-list > :last-child {
+    border-block-end: 0;
+  }
+
+  .sf-empty-state {
+    align-items: center;
+    background: var(--color-surface-alt);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-muted-foreground);
+    display: grid;
+    gap: var(--space-xs);
+    justify-items: center;
+    padding: var(--space-l);
+    text-align: center;
+  }
+
+  .sf-settings-section,
+  .sf-detail-panel {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: grid;
+    gap: var(--space-s);
+    padding: var(--space-m);
+  }
+
+  .sf-detail-panel {
+    background: var(--color-surface-alt);
   }
 
   .sf-field {

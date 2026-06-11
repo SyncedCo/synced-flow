@@ -18,6 +18,10 @@ pnpm exec synced-flow pattern scroll-viewport-sections --json
 | `scroll-viewport-with-spy` | Scroll snap panels with optional IntersectionObserver active-state notes. |
 | `native-dialog-react` | Native `<dialog>` markup plus React/Next fallback shape. |
 | `popover-drawer-layout` | Popover-backed drawer or filter panel with `sf-drawer--stack`. |
+| `saas-filter-toolbar` | Search, filters, and actions above app lists and tables. |
+| `saas-data-table` | Native responsive table markup with status pills. |
+| `saas-empty-state` | No-results and first-run states with clear next actions. |
+| `saas-settings-section` | Settings/detail sections for account, team, billing, and security screens. |
 
 Pattern JSON includes:
 

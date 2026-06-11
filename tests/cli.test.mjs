@@ -35,6 +35,7 @@ function run(args, options = {}) {
   return execFileSync('node', [cli, ...args], {
     cwd: packageRoot,
     encoding: 'utf8',
+    maxBuffer: 1024 * 1024,
     ...options,
   })
 }
@@ -326,6 +327,11 @@ test('tokens command prints machine-readable starter surface', () => {
   assert.ok(tokens.starterClasses.components.includes('sf-avatar'))
   assert.ok(tokens.starterClasses.components.includes('sf-chart'))
   assert.ok(tokens.starterClasses.components.includes('sf-meter'))
+  assert.ok(tokens.starterClasses.components.includes('sf-filter-bar'))
+  assert.ok(tokens.starterClasses.components.includes('sf-data-table'))
+  assert.ok(tokens.starterClasses.components.includes('sf-status'))
+  assert.ok(tokens.starterClasses.components.includes('sf-empty-state'))
+  assert.ok(tokens.starterClasses.components.includes('sf-settings-section'))
   assert.ok(tokens.starterClasses.utilities.includes('sr-only'))
   assert.ok(tokens.starterClasses.utilities.includes('sf-skip-link'))
   assert.ok(tokens.starterClasses.utilities.includes('sf-link-plain'))
@@ -347,6 +353,10 @@ test('catalog command prints public API for AI composition', () => {
   assert.ok(catalog.patterns.some((pattern) => pattern.id === 'mobile-nav-drawer' && pattern.requiresJs === false))
   assert.ok(catalog.patterns.some((pattern) => pattern.id === 'scroll-snap-page'))
   assert.ok(catalog.patterns.some((pattern) => pattern.classes.includes('sf-dialog')))
+  assert.ok(catalog.patterns.some((pattern) => pattern.id === 'saas-filter-toolbar'))
+  assert.ok(catalog.patterns.some((pattern) => pattern.id === 'saas-data-table' && pattern.classes.includes('sf-status')))
+  assert.ok(catalog.patterns.some((pattern) => pattern.id === 'saas-empty-state'))
+  assert.ok(catalog.patterns.some((pattern) => pattern.id === 'saas-settings-section'))
   assert.ok(catalog.recipes.some((recipe) => recipe.id === 'saas-landing'))
   assert.ok(catalog.recipes.some((recipe) => recipe.id === 'saas-dashboard'))
   assert.ok(catalog.recipes.some((recipe) => recipe.id === 'coming-soon'))
@@ -440,6 +450,11 @@ test('recipe command prints copy-ready recipe markup', () => {
   assert.match(dashboard.markup, /Account owner/)
   assert.match(dashboard.markup, /Sign out/)
   assert.match(dashboard.markup, /sf-table-wrap/)
+  assert.match(dashboard.markup, /sf-filter-bar/)
+  assert.match(dashboard.markup, /sf-data-table/)
+  assert.match(dashboard.markup, /sf-status/)
+  assert.match(dashboard.markup, /sf-empty-state/)
+  assert.match(dashboard.markup, /sf-detail-panel/)
   assert.match(dashboard.markup, /sf-push-block-end/)
   assert.match(dashboard.markup, /class="sf-icon"/)
   assert.match(dashboard.markup, /class="sf-chart__svg"/)
@@ -617,6 +632,11 @@ test('package exposes modular CSS layer files', () => {
   assert.match(componentsCss, /\.sf-avatar/)
   assert.match(componentsCss, /\.sf-chart/)
   assert.match(componentsCss, /\.sf-meter/)
+  assert.match(componentsCss, /\.sf-filter-bar/)
+  assert.match(componentsCss, /\.sf-data-table/)
+  assert.match(componentsCss, /\.sf-status/)
+  assert.match(componentsCss, /\.sf-empty-state/)
+  assert.match(componentsCss, /\.sf-settings-section/)
   assert.match(componentsCss, /\.sf-popover/)
   assert.match(componentsCss, /\.sf-drawer/)
   assert.match(componentsCss, /\.sf-drawer--stack/)
