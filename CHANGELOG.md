@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.1 - 2026-06-13
 
 - Fix mobile app drawer scrolling by giving the drawer sidebar a viewport block size.
 - Vertically center `.sf-tab` contents.
