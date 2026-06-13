@@ -22,7 +22,7 @@ Synced Flow is designed to reduce the number of styling decisions made from scra
 
 Synced Flow is not trying to be a Tailwind clone, a Bootstrap replacement, or a React component library.
 
-It is an AI-native fluid CSS design system for brand-consistent websites and agency builds.
+It is an AI-friendly fluid CSS design system for brand-consistent websites and agency builds.
 
 Use it when you want:
 

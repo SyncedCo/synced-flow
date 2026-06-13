@@ -86,6 +86,8 @@ The generated core includes enough semantic variables for common website UI:
 - structure: `--sf-colour-border-subtle`, `--sf-colour-border`,
   `--sf-colour-border-strong`, `--sf-colour-backdrop`,
   `--sf-radius-control`, `--sf-radius-panel`, `--sf-shadow-*`
+- stacking: `--sf-z-sticky`, `--sf-z-header`, `--sf-z-backdrop`,
+  `--sf-z-drawer`, `--sf-z-overlay`, `--sf-z-toast`, `--sf-z-skip-link`
 - data accents: `--sf-colour-categorical-1` through
   `--sf-colour-categorical-6`
 

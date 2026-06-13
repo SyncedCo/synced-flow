@@ -145,7 +145,7 @@
     text-decoration: none;
     transform: translateY(calc(-100% - var(--sf-space-m)));
     transition: opacity var(--sf-duration-fast) var(--sf-ease-standard), transform var(--sf-duration-fast) var(--sf-ease-standard);
-    z-index: 999;
+    z-index: var(--sf-z-skip-link);
   }
 
   .sf-skip-link:focus-visible {

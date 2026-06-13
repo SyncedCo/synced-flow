@@ -1,6 +1,6 @@
 # Synced Flow
 
-AI-native fluid CSS design system for brand-consistent websites, agency builds,
+AI-friendly fluid CSS design system for brand-consistent websites, agency builds,
 and modern frontend projects.
 
 Synced Flow gives developers and AI coding agents a shared styling contract:
@@ -58,6 +58,7 @@ documentation, and recipes.
 Useful project files:
 
 - [Contributing](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
 - [Security policy](SECURITY.md)
 - [Code of conduct](CODE_OF_CONDUCT.md)
 - [Support](SUPPORT.md)

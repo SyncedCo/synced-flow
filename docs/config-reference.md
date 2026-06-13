@@ -79,3 +79,30 @@ theme: {
   },
 }
 ```
+
+## Theme Scope
+
+The config theme model is intentionally global. Use `theme.colours` for the
+default token set and `theme.darkColours` for `.sf-theme-dark` /
+`[data-sf-theme="dark"]` overrides. This covers the common site or app case:
+one brand token set, with an optional dark-mode token set.
+
+Synced Flow does not try to encode every theme matrix in config. If a project
+needs per-tenant branding, `[data-surface]` variants, density-by-context, or
+other multi-axis theme rules, keep the reusable defaults in config and write
+the extra token scopes in project CSS:
+
+```css
+[data-tenant="acme"] {
+  --sf-colour-primary: oklch(62% 0.19 252);
+  --sf-colour-primary-hover: oklch(56% 0.19 252);
+}
+
+[data-surface="inset"] {
+  --sf-colour-surface: var(--sf-colour-surface-inset);
+  --sf-card-padding: var(--sf-space-s);
+}
+```
+
+Use this pattern for deliberate product theming. Avoid scattering one-off
+colour values through page components when a value can live in a token scope.

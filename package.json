@@ -1,7 +1,7 @@
 {
   "name": "@syncedco/flow",
   "version": "0.3.0",
-  "description": "AI-native fluid CSS design system for brand-consistent websites and agency builds.",
+  "description": "AI-friendly fluid CSS design system for brand-consistent websites and agency builds.",
   "type": "module",
   "packageManager": "pnpm@11.2.2",
   "license": "MIT",
@@ -63,6 +63,7 @@
     "examples",
     "skills",
     "src",
+    "CHANGELOG.md",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",

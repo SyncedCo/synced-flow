@@ -17,6 +17,7 @@ Use the `--sf-*` variables as the stable CSS foundation.
 | App colour | `--sf-colour-surface-hover`, `--sf-colour-surface-raised-2`, `--sf-colour-border-subtle`, `--sf-colour-backdrop` | App surfaces, hover states, subtle dividers, and overlays. |
 | Categorical colour | `--sf-colour-categorical-1` ... `--sf-colour-categorical-6` | Charts, stages, labels, and recurring data accents. |
 | State | `--sf-colour-success`, `--sf-colour-warning`, `--sf-colour-danger`, `--sf-colour-info` | Feedback and notices. |
+| Z-index | `--sf-z-header`, `--sf-z-backdrop`, `--sf-z-drawer`, `--sf-z-overlay`, `--sf-z-toast` | Shared stacking slots for app chrome, drawers, popovers, and feedback. |
 | Motion | `--sf-duration-fast`, `--sf-duration-normal`, `--sf-ease-standard` | Consistent transitions. |
 | Component | `--sf-button-*`, `--sf-card-*`, `--sf-input-*`, `--sf-alert-*` | Reusable component defaults. |
 | Accessibility | `:focus-visible`, `:target`, `[aria-invalid]`, `[aria-current]`, `[aria-expanded]`, `[aria-selected]`, `[aria-busy]`, `[aria-disabled]` | Visible native and ARIA states. |
