@@ -21,6 +21,7 @@
     --sf-type-caption-sm: var(--sf-step--2);
     --sf-type-caption: var(--sf-step--1);
     --sf-type-body: var(--sf-step-0);
+    --sf-text-base: var(--sf-type-body);
     --sf-type-lead: var(--sf-step-1);
     --sf-type-h6: var(--sf-step-1);
     --sf-type-h5: var(--sf-step-2);

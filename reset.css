@@ -3,7 +3,7 @@
 @layer reset {
   *, *::before, *::after { box-sizing: border-box; }
   *:where(:not(dialog)) { margin: 0; }
-  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html { font-size: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body { min-block-size: 100%; }
   img, picture, video, canvas, svg { display: block; max-inline-size: 100%; }
   img, video { block-size: auto; }

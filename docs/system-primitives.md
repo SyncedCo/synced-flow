@@ -10,7 +10,7 @@ Use the `--sf-*` variables as the stable CSS foundation.
 | Layer | Examples | Use for |
 | --- | --- | --- |
 | Font | `--sf-font-sans`, `--sf-font-display`, `--sf-font-mono` | Site typography families. |
-| Type | `--sf-type-body`, `--sf-type-lead`, `--sf-type-h1`, `--sf-type-display` | Fluid text sizes. |
+| Type | `--sf-text-base`, `--sf-type-body`, `--sf-type-lead`, `--sf-type-h1`, `--sf-type-display` | Fluid text sizes. |
 | Space | `--sf-space-s`, `--sf-space-m-l`, `--sf-space-xl-2xl` | Fluid padding, margin, and gaps. |
 | Radius | `--sf-radius-control`, `--sf-radius-panel`, `--sf-radius-full` | Controls, panels, pills. |
 | Colour | `--sf-colour-background`, `--sf-colour-surface`, `--sf-colour-primary` | Semantic UI colour roles. |

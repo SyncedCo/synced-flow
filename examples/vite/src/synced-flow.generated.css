@@ -19,6 +19,8 @@
     --step-6: clamp(2.986rem, 2.5863rem + 1.7763vw, 4.2915rem);
     --step-7: clamp(3.5832rem, 3.0379rem + 2.4235vw, 5.3644rem);
     --step-8: clamp(4.2998rem, 3.5634rem + 3.2731vw, 6.7055rem);
+    --type-caption-sm: var(--step--2);
+    --text-base: var(--step-0);
 
     --space-3xs: clamp(0.25rem, 0.2404rem + 0.0425vw, 0.2813rem);
     --space-2xs: clamp(0.5rem, 0.4809rem + 0.085vw, 0.5625rem);
@@ -88,7 +90,9 @@
     --color-destructive: var(--sf-colour-destructive, oklch(55% 0.2 28));
     --color-destructive-foreground: var(--sf-colour-destructive-foreground, oklch(98% 0.01 95));
     --color-border: var(--sf-colour-border, oklch(100% 0 0 / 0.12));
+    --color-border-subtle: var(--sf-colour-border-subtle, oklch(100% 0 0 / 0.08));
     --color-input: var(--sf-colour-input, oklch(100% 0 0 / 0.12));
+    --color-backdrop: var(--sf-colour-backdrop, oklch(0% 0 0 / 0.56));
     --color-ring: var(--sf-colour-ring, oklch(69% 0.18 44));
     --color-heading: var(--sf-colour-heading, oklch(20% 0.02 18));
     --color-page-text: var(--sf-colour-page-text, oklch(23% 0.02 18));
@@ -97,6 +101,14 @@
     --color-subdued: var(--sf-colour-subdued, oklch(42% 0.02 20));
     --color-surface: var(--sf-colour-surface, oklch(96% 0.015 80));
     --color-surface-alt: var(--sf-colour-surface-alt, oklch(96.6% 0.018 82));
+    --color-surface-hover: var(--sf-colour-surface-hover, color-mix(in oklch, var(--color-surface-alt) 86%, var(--color-primary)));
+    --color-surface-raised-2: var(--sf-colour-surface-raised-2, color-mix(in oklch, var(--color-surface) 86%, white));
+    --color-categorical-1: var(--sf-colour-categorical-1, var(--color-primary));
+    --color-categorical-2: var(--sf-colour-categorical-2, var(--color-green));
+    --color-categorical-3: var(--sf-colour-categorical-3, var(--color-deco-blue));
+    --color-categorical-4: var(--sf-colour-categorical-4, var(--color-deco-lime));
+    --color-categorical-5: var(--sf-colour-categorical-5, var(--color-warm-icon));
+    --color-categorical-6: var(--sf-colour-categorical-6, var(--color-purple-icon));
     --color-hero-bg: oklch(8% 0.02 260);
     --color-green: var(--sf-colour-green, oklch(55% 0.12 148));
     --color-green-dark: var(--sf-colour-green-dark, oklch(45% 0.12 148));
@@ -168,6 +180,8 @@
     --color-surface: var(--sf-colour-surface);
     --sf-colour-surface-alt: oklch(96.4% 0.011 80);
     --color-surface-alt: var(--sf-colour-surface-alt);
+    --sf-colour-surface-elevated: var(--sf-colour-surface-raised);
+    --color-surface-elevated: var(--sf-colour-surface-elevated);
     --sf-colour-border: oklch(18% 0.026 250 / 0.12);
     --color-border: var(--sf-colour-border);
     --sf-colour-primary: oklch(68% 0.18 44);

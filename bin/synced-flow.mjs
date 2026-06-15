@@ -2980,6 +2980,19 @@ function pxToRem(value) {
   })
 }
 
+function pixelNumberToRem(value) {
+  const number = Number(value)
+  if (Number.isNaN(number)) return null
+  if (number === 0) return '0'
+  return `${round(number / 16)}rem`
+}
+
+function borderWidthUnit(value) {
+  if (value === '0') return '0'
+  if (value === '1') return '1px'
+  return pixelNumberToRem(value)
+}
+
 function arbitraryValue(value) {
   return pxToRem(value.replace(/_/g, ' '))
 }
@@ -3650,7 +3663,7 @@ function colourUtility(base) {
 function borderUtility(base) {
   if (base === 'border') return [['border-width', '1px']]
   if (base === 'border-0') return [['border-width', '0']]
-  if (base === 'border-2') return [['border-width', '2px']]
+  if (base === 'border-2') return [['border-width', '0.125rem']]
   if (base === 'border-t') return [['border-top-width', '1px']]
   if (base === 'border-r') return [['border-right-width', '1px']]
   if (base === 'border-b') return [['border-bottom-width', '1px']]
@@ -3660,7 +3673,7 @@ function borderUtility(base) {
   const sideWidth = base.match(/^border-(t|r|b|l)-(\d+)$/)
   if (sideWidth) {
     const side = { t: 'top', r: 'right', b: 'bottom', l: 'left' }[sideWidth[1]]
-    return [[`border-${side}-width`, `${sideWidth[2]}px`]]
+    return [[`border-${side}-width`, borderWidthUnit(sideWidth[2])]]
   }
   if (base === 'divide-y') return [['--sf-divide-y', '1px']]
   if (base === 'divide-x') return [['--sf-divide-x', '1px']]
@@ -3724,26 +3737,26 @@ function effectUtility(base) {
   if (match) return [['opacity', String(Number(match[1]) / 100)]]
   match = base.match(/^blur-(none|sm|md|lg|xl|2xl|3xl)$/)
   if (match) {
-    const map = { none: '0', sm: '4px', md: '12px', lg: '16px', xl: '24px', '2xl': '40px', '3xl': '64px' }
+    const map = { none: '0', sm: '0.25rem', md: '0.75rem', lg: '1rem', xl: '1.5rem', '2xl': '2.5rem', '3xl': '4rem' }
     return [['filter', `blur(${map[match[1]]})`]]
   }
   match = base.match(/^backdrop-blur(?:-(none|sm|md|lg|xl))?$/)
   if (match) {
-    const map = { undefined: '8px', none: '0', sm: '4px', md: '12px', lg: '16px', xl: '24px' }
+    const map = { undefined: '0.5rem', none: '0', sm: '0.25rem', md: '0.75rem', lg: '1rem', xl: '1.5rem' }
     return [['backdrop-filter', `blur(${map[match[1] ?? 'undefined']})`]]
   }
   match = base.match(/^ring(?:-(\d+))?$/)
-  if (match) return [['box-shadow', `0 0 0 ${match[1] ?? 3}px var(--sf-ring-color, var(--color-ring))`]]
+  if (match) return [['box-shadow', `0 0 0 ${pixelNumberToRem(match[1] ?? 3)} var(--sf-ring-color, var(--color-ring))`]]
   if (base === 'ring-offset-white') return [['--sf-ring-offset-color', 'var(--color-white)']]
   if (base === 'ring-offset-background') return [['--sf-ring-offset-color', 'var(--color-background)']]
   match = base.match(/^ring-offset-(\d+)$/)
-  if (match) return [['--sf-ring-offset-width', `${match[1]}px`]]
+  if (match) return [['--sf-ring-offset-width', pixelNumberToRem(match[1])]]
   if (base === 'outline') return [['outline-style', 'solid']]
-  if (base === 'outline-none') return [['outline', '2px solid transparent'], ['outline-offset', '2px']]
+  if (base === 'outline-none') return [['outline', '0.125rem solid transparent'], ['outline-offset', '0.125rem']]
   match = base.match(/^outline-(\d+)$/)
-  if (match) return [['outline-width', `${match[1]}px`]]
+  if (match) return [['outline-width', pixelNumberToRem(match[1])]]
   match = base.match(/^outline-offset-(\d+)$/)
-  if (match) return [['outline-offset', `${match[1]}px`]]
+  if (match) return [['outline-offset', pixelNumberToRem(match[1])]]
   match = base.match(/^outline-(.+)$/)
   if (match) {
     const value = colourValue(match[1])
@@ -3944,6 +3957,7 @@ function buildTokensCss() {
 
 ${steps.join('\n')}
     --type-caption-sm: var(--step--2);
+    --text-base: var(--step-0);
 
 ${spaces.join('\n')}
 ${pairs.join('\n')}
@@ -4074,7 +4088,7 @@ function buildBaseCss() {
   return `@layer reset {
   *, *::before, *::after { box-sizing: border-box; }
   *:where(:not(dialog)) { margin: 0; }
-  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html { font-size: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body { min-block-size: 100%; }
   img, picture, video, canvas, svg { display: block; max-inline-size: 100%; }
   img, video { block-size: auto; }
@@ -4084,11 +4098,15 @@ function buildBaseCss() {
 }
 
 @layer base {
+  html {
+    font-size: 100%;
+  }
+
   body {
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-inter, var(--sf-font-sans, ui-sans-serif, system-ui, sans-serif));
-    font-size: var(--step-0);
+    font-size: var(--text-base);
     line-height: 1.5;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
@@ -4116,7 +4134,7 @@ function buildBaseCss() {
   :where(button:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
 
   :where(:focus-visible) {
-    outline: 2px solid var(--color-ring);
+    outline: 0.125rem solid var(--color-ring);
     outline-offset: .2rem;
   }
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.2 - 2026-06-15
+
+- Add an explicit accessible root typography baseline with `html { font-size: 100%; }`.
+- Add `--sf-text-base` and generated `--text-base` aliases for fluid body text.
+- Use the new fluid body text token in shipped and generated base CSS.
+- Convert CLI-generated utility lengths for blur, rings, outlines, and thicker borders from static `px` to `rem`.
+- Extend guardrails and tests so shipped generated examples reject raw pixels outside allowed hairline, visually-hidden, and forced-colors exceptions.
+
 ## 0.3.1 - 2026-06-13
 
 - Fix mobile app drawer scrolling by giving the drawer sidebar a viewport block size.

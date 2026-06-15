@@ -4,6 +4,7 @@
   html {
     background: var(--sf-colour-background);
     color: var(--sf-colour-foreground);
+    font-size: 100%;
     scroll-behavior: smooth;
   }
 
@@ -11,7 +12,7 @@
     background: var(--sf-colour-background);
     color: var(--sf-colour-foreground);
     font-family: var(--sf-font-sans);
-    font-size: var(--sf-type-body);
+    font-size: var(--sf-text-base);
     line-height: var(--sf-line-height-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;

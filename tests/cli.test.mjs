@@ -134,6 +134,7 @@ export default defineConfig({
   assert.match(css, /--sf-colour-primary: oklch\(70% 0\.2 40\);/)
   assert.match(css, /--sf-colour-tertiary: oklch\(62% 0\.15 185\);/)
   assert.match(css, /--sf-colour-tertiary: oklch\(82% 0\.12 205\);/)
+  assert.match(css, /--text-base: var\(--step-0\);/)
   assert.match(css, /--grid-max-width: 68rem;/)
   assert.doesNotMatch(css, /@layer tokens\s*\{\s*:root/)
   assert.doesNotMatch(css, /:where\(\.sf-theme-dark/)
@@ -187,6 +188,37 @@ export default defineConfig({
 
   const css = readFileSync(join(cwd, 'src/synced-flow.generated.css'), 'utf8')
   assert.match(css, /@media \(min-width: 36rem\)\{\[class~="sm:flex"\]\{display:flex\}\}/)
+})
+
+test('generated utility lengths use rem outside allowed px exceptions', () => {
+  const cwd = tempProject()
+  writeFileSync(
+    join(cwd, 'src/App.jsx'),
+    '<div class="blur-sm backdrop-blur ring-4 ring-offset-2 outline-2 outline-offset-4 border-2 border-t-4 sr-only"></div>\n'
+  )
+  writeFileSync(
+    join(cwd, 'synced-flow.config.mjs'),
+    `import { defineConfig } from '@syncedco/flow/config'
+
+export default defineConfig({
+  scan: ['src'],
+  out: 'src/synced-flow.generated.css',
+})
+`
+  )
+
+  run(['build', '--cwd', cwd])
+
+  const css = readFileSync(join(cwd, 'src/synced-flow.generated.css'), 'utf8')
+  assert.match(css, /\[class~="backdrop-blur"\]\{backdrop-filter:blur\(0\.5rem\)\}/)
+  assert.match(css, /\[class~="blur-sm"\]\{filter:blur\(0\.25rem\)\}/)
+  assert.match(css, /\[class~="border-2"\]\{border-width:0\.125rem\}/)
+  assert.match(css, /\[class~="border-t-4"\]\{border-top-width:0\.25rem\}/)
+  assert.match(css, /\[class~="outline-2"\]\{outline-width:0\.125rem\}/)
+  assert.match(css, /\[class~="outline-offset-4"\]\{outline-offset:0\.25rem\}/)
+  assert.match(css, /\[class~="ring-4"\]\{box-shadow:0 0 0 0\.25rem var\(--sf-ring-color, var\(--color-ring\)\)\}/)
+  assert.match(css, /\[class~="ring-offset-2"\]\{--sf-ring-offset-width:0\.125rem\}/)
+  assert.doesNotMatch(css, /\b(?:2|3|4|8|12|16|24|40|64)px\b/)
 })
 
 test('doctor passes a configured project', () => {
@@ -285,6 +317,9 @@ test('init supports WordPress themes with enqueue-ready CSS output', () => {
 
   run(['build', '--cwd', cwd])
   const builtCssOutput = readFileSync(join(cwd, 'assets/css/synced-flow.css'), 'utf8')
+  assert.match(builtCssOutput, /html \{ font-size: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; \}/)
+  assert.match(builtCssOutput, /--text-base: var\(--step-0\);/)
+  assert.match(builtCssOutput, /font-size: var\(--text-base\);/)
   assert.match(builtCssOutput, /\.sf-skip-link/)
   assert.match(builtCssOutput, /:where\(\.sf-visually-hidden, \.sr-only\)/)
   assert.doesNotMatch(builtCssOutput, /@layer tokens\s*\{/)
@@ -609,6 +644,8 @@ test('package exposes modular CSS layer files', () => {
   const baseCss = readFileSync(join(packageRoot, 'base.css'), 'utf8')
   const defaultsCss = readFileSync(join(packageRoot, 'defaults.css'), 'utf8')
   const utilitiesCss = readFileSync(join(packageRoot, 'utilities.css'), 'utf8')
+  assert.match(baseCss, /font-size: 100%;/)
+  assert.match(baseCss, /font-size: var\(--sf-text-base\);/)
   assert.match(baseCss, /text-decoration-color: color-mix\(in oklch, currentColor 55%, transparent\)/)
   assert.doesNotMatch(baseCss, /:where\(a\) \{ color: inherit; text-decoration: none;/)
   assert.match(defaultsCss, /@layer app/)
@@ -624,6 +661,7 @@ test('package exposes modular CSS layer files', () => {
   const componentsCss = readFileSync(join(packageRoot, 'components.css'), 'utf8')
   const tokensCss = readFileSync(join(packageRoot, 'tokens.css'), 'utf8')
   assert.match(tokensCss, /\.sf-theme-light/)
+  assert.match(tokensCss, /--sf-text-base: var\(--sf-type-body\);/)
   assert.match(tokensCss, /--sf-icon-size/)
   assert.match(tokensCss, /--sf-colour-surface-hover/)
   assert.match(tokensCss, /--sf-colour-border-subtle/)

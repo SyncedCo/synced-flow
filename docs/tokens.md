@@ -64,10 +64,15 @@ Type and space tokens use Utopia-style `clamp()` values.
 
 ```css
 --sf-step-0: clamp(1rem, 0.9617rem + 0.1701vw, 1.125rem);
+--sf-type-body: var(--sf-step-0);
+--sf-text-base: var(--sf-type-body);
 --sf-space-s-l: clamp(1rem, 0.6173rem + 1.7007vw, 2.25rem);
 ```
 
-Prefer these tokens for new project CSS instead of fixed pixel values.
+Prefer these tokens for new project CSS instead of fixed pixel values. The root
+`html` element stays at `font-size: 100%` so browser and user accessibility
+settings remain in control; Synced Flow starts its fluid body scale from
+`--sf-text-base`.
 
 ## Core Starter Tokens
 

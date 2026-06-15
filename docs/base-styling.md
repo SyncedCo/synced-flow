@@ -111,3 +111,8 @@ The base layer uses cascade layers, logical properties, low-specificity
 `prefers-reduced-motion`. Utopia informs the fluid type, space, and grid
 tokens; Synced Flow owns the reset, accessibility helpers, and component
 defaults.
+
+The root element is kept at `font-size: 100%` rather than a fixed pixel value so
+browser and user font-size settings remain respected. Body copy starts from the
+fluid text token with `body { font-size: var(--sf-text-base); }`, where
+`--sf-text-base` maps to the existing body type scale.

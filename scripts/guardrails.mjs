@@ -13,6 +13,14 @@ const budgets = {
 }
 
 const cssFiles = ['styles.css', 'tokens.css', 'reset.css', 'base.css', 'defaults.css', 'layout.css', 'components.css', 'utilities.css']
+const rawPxFiles = [
+  ...cssFiles,
+  'examples/plain-html/synced-flow.generated.css',
+  'examples/astro/src/styles/synced-flow.generated.css',
+  'examples/vite/src/synced-flow.generated.css',
+  'examples/next/app/synced-flow.generated.css',
+  'examples/wordpress/assets/css/synced-flow.css',
+]
 const failures = []
 
 checkRuntimeDependencies()
@@ -55,7 +63,7 @@ function checkCssLayerShape() {
 }
 
 function checkRawPxUsage() {
-  for (const file of cssFiles) {
+  for (const file of rawPxFiles) {
     const lines = readFileSync(file, 'utf8').split('\n')
     lines.forEach((line, index) => {
       const values = line.match(/-?\d*\.?\d+px\b/g) ?? []
@@ -68,6 +76,7 @@ function checkRawPxUsage() {
 
 function isAllowedPx(value, line) {
   if (value === '1px' && /\bborder\b|border-(block|inline)|inset 0 0 0/.test(line)) return true
+  if ((value === '1px' || value === '-1px') && /(?:sr-only|visually-hidden)/.test(line)) return true
   if (value === '2px' && /Highlight/.test(line)) return true
   return false
 }
