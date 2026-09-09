@@ -1,6 +1,6 @@
 # CSS Optimisation Notes
 
-Current measurements from `pnpm build` on 2026-05-24.
+Current measurements from `pnpm build` on 2026-09-09.
 
 ## Developer Notes
 
@@ -33,14 +33,14 @@ Sizes are raw bytes and gzip bytes from `gzip -c`.
 
 | File | Raw | Gzip | Use |
 | --- | ---: | ---: | --- |
-| `tokens.css` | 9,505 B | 2,232 B | Design tokens only. |
-| `reset.css` | 713 B | 430 B | Reset layer only. |
-| `base.css` | 3,455 B | 1,152 B | Base element styles. |
-| `defaults.css` | 505 B | 296 B | Optional site/UI defaults for raw links, lists, and controls. |
-| `layout.css` | 7,510 B | 1,866 B | Layout primitives such as container, stack, grid, app shell, sidebar, scroll snap, sticky, media object, and split. |
-| `components.css` | 31,195 B | 5,001 B | Component primitives such as button, icon, avatar, chart, card, surface, nav, form, alert, native overlays, disclosure, tabs, website patterns, accessibility states, and input. |
-| `utilities.css` | 7,498 B | 1,886 B | Static type, prose, content, positioning, motion, accessibility, link, list, colour, border, and shadow helpers. |
-| `styles.css` | 59,051 B | 10,457 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
+| `tokens.css` | 11,953 B | 2,563 B | Design tokens only. |
+| `reset.css` | 731 B | 435 B | Reset layer only. |
+| `base.css` | 3,477 B | 1,163 B | Base element styles. |
+| `defaults.css` | 506 B | 302 B | Optional site/UI defaults for raw links, lists, and controls. |
+| `layout.css` | 12,195 B | 2,820 B | Layout primitives such as container, stack, grid, app shell, sidebar, scroll snap, sticky, media object, and split. |
+| `components.css` | 62,874 B | 9,319 B | Component primitives including complete forms, app data controls, native overlays, website patterns, loading states, and technical presentation. |
+| `utilities.css` | 7,550 B | 1,902 B | Static type, prose, content, positioning, motion, accessibility, link, list, colour, border, and shadow helpers. |
+| `styles.css` | 97,950 B | 15,776 B | Full core stylesheet with tokens, reset, base, layout, components, and utilities. |
 
 Example generated project CSS with tokens plus one scanned `text-primary`
 utility measured 7,031 B raw and 1,943 B gzip.
@@ -91,7 +91,7 @@ Safe claims:
 
 - Modern CSS-first: Synced Flow uses cascade layers, custom properties,
   `clamp()`, logical properties, OKLCH colour, and container-aware primitives.
-- Compact by default: the full core stylesheet is currently about 10.5 KB gzip.
+- Compact by default: the full core stylesheet is currently about 15.8 KB gzip.
 - Flexible loading: developers can import only the CSS layers their project
   uses.
 - Source-scanned utilities: project utility CSS is generated from actual class

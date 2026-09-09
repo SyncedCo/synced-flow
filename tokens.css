@@ -94,6 +94,8 @@
     --sf-colour-orange-500: oklch(74% 0.17 48);
     --sf-colour-orange-600: oklch(68% 0.18 44);
     --sf-colour-orange-700: oklch(58% 0.17 42);
+    --sf-colour-orange-800: oklch(50% 0.16 40);
+    --sf-colour-orange-900: oklch(44% 0.14 40);
     --sf-colour-green-500: oklch(62% 0.13 150);
     --sf-colour-green-600: oklch(54% 0.13 150);
     --sf-colour-green-700: oklch(44% 0.12 150);
@@ -116,13 +118,13 @@
     --sf-colour-border: oklch(18% 0.026 250 / 0.12);
     --sf-colour-border-strong: oklch(18% 0.026 250 / 0.22);
     --sf-colour-backdrop: oklch(0% 0 0 / 0.48);
-    --sf-colour-primary: var(--sf-colour-orange-600);
-    --sf-colour-primary-hover: var(--sf-colour-orange-700);
+    --sf-colour-primary: var(--sf-colour-orange-800);
+    --sf-colour-primary-hover: var(--sf-colour-orange-900);
     --sf-colour-primary-foreground: var(--sf-colour-neutral-0);
-    --sf-colour-primary-soft: oklch(68% 0.18 44 / 0.12);
-    --sf-colour-primary-soft-border: oklch(68% 0.18 44 / 0.28);
-    --sf-colour-link: var(--sf-colour-orange-700);
-    --sf-colour-link-hover: var(--sf-colour-orange-600);
+    --sf-colour-primary-soft: oklch(50% 0.16 40 / 0.12);
+    --sf-colour-primary-soft-border: oklch(50% 0.16 40 / 0.28);
+    --sf-colour-link: var(--sf-colour-orange-800);
+    --sf-colour-link-hover: var(--sf-colour-orange-900);
     --sf-colour-accent: var(--sf-colour-cyan-500);
     --sf-colour-accent-foreground: var(--sf-colour-neutral-950);
     --sf-colour-success: var(--sf-colour-green-500);
@@ -131,7 +133,7 @@
     --sf-colour-warning: var(--sf-colour-amber-500);
     --sf-colour-warning-foreground: var(--sf-colour-neutral-950);
     --sf-colour-warning-soft: oklch(78% 0.15 82 / 0.16);
-    --sf-colour-danger: var(--sf-colour-red-600);
+    --sf-colour-danger: var(--sf-colour-red-700);
     --sf-colour-danger-foreground: var(--sf-colour-neutral-0);
     --sf-colour-danger-soft: oklch(56% 0.2 28 / 0.12);
     --sf-colour-info: var(--sf-colour-cyan-600);
@@ -143,7 +145,7 @@
     --sf-colour-categorical-4: var(--sf-colour-orange-600);
     --sf-colour-categorical-5: var(--sf-colour-red-600);
     --sf-colour-categorical-6: oklch(58% 0.15 292);
-    --sf-colour-ring: var(--sf-colour-orange-600);
+    --sf-colour-ring: var(--sf-colour-orange-800);
 
     --sf-shadow-sm: 0 0.125rem 0.375rem oklch(0% 0 0 / 0.08);
     --sf-shadow-md: 0 0.75rem 1.75rem oklch(0% 0 0 / 0.12);
@@ -198,8 +200,8 @@
     --sf-colour-border: oklch(18% 0.026 250 / 0.12);
     --sf-colour-border-strong: oklch(18% 0.026 250 / 0.22);
     --sf-colour-backdrop: oklch(0% 0 0 / 0.48);
-    --sf-colour-link: var(--sf-colour-orange-700);
-    --sf-colour-link-hover: var(--sf-colour-orange-600);
+    --sf-colour-link: var(--sf-colour-orange-800);
+    --sf-colour-link-hover: var(--sf-colour-orange-900);
   }
 
   .sf-theme-dark, [data-sf-theme="dark"] {

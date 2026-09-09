@@ -25,6 +25,127 @@ Synced Flow sets `color-scheme` for native controls, forms, dialogs, and
 popover-backed UI. Projects can toggle the attribute however they like; the
 package does not ship a JavaScript theme switcher.
 
+## Switches And Segmented Choices
+
+Use `sf-switch` only for a strict binary setting. The native checkbox owns the
+checked, keyboard, disabled, and form states. Keep the visible label unchanged
+when the value changes, and do not use `indeterminate` or `aria-checked="mixed"`
+for this pattern.
+
+```html
+<label class="sf-switch">
+  <input type="checkbox" role="switch" name="notifications" checked>
+  <span class="sf-switch__control" aria-hidden="true"></span>
+  <span class="sf-switch__label">Email notifications</span>
+</label>
+```
+
+Checkboxes do not have a native read-only state. Use `disabled` when a setting
+is unavailable. If a product needs a focusable but non-editable explanation,
+the app must implement and test that behavior rather than adding `readonly` to
+the checkbox.
+
+State mapping is deliberately small: omit `checked` for off, add `checked` for
+on, rely on native `:focus-visible` for keyboard focus, and add `disabled` to
+the input when unavailable. The visible label must stay the same in every
+state.
+
+Use the radio-backed segmented control for one choice from a small set. It is a
+form control, not a tab list and not a group of independent switches.
+
+```html
+<fieldset class="sf-fieldset">
+  <legend>Billing cycle</legend>
+  <div class="sf-segmented-control">
+    <label class="sf-segmented-control__option">
+      <input type="radio" name="cycle" value="monthly" checked>
+      <span class="sf-segmented-control__label">Monthly</span>
+    </label>
+    <label class="sf-segmented-control__option">
+      <input type="radio" name="cycle" value="annual">
+      <span class="sf-segmented-control__label">Annual</span>
+    </label>
+  </div>
+</fieldset>
+```
+
+Both controls include light/dark token behavior, visible keyboard focus,
+disabled styling, forced-colors fallbacks, and reduced-motion handling.
+
+## Input Groups, File Inputs, And Range Inputs
+
+`sf-input-group` composes one flexible input with leading/trailing content or
+an inline action. Prefixes that repeat visible label context should be hidden
+from assistive technology. Use `sf-search` for a normal search field.
+
+```html
+<label class="sf-field">
+  <span class="sf-label">Monthly budget</span>
+  <span class="sf-input-group">
+    <span class="sf-input-group__leading" aria-hidden="true">£</span>
+    <input class="sf-input" name="budget" inputmode="decimal">
+    <span class="sf-input-group__trailing" aria-hidden="true">GBP</span>
+  </span>
+</label>
+```
+
+Use `sf-file-input` and `sf-range` on their native input types. File previews,
+upload limits, live range output, and persistence belong to the app.
+
+```html
+<label class="sf-field">
+  <span class="sf-label">Supporting document</span>
+  <input class="sf-file-input" type="file" accept=".pdf,.doc,.docx">
+  <span class="sf-help">PDF or Word, up to 10 MB.</span>
+</label>
+
+<label class="sf-field">
+  <span class="sf-label">Team size: <output for="team-size">12</output></span>
+  <input class="sf-range" id="team-size" type="range" min="1" max="50" value="12">
+</label>
+```
+
+## Loading Buttons
+
+`sf-spinner` is a presentational indicator. A pending action must also expose a
+text status and use app state to prevent duplicate submission.
+
+```html
+<button class="sf-button" type="submit" aria-busy="true" aria-disabled="true">
+  <span class="sf-spinner" aria-hidden="true"></span>
+  <span>Saving…</span>
+</button>
+<p class="sr-only" role="status" aria-live="polite">Saving changes</p>
+```
+
+The spinner stops rotating under reduced motion while remaining visible.
+`aria-disabled` keeps an in-flight button in the focus order, but the app must
+prevent click and submit activation while it is set. Use native `disabled`
+instead when removing the action from the focus order is the better tradeoff.
+
+## App-Owned Interactive Shells
+
+Synced Flow includes presentation classes for searchable selects, selection
+toolbars, complete pagination, and multi-step forms. The copy-ready contracts
+live in the CLI:
+
+```bash
+pnpm exec synced-flow pattern searchable-select --markup
+pnpm exec synced-flow pattern bulk-actions-toolbar --markup
+pnpm exec synced-flow pattern complete-pagination --markup
+pnpm exec synced-flow pattern multi-step-form --markup
+```
+
+The combobox shell does not implement filtering or keyboard behavior. The app
+must synchronize `aria-expanded`, `aria-controls`, `aria-activedescendant`, and
+`aria-selected`, and test the complete interaction with keyboard and assistive
+technology. Bulk selection, client-side pagination state, step validation,
+focus movement, persistence, and history are also app-owned.
+
+For a completed wizard step, include hidden text such as
+`<span class="sr-only">Completed: </span>` before the visible label. The tick
+or marker may remain `aria-hidden`; completion must still be available as text.
+
 ## Dialog
 
 Use `<dialog>` for modal UI. Style the dialog with `sf-dialog` and structure it

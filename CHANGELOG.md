@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 - 2026-09-09
+
+- Add native checkbox-backed switches, radio-backed segmented controls,
+  grouped inputs, styled file/range inputs, and a reduced-motion-safe spinner.
+- Add app-tier presentation contracts for searchable selects, bulk actions,
+  complete pagination, and multi-step forms while keeping JavaScript state in
+  consuming apps.
+- Expand CLI catalogue, suggestion routing, patterns, and the
+  `app-settings-workflow` recipe across the new public surface.
+- Expand the TypeScript `fluidSystem.components` shortcuts and document the
+  existing code-window, token-strip, marquee, command-list, and platform-card
+  presentation classes as public.
+- Fix modal Cancel form association and move sortable-table `aria-sort` to the
+  column header.
+- Add generated-CSS freshness, semantic React/Next compilation, package dry-run,
+  and cross-browser accessibility/interaction release gates.
+- Darken default light-theme action and link tokens to meet normal-text colour
+  contrast, including hover states.
+
 ## 0.3.2 - 2026-06-15
 
 - Add an explicit accessible root typography baseline with `html { font-size: 100%; }`.

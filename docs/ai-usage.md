@@ -53,7 +53,9 @@ before finalising the theme.
   `sf-split`, and `sf-sidebar` before writing custom layout CSS.
 - Use semantic colours: `bg-background`, `text-foreground`, `bg-primary`,
   `text-primary-foreground`, `border-border`, `bg-surface`.
-- Use `sf-button`, `sf-card`, `sf-badge`, `sf-field`, and `sf-input` for common UI.
+- Use `sf-button`, `sf-card`, `sf-badge`, `sf-field`, `sf-input`, `sf-switch`,
+  `sf-input-group`, `sf-file-input`, `sf-range`, and `sf-segmented-control` for
+  common UI.
 - Keep browser affordances unless the UI intentionally replaces them: body
   links stay underlined, content lists keep markers, and focus states remain
   visible.
@@ -78,6 +80,9 @@ before finalising the theme.
 - Choose `saas-landing` for public SaaS marketing pages. Choose
   `saas-dashboard` for authenticated app UI, admin panels, portals, CRMs,
   analytics dashboards, metrics, tables, account menus, and login state.
+- Choose `app-settings-workflow` for richer forms. Use the
+  `searchable-select`, `bulk-actions-toolbar`, `complete-pagination`, and
+  `multi-step-form` patterns for app-owned interactive behavior.
 - Treat auth recipe markup as UI only; sessions, providers, permissions, and
   sign-out logic belong to the consuming app.
 - Keep class names complete in source files. Do not build classes from fragments.
@@ -110,3 +115,19 @@ pnpm flow:doctor
 ```
 
 If `doctor` warns about stale CSS, run `pnpm flow:build`.
+
+## Machine-Readable Integration
+
+Synced Flow does not ship an MCP server. AI and external tool integrations
+should use the local CLI as the canonical discovery surface:
+
+```bash
+pnpm exec synced-flow tokens --json
+pnpm exec synced-flow catalog --json
+pnpm exec synced-flow suggest "searchable select settings" --json
+pnpm exec synced-flow pattern searchable-select --json
+pnpm exec synced-flow recipe app-settings-workflow --json
+```
+
+This keeps component names, app-owned behavior notes, accessibility guidance,
+and copy-ready markup in one versioned contract.

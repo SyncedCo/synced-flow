@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify package and Chromium
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Enable pnpm
+        run: corepack enable pnpm
+
+      - name: Install dependencies without lifecycle builds
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build untracked package type exports
+        run: pnpm build:types
+
+      - name: Verify generated CSS before any CSS build
+        run: pnpm check:generated
+
+      - name: Run static checks
+        run: pnpm check
+
+      - name: Run the public test aggregate
+        run: pnpm test
+
+      - name: Verify package contents
+        run: npm pack --dry-run
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Chromium browser tests
+        run: pnpm test:browser

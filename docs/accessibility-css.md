@@ -27,6 +27,8 @@ semantic HTML and ARIA states are visible, consistent, and easy to compose.
 | `[aria-disabled="true"]`, `:disabled` | Disabled affordance for buttons, links, cards, and form controls. |
 | `[aria-busy="true"]`, `[data-loading="true"]` | Busy/loading affordance for buttons and form controls. |
 | `.sf-field[data-invalid="true"]`, `[aria-invalid="true"]` | Invalid field styling. |
+| `.sf-switch input:checked`, `.sf-segmented-control input:checked` | Native checkbox/radio state shown without replacing the input semantics. |
+| `.sf-spinner` | Presentational loading indicator with a reduced-motion fallback; text status remains required. |
 | `.sf-required`, `.sf-label[aria-required="true"]`, `label:has(+ :required)` | Required-field marker styling. |
 | `@media (forced-colors: active)` | High contrast mode border, focus, and button fallbacks. |
 
@@ -111,13 +113,22 @@ messages that need immediate announcement.
 When an action is in progress, keep the accessible name visible and add state:
 
 ```html
-<button class="sf-button" type="button" aria-busy="true">
-  Saving
+<button class="sf-button" type="button" aria-busy="true" aria-disabled="true">
+  <span class="sf-spinner" aria-hidden="true"></span>
+  <span>Saving…</span>
 </button>
+<p class="sr-only" role="status" aria-live="polite">Saving changes</p>
 ```
 
 Synced Flow styles this as a busy state, but the consuming app should still
-manage focus, state changes, and completion messaging.
+manage focus, state changes, and completion messaging. `aria-disabled` keeps
+focus stable but does not block activation, so the app must guard its handler.
+Native `disabled` is also valid when removing the action from focus order is
+preferable.
+
+For a searchable select, the `sf-combobox` classes only style the shell. The
+app must implement the full combobox keyboard and ARIA contract. A static
+`role="combobox"` without synchronized state is not production-ready.
 
 ## Confidence Checklist
 

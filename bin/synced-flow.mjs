@@ -1025,7 +1025,7 @@ function getTokenSummary() {
     themePresets: presetNames.map(kebabThemeName),
     starterClasses: {
       layout: ['sf-container', 'sf-container--narrow', 'sf-container--wide', 'sf-container--full', 'sf-rail-shell', 'sf-rail-shell__rail', 'sf-rail-shell__body', 'sf-rail-shell__mark', 'sf-rail-shell__label', 'sf-section', 'sf-section--compact', 'sf-section--spacious', 'sf-stack', 'sf-flow', 'sf-cluster', 'sf-repel', 'sf-toolbar', 'sf-app-shell', 'sf-app-sidebar', 'sf-app-sidebar__brand', 'sf-app-header', 'sf-app-backdrop', 'sf-app-main', 'sf-auto-grid', 'sf-auto-grid--xs', 'sf-auto-grid--sm', 'sf-auto-grid--lg', 'sf-switcher', 'sf-sidebar', 'sf-split', 'sf-split--reverse', 'sf-chapter', 'sf-chapter__copy', 'sf-frame', 'sf-cover', 'sf-panel-grid', 'sf-metric-grid', 'sf-pipeline', 'sf-scroll-viewport', 'sf-scroll-panel', 'sf-scroll-snap-y', 'sf-sticky-top', 'sf-media-object', 'sf-aside-rail'],
-      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-progress', 'sf-skeleton', 'sf-filter-bar', 'sf-search', 'sf-data-table', 'sf-table-sort', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-toast-stack', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab__count', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
+      components: ['sf-button', 'sf-button-group', 'sf-button--icon', 'sf-icon-button', 'sf-icon', 'sf-icon--xs', 'sf-icon--sm', 'sf-icon--md', 'sf-icon--lg', 'sf-icon--xl', 'sf-spinner', 'sf-card', 'sf-card--flat', 'sf-card--raised', 'sf-card--compact', 'sf-card--glass', 'sf-card--technical', 'sf-card--accent', 'sf-card--center', 'sf-surface', 'sf-code-window', 'sf-code-window--glow', 'sf-code-window__bar', 'sf-window-dots', 'sf-code-lines', 'sf-code-lines--compact', 'sf-code-block', 'sf-token-strip', 'sf-marquee', 'sf-marquee__track', 'sf-marquee__item', 'sf-command-list', 'sf-command-list__prompt', 'sf-platform-card', 'sf-platform-card__logo', 'sf-hero', 'sf-logo-cloud', 'sf-feature', 'sf-stats', 'sf-stat', 'sf-testimonial', 'sf-pricing-grid', 'sf-price-card', 'sf-price', 'sf-faq', 'sf-cta', 'sf-footer', 'sf-badge', 'sf-avatar', 'sf-chart', 'sf-chart--wide', 'sf-chart__plot', 'sf-chart__svg', 'sf-chart__grid', 'sf-chart__axis', 'sf-chart__area', 'sf-chart__line', 'sf-chart__point', 'sf-chart__legend', 'sf-chart__legend-item', 'sf-chart__swatch', 'sf-meter-list', 'sf-meter-row', 'sf-meter', 'sf-progress', 'sf-skeleton', 'sf-filter-bar', 'sf-search', 'sf-input-group', 'sf-input-group__leading', 'sf-input-group__trailing', 'sf-input-group__action', 'sf-file-input', 'sf-range', 'sf-switch', 'sf-switch__control', 'sf-switch__label', 'sf-segmented-control', 'sf-segmented-control__option', 'sf-segmented-control__label', 'sf-combobox', 'sf-combobox__listbox', 'sf-combobox__option', 'sf-combobox__empty', 'sf-bulk-actions', 'sf-bulk-actions__count', 'sf-bulk-actions__controls', 'sf-stepper', 'sf-stepper__step', 'sf-stepper__marker', 'sf-stepper__label', 'sf-wizard-actions', 'sf-data-table', 'sf-table-sort', 'sf-status', 'sf-data-list', 'sf-empty-state', 'sf-settings-section', 'sf-detail-panel', 'sf-nav', 'sf-nav--mobile', 'sf-nav__list', 'sf-nav__link', 'sf-menu', 'sf-breadcrumb', 'sf-pagination', 'sf-pagination__summary', 'sf-pagination__controls', 'sf-pagination__pages', 'sf-pagination__jump', 'sf-dialog', 'sf-popover', 'sf-tooltip', 'sf-tooltip-trigger', 'sf-menu-popover', 'sf-toast', 'sf-toast-stack', 'sf-banner', 'sf-drawer', 'sf-drawer--stack', 'sf-disclosure', 'sf-accordion', 'sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab__count', 'sf-tab-panel', 'sf-form', 'sf-fieldset', 'sf-field', 'sf-label', 'sf-help', 'sf-error', 'sf-input', 'sf-select', 'sf-textarea', 'sf-check', 'sf-alert', 'sf-section-header', 'sf-kicker'],
       type: ['sf-text-caption', 'sf-text-body', 'sf-text-lead', 'sf-text-h4', 'sf-text-h3', 'sf-text-h2', 'sf-text-h1', 'sf-text-display'],
       utilities: ['sr-only', 'not-sr-only', 'sf-visually-hidden', 'sf-not-visually-hidden', 'sf-skip-link', 'sf-focus-ring', 'sf-touch-target', 'sf-list-reset', 'sf-list-disc', 'sf-list-decimal', 'sf-link', 'sf-link-subtle', 'sf-link-plain', 'sf-prose', 'sf-prose--blog', 'sf-prose--legal', 'sf-meta', 'sf-figure', 'sf-caption', 'sf-table-wrap', 'sf-push-block-end', 'sf-push-block-start', 'sf-push-inline-end', 'sf-push-inline-start', 'sf-full-bleed', 'sf-text-muted', 'sf-bg-surface', 'sf-border', 'sf-rounded-panel', 'sf-shadow-md', 'sf-animate-fade', 'sf-animate-rise', 'sf-animate-scale', 'sf-animate-slide', 'sf-animate-stagger'],
     },
@@ -1082,7 +1082,7 @@ function getPublicPatterns() {
     <a class="sf-nav__link" href="#contact">Contact</a>
   </nav>
 </header>
-<main class="sf-scroll-viewport sf-scroll-snap-y" id="main">
+<main class="sf-scroll-viewport sf-scroll-snap-y" id="main" tabindex="0">
   <section class="sf-scroll-panel" id="intro"><div class="sf-container sf-stack"><h1 class="sf-text-display">Intro panel</h1></div></section>
   <section class="sf-scroll-panel" id="work"><div class="sf-container sf-stack"><h2 class="sf-text-h1">Work panel</h2></div></section>
   <section class="sf-scroll-panel" id="contact"><div class="sf-container sf-stack"><h2 class="sf-text-h1">Contact panel</h2></div></section>
@@ -1100,24 +1100,65 @@ function getPublicPatterns() {
       a11y: ['Update aria-current on the active nav link.', 'Do not rely on colour alone for current state.', 'Respect prefers-reduced-motion for scripted scrolling.'],
       gotchas: ['Keep the observer script in the consuming app or example, not the Synced Flow package.', 'Anchor links still work without the optional script.'],
       markup: {
-        html: `<nav class="sf-container sf-nav sf-sticky-top" aria-label="Section navigation">
+        html: `<nav class="sf-container sf-nav sf-sticky-top" aria-label="Section navigation" data-sf-scroll-spy-nav>
   <a class="sf-nav__link" href="#one" aria-current="location">One</a>
   <a class="sf-nav__link" href="#two">Two</a>
 </nav>
-<main class="sf-scroll-viewport sf-scroll-snap-y" data-sf-scroll-spy>
+<main class="sf-scroll-viewport sf-scroll-snap-y" data-sf-scroll-spy tabindex="0">
   <section class="sf-scroll-panel" id="one"><div class="sf-container"><h1 class="sf-text-display">One</h1></div></section>
   <section class="sf-scroll-panel" id="two"><div class="sf-container"><h2 class="sf-text-h1">Two</h2></div></section>
 </main>
 <script>
-  const links = [...document.querySelectorAll('[data-sf-scroll-spy] ~ * a[href^="#"], nav a[href^="#"]')]
-  const panels = [...document.querySelectorAll('.sf-scroll-panel[id]')]
+  const viewport = document.querySelector('[data-sf-scroll-spy]')
+  const links = [...document.querySelectorAll('[data-sf-scroll-spy-nav] a[href^="#"]')]
+  const panels = [...viewport.querySelectorAll('.sf-scroll-panel[id]')]
   const observer = new IntersectionObserver((entries) => {
     const active = entries.find((entry) => entry.isIntersecting)
     if (!active) return
-    for (const link of links) link.toggleAttribute('aria-current', link.hash === '#' + active.target.id)
+    for (const link of links) {
+      if (link.hash === '#' + active.target.id) link.setAttribute('aria-current', 'location')
+      else link.removeAttribute('aria-current')
+    }
   }, { threshold: 0.6 })
   for (const panel of panels) observer.observe(panel)
 </script>`,
+        next: `'use client'
+
+import { useEffect, useRef } from 'react'
+
+export default function ScrollViewportWithSpy() {
+  const navRef = useRef<HTMLElement>(null)
+  const viewportRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const links = Array.from(navRef.current?.querySelectorAll<HTMLAnchorElement>('a[href^="#"]') ?? [])
+    const panels = Array.from(viewportRef.current?.querySelectorAll<HTMLElement>('.sf-scroll-panel[id]') ?? [])
+    const observer = new IntersectionObserver((entries) => {
+      const active = entries.find((entry) => entry.isIntersecting)
+      if (!active) return
+      for (const link of links) {
+        if (link.hash === '#' + active.target.id) link.setAttribute('aria-current', 'location')
+        else link.removeAttribute('aria-current')
+      }
+    }, { threshold: 0.6 })
+
+    for (const panel of panels) observer.observe(panel)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <>
+      <nav ref={navRef} className="sf-container sf-nav sf-sticky-top" aria-label="Section navigation">
+        <a className="sf-nav__link" href="#one" aria-current="location">One</a>
+        <a className="sf-nav__link" href="#two">Two</a>
+      </nav>
+      <main ref={viewportRef} className="sf-scroll-viewport sf-scroll-snap-y" data-sf-scroll-spy tabIndex={0}>
+        <section className="sf-scroll-panel" id="one"><div className="sf-container"><h1 className="sf-text-display">One</h1></div></section>
+        <section className="sf-scroll-panel" id="two"><div className="sf-container"><h2 className="sf-text-h1">Two</h2></div></section>
+      </main>
+    </>
+  )
+}`,
       },
       keywords: ['scroll', 'spy', 'intersectionobserver', 'portfolio', 'active', 'nav', 'sections'],
     },
@@ -1142,7 +1183,7 @@ function getPublicPatterns() {
 import { useRef } from 'react'
 
 export default function DialogExample() {
-  const dialogRef = useRef(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
 
   return (
     <>
@@ -1228,7 +1269,7 @@ export default function DialogExample() {
       name: 'Scroll snap page sections',
       whenToUse: 'Portfolio panels, product storytelling, presentation-style pages, and full-page feature sections.',
       classes: ['sf-scroll-viewport', 'sf-scroll-snap-y', 'sf-scroll-panel', 'sf-sticky-top', 'sf-section', 'sf-container'],
-      markup: '<main class="sf-scroll-viewport" data-snap="mandatory"><section class="sf-scroll-panel">...</section></main>',
+      markup: '<main class="sf-scroll-viewport" data-snap="mandatory" tabindex="0"><section class="sf-scroll-panel">...</section></main>',
       keywords: ['scroll', 'snap', 'panel', 'portfolio', 'presentation', 'full-page', 'sections'],
     },
     {
@@ -1285,12 +1326,12 @@ export default function DialogExample() {
       whenToUse: 'Filtered app views, inboxes, queues, and reports where each tab needs a compact count.',
       classes: ['sf-tabs', 'sf-tab-list', 'sf-tab', 'sf-tab__count', 'sf-tab-panel'],
       requiresJs: false,
-      requiresJsNotes: 'CSS styles state. The app owns aria-selected, routing, or tab panel switching for dynamic interfaces.',
-      a11y: ['Use role="tablist" only when implementing full keyboard tab behavior.', 'Use aria-selected on active tabs.', 'Keep counts textual and not colour-only.'],
+      requiresJsNotes: 'CSS styles state. The app owns routing or tab panel switching for dynamic interfaces.',
+      a11y: ['Use role="tablist" and aria-selected only when implementing full keyboard tab behavior.', 'Use aria-current="page" for the active route-backed link.', 'Keep counts textual and not colour-only.'],
       gotchas: ['Use data-variant="pill" for pill tabs.', 'Use links for route-backed tabs and buttons for in-page tab switching.'],
       markup: {
         html: `<nav class="sf-tab-list" aria-label="Views">
-  <a class="sf-tab" data-variant="pill" href="?view=open" aria-selected="true">Open <span class="sf-tab__count">12</span></a>
+  <a class="sf-tab" data-variant="pill" href="?view=open" aria-current="page">Open <span class="sf-tab__count">12</span></a>
   <a class="sf-tab" data-variant="pill" href="?view=closed">Closed <span class="sf-tab__count">8</span></a>
 </nav>`,
       },
@@ -1306,9 +1347,9 @@ export default function DialogExample() {
       a11y: ['Use aria-sort on sorted columns.', 'Keep the row destination as a real link.', 'Add data-label to cells when using card fallback.'],
       gotchas: ['Set data-view="cards" on sf-table-wrap for the responsive card fallback.', 'Do not put interactive controls inside a stretched row link.'],
       markup: {
-        html: `<div class="sf-table-wrap" data-view="cards">
+        html: `<div class="sf-table-wrap" data-view="cards" tabindex="0">
   <table class="sf-data-table">
-    <thead><tr><th><button class="sf-table-sort" type="button" aria-sort="ascending">Name</button></th><th>Status</th></tr></thead>
+    <thead><tr><th aria-sort="ascending"><button class="sf-table-sort" type="button">Name</button></th><th>Status</th></tr></thead>
     <tbody><tr data-clickable="true"><td data-label="Name"><a class="sf-link" href="/items/1">Northstar</a></td><td data-label="Status"><span class="sf-status" data-size="sm" data-tone="success">Active</span></td></tr></tbody>
   </table>
 </div>`,
@@ -1345,7 +1386,7 @@ export default function DialogExample() {
         html: `<dialog class="sf-dialog" data-layout="form" id="edit-dialog" aria-labelledby="edit-title">
   <header class="sf-dialog__header"><h2 id="edit-title">Edit record</h2></header>
   <form class="sf-form sf-dialog__body" id="edit-form"><label class="sf-field"><span class="sf-label">Name</span><input class="sf-input" name="name"></label></form>
-  <footer class="sf-dialog__footer"><button class="sf-button sf-button--outline" formmethod="dialog">Cancel</button><button class="sf-button" form="edit-form">Save</button></footer>
+  <footer class="sf-dialog__footer"><button class="sf-button sf-button--outline" type="submit" form="edit-form" formmethod="dialog">Cancel</button><button class="sf-button" type="submit" form="edit-form">Save</button></footer>
 </dialog>`,
       },
       keywords: ['dialog', 'modal', 'form', 'drawer', 'actions', 'footer'],
@@ -1439,7 +1480,7 @@ export default function DialogExample() {
       a11y: ['Use a caption or labelled section.', 'Use real table headers.', 'Do not replace table markup with divs for tabular data.'],
       gotchas: ['Wrap wide tables in sf-table-wrap.', 'Use sf-status for display only; keep actual status text in the element.'],
       markup: {
-        html: `<div class="sf-table-wrap">
+        html: `<div class="sf-table-wrap" tabindex="0">
   <table class="sf-data-table" aria-label="Customers">
     <thead><tr><th>Customer</th><th>Status</th><th>Plan</th><th>Updated</th></tr></thead>
     <tbody>
@@ -1492,6 +1533,132 @@ export default function DialogExample() {
 </section>`,
       },
       keywords: ['saas', 'settings', 'section', 'billing', 'team', 'security', 'account', 'detail'],
+    },
+    {
+      id: 'switch-control',
+      name: 'Binary switch control',
+      whenToUse: 'A setting that takes effect as a strict on or off value and has a stable visible label.',
+      classes: ['sf-switch', 'sf-switch__control', 'sf-switch__label'],
+      requiresJs: false,
+      requiresJsNotes: 'The native checkbox owns keyboard and form behavior. App logic is only needed for immediate persistence.',
+      a11y: ['Keep the visible label stable when state changes.', 'Use checked for state and disabled when unavailable.', 'Do not use indeterminate or mixed state for a switch.'],
+      gotchas: ['Checkboxes have no readonly state; use disabled, or implement a separately explained app-owned restriction.', 'Place the control span immediately after the checkbox.'],
+      markup: {
+        html: `<label class="sf-switch"><input type="checkbox" role="switch" name="notifications" checked><span class="sf-switch__control" aria-hidden="true"></span><span class="sf-switch__label">Email notifications</span></label>`,
+      },
+      keywords: ['switch', 'toggle', 'settings', 'binary', 'checkbox', 'on', 'off'],
+    },
+    {
+      id: 'input-group',
+      name: 'Input group',
+      whenToUse: 'Text inputs with a unit, currency prefix, domain suffix, or compact inline action.',
+      classes: ['sf-field', 'sf-label', 'sf-input-group', 'sf-input-group__leading', 'sf-input', 'sf-input-group__trailing', 'sf-input-group__action'],
+      requiresJs: false,
+      requiresJsNotes: 'The group is CSS-only. Inline action behavior belongs to the app.',
+      a11y: ['Keep one explicit label for the input.', 'Mark decorative prefixes and suffixes aria-hidden.', 'Give inline actions an accessible name.'],
+      gotchas: ['Use sf-search for ordinary search fields.', 'Keep exactly one flexible form control in each group.'],
+      markup: {
+        html: `<label class="sf-field"><span class="sf-label">Monthly budget</span><span class="sf-input-group"><span class="sf-input-group__leading" aria-hidden="true">£</span><input class="sf-input" name="budget" inputmode="decimal"><span class="sf-input-group__trailing" aria-hidden="true">GBP</span></span></label>`,
+      },
+      keywords: ['input', 'group', 'prefix', 'suffix', 'currency', 'unit', 'action'],
+    },
+    {
+      id: 'native-file-and-range',
+      name: 'Native file and range inputs',
+      whenToUse: 'File selection and bounded numeric values that can use browser-native controls.',
+      classes: ['sf-form', 'sf-field', 'sf-label', 'sf-help', 'sf-file-input', 'sf-range'],
+      requiresJs: false,
+      requiresJsNotes: 'Native inputs submit normally. Upload processing, previews, and live range value output belong to the app.',
+      a11y: ['Label both inputs.', 'Describe accepted file types in visible help text.', 'Provide min, max and a visible current value for range controls.'],
+      gotchas: ['File picker presentation varies by browser.', 'Do not use range where an exact typed value is required.'],
+      markup: {
+        html: `<div class="sf-form"><label class="sf-field"><span class="sf-label">Supporting document</span><input class="sf-file-input" type="file" name="document" accept=".pdf,.doc,.docx"><span class="sf-help">PDF or Word, up to 10 MB.</span></label><label class="sf-field"><span class="sf-label">Team size: <output for="team-size">12</output></span><input class="sf-range" id="team-size" name="team_size" type="range" min="1" max="50" value="12"></label></div>`,
+      },
+      keywords: ['file', 'upload', 'range', 'slider', 'input', 'native'],
+    },
+    {
+      id: 'segmented-control',
+      name: 'Segmented single choice',
+      whenToUse: 'A small set of mutually exclusive form choices displayed as adjacent options.',
+      classes: ['sf-segmented-control', 'sf-segmented-control__option', 'sf-segmented-control__label'],
+      requiresJs: false,
+      requiresJsNotes: 'Native radio inputs own keyboard, form, and checked state.',
+      a11y: ['Use a fieldset and legend to name the choice.', 'Keep every option label visible.', 'Use tabs for panel navigation and switches for independent on/off settings.'],
+      gotchas: ['All radios must share a name.', 'Keep the number of options small enough to scan.'],
+      markup: {
+        html: `<fieldset class="sf-fieldset"><legend>Billing cycle</legend><div class="sf-segmented-control"><label class="sf-segmented-control__option"><input type="radio" name="cycle" value="monthly" checked><span class="sf-segmented-control__label">Monthly</span></label><label class="sf-segmented-control__option"><input type="radio" name="cycle" value="annual"><span class="sf-segmented-control__label">Annual</span></label></div></fieldset>`,
+      },
+      keywords: ['segmented', 'radio', 'choice', 'single', 'options', 'billing'],
+    },
+    {
+      id: 'loading-button',
+      name: 'Loading button',
+      whenToUse: 'A compact pending state for an action while the app completes asynchronous work.',
+      classes: ['sf-button', 'sf-spinner', 'sr-only'],
+      requiresJs: true,
+      requiresJsNotes: 'The app owns pending state, prevents activation while aria-disabled, updates visible text, and announces completion or failure.',
+      a11y: ['Set aria-busy="true" while pending.', 'Keep a visible pending label such as Saving… or expose an sr-only status.', 'Announce the result in a nearby live region.'],
+      gotchas: ['A spinner alone is not an accessible status.', 'aria-disabled keeps the button focusable but does not prevent activation; the app must guard the handler.', 'Use native disabled instead when removing the action from focus order is preferable.'],
+      markup: {
+        html: `<button class="sf-button" type="submit" aria-busy="true" aria-disabled="true"><span class="sf-spinner" aria-hidden="true"></span><span>Saving…</span></button><p class="sr-only" role="status" aria-live="polite">Saving changes</p>`,
+      },
+      keywords: ['loading', 'spinner', 'button', 'busy', 'pending', 'saving'],
+    },
+    {
+      id: 'searchable-select',
+      name: 'Searchable select shell',
+      whenToUse: 'A large option set that needs app-owned filtering and complete combobox keyboard behavior.',
+      classes: ['sf-field', 'sf-label', 'sf-combobox', 'sf-input', 'sf-combobox__listbox', 'sf-combobox__option', 'sf-combobox__empty'],
+      requiresJs: true,
+      requiresJsNotes: 'The app must implement the ARIA combobox contract, active option, filtering, selection, focus, Escape, and outside-click behavior. Synced Flow supplies presentation only.',
+      a11y: ['Follow the ARIA combobox pattern completely.', 'Keep aria-expanded, aria-controls, aria-activedescendant and aria-selected synchronized.', 'Test with keyboard and assistive technology.'],
+      gotchas: ['This shell is not a working combobox without app code.', 'Prefer native select for short option lists.'],
+      markup: {
+        html: `<div class="sf-field"><label class="sf-label" for="customer-search">Customer</label><div class="sf-combobox"><input class="sf-input" id="customer-search" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="customer-options" aria-activedescendant="customer-option-2"><ul class="sf-combobox__listbox" id="customer-options" role="listbox"><li class="sf-combobox__option" id="customer-option-1" role="option" aria-selected="false">Northstar Labs</li><li class="sf-combobox__option" id="customer-option-2" role="option" aria-selected="true">Willow Group</li></ul></div></div>`,
+      },
+      keywords: ['combobox', 'searchable', 'select', 'autocomplete', 'listbox', 'customer'],
+    },
+    {
+      id: 'bulk-actions-toolbar',
+      name: 'Bulk actions toolbar',
+      whenToUse: 'A table or list selection that exposes actions and a clear selected-item count.',
+      classes: ['sf-bulk-actions', 'sf-bulk-actions__count', 'sf-bulk-actions__controls', 'sf-button', 'sf-button--sm', 'sf-button--destructive'],
+      requiresJs: true,
+      requiresJsNotes: 'The app owns row selection, selected count, action availability, confirmation, and focus after updates.',
+      a11y: ['Announce selection count changes in a polite live region.', 'Name destructive actions clearly.', 'Keep selection checkboxes associated with their rows.'],
+      gotchas: ['Hide the toolbar when nothing is selected.', 'Do not infer selection from row colour alone.'],
+      markup: {
+        html: `<div class="sf-bulk-actions" aria-label="Bulk actions"><p class="sf-bulk-actions__count" aria-live="polite">3 customers selected</p><div class="sf-bulk-actions__controls"><button class="sf-button sf-button--sm" type="button">Assign owner</button><button class="sf-button sf-button--destructive sf-button--sm" type="button">Delete selected</button></div></div>`,
+      },
+      keywords: ['bulk', 'actions', 'toolbar', 'selection', 'table', 'list'],
+    },
+    {
+      id: 'complete-pagination',
+      name: 'Complete pagination',
+      whenToUse: 'Server or app pagination that needs result context, page links, page size, and direct page entry.',
+      classes: ['sf-pagination', 'sf-pagination__summary', 'sf-pagination__controls', 'sf-pagination__pages', 'sf-pagination__jump', 'sf-input', 'sf-select', 'sf-button'],
+      requiresJs: false,
+      requiresJsNotes: 'Links and GET forms work without JavaScript. Client-side data grids may synchronize the same controls with app state.',
+      a11y: ['Label the navigation and current page.', 'Use a real label for page size and page entry.', 'Announce updated result context when content changes dynamically.'],
+      gotchas: ['Keep URL parameters shareable for server pagination.', 'Validate page numbers on the server or in the app.'],
+      markup: {
+        html: `<nav class="sf-pagination" data-layout="complete" aria-label="Customer pages"><p class="sf-pagination__summary">Showing 21–40 of 126 customers</p><div class="sf-pagination__controls"><div class="sf-pagination__pages"><a href="?page=1">Previous</a><a href="?page=1">1</a><span aria-current="page">2</span><a href="?page=3">3</a><a href="?page=3">Next</a></div><form class="sf-pagination__jump" method="get"><label for="page-size">Rows</label><select class="sf-select" id="page-size" name="size"><option>20</option><option>50</option></select><label for="page-number">Page</label><input class="sf-input" id="page-number" name="page" type="number" min="1" max="7" value="2"><button class="sf-button sf-button--sm" type="submit">Go</button></form></div></nav>`,
+      },
+      keywords: ['pagination', 'pages', 'page size', 'jump', 'results', 'table'],
+    },
+    {
+      id: 'multi-step-form',
+      name: 'Multi-step form',
+      whenToUse: 'Long forms that need clear progress, a current step, completed steps, and predictable navigation.',
+      classes: ['sf-stepper', 'sf-stepper__step', 'sf-stepper__marker', 'sf-stepper__label', 'sf-form', 'sf-wizard-actions', 'sf-button', 'sf-button--outline'],
+      requiresJs: true,
+      requiresJsNotes: 'The app owns step validation, persistence, navigation, focus placement, and URL or history state.',
+      a11y: ['Use an ordered list and aria-current="step".', 'Prefix completed step labels with sr-only text such as "Completed:" so completion is not visual-only.', 'Move focus to the new step heading after navigation.', 'Preserve entered data and expose validation before advancing.'],
+      gotchas: ['Do not make step markers tabs unless they control tab panels with full tab behavior.', 'Allow review and correction before final submission.'],
+      markup: {
+        html: `<nav aria-label="Application progress"><ol class="sf-stepper"><li class="sf-stepper__step" data-complete="true"><span class="sf-stepper__marker" aria-hidden="true">✓</span><span class="sf-stepper__label"><span class="sr-only">Completed: </span>Account</span></li><li class="sf-stepper__step" aria-current="step"><span class="sf-stepper__marker" aria-hidden="true"></span><span class="sf-stepper__label">Profile</span></li><li class="sf-stepper__step"><span class="sf-stepper__marker" aria-hidden="true"></span><span class="sf-stepper__label">Review</span></li></ol></nav><form class="sf-form" aria-labelledby="profile-step-title"><h2 id="profile-step-title">Profile</h2><label class="sf-field"><span class="sf-label">Role</span><input class="sf-input" name="role"></label><div class="sf-wizard-actions"><button class="sf-button sf-button--outline" type="button">Back</button><button class="sf-button" type="submit">Continue</button></div></form>`,
+      },
+      keywords: ['stepper', 'wizard', 'multi-step', 'form', 'onboarding', 'progress'],
     },
     {
       id: 'contact-form',
@@ -1593,7 +1760,7 @@ function getPublicRecipes() {
     <button class="sf-nav__link" type="submit" formaction="#contact" popovertarget="portfolio-mobile-menu" popovertargetaction="hide">Contact</button>
   </form>
 </nav>
-<main class="sf-scroll-viewport" data-snap="mandatory">
+<main class="sf-scroll-viewport" data-snap="mandatory" tabindex="0">
   <section class="sf-scroll-panel" id="intro">
     <div class="sf-container sf-stack">
       <p class="sf-kicker">Selected work</p>
@@ -1733,7 +1900,7 @@ function getPublicRecipes() {
           <button class="sf-button" type="submit">Apply</button>
         </form>
         <div class="sf-cluster" aria-label="Active filters"><span class="sf-badge">Status: Active <a class="sf-link" href="/app/activity" aria-label="Remove status filter">Remove</a></span><a class="sf-button sf-button--ghost sf-button--sm" href="/app/activity">Clear filters</a></div>
-        <div class="sf-table-wrap">
+        <div class="sf-table-wrap" tabindex="0">
           <table class="sf-data-table" aria-label="Recent activity">
             <thead><tr><th>Item</th><th>Status</th><th>Value</th><th>Date</th></tr></thead>
             <tbody>
@@ -1746,7 +1913,7 @@ function getPublicRecipes() {
       </article>
       <article class="sf-card sf-stack sf-detail-panel" id="activity">
         <div class="sf-repel"><h2 class="sf-card__title sf-font-sans">Recent customers</h2><a class="sf-link" href="/app/customers">View all</a></div>
-        <div class="sf-skeleton" aria-hidden="true">Loading customer details</div>
+        <div class="sf-skeleton" aria-hidden="true"></div><span class="sr-only">Loading customer details</span>
         <ul class="sf-list-reset sf-data-list">
           <li><span><strong>Northstar Labs</strong><br><span class="sf-text-muted">Growth workspace</span></span><span class="sf-status" data-tone="success">Healthy</span></li>
           <li><span><strong>Willow Group</strong><br><span class="sf-text-muted">Operations workspace</span></span><span class="sf-status" data-tone="warning">Needs review</span></li>
@@ -1769,6 +1936,36 @@ function getPublicRecipes() {
     </section>
   </main>
 </div>`,
+    },
+    {
+      id: 'app-settings-workflow',
+      name: 'Application settings workflow',
+      whenToUse: 'Production app settings and onboarding forms that need richer native controls and explicit progress.',
+      sections: ['settings-section', 'input-group', 'switch-control', 'segmented-control', 'native-file-and-range', 'searchable-select', 'loading-button', 'multi-step-form'],
+      classes: ['sf-skip-link', 'sf-section', 'sf-container', 'sf-split', 'sf-card', 'sf-stack', 'sf-form', 'sf-field', 'sf-label', 'sf-help', 'sf-input', 'sf-input-group', 'sf-input-group__leading', 'sf-switch', 'sf-switch__control', 'sf-switch__label', 'sf-file-input', 'sf-range', 'sf-segmented-control', 'sf-segmented-control__option', 'sf-segmented-control__label', 'sf-combobox', 'sf-combobox__listbox', 'sf-combobox__option', 'sf-stepper', 'sf-stepper__step', 'sf-stepper__marker', 'sf-stepper__label', 'sf-wizard-actions', 'sf-button', 'sf-spinner'],
+      keywords: ['app', 'settings', 'workflow', 'onboarding', 'form', 'switch', 'input group', 'file', 'range', 'segmented', 'combobox', 'stepper', 'wizard', 'loading'],
+      markup: `<a class="sf-skip-link" href="#settings-main">Skip to settings</a>
+<main class="sf-section" id="settings-main">
+  <div class="sf-container sf-split">
+    <nav aria-label="Setup progress">
+      <ol class="sf-stepper">
+        <li class="sf-stepper__step" data-complete="true"><span class="sf-stepper__marker" aria-hidden="true">✓</span><span class="sf-stepper__label"><span class="sr-only">Completed: </span>Workspace</span></li>
+        <li class="sf-stepper__step" aria-current="step"><span class="sf-stepper__marker" aria-hidden="true"></span><span class="sf-stepper__label">Preferences</span></li>
+        <li class="sf-stepper__step"><span class="sf-stepper__marker" aria-hidden="true"></span><span class="sf-stepper__label">Review</span></li>
+      </ol>
+    </nav>
+    <form class="sf-card sf-form" aria-labelledby="preferences-title">
+      <header class="sf-stack"><p class="sf-kicker">Step 2 of 3</p><h1 id="preferences-title">Workspace preferences</h1></header>
+      <label class="sf-field"><span class="sf-label">Workspace URL</span><span class="sf-input-group"><span class="sf-input-group__leading" aria-hidden="true">https://</span><input class="sf-input" name="workspace" autocomplete="organization"><span class="sf-input-group__trailing" aria-hidden="true">.example.com</span></span></label>
+      <fieldset class="sf-fieldset"><legend>Billing cycle</legend><div class="sf-segmented-control"><label class="sf-segmented-control__option"><input type="radio" name="cycle" value="monthly" checked><span class="sf-segmented-control__label">Monthly</span></label><label class="sf-segmented-control__option"><input type="radio" name="cycle" value="annual"><span class="sf-segmented-control__label">Annual</span></label></div></fieldset>
+      <label class="sf-switch"><input type="checkbox" role="switch" name="weekly_summary" checked><span class="sf-switch__control" aria-hidden="true"></span><span class="sf-switch__label">Email weekly summary</span></label>
+      <label class="sf-field"><span class="sf-label" id="settings-team-size-label">Team size: <output for="settings-team-size">12</output></span><input class="sf-range" id="settings-team-size" type="range" name="team_size" min="1" max="50" value="12" aria-labelledby="settings-team-size-label"></label>
+      <label class="sf-field"><span class="sf-label">Brand mark</span><input class="sf-file-input" type="file" name="brand_mark" accept="image/png,image/svg+xml"><span class="sf-help">PNG or SVG.</span></label>
+      <div class="sf-field"><label class="sf-label" for="owner-search">Workspace owner</label><div class="sf-combobox"><input class="sf-input" id="owner-search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="owner-options"><ul class="sf-combobox__listbox" id="owner-options" role="listbox" hidden><li class="sf-combobox__option" role="option">Alex Morgan</li></ul></div><span class="sf-help">The app must implement combobox keyboard and state behavior.</span></div>
+      <div class="sf-wizard-actions"><button class="sf-button sf-button--outline" type="button">Back</button><button class="sf-button" type="submit"><span class="sf-spinner" aria-hidden="true" hidden></span><span>Continue</span></button></div>
+    </form>
+  </div>
+</main>`,
     },
     {
       id: 'agency-home',
@@ -1823,7 +2020,7 @@ function getPublicRecipes() {
     <figure class="sf-figure"><div class="sf-frame"></div><figcaption class="sf-caption">Use real project imagery here.</figcaption></figure>
     <h2>Start with primitives</h2>
     <p>Use semantic colours, fluid spacing, and named components before adding custom CSS.</p>
-    <div class="sf-table-wrap"><table><thead><tr><th>Layer</th><th>Use</th></tr></thead><tbody><tr><td>Tokens</td><td>Brand decisions</td></tr><tr><td>Components</td><td>Common UI</td></tr></tbody></table></div>
+    <div class="sf-table-wrap" tabindex="0"><table><thead><tr><th>Layer</th><th>Use</th></tr></thead><tbody><tr><td>Tokens</td><td>Brand decisions</td></tr><tr><td>Components</td><td>Common UI</td></tr></tbody></table></div>
   </article>
 </main>`,
     },
@@ -2054,6 +2251,7 @@ function runPattern() {
 
 function patternMarkupFor(pattern, framework = 'html') {
   if (typeof pattern.markup === 'string') return pattern.markup
+  if (framework === 'react') return pattern.markup?.react ?? pattern.markup?.next ?? pattern.markup?.html ?? ''
   return pattern.markup?.[framework] ?? pattern.markup?.html ?? ''
 }
 
@@ -2339,25 +2537,60 @@ ${indentMarkup(htmlToJsx(markup), 6)}
 }
 
 function htmlToJsx(markup) {
+  const voidElements = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
+  const attributeNames = new Map([
+    ['class', 'className'],
+    ['for', 'htmlFor'],
+    ['autocomplete', 'autoComplete'],
+    ['inputmode', 'inputMode'],
+    ['readonly', 'readOnly'],
+    ['tabindex', 'tabIndex'],
+    ['formaction', 'formAction'],
+    ['formmethod', 'formMethod'],
+    ['formenctype', 'formEncType'],
+    ['formnovalidate', 'formNoValidate'],
+    ['formtarget', 'formTarget'],
+    ['accept-charset', 'acceptCharset'],
+    ['charset', 'charSet'],
+    ['colspan', 'colSpan'],
+    ['rowspan', 'rowSpan'],
+    ['maxlength', 'maxLength'],
+    ['minlength', 'minLength'],
+    ['contenteditable', 'contentEditable'],
+    ['crossorigin', 'crossOrigin'],
+    ['referrerpolicy', 'referrerPolicy'],
+    ['usemap', 'useMap'],
+    ['datetime', 'dateTime'],
+    ['popovertarget', 'popoverTarget'],
+    ['popovertargetaction', 'popoverTargetAction'],
+    ['commandfor', 'commandFor'],
+    ['stroke-linecap', 'strokeLinecap'],
+    ['stroke-linejoin', 'strokeLinejoin'],
+    ['stroke-width', 'strokeWidth'],
+    ['fill-rule', 'fillRule'],
+    ['clip-rule', 'clipRule'],
+  ])
+
   return markup
-    .replace(/\bclass=/g, 'className=')
-    .replace(/\bfor=/g, 'htmlFor=')
-    .replace(/\bautocomplete=/g, 'autoComplete=')
-    .replace(/\breadonly=/g, 'readOnly=')
-    .replace(/\btabindex=/g, 'tabIndex=')
-    .replace(/\bformaction=/g, 'formAction=')
-    .replace(/\bpopoverTarget=/g, 'popoverTarget=')
-    .replace(/\bpopovertarget=/g, 'popoverTarget=')
-    .replace(/\bpopoverTargetAction=/g, 'popoverTargetAction=')
-    .replace(/\bpopovertargetaction=/g, 'popoverTargetAction=')
-    .replace(/\bcommandfor=/g, 'commandFor=')
-    .replace(/\bstroke-linecap=/g, 'strokeLinecap=')
-    .replace(/\bstroke-linejoin=/g, 'strokeLinejoin=')
-    .replace(/\bstroke-width=/g, 'strokeWidth=')
-    .replace(/<!--/g, '{/*')
-    .replace(/-->/g, '*/}')
-    .replace(/<input([^>/]*?)>/g, '<input$1 />')
-    .replace(/<br>/g, '<br />')
+    .replace(/<!--([\s\S]*?)-->/g, '{/*$1*/}')
+    .replace(/<([A-Za-z][\w:-]*)(\s[^<>]*?)?\s*(\/?)>/g, (match, rawTagName, rawAttributes = '', selfClosing = '') => {
+      const tagName = rawTagName.toLowerCase()
+      let attributes = rawAttributes.replace(/\s+$/, '')
+
+      for (const [htmlName, jsxName] of attributeNames) {
+        attributes = attributes.replace(new RegExp(`(\\s)${htmlName}(?=\\s*=)`, 'gi'), `$1${jsxName}`)
+      }
+
+      attributes = attributes.replace(/(\s)checked(?=\s|$)/gi, '$1defaultChecked')
+      attributes = attributes.replace(/(\s)popover(?=\s|$)/gi, '$1popover=""')
+      attributes = attributes.replace(/(\s)(rows|cols|size|span|tabIndex)=["'](\d+)["']/gi, '$1$2={$3}')
+      if (['input', 'select', 'textarea'].includes(tagName) && !/\stype\s*=\s*["'](?:checkbox|radio)["']/i.test(attributes)) {
+        attributes = attributes.replace(/(\s)value(?=\s*=)/gi, '$1defaultValue')
+      }
+
+      const close = voidElements.has(tagName) || selfClosing ? ' />' : '>'
+      return `<${rawTagName}${attributes}${close}`
+    })
 }
 
 function indentMarkup(markup, spaces) {
@@ -4795,6 +5028,8 @@ function buildComponentCss() {
 
   .sf-data-table :where(th button, .sf-table-sort) {
     align-items: center;
+    background: transparent;
+    border: 0;
     color: inherit;
     display: inline-flex;
     font: inherit;
@@ -4803,14 +5038,14 @@ function buildComponentCss() {
     padding: 0;
   }
 
-  .sf-data-table :where(th button, .sf-table-sort)[aria-sort]::after {
+  .sf-data-table th[aria-sort] :where(button, .sf-table-sort)::after {
     color: var(--color-muted-foreground);
     content: "\\2195";
     font-size: var(--step--2);
   }
 
-  .sf-data-table :where(th button, .sf-table-sort)[aria-sort="ascending"]::after { content: "\\2191"; }
-  .sf-data-table :where(th button, .sf-table-sort)[aria-sort="descending"]::after { content: "\\2193"; }
+  .sf-data-table th[aria-sort="ascending"] :where(button, .sf-table-sort)::after { content: "\\2191"; }
+  .sf-data-table th[aria-sort="descending"] :where(button, .sf-table-sort)::after { content: "\\2193"; }
 
   .sf-data-table tr[data-clickable="true"] {
     cursor: pointer;
@@ -4885,7 +5120,7 @@ function buildComponentCss() {
   }
 
   .sf-status::before {
-    background: currentColor;
+    background: var(--status-dot, currentColor);
     block-size: .42em;
     border-radius: var(--radius-full);
     content: "";
@@ -4895,25 +5130,29 @@ function buildComponentCss() {
   .sf-status[data-tone="success"] {
     --status-bg: var(--sf-colour-success-soft, oklch(62% 0.13 150 / 0.12));
     --status-border: color-mix(in oklch, var(--sf-colour-success, oklch(62% 0.13 150)) 34%, transparent);
-    --status-color: color-mix(in oklch, var(--sf-colour-success, oklch(62% 0.13 150)) 76%, var(--color-foreground));
+    --status-color: var(--color-foreground);
+    --status-dot: var(--sf-colour-success, oklch(62% 0.13 150));
   }
 
   .sf-status[data-tone="warning"] {
     --status-bg: var(--sf-colour-warning-soft, oklch(78% 0.15 82 / 0.16));
     --status-border: color-mix(in oklch, var(--sf-colour-warning, oklch(78% 0.15 82)) 38%, transparent);
-    --status-color: color-mix(in oklch, var(--sf-colour-warning, oklch(78% 0.15 82)) 70%, var(--color-foreground));
+    --status-color: var(--color-foreground);
+    --status-dot: color-mix(in oklch, var(--sf-colour-warning, oklch(78% 0.15 82)) 60%, var(--color-foreground));
   }
 
   .sf-status[data-tone="danger"] {
     --status-bg: var(--sf-colour-danger-soft, oklch(56% 0.2 28 / 0.12));
     --status-border: color-mix(in oklch, var(--sf-colour-danger, var(--color-destructive)) 34%, transparent);
-    --status-color: color-mix(in oklch, var(--sf-colour-danger, var(--color-destructive)) 76%, var(--color-foreground));
+    --status-color: var(--color-foreground);
+    --status-dot: var(--sf-colour-danger, var(--color-destructive));
   }
 
   .sf-status[data-tone="info"] {
     --status-bg: var(--sf-colour-info-soft, oklch(70% 0.12 205 / 0.14));
     --status-border: color-mix(in oklch, var(--sf-colour-info, oklch(70% 0.12 205)) 34%, transparent);
-    --status-color: color-mix(in oklch, var(--sf-colour-info, oklch(70% 0.12 205)) 76%, var(--color-foreground));
+    --status-color: var(--color-foreground);
+    --status-dot: color-mix(in oklch, var(--sf-colour-info, oklch(70% 0.12 205)) 68%, var(--color-foreground));
   }
 
   .sf-data-list {
@@ -4961,9 +5200,16 @@ function buildComponentCss() {
     background: var(--color-surface-alt);
   }
 
+  .sf-form {
+    display: grid;
+    gap: var(--form-gap, var(--space-s));
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .sf-field {
     display: grid;
     gap: var(--space-2xs);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .sf-form[data-density="compact"],
@@ -5025,6 +5271,130 @@ function buildComponentCss() {
     border-color: var(--color-ring);
     outline: 0.125rem solid color-mix(in oklch, var(--color-ring) 24%, transparent);
     outline-offset: 0;
+  }
+
+  .sf-spinner {
+    animation: sf-spinner-rotate .75s linear infinite;
+    block-size: var(--spinner-size, 1em);
+    border: .125em solid color-mix(in oklch, currentColor 28%, transparent);
+    border-block-start-color: currentColor;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    flex: 0 0 auto;
+    inline-size: var(--spinner-size, 1em);
+  }
+
+  @keyframes sf-spinner-rotate { to { transform: rotate(1turn); } }
+
+  .sf-input-group {
+    align-items: stretch;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--input-radius, var(--radius-md));
+    display: flex;
+    inline-size: 100%;
+    min-block-size: var(--input-block-size, 2.75rem);
+    overflow: clip;
+  }
+
+  .sf-input-group:focus-within {
+    border-color: var(--color-ring);
+    outline: .125rem solid color-mix(in oklch, var(--color-ring) 24%, transparent);
+  }
+
+  .sf-input-group > .sf-input { background: transparent; border: 0; border-radius: 0; flex: 1 1 0%; inline-size: auto; min-inline-size: 0; outline: 0; }
+  .sf-input-group__leading,
+  .sf-input-group__trailing { align-items: center; color: var(--color-muted-foreground); display: inline-flex; flex: 0 0 auto; padding-inline: var(--space-xs); white-space: nowrap; }
+  .sf-input-group__leading { border-inline-end: 1px solid var(--color-border); }
+  .sf-input-group__trailing,
+  .sf-input-group__action { border-inline-start: 1px solid var(--color-border); }
+  .sf-input-group__action { background: transparent; border-block: 0; border-inline-end: 0; color: var(--color-foreground); font-weight: 700; padding-inline: var(--space-xs); }
+  .sf-input-group[data-invalid="true"],
+  .sf-field[data-invalid="true"] .sf-input-group { border-color: var(--color-destructive, var(--color-danger)); }
+  .sf-input-group:has(:disabled) { background: var(--color-surface-alt); opacity: .72; }
+
+  .sf-file-input {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--input-radius, var(--radius-md));
+    color: var(--color-muted-foreground);
+    inline-size: 100%;
+    min-block-size: var(--input-block-size, 2.75rem);
+    padding: var(--space-3xs);
+  }
+
+  .sf-file-input::file-selector-button { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-foreground); font: inherit; font-weight: 700; margin-inline-end: var(--space-xs); min-block-size: 2.25rem; padding-inline: var(--space-xs); }
+  .sf-range { accent-color: var(--color-primary); inline-size: 100%; min-block-size: var(--input-block-size, 2.75rem); }
+  .sf-range:focus-visible,
+  .sf-file-input:focus-visible { outline: .125rem solid var(--color-ring); outline-offset: .125rem; }
+  .sf-file-input[aria-invalid="true"],
+  .sf-field[data-invalid="true"] .sf-file-input { border-color: var(--color-destructive, var(--color-danger)); }
+  :where(.sf-file-input, .sf-range):disabled { opacity: .55; }
+
+  .sf-switch { align-items: center; display: inline-grid; gap: var(--space-xs); grid-template-columns: auto 1fr; position: relative; }
+  .sf-switch > input[type="checkbox"],
+  .sf-segmented-control__option > input[type="radio"] { block-size: .0625rem; clip: rect(0 0 0 0); clip-path: inset(50%); inline-size: .0625rem; overflow: hidden; position: absolute; white-space: nowrap; }
+  .sf-switch__control { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-full); block-size: 1.5rem; display: inline-flex; inline-size: 2.75rem; padding: .1875rem; }
+  .sf-switch__control::before { background: var(--color-foreground); border-radius: var(--radius-full); content: ""; inline-size: 1rem; transition: transform var(--duration-fast) var(--ease-standard); }
+  .sf-switch > input:checked + .sf-switch__control { background: var(--color-primary); border-color: var(--color-primary); }
+  .sf-switch > input:checked + .sf-switch__control::before { background: var(--color-primary-foreground); transform: translateX(1.1875rem); }
+  .sf-switch > input:focus-visible + .sf-switch__control { outline: .125rem solid var(--color-ring); outline-offset: .125rem; }
+  .sf-switch__label { color: var(--color-foreground); font-weight: 700; }
+  .sf-switch:has(input:disabled) { cursor: not-allowed; opacity: .55; }
+
+  .sf-segmented-control { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); display: inline-flex; flex-wrap: wrap; gap: var(--space-3xs); padding: var(--space-3xs); }
+  .sf-segmented-control__option { cursor: pointer; position: relative; }
+  .sf-segmented-control__label { align-items: center; border: 1px solid transparent; border-radius: var(--radius-sm); color: var(--color-muted-foreground); display: inline-flex; font-size: var(--step--1); font-weight: 700; min-block-size: 2.25rem; padding-inline: var(--space-xs); }
+  .sf-segmented-control__option > input:checked + .sf-segmented-control__label { background: var(--color-card); border-color: var(--color-border); color: var(--color-foreground); }
+  .sf-segmented-control__option > input:focus + .sf-segmented-control__label { outline: .125rem solid var(--color-ring); outline-offset: .125rem; }
+  .sf-segmented-control__option:has(input:disabled) { cursor: not-allowed; opacity: .55; }
+
+  .sf-combobox { position: relative; }
+  .sf-combobox__listbox { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); display: grid; gap: var(--space-3xs); inset-block-start: calc(100% + var(--space-3xs)); inset-inline: 0; list-style: none; max-block-size: min(18rem, 50dvh); overflow: auto; padding: var(--space-2xs); position: absolute; z-index: 40; }
+  .sf-combobox__option { border-radius: var(--radius-sm); cursor: pointer; padding: var(--space-2xs) var(--space-xs); }
+  .sf-combobox__option:hover,
+  .sf-combobox__option[aria-selected="true"],
+  .sf-combobox__option[data-active="true"] { background: var(--color-surface-alt); }
+  .sf-combobox__empty { color: var(--color-muted-foreground); padding: var(--space-xs); }
+
+  .sf-bulk-actions { align-items: center; background: color-mix(in oklch, var(--color-primary) 12%, transparent); border: 1px solid color-mix(in oklch, var(--color-primary) 30%, var(--color-border)); border-radius: var(--radius-md); display: flex; flex-wrap: wrap; gap: var(--space-xs); justify-content: space-between; padding: var(--space-xs); }
+  .sf-bulk-actions__count { font-size: var(--step--1); font-weight: 800; }
+  .sf-bulk-actions__controls,
+  .sf-pagination__controls,
+  .sf-pagination__pages,
+  .sf-pagination__jump { align-items: center; display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+
+  .sf-pagination { align-items: center; display: flex; flex-wrap: wrap; gap: var(--space-2xs); list-style: none; padding-inline-start: 0; }
+  .sf-pagination[data-layout="complete"] { justify-content: space-between; row-gap: var(--space-xs); }
+  .sf-pagination__summary,
+  .sf-pagination__jump { color: var(--color-muted-foreground); font-size: var(--step--1); }
+  .sf-pagination__jump .sf-input { inline-size: 5rem; }
+
+  .sf-stepper { counter-reset: sf-step; display: grid; gap: var(--space-xs); list-style: none; padding-inline-start: 0; }
+  .sf-stepper__step { align-items: center; color: var(--color-muted-foreground); counter-increment: sf-step; display: grid; gap: var(--space-xs); grid-template-columns: auto 1fr; }
+  .sf-stepper__marker { align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-full); block-size: 2rem; display: inline-flex; font-size: var(--step--1); font-weight: 800; inline-size: 2rem; justify-content: center; }
+  .sf-stepper__marker:empty::before { content: counter(sf-step); }
+  .sf-stepper__step[aria-current="step"] { color: var(--color-foreground); }
+  .sf-stepper__step[aria-current="step"] .sf-stepper__marker { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-primary-foreground); }
+  .sf-stepper__label { font-weight: 700; }
+  .sf-wizard-actions { align-items: center; display: flex; flex-wrap: wrap; gap: var(--space-xs); justify-content: space-between; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sf-spinner { animation: none; border-color: currentColor; border-inline-end-color: transparent; }
+    .sf-switch__control::before { transition: none; }
+  }
+
+  @media (forced-colors: active) {
+    :where(.sf-input-group, .sf-file-input, .sf-combobox__listbox, .sf-bulk-actions) { border-color: ButtonText; forced-color-adjust: auto; }
+    :where(.sf-switch__control, .sf-segmented-control__label, .sf-stepper__marker) { background: Canvas; border-color: ButtonText; color: ButtonText; forced-color-adjust: none; }
+    .sf-switch > input:focus-visible + .sf-switch__control,
+    .sf-segmented-control__option > input:focus + .sf-segmented-control__label { outline: .125rem solid Highlight; outline-offset: .125rem; }
+    .sf-switch > input:checked + .sf-switch__control,
+    .sf-segmented-control__option > input:checked + .sf-segmented-control__label,
+    .sf-stepper__step[aria-current="step"] .sf-stepper__marker { background: Highlight; border-color: Highlight; color: HighlightText; }
+    .sf-switch__control::before { background: ButtonText; }
+    .sf-switch > input:checked + .sf-switch__control::before { background: HighlightText; }
+    .sf-stepper__step[data-complete="true"] .sf-stepper__marker { background: Canvas; border-color: LinkText; color: LinkText; }
   }
 }`
 }

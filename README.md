@@ -22,12 +22,12 @@ brand drift, or generated class chaos.
   project usage
 - layout primitives: container, section, stack, cluster, grid, sidebar,
   switcher, frame, cover, hero, and flow
-- component primitives: buttons, cards, surfaces, navigation, forms, alerts,
-  badges, avatars, charts, and section headers
+- component primitives: buttons and loading states, cards, navigation, complete
+  forms, switches, segmented choices, app data controls, charts, and feedback
 - website patterns: logo clouds, feature blocks, stats, testimonials, pricing,
   FAQ, CTA, and footer helpers
 - native component styling: dialog, popover, drawer, tooltip, disclosure, tabs,
-  breadcrumbs, pagination, scroll snap, and sticky patterns
+  breadcrumbs, complete pagination, file/range inputs, scroll snap, and sticky patterns
 - AI-friendly CLI discovery: `catalog --json`, `suggest`, `lint`, `watch`, and
   `theme init --from` for turning a site brief into reusable theme tokens
 - project-level AI agent setup: `agents install`, `agents status`, and `skill`
@@ -133,17 +133,17 @@ breakpoint-heavy patterns: fluid `clamp()` scales, CSS custom properties,
 logical sizing and spacing, cascade layers, OKLCH colour tokens,
 container-aware layout primitives, and `prefers-reduced-motion` handling.
 
-Current built CSS sizes from `pnpm build` on 2026-05-28:
+Current built CSS sizes from `pnpm build` on 2026-09-09:
 
 | File | Raw | Gzip | Purpose |
 | --- | ---: | ---: | --- |
-| `styles.css` | 59.1 KB | 10.5 KB | Full core stylesheet for simple setup. |
-| `tokens.css` | 9.5 KB | 2.2 KB | Design tokens only. |
+| `styles.css` | 98.0 KB | 15.7 KB | Full core stylesheet for simple setup. |
+| `tokens.css` | 12.0 KB | 2.5 KB | Design tokens only. |
 | `reset.css` | 0.7 KB | 0.4 KB | Reset layer only. |
-| `base.css` | 3.4 KB | 1.2 KB | Base element styles. |
+| `base.css` | 3.5 KB | 1.1 KB | Base element styles. |
 | `defaults.css` | 0.5 KB | 0.3 KB | Optional site/UI defaults for links, lists, and native controls. |
-| `layout.css` | 7.5 KB | 1.9 KB | Fluid layout, app shell, scroll, sticky, media, and split primitives. |
-| `components.css` | 31.3 KB | 5.0 KB | Button, icon, avatar, chart, card, surface, nav, form, alert, native component, website pattern, accessibility state, and input primitives. |
+| `layout.css` | 12.2 KB | 2.8 KB | Fluid layout, app shell, scroll, sticky, media, and split primitives. |
+| `components.css` | 62.9 KB | 9.3 KB | Button, form, native control, app data, overlay, website, accessibility, and presentation primitives. |
 | `utilities.css` | 7.5 KB | 1.9 KB | Static `sf-*` content, positioning, motion, and helper utilities. |
 
 CSS is not automatically tree-shaken like JavaScript in every environment. The
@@ -235,6 +235,15 @@ import '@syncedco/flow/styles.css'
 import './synced-flow.generated.css'
 ```
 
+JavaScript and TypeScript consumers can use the dependency-free `cx()` helper
+and typed class shortcuts without importing CSS through JavaScript:
+
+```ts
+import { cx, fluidSystem } from '@syncedco/flow'
+
+const settingClass = cx(fluidSystem.components.switch, 'project-setting')
+```
+
 Add package scripts:
 
 ```json
@@ -262,7 +271,11 @@ pnpm exec synced-flow tokens
 pnpm exec synced-flow tokens --json
 pnpm exec synced-flow catalog --json
 pnpm exec synced-flow suggest "full page scroll portfolio"
+pnpm exec synced-flow suggest "searchable select and multi-step settings" --json
+pnpm exec synced-flow pattern switch-control --markup
+pnpm exec synced-flow pattern searchable-select --markup
 pnpm exec synced-flow recipe portfolio-scroll --markup
+pnpm exec synced-flow recipe app-settings-workflow --markup
 pnpm exec synced-flow recipe portfolio-scroll --framework next --markup
 pnpm exec synced-flow theme init --from brief.md
 pnpm exec synced-flow theme init --from brief.md --preset-base neutral-saas
@@ -330,7 +343,17 @@ an existing codebase that still contains compatibility classes such as `sm:` or
 ## Scripts
 
 ```bash
+pnpm check:generated
 pnpm build
 pnpm check
+pnpm test
+pnpm test:browser
+pnpm test:browser:all
+pnpm pack --dry-run
 pnpm type-check
 ```
+
+Run `pnpm check:generated` before a build or package lifecycle script when
+reviewing tracked CSS freshness. `test:browser` uses Chromium for the normal
+development gate; `test:browser:all` adds Firefox and WebKit for release
+readiness.

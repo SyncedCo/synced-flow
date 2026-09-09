@@ -9,15 +9,24 @@ documentation.
 ## Local Setup
 
 ```bash
-pnpm install
-pnpm test
+pnpm install --ignore-scripts
+pnpm build:types
+pnpm check:generated
+pnpm exec playwright install chromium
 ```
+
+Lifecycle scripts rebuild tracked CSS, so install with `--ignore-scripts` when
+reviewing a checkout. `check:generated` verifies package CSS and the tracked
+plain HTML, Vite, Next, Astro, and WordPress outputs before a build can refresh
+them.
 
 Useful commands:
 
 ```bash
-pnpm build
 pnpm check
+pnpm test
+pnpm test:browser
+pnpm test:browser:all
 pnpm pack --dry-run
 ```
 
@@ -39,13 +48,17 @@ pnpm pack --dry-run
 Run:
 
 ```bash
+pnpm check:generated
 pnpm check
 pnpm test
+pnpm test:browser
 pnpm pack --dry-run
 ```
 
-For documentation-only changes, `pnpm check` is usually enough unless package
-metadata or generated files changed.
+Install all release browsers with
+`pnpm exec playwright install chromium firefox webkit` before running
+`pnpm test:browser:all`. Pull requests and `main` run Chromium in CI; version
+tags must pass Chromium, Firefox, and WebKit before npm publishing can start.
 
 ## Commercial Work
 

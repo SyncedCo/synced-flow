@@ -10,6 +10,7 @@ Use the CLI for framework-specific output:
 pnpm exec synced-flow recipe saas-landing --markup
 pnpm exec synced-flow recipe saas-landing --framework next --markup
 pnpm exec synced-flow recipe saas-dashboard --framework next --markup
+pnpm exec synced-flow recipe app-settings-workflow --markup
 pnpm exec synced-flow recipe portfolio-scroll --framework astro --markup
 ```
 
@@ -17,6 +18,7 @@ Templates:
 
 - `saas-landing.html`
 - `saas-dashboard.html`
+- `app-settings-workflow.html`
 - `portfolio-scroll.html`
 - `blog-index.html`
 - `coming-soon.html`

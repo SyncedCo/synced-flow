@@ -14,10 +14,12 @@ These are intended for application code and examples.
 | Tokens | Unlayered `--sf-*` custom properties emitted by `tokens.css` |
 | Theme config | `theme.fonts`, `theme.colours`, `theme.darkColours`, `theme.radii`, `theme.layout`, `theme.components` |
 | Layout classes | `sf-container`, `sf-section`, `sf-stack`, `sf-flow`, `sf-cluster`, `sf-repel`, `sf-toolbar`, `sf-app-shell`, `sf-app-header`, `sf-app-sidebar`, `sf-app-backdrop`, `sf-app-main`, `sf-auto-grid`, `sf-switcher`, `sf-sidebar`, `sf-split`, `sf-frame`, `sf-cover`, `sf-metric-grid`, `sf-pipeline` |
-| Components | `sf-button`, `sf-icon`, `sf-icon-button`, `sf-avatar`, `sf-chart`, `sf-meter`, `sf-progress`, `sf-skeleton`, `sf-filter-bar`, `sf-search`, `sf-data-table`, `sf-table-sort`, `sf-status`, `sf-data-list`, `sf-empty-state`, `sf-settings-section`, `sf-detail-panel`, `sf-card`, `sf-surface`, `sf-hero`, `sf-nav`, `sf-form`, `sf-field`, `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-alert`, `sf-badge`, `sf-section-header`, `sf-kicker` |
-| Native components | `sf-dialog`, `sf-popover`, `sf-tooltip`, `sf-drawer`, `sf-drawer--stack`, `sf-disclosure`, `sf-accordion`, `sf-tabs`, `sf-tab__count`, `sf-menu`, `sf-breadcrumb`, `sf-pagination`, `sf-toast-stack` |
+| Components | `sf-button`, `sf-spinner`, `sf-icon`, `sf-icon-button`, `sf-avatar`, `sf-chart`, `sf-meter`, `sf-progress`, `sf-skeleton`, `sf-filter-bar`, `sf-search`, `sf-input-group`, `sf-file-input`, `sf-range`, `sf-switch`, `sf-segmented-control`, `sf-combobox`, `sf-bulk-actions`, `sf-stepper`, `sf-wizard-actions`, `sf-data-table`, `sf-table-sort`, `sf-status`, `sf-data-list`, `sf-empty-state`, `sf-settings-section`, `sf-detail-panel`, `sf-card`, `sf-surface`, `sf-hero`, `sf-nav`, `sf-form`, `sf-field`, `sf-input`, `sf-select`, `sf-textarea`, `sf-check`, `sf-alert`, `sf-badge`, `sf-section-header`, `sf-kicker` |
+| Native components | `sf-dialog`, `sf-popover`, `sf-tooltip`, `sf-drawer`, `sf-drawer--stack`, `sf-disclosure`, `sf-accordion`, `sf-tabs`, `sf-tab__count`, `sf-menu`, `sf-breadcrumb`, `sf-pagination`, `sf-pagination__*`, `sf-toast-stack` |
 | Website patterns | `sf-logo-cloud`, `sf-feature`, `sf-stats`, `sf-testimonial`, `sf-pricing-grid`, `sf-price-card`, `sf-faq`, `sf-cta`, `sf-footer` |
+| Technical presentation | `sf-code-window`, `sf-code-lines`, `sf-code-block`, `sf-code-token--*`, `sf-token-strip`, `sf-marquee`, `sf-command-list`, `sf-platform-card` |
 | Utilities | `sf-prose`, `sf-link`, `sf-link-subtle`, `sf-link-plain`, `sf-list-*`, `sf-push-*`, `sf-focus-ring`, `sf-touch-target`, `sf-skip-link`, `sr-only`, `not-sr-only` |
+| TypeScript runtime | `cx()` and the typed `fluidSystem.layout`, `fluidSystem.components`, and `fluidSystem.utilities` class shortcuts exported from `@syncedco/flow` |
 | CLI | `synced-flow init`, `agents install`, `agents status`, `skill`, `add defaults`, `build`, `watch`, `lint`, `doctor`, `tokens`, `catalog`, `suggest`, `pattern`, `recipe`, `theme init`, `theme validate` |
 
 ## AI Agent Contract
@@ -34,6 +36,12 @@ The project-level AI setup commands are public in 0.x:
 
 `catalog --json` includes `patterns[]` with copy-ready interaction metadata:
 classes, markup, JS requirement notes, accessibility notes, and gotchas.
+
+The package does not own an MCP server. Its supported machine-readable
+integration is the local CLI: `tokens --json`, `catalog --json`, `suggest
+--json`, and `pattern`/`recipe` JSON or markup output. External MCP tools may
+invoke those commands, but they should treat the CLI output as the package
+contract rather than maintaining a separate component inventory.
 
 ## Internal Or Compatibility Surface
 

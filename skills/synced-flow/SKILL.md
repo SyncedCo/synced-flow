@@ -91,14 +91,24 @@ intact. Leave out `utilities.css` unless static helpers such as `sf-text-*`,
   `sf-app-backdrop`, `sf-frame`, and `sf-flow`.
 - Prefer component primitives for common UI: `sf-button`, `sf-card`,
   `sf-badge`, `sf-status`, `sf-field`, `sf-input`, `sf-search`,
-  `sf-data-table`, `sf-table-sort`, `sf-tab__count`, and `sf-toast-stack`.
+  `sf-input-group`, `sf-file-input`, `sf-range`, `sf-switch`,
+  `sf-segmented-control`, `sf-spinner`, `sf-data-table`, `sf-table-sort`,
+  `sf-tab__count`, and `sf-toast-stack`.
 - Use `saas-landing` for public SaaS marketing pages. Use `saas-dashboard` when
   a full authenticated starter is useful, but prefer neutral app patterns for
   reusable UI in admin panels, portals, CRMs, analytics dashboards, internal
   tools, account areas, and product workspaces.
 - Use app patterns before writing project CSS:
   `app-shell-layout`, `row-action-menu`, `tabs-with-counts`,
-  `data-table-actions`, `search-field`, `modal-form`, and `toast-stack`.
+  `data-table-actions`, `search-field`, `modal-form`, `toast-stack`,
+  `searchable-select`, `bulk-actions-toolbar`, `complete-pagination`, and
+  `multi-step-form`.
+- Use `switch-control` for independent binary settings and
+  `segmented-control` for one choice from a small set. Do not use either as a
+  substitute for tabs.
+- Treat `searchable-select`, async loading, bulk selection, and multi-step
+  navigation as app-owned behavior. Flow supplies presentation and accessible
+  markup guidance, not JavaScript state machines.
 - Use app shell states instead of bespoke layout CSS: `data-layout="fixed-header"`
   for fixed app headers, `data-collapsed="true"` for collapsed sidebars, and
   `data-mobile="drawer"` with `data-sidebar-open="true"` for mobile drawer
@@ -160,9 +170,16 @@ pnpm flow:doctor
 For package or repo changes, also run:
 
 ```bash
+pnpm check:generated
 pnpm check
 pnpm test
+pnpm test:browser
+pnpm test:browser:all
 pnpm pack --dry-run
 ```
 
-If `doctor` warns about stale CSS, run `pnpm flow:build`.
+Run `pnpm check:generated` before a build or lifecycle command can refresh
+tracked CSS. It covers package CSS and the plain HTML, Vite, Next, Astro, and
+WordPress generated outputs. Use the Chromium browser gate during development
+and all three browser engines before a release. If `doctor` warns about stale
+project CSS, run `pnpm flow:build`.

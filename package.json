@@ -1,6 +1,6 @@
 {
   "name": "@syncedco/flow",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "AI-friendly fluid CSS design system for brand-consistent websites and agency builds.",
   "type": "module",
   "packageManager": "pnpm@11.2.2",
@@ -77,16 +77,27 @@
   "scripts": {
     "build": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
     "build:css": "node scripts/build-css.mjs",
-    "check": "node scripts/build-css.mjs --check && tsc --noEmit && node scripts/guardrails.mjs",
+    "build:types": "tsc -p tsconfig.build.json",
+    "check": "pnpm check:generated && tsc --noEmit && node scripts/guardrails.mjs",
+    "check:generated": "pnpm build:types && node scripts/check-generated-css.mjs",
     "guardrails": "node scripts/guardrails.mjs",
     "clean": "rm -rf dist",
     "prepack": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
     "prepare": "node scripts/build-css.mjs && tsc -p tsconfig.build.json",
-    "test": "pnpm build && node --test tests/*.test.mjs",
+    "test": "pnpm check:generated && pnpm build && pnpm test:unit",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test --project=chromium",
+    "test:browser:all": "playwright test",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^22.15.21",
+    "@types/react": "^19.2.18",
+    "@types/react-test-renderer": "19.1.0",
+    "react": "^19.2.8",
+    "react-test-renderer": "19.2.8",
     "typescript": "^5.8.3"
   },
   "engines": {

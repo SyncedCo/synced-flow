@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Synced Flow Application Settings Template</title>
+    <link rel="stylesheet" href="../plain-html/synced-flow.css" />
+  </head>
+  <body>
+    <a class="sf-skip-link" href="#settings-main">Skip to settings</a>
+    <main class="sf-section" id="settings-main">
+      <div class="sf-container sf-split">
+        <nav aria-label="Setup progress">
+          <ol class="sf-stepper">
+            <li class="sf-stepper__step" data-complete="true"><span class="sf-stepper__marker" aria-hidden="true">✓</span><span class="sf-stepper__label"><span class="sr-only">Completed: </span>Workspace</span></li>
+            <li class="sf-stepper__step" aria-current="step"><span class="sf-stepper__marker" aria-hidden="true"></span><span class="sf-stepper__label">Preferences</span></li>
+            <li class="sf-stepper__step"><span class="sf-stepper__marker" aria-hidden="true"></span><span class="sf-stepper__label">Review</span></li>
+          </ol>
+        </nav>
+
+        <form class="sf-card sf-form" aria-labelledby="preferences-title">
+          <header class="sf-stack">
+            <p class="sf-kicker">Step 2 of 3</p>
+            <h1 id="preferences-title">Workspace preferences</h1>
+          </header>
+
+          <label class="sf-field">
+            <span class="sf-label">Workspace URL</span>
+            <span class="sf-input-group">
+              <span class="sf-input-group__leading" aria-hidden="true">https://</span>
+              <input class="sf-input" name="workspace" autocomplete="organization" />
+              <span class="sf-input-group__trailing" aria-hidden="true">.example.com</span>
+            </span>
+          </label>
+
+          <fieldset class="sf-fieldset">
+            <legend>Billing cycle</legend>
+            <div class="sf-segmented-control">
+              <label class="sf-segmented-control__option"><input type="radio" name="cycle" value="monthly" checked /><span class="sf-segmented-control__label">Monthly</span></label>
+              <label class="sf-segmented-control__option"><input type="radio" name="cycle" value="annual" /><span class="sf-segmented-control__label">Annual</span></label>
+            </div>
+          </fieldset>
+
+          <label class="sf-switch">
+            <input type="checkbox" role="switch" name="weekly_summary" checked />
+            <span class="sf-switch__control" aria-hidden="true"></span>
+            <span class="sf-switch__label">Email weekly summary</span>
+          </label>
+
+          <label class="sf-field">
+            <span class="sf-label" id="team-size-label">Team size: <output for="team-size">12</output></span>
+            <input class="sf-range" id="team-size" type="range" name="team_size" min="1" max="50" value="12" aria-labelledby="team-size-label" />
+          </label>
+
+          <label class="sf-field">
+            <span class="sf-label">Brand mark</span>
+            <input class="sf-file-input" type="file" name="brand_mark" accept="image/png,image/svg+xml" />
+            <span class="sf-help">PNG or SVG.</span>
+          </label>
+
+          <div class="sf-field">
+            <label class="sf-label" for="owner-search">Workspace owner</label>
+            <div class="sf-combobox">
+              <input class="sf-input" id="owner-search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="owner-options" />
+              <ul class="sf-combobox__listbox" id="owner-options" role="listbox" hidden>
+                <li class="sf-combobox__option" id="owner-option-1" role="option" aria-selected="true">Alex Morgan</li>
+                <li class="sf-combobox__option" id="owner-option-2" role="option" aria-selected="false">Jamie Lee</li>
+              </ul>
+            </div>
+            <span class="sf-help">This static fixture shows presentation. The consuming app must implement combobox behavior.</span>
+          </div>
+
+          <div class="sf-wizard-actions">
+            <button class="sf-button sf-button--outline" type="button">Back</button>
+            <button class="sf-button" type="submit"><span class="sf-spinner" aria-hidden="true" hidden></span><span>Continue</span></button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

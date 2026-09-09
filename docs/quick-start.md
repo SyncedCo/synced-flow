@@ -50,10 +50,11 @@ theme: {
     display: 'Fraunces, Georgia, serif',
   },
   colours: {
-    primary: 'oklch(68% 0.18 44)',
+    primary: 'oklch(50% 0.16 40)',
+    primaryHover: 'oklch(44% 0.14 40)',
     primaryForeground: 'oklch(100% 0 0)',
     accent: 'oklch(70% 0.12 205)',
-    ring: 'oklch(68% 0.18 44)',
+    ring: 'oklch(50% 0.16 40)',
   },
   components: {
     button: { radius: '0.5rem' },
@@ -153,7 +154,8 @@ export default defineConfig({
       display: 'Fraunces, Georgia, serif',
     },
     colours: {
-      primary: 'oklch(68% 0.18 44)',
+      primary: 'oklch(50% 0.16 40)',
+      primaryHover: 'oklch(44% 0.14 40)',
       secondary: 'oklch(62% 0.12 205)',
       tertiary: 'oklch(64% 0.14 185)',
       primaryForeground: 'oklch(100% 0 0)',
@@ -174,7 +176,7 @@ Use the CSS entry file for one-off local overrides.
 
 :root {
   --sf-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-  --sf-colour-primary: oklch(68% 0.18 44);
+  --sf-colour-primary: oklch(50% 0.16 40);
 }
 ```
 

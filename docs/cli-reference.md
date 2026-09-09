@@ -189,9 +189,11 @@ pnpm exec synced-flow pattern mobile-nav-drawer --framework next --markup
 pnpm exec synced-flow pattern scroll-viewport-sections --json
 ```
 
-Current interaction patterns include `mobile-nav-drawer`,
-`scroll-viewport-sections`, `scroll-viewport-with-spy`,
-`native-dialog-react`, and `popover-drawer-layout`. Pattern JSON includes
+Current interaction patterns include native navigation and overlays, app shell
+and data patterns, plus `switch-control`, `input-group`,
+`native-file-and-range`, `segmented-control`, `loading-button`,
+`searchable-select`, `bulk-actions-toolbar`, `complete-pagination`, and
+`multi-step-form`. Pattern JSON includes
 classes, framework markup, JS requirement notes, accessibility notes, and
 implementation gotchas.
 
@@ -210,9 +212,10 @@ pnpm exec synced-flow recipe coming-soon --json
 
 Current recipes include SaaS landing, scroll portfolio, agency homepage, blog
 index, article page, about timeline, team grid, contact page, 404, coming soon,
-and SaaS dashboard. Use `saas-landing` for public product marketing and
-`saas-dashboard` for authenticated app UI with account state, metrics, tables,
-and workspace navigation. Recipes are composed from public `sf-*` classes and
+SaaS dashboard, and application settings workflow. Use `saas-landing` for
+public product marketing, `saas-dashboard` for authenticated app UI, and
+`app-settings-workflow` for the richer form-control surface. Recipes are
+composed from public `sf-*` classes and
 are intended as copy-paste starting points rather than new utility APIs.
 
 Use `--framework html`, `--framework next`, `--framework react`, or

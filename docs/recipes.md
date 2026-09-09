@@ -21,6 +21,7 @@ Available recipe ids:
 
 - `saas-landing`
 - `saas-dashboard`
+- `app-settings-workflow`
 - `portfolio-scroll`
 - `agency-home`
 - `blog-index`
@@ -30,6 +31,17 @@ Available recipe ids:
 - `contact-page`
 - `not-found`
 - `coming-soon`
+
+`app-settings-workflow` composes the switch, grouped input, file and range
+inputs, segmented choice, combobox presentation shell, stepper, wizard actions,
+and loading-button structure. Generate the complete copy-ready markup with:
+
+```bash
+pnpm exec synced-flow recipe app-settings-workflow --markup
+```
+
+The consuming app still owns async state, upload handling, live range output,
+combobox keyboard behavior, step validation, persistence, and focus movement.
 
 ## Marketing Homepage
 

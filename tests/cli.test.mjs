@@ -322,6 +322,10 @@ test('init supports WordPress themes with enqueue-ready CSS output', () => {
   assert.match(builtCssOutput, /font-size: var\(--text-base\);/)
   assert.match(builtCssOutput, /\.sf-skip-link/)
   assert.match(builtCssOutput, /:where\(\.sf-visually-hidden, \.sr-only\)/)
+  assert.match(builtCssOutput, /\.sf-switch/)
+  assert.match(builtCssOutput, /\.sf-input-group/)
+  assert.match(builtCssOutput, /\.sf-combobox__listbox/)
+  assert.match(builtCssOutput, /\.sf-stepper/)
   assert.doesNotMatch(builtCssOutput, /@layer tokens\s*\{/)
   assert.doesNotMatch(builtCssOutput, /:where\(\.sf-theme-(?:light|dark)/)
 
@@ -559,7 +563,7 @@ test('theme init warns when a brief omits brand decisions', () => {
 
   assert.ok(result.warnings.some((warning) => warning.includes('primary colour')))
   assert.ok(result.warnings.some((warning) => warning.includes('density')))
-  assert.equal(result.theme.colours.primary, 'oklch(68% 0.18 44)')
+  assert.equal(result.theme.colours.primary, 'oklch(50% 0.16 40)')
 })
 
 test('theme validate checks configured theme shape', () => {

@@ -23,7 +23,7 @@ Semantic tokens describe intent.
 ```css
 --sf-colour-background: var(--sf-colour-neutral-50);
 --sf-colour-foreground: var(--sf-colour-neutral-900);
---sf-colour-primary: var(--sf-colour-orange-600);
+--sf-colour-primary: var(--sf-colour-orange-800);
 --sf-colour-surface-raised: var(--sf-colour-neutral-0);
 --sf-colour-success-soft: oklch(62% 0.13 150 / 0.12);
 ```
@@ -36,6 +36,9 @@ CSS file that redefines `--sf-*` variables.
 Theme overrides use `.sf-theme-dark`, `[data-sf-theme="dark"]`,
 `.sf-theme-light`, and `[data-sf-theme="light"]` selectors directly so they have
 enough specificity to override default `:root` values.
+
+The default action and link oranges use the darker 800/900 steps so white
+button text and orange text on light surfaces meet normal-text contrast.
 
 Use semantic utilities in projects:
 

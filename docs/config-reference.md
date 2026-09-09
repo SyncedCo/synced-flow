@@ -52,8 +52,8 @@ theme: {
   colours: {
     background: 'oklch(98.6% 0.006 80)',
     foreground: 'oklch(18% 0.026 250)',
-    primary: 'oklch(68% 0.18 44)',
-    primaryHover: 'oklch(60% 0.18 44)',
+    primary: 'oklch(50% 0.16 40)',
+    primaryHover: 'oklch(44% 0.14 40)',
     primaryForeground: 'oklch(100% 0 0)',
     border: 'oklch(18% 0.026 250 / 0.12)',
   },

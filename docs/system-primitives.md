@@ -63,18 +63,25 @@ These cover the common UI elements needed for a simple site.
 | `sf-surface`, `sf-surface--alt`, `sf-surface--raised` | Generic reusable panels. |
 | `sf-logo-cloud`, `sf-feature`, `sf-stats`, `sf-testimonial`, `sf-pricing-grid`, `sf-faq`, `sf-cta`, `sf-footer` | Common website patterns. |
 | `sf-nav`, `sf-nav__list`, `sf-nav__link` | Navigation basics. |
-| `sf-nav--mobile`, `sf-menu`, `sf-breadcrumb`, `sf-pagination` | Mobile, menu, breadcrumb, and paginated navigation. |
+| `sf-nav--mobile`, `sf-menu`, `sf-breadcrumb`, `sf-pagination`, `sf-pagination__summary`, `sf-pagination__controls`, `sf-pagination__pages`, `sf-pagination__jump` | Mobile, menu, breadcrumb, and complete paginated navigation. |
 | `sf-dialog`, `sf-dialog__header`, `sf-dialog__body`, `sf-dialog__footer` | Native `<dialog>` styling. |
 | `sf-popover`, `sf-tooltip`, `sf-tooltip-trigger`, `sf-menu-popover`, `sf-toast`, `sf-toast-stack`, `sf-banner`, `sf-drawer` | Popover-backed native overlays and app feedback stacks. |
 | `sf-disclosure`, `sf-accordion` | Native `details`/`summary` disclosure patterns. |
 | `sf-tabs`, `sf-tab-list`, `sf-tab`, `sf-tab__count`, `sf-tab-panel` | HTML/CSS-first tab styling, including counted pill tabs. |
 | `sf-form`, `sf-fieldset`, `sf-field`, `sf-label`, `sf-help`, `sf-error` | Form structure and messaging. |
-| `sf-input`, `sf-select`, `sf-textarea`, `sf-search`, `sf-check` | Form controls, including search input shell. |
+| `sf-input`, `sf-select`, `sf-textarea`, `sf-search`, `sf-input-group`, `sf-file-input`, `sf-range`, `sf-check` | Native form controls, search, grouped prefixes/suffixes/actions, file selection, and range input. |
+| `sf-switch`, `sf-switch__control`, `sf-switch__label` | Native checkbox-backed binary setting switch. |
+| `sf-segmented-control`, `sf-segmented-control__option`, `sf-segmented-control__label` | Native radio-backed single-choice control. |
+| `sf-spinner` | Compact loading indicator for buttons and small async surfaces. |
 | `sf-alert`, `sf-alert--info`, `sf-alert--success`, `sf-alert--warning`, `sf-alert--danger`, `sf-alert__title` | Notices and feedback. |
 | `sf-section-header`, `sf-kicker`, `sf-badge`, `sf-avatar` | Common marketing/content and account patterns. |
 | `sf-chart`, `sf-chart__plot`, `sf-chart__svg`, `sf-chart__legend`, `sf-meter-list`, `sf-meter` | Lightweight chart shells for app-owned SVG charts and native meter bars. |
 | `sf-progress`, `sf-skeleton` | Native progress bars and CSS-only loading placeholders for async app states. |
 | `sf-filter-bar`, `sf-data-table`, `sf-table-sort`, `sf-status`, `sf-data-list`, `sf-empty-state`, `sf-settings-section`, `sf-detail-panel` | Lean application primitives for filters, operational data, status, empty states, and settings/detail screens. |
+| `sf-combobox`, `sf-combobox__listbox`, `sf-combobox__option`, `sf-combobox__empty` | Presentation shell for an app-owned accessible searchable select. |
+| `sf-bulk-actions`, `sf-bulk-actions__count`, `sf-bulk-actions__controls` | Selection count and actions above a list or table. |
+| `sf-stepper`, `sf-stepper__step`, `sf-stepper__marker`, `sf-stepper__label`, `sf-wizard-actions` | Multi-step progress and form navigation structure. |
+| `sf-code-window`, `sf-code-lines`, `sf-code-block`, `sf-token-strip`, `sf-marquee`, `sf-command-list`, `sf-platform-card` | Public technical/product presentation primitives used by the catalogue and examples. |
 
 ## Utility Classes
 

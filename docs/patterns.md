@@ -31,6 +31,15 @@ pnpm exec synced-flow pattern scroll-viewport-sections --json
 | `data-table` | Native responsive table markup with status pills. |
 | `empty-state` | No-results and first-run states with clear next actions. |
 | `settings-section` | Settings/detail sections for account, team, billing, and security screens. |
+| `switch-control` | Native checkbox-backed binary setting switch. |
+| `input-group` | Prefix, suffix, unit, or inline-action input composition. |
+| `native-file-and-range` | Styled native file and bounded range inputs. |
+| `segmented-control` | Native radio-backed mutually exclusive choice. |
+| `loading-button` | Busy action with spinner and text/live-region guidance. |
+| `searchable-select` | Presentation shell and complete app-owned combobox contract. |
+| `bulk-actions-toolbar` | Selection count and list/table actions. |
+| `complete-pagination` | Result context, page links, page size, and direct page entry. |
+| `multi-step-form` | Step progress and form navigation structure with textual current and completed states. |
 
 Pattern JSON includes:
 
@@ -43,3 +52,12 @@ Pattern JSON includes:
 Use patterns before hand-rolling interaction markup. Use recipes for full-page
 composition and patterns for the tricky native interaction details inside those
 pages.
+
+Patterns with `requiresJs: true` are presentation and markup contracts. Synced
+Flow deliberately does not pretend that CSS supplies combobox keyboard
+behavior, async state, row selection, or wizard validation. The consuming app
+owns those behaviors and their browser/assistive-technology tests.
+
+Wizard completion cannot rely on the tick marker alone. Keep that decorative
+marker hidden from assistive technology and prefix completed labels with
+screen-reader text such as `Completed:`.

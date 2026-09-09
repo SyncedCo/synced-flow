@@ -34,10 +34,19 @@ keep the CSS affordances in place.
   the system provides matching primitives.
 - Native disabled, required, invalid, `details[open]`, and `:target` states are
   styled.
+- Checkbox-backed switches remain strictly binary and radio-backed segmented
+  controls preserve native keyboard behavior.
+- Loading indicators have a text status; reduced motion leaves a visible
+  non-rotating indicator.
+- App-owned combobox, bulk-selection, pagination, and wizard examples clearly
+  name the JavaScript and focus behavior the consumer must implement.
 - Forced-colors fallbacks keep borders and focus outlines visible.
 - `prefers-reduced-motion` is respected by the base styles.
 - Examples use semantic landmarks, real buttons, real links, labels, help text,
   and native disclosure controls.
+- Every catalogue pattern and recipe has valid IDs and ID references and passes
+  automated WCAG A/AA checks in light and dark themes.
+- Native component behaviour passes in Chromium, Firefox, and WebKit.
 
 ## Documentation Checks
 
@@ -51,23 +60,39 @@ keep the CSS affordances in place.
 ## Commands
 
 ```bash
-pnpm build
+pnpm install --ignore-scripts
+pnpm build:types
+pnpm check:generated
 pnpm check
 pnpm test
+pnpm test:browser:all
+npm pack --dry-run
 node bin/synced-flow.mjs tokens --json
 node bin/synced-flow.mjs catalog --json
+node bin/synced-flow.mjs pattern switch-control --markup
+node bin/synced-flow.mjs pattern searchable-select --json
+node bin/synced-flow.mjs recipe app-settings-workflow --markup
 node bin/synced-flow.mjs doctor --cwd examples/plain-html
 ```
 
-If a browser-visible example changes, inspect it at mobile and desktop widths
-before calling the release ready.
+Run freshness checks before `pnpm build`, `pnpm install` without
+`--ignore-scripts`, or another lifecycle command can regenerate tracked CSS.
+The freshness gate covers the eight package layer/bundle files plus plain HTML,
+Vite, Next, Astro, and WordPress generated outputs. The unit suite semantically
+compiles all 35 patterns and 12 recipes for React and Next (94 generated TSX
+files), and exercises the generated React scroll-spy lifecycle. Browser tests
+use shipped CSS and generated markup to cover native keyboard/form behaviour,
+focus, reduced motion, forced colours, dialogs, responsive overflow, IDs, and
+light/dark Axe checks.
 
 ## npm Trusted Publishing
 
-Publishing is handled by `.github/workflows/npm-publish.yml` when a `v*` tag is
-pushed. The workflow checks that the tag matches `package.json`, installs with
-pnpm, runs tests, verifies package contents, and publishes with npm trusted
-publishing.
+Pull requests and `main` use `.github/workflows/ci.yml` to run the freshness,
+static, unit, package dry-run, and Chromium gates. Publishing is handled by
+`.github/workflows/npm-publish.yml` when a `v*` tag is pushed. Its release gate
+checks that the tag matches `package.json` and runs the same checks with
+Chromium, Firefox, and WebKit. The publish job can start only after that gate
+passes and is the only job granted npm trusted-publishing identity permission.
 
 Configure npm package trusted publishing for `@syncedco/flow` with:
 

@@ -7,8 +7,8 @@ These examples show the intended starting point for new projects.
 - `vite` - Vite React setup
 - `plain-html` - no framework setup with a complete website demo using only
   Synced Flow primitives for header, hero, content, cards, form, notice, and footer
-- `templates` - copy-ready full-page HTML templates for SaaS, portfolio, blog,
-  and coming soon pages
+- `templates` - copy-ready full-page HTML templates for SaaS, app settings,
+  portfolio, blog, and coming soon pages
 - `wordpress` - block theme style setup with enqueue code, templates, parts,
   and PHP patterns
 
