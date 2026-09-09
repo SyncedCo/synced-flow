@@ -10,6 +10,7 @@ import { fluidSystem } from '../dist/index.js'
 
 const packageRoot = dirname(dirname(fileURLToPath(import.meta.url)))
 const cli = join(packageRoot, 'bin/synced-flow.mjs')
+const generatedCssCheck = join(packageRoot, 'scripts/check-generated-css.mjs')
 
 function run(args) {
   return execFileSync(process.execPath, [cli, ...args], {
@@ -216,7 +217,7 @@ test('public documentation includes technical presentation and CLI integration c
 
 test('packaged WordPress include-core CSS stays in sync with the current generator', () => {
   assert.doesNotThrow(() => {
-    execFileSync(process.execPath, [cli, 'build', '--check', '--cwd', join(packageRoot, 'examples/wordpress')], {
+    execFileSync(process.execPath, [generatedCssCheck], {
       cwd: packageRoot,
       encoding: 'utf8',
     })

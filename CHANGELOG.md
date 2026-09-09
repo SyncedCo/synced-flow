@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 - 2026-09-09
+
+- Fix source-tree generated-CSS checks when the package is tested from a
+  root-only installation, and refresh tracked example outputs against the
+  current theme tokens.
+
 ## 0.4.0 - 2026-09-09
 
 - Add native checkbox-backed switches, radio-backed segmented controls,
