@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, rmSync, symlinkSync } from 'node:fs'
+import { lstatSync, mkdirSync, readlinkSync, realpathSync, rmSync, symlinkSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -18,18 +18,51 @@ const checks = [
 ]
 
 let createdPackageLink = false
+const packageRealpath = realpathSync(packageRoot)
+
+function inspectPackageLink() {
+  try {
+    lstatSync(localPackageLink)
+  } catch (error) {
+    if (error.code === 'ENOENT') return { kind: 'missing' }
+    throw error
+  }
+
+  try {
+    const resolved = realpathSync(localPackageLink)
+    return resolved === packageRealpath
+      ? { kind: 'valid' }
+      : { kind: 'invalid', detail: `resolves to ${resolved}` }
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      let target = 'an unavailable target'
+      try {
+        target = `the missing target ${readlinkSync(localPackageLink)}`
+      } catch {
+        // Keep the generic message when the entry cannot be read as a link.
+      }
+      return { kind: 'invalid', detail: `is dangling and points to ${target}` }
+    }
+    throw error
+  }
+}
 
 try {
   // The tracked examples use the same package specifier as a real consumer.
   // A root-only install does not install their file dependency, so provide the
   // source tree as a temporary self-link while checking its generated output.
-  if (!existsSync(localPackageLink)) {
+  const packageLink = inspectPackageLink()
+  if (packageLink.kind === 'invalid') {
+    console.error(`Cannot verify generated CSS: ${localPackageLink} ${packageLink.detail}. Remove the stale package link or run this check from a clean install.`)
+    process.exitCode = 1
+  } else if (packageLink.kind === 'missing') {
     mkdirSync(dirname(localPackageLink), { recursive: true })
     symlinkSync(packageRoot, localPackageLink, 'dir')
     createdPackageLink = true
   }
 
   for (const [script, ...args] of checks) {
+    if (process.exitCode) break
     const result = spawnSync(process.execPath, [script, ...args], {
       cwd: packageRoot,
       encoding: 'utf8',
