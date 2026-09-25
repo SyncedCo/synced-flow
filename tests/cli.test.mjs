@@ -212,13 +212,123 @@ export default defineConfig({
   const css = readFileSync(join(cwd, 'src/synced-flow.generated.css'), 'utf8')
   assert.match(css, /\[class~="backdrop-blur"\]\{backdrop-filter:blur\(0\.5rem\)\}/)
   assert.match(css, /\[class~="blur-sm"\]\{filter:blur\(0\.25rem\)\}/)
-  assert.match(css, /\[class~="border-2"\]\{border-width:0\.125rem\}/)
-  assert.match(css, /\[class~="border-t-4"\]\{border-top-width:0\.25rem\}/)
+  assert.match(css, /\[class~="border-2"\]\{border-width:0\.125rem;border-style:solid\}/)
+  assert.match(css, /\[class~="border-t-4"\]\{border-top-width:0\.25rem;border-top-style:solid\}/)
   assert.match(css, /\[class~="outline-2"\]\{outline-width:0\.125rem\}/)
   assert.match(css, /\[class~="outline-offset-4"\]\{outline-offset:0\.25rem\}/)
   assert.match(css, /\[class~="ring-4"\]\{box-shadow:0 0 0 0\.25rem var\(--sf-ring-color, var\(--color-ring\)\)\}/)
   assert.match(css, /\[class~="ring-offset-2"\]\{--sf-ring-offset-width:0\.125rem\}/)
   assert.doesNotMatch(css, /\b(?:2|3|4|8|12|16|24|40|64)px\b/)
+})
+
+test('screen sizes follow the axis they set', () => {
+  const cwd = tempProject()
+  writeFileSync(
+    join(cwd, 'src/App.jsx'),
+    '<div class="w-screen h-screen min-h-screen max-h-screen max-w-screen size-screen translate-y-screen top-screen min-h-dvh w-dvw h-lvh"></div>\n'
+  )
+  writeFileSync(
+    join(cwd, 'synced-flow.config.mjs'),
+    `import { defineConfig } from '@syncedco/flow/config'
+
+export default defineConfig({
+  scan: ['src'],
+  out: 'src/synced-flow.generated.css',
+})
+`
+  )
+
+  run(['build', '--cwd', cwd])
+
+  const css = readFileSync(join(cwd, 'src/synced-flow.generated.css'), 'utf8')
+  assert.match(css, /\[class~="w-screen"\]\{width:100svw\}/)
+  assert.match(css, /\[class~="max-w-screen"\]\{max-width:100svw\}/)
+  assert.match(css, /\[class~="h-screen"\]\{height:100svh\}/)
+  assert.match(css, /\[class~="min-h-screen"\]\{min-height:100svh\}/)
+  assert.match(css, /\[class~="max-h-screen"\]\{max-height:100svh\}/)
+  assert.match(css, /\[class~="size-screen"\]\{width:100svw;height:100svh\}/)
+  assert.match(css, /\[class~="translate-y-screen"\]\{[^}]*--sf-translate-y:100svh/)
+  assert.match(css, /\[class~="top-screen"\]\{top:100svh\}/)
+  assert.match(css, /\[class~="min-h-dvh"\]\{min-height:100dvh\}/)
+  assert.match(css, /\[class~="w-dvw"\]\{width:100dvw\}/)
+  assert.match(css, /\[class~="h-lvh"\]\{height:100lvh\}/)
+})
+
+function buildClasses(classes) {
+  const cwd = tempProject()
+  writeFileSync(join(cwd, 'src/App.jsx'), `<div class="${classes}"></div>\n`)
+  writeFileSync(
+    join(cwd, 'synced-flow.config.mjs'),
+    `import { defineConfig } from '@syncedco/flow/config'
+
+export default defineConfig({
+  scan: ['src'],
+  out: 'src/synced-flow.generated.css',
+})
+`
+  )
+  run(['build', '--cwd', cwd])
+  return readFileSync(join(cwd, 'src/synced-flow.generated.css'), 'utf8')
+}
+
+test('border width utilities draw a solid line', () => {
+  const css = buildClasses('border border-t border-x border-b-2 border-dashed border-none')
+  assert.match(css, /\[class~="border"\]\{border-width:1px;border-style:solid\}/)
+  assert.match(css, /\[class~="border-t"\]\{border-top-width:1px;border-top-style:solid\}/)
+  assert.match(css, /\[class~="border-x"\]\{[^}]*border-left-style:solid;border-right-style:solid\}/)
+  assert.match(css, /\[class~="border-b-2"\]\{border-bottom-width:0\.125rem;border-bottom-style:solid\}/)
+  assert.match(css, /\[class~="border-dashed"\]\{border-style:dashed\}/)
+  assert.match(css, /\[class~="border-none"\]\{border-style:none\}/)
+})
+
+test('space and divide utilities style the gaps between children', () => {
+  const css = buildClasses('space-y-4 space-x-7 divide-y divide-x-2 divide-border divide-dashed')
+  assert.match(css, /\[class~="space-y-4"\] > \* \+ \*\{margin-block-start:clamp\(/)
+  assert.match(css, /\[class~="space-x-7"\] > \* \+ \*\{margin-inline-start:clamp\(/)
+  assert.match(css, /\[class~="divide-y"\] > \* \+ \*\{border-block-start-width:1px;border-block-start-style:solid\}/)
+  assert.match(css, /\[class~="divide-x-2"\] > \* \+ \*\{border-inline-start-width:0\.125rem;border-inline-start-style:solid\}/)
+  assert.match(css, /\[class~="divide-border"\] > \* \+ \*\{border-color:var\(--color-border\)\}/)
+  assert.match(css, /\[class~="divide-dashed"\] > \* \+ \*\{border-style:dashed\}/)
+  assert.doesNotMatch(css, /--sf-space-[xy]|--sf-divide/)
+})
+
+test('common layout, background, text and motion utilities generate', () => {
+  const css = buildClasses(
+    'order-1 order-first order-last col-start-2 row-end-auto justify-items-center justify-self-end flex-initial max-w-none ' +
+      'object-center object-left-top bg-cover bg-center bg-no-repeat bg-right-bottom bg-linear-to-r bg-none origin-top-left ' +
+      'font-serif text-ellipsis blur transition-opacity transition-none animate-ping animate-bounce motion-reduce:transition-none'
+  )
+  const expected = {
+    'order-1': 'order:1',
+    'order-first': 'order:-9999',
+    'order-last': 'order:9999',
+    'col-start-2': 'grid-column-start:2',
+    'row-end-auto': 'grid-row-end:auto',
+    'justify-items-center': 'justify-items:center',
+    'justify-self-end': 'justify-self:end',
+    'flex-initial': 'flex:0 1 auto',
+    'max-w-none': 'max-width:none',
+    'object-center': 'object-position:center',
+    'object-left-top': 'object-position:left top',
+    'bg-cover': 'background-size:cover',
+    'bg-center': 'background-position:center',
+    'bg-no-repeat': 'background-repeat:no-repeat',
+    'bg-right-bottom': 'background-position:right bottom',
+    'bg-linear-to-r': 'background-image:linear-gradient(to right, var(--sf-gradient-stops))',
+    'bg-none': 'background-image:none',
+    'origin-top-left': 'transform-origin:top left',
+    'text-ellipsis': 'text-overflow:ellipsis',
+    blur: 'filter:blur(0.5rem)',
+    'transition-none': 'transition-property:none',
+  }
+  for (const [token, declaration] of Object.entries(expected)) {
+    assert.ok(css.includes(`[class~="${token}"]{${declaration}}`), `${token} should generate ${declaration}`)
+  }
+  assert.match(css, /\[class~="font-serif"\]\{font-family:var\(--font-serif/)
+  assert.match(css, /\[class~="transition-opacity"\]\{transition-property:opacity;/)
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)\{\[class~="motion-reduce:transition-none"\]\{transition-property:none\}\}/)
+  assert.match(css, /@keyframes sf-ping/)
+  assert.match(css, /@keyframes sf-bounce/)
 })
 
 test('doctor passes a configured project', () => {
@@ -608,6 +718,39 @@ export default defineConfig({
   assert.notEqual(result.status, 0)
   assert.match(result.stderr, /sf-buton.*sf-button/)
   assert.match(result.stderr, /text-prmary.*text-primary/)
+})
+
+test('lint hints suggest the same utility with a valid value', () => {
+  const cwd = tempProject()
+  writeFileSync(join(cwd, 'src/App.jsx'), '<div class="h-scren min-h-scren w-fulll max-w-prse h-banana prose max-w-nne border-dahsed order-lst"></div>\n')
+  writeFileSync(
+    join(cwd, 'synced-flow.config.mjs'),
+    `import { defineConfig } from '@syncedco/flow/config'
+
+export default defineConfig({
+  scan: ['src'],
+  out: 'src/synced-flow.generated.css',
+})
+`
+  )
+
+  const result = spawnSync('node', [cli, 'lint', '--cwd', cwd], {
+    cwd: packageRoot,
+    encoding: 'utf8',
+  })
+
+  assert.notEqual(result.status, 0)
+  assert.match(result.stderr, /- h-scren \(did you mean h-screen\?\)/)
+  assert.match(result.stderr, /- min-h-scren \(did you mean min-h-screen\?\)/)
+  assert.match(result.stderr, /- w-fulll \(did you mean w-full\?\)/)
+  assert.match(result.stderr, /- max-w-prse \(did you mean max-w-prose\?\)/)
+  assert.match(result.stderr, /- h-banana\n/)
+  // Flow's own version of a common class.
+  assert.match(result.stderr, /- prose \(did you mean sf-prose\?\)/)
+  // Typos of the new utilities resolve to the same utility, not a look-alike.
+  assert.match(result.stderr, /- max-w-nne \(did you mean max-w-none\?\)/)
+  assert.match(result.stderr, /- border-dahsed\n/)
+  assert.match(result.stderr, /- order-lst \(did you mean order-last\?\)/)
 })
 
 test('doctor teaches missing scripts and unsupported classes', () => {
