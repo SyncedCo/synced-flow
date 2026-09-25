@@ -602,16 +602,6 @@
     }
   }
 
-  :where(.space-y-1, .space-y-2, .space-y-3, .space-y-4, .space-y-5, .space-y-6, .space-y-8, .space-y-10, .space-y-12) > * + * {
-    margin-block-start: var(--sf-space-y);
-  }
-
-  :where(.space-x-1, .space-x-2, .space-x-3, .space-x-4, .space-x-5, .space-x-6, .space-x-8) > * + * {
-    margin-inline-start: var(--sf-space-x);
-  }
-
-  .divide-y > * + * { border-block-start-width: var(--sf-divide-y); }
-  .divide-x > * + * { border-inline-start-width: var(--sf-divide-x); }
 }
 
 @layer components {

@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.5.0 - 2026-09-25
+
+- Fix `border`, `border-t`, `border-2` and the other border width utilities
+  drawing nothing: they now also set `border-style: solid`.
+- Fix `space-x-*`, `space-y-*`, `divide-x` and `divide-y` doing nothing unless
+  core CSS was included. They now generate their own child rules for any
+  value, so `space-y-7` works too.
+- Fix `h-screen`, `min-h-screen`, `max-h-screen`, `top-screen`,
+  `bottom-screen` and `translate-y-screen` using the viewport width (`100svw`)
+  instead of the viewport height (`100svh`). `size-screen` now sets
+  `100svw` by `100svh`.
+- Add `dvh`, `dvw`, `lvh` and `lvw` sizing keywords, such as `min-h-dvh`.
+- Add common utilities: `border-dashed`/`dotted`/`double`/`none`,
+  `divide-<colour>`, `divide-dashed`, `divide-x-2`, `order-*`,
+  `col-start-*`/`col-end-*`/`row-start-*`/`row-end-*`, `justify-items-*`,
+  `justify-self-*`, `flex-initial`, `max-w-none`, `max-h-none`,
+  `object-<position>`, `bg-cover`/`contain`, `bg-<position>`,
+  `bg-no-repeat` and other repeat values, `bg-fixed`, `bg-linear-to-*`,
+  `bg-none`, `origin-*`, `font-serif`, `text-ellipsis`, `text-clip`, `blur`,
+  `transition-opacity`, `transition-shadow`, `transition-none`,
+  `animate-ping`, `animate-bounce` and `animate-none`.
+- Improve `synced-flow lint` hints: suggest Flow's own class first
+  (`prose` suggests `sf-prose`), suggest the same utility with a valid value
+  (`h-scren` suggests `h-screen`, not `hidden`), and only suggest near typos,
+  so hints no longer name a class that does something else.
+
 ## 0.4.1 - 2026-09-09
 
 - Fix source-tree generated-CSS checks when the package is tested from a

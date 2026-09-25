@@ -3618,6 +3618,12 @@ function rawDeclarationsFor(base) {
     [/^overflow-x-(hidden|visible|auto|scroll|clip)$/, 'overflow-x'],
     [/^overflow-y-(hidden|visible|auto|scroll|clip)$/, 'overflow-y'],
     [/^object-(cover|contain|fill|none|scale-down)$/, 'object-fit'],
+    [/^object-(center|top|bottom|left|right|left-top|left-bottom|right-top|right-bottom)$/, 'object-position'],
+    [/^bg-(cover|contain|auto)$/, 'background-size'],
+    [/^bg-(center|top|bottom|left|right|left-top|left-bottom|right-top|right-bottom)$/, 'background-position'],
+    [/^bg-(repeat|no-repeat|repeat-x|repeat-y|repeat-round|repeat-space)$/, 'background-repeat'],
+    [/^bg-(fixed|local|scroll)$/, 'background-attachment'],
+    [/^origin-(center|top|bottom|left|right|top-left|top-right|bottom-left|bottom-right)$/, 'transform-origin'],
     [/^whitespace-(normal|nowrap|pre|pre-line|pre-wrap|break-spaces)$/, 'white-space'],
     [/^break-(normal|words|all|keep)$/, 'overflow-wrap'],
     [/^cursor-(pointer|default|not-allowed|grab|grabbing|text)$/, 'cursor'],
@@ -3627,11 +3633,17 @@ function rawDeclarationsFor(base) {
   ]
   for (const [pattern, property] of simpleMaps) {
     const match = base.match(pattern)
-    if (match) return [[property, match[1] === 'words' ? 'break-word' : match[1]]]
+    if (match) {
+      if (match[1] === 'words') return [[property, 'break-word']]
+      // Positions are written `left-top` in the class and `left top` in CSS.
+      return [[property, /-position$|-origin$/.test(property) ? match[1].replace('-', ' ') : match[1]]]
+    }
   }
 
   if (base === 'appearance-none') return [['appearance', 'none']]
   if (base === 'resize') return [['resize', 'both']]
+  if (base === 'text-ellipsis') return [['text-overflow', 'ellipsis']]
+  if (base === 'text-clip') return [['text-overflow', 'clip']]
   if (base === 'truncate') return [['overflow', 'hidden'], ['text-overflow', 'ellipsis'], ['white-space', 'nowrap']]
   const lineClamp = base.match(/^line-clamp-(\d+)$/)
   if (lineClamp) return [['overflow', 'hidden'], ['display', '-webkit-box'], ['-webkit-box-orient', 'vertical'], ['-webkit-line-clamp', lineClamp[1]]]
@@ -3679,7 +3691,8 @@ function sideUtility(base, prefixes) {
     const match = base.match(new RegExp(`^-?${prefix}-(.+)$`))
     if (!match) continue
     const negative = base.startsWith('-')
-    const value = spacingUnit(match[1]) ?? sizeKeyword(match[1])
+    const axis = prefix === 'top' || prefix === 'bottom' ? 'y' : 'x'
+    const value = spacingUnit(match[1]) ?? sizeKeyword(match[1], axis)
     if (!value) continue
     const resolved = negative ? `calc(${value} * -1)` : value
     if (prefix === 'inset') return [['inset', resolved]]
@@ -3720,18 +3733,22 @@ function spacingUtility(base) {
     'gap-x': ['column-gap'],
     'gap-y': ['row-gap'],
   }
-  if (prefix === 'space-x') return [['--sf-space-x', resolved]]
-  if (prefix === 'space-y') return [['--sf-space-y', resolved]]
+  if (prefix === 'space-x') return [['margin-inline-start', resolved]]
+  if (prefix === 'space-y') return [['margin-block-start', resolved]]
   return map[prefix].map((property) => [property, resolved])
 }
 
-function sizeKeyword(valueName) {
-  const map = {
+// Keyword sizes. `screen` is swapped for the viewport height on the y axis.
+const sizeKeywords = {
     auto: 'auto',
     full: '100%',
     screen: '100svw',
     svw: '100svw',
     svh: '100svh',
+    dvw: '100dvw',
+    dvh: '100dvh',
+    lvw: '100lvw',
+    lvh: '100lvh',
     min: 'min-content',
     max: 'max-content',
     fit: 'fit-content',
@@ -3758,15 +3775,21 @@ function sizeKeyword(valueName) {
     '4/5': '80%',
     '1/6': '16.666667%',
     '5/6': '83.333333%',
-  }
-  return map[valueName] ?? null
+}
+
+function sizeKeyword(valueName, axis = 'x') {
+  if (valueName === 'screen' && axis === 'y') return '100svh'
+  return Object.hasOwn(sizeKeywords, valueName) ? sizeKeywords[valueName] : null
 }
 
 function sizingUtility(base) {
   const match = base.match(/^(w|h|min-w|min-h|max-w|max-h|size|basis)-(.+)$/)
   if (!match) return null
   const [, prefix, valueName] = match
-  const value = spacingUnit(valueName) ?? sizeKeyword(valueName)
+  if ((prefix === 'max-w' || prefix === 'max-h') && valueName === 'none') return [[prefix === 'max-w' ? 'max-width' : 'max-height', 'none']]
+  if (prefix === 'size' && valueName === 'screen') return [['width', '100svw'], ['height', '100svh']]
+  const axis = prefix === 'h' || prefix === 'min-h' || prefix === 'max-h' ? 'y' : 'x'
+  const value = spacingUnit(valueName) ?? sizeKeyword(valueName, axis)
   if (!value) return null
   const props = {
     w: ['width'],
@@ -3792,6 +3815,7 @@ function flexGridUtility(base) {
     'flex-1': [['flex', '1 1 0%']],
     'flex-auto': [['flex', '1 1 auto']],
     'flex-none': [['flex', 'none']],
+    'flex-initial': [['flex', '0 1 auto']],
     grow: [['flex-grow', '1']],
     'grow-0': [['flex-grow', '0']],
     shrink: [['flex-shrink', '1']],
@@ -3818,6 +3842,12 @@ function flexGridUtility(base) {
   const placeMap = { center: 'center', start: 'start', end: 'end', stretch: 'stretch' }
   let match = base.match(/^items-(start|end|center|baseline|stretch)$/)
   if (match) return [['align-items', alignMap[match[1]]]]
+  match = base.match(/^justify-items-(start|end|center|stretch)$/)
+  if (match) return [['justify-items', match[1]]]
+  match = base.match(/^justify-self-(auto|start|end|center|stretch)$/)
+  if (match) return [['justify-self', match[1]]]
+  match = base.match(/^order-(\d+|first|last|none)$/)
+  if (match) return [['order', { first: '-9999', last: '9999', none: '0' }[match[1]] ?? match[1]]]
   match = base.match(/^justify-(start|end|center|between|around|evenly|stretch)$/)
   if (match) return [['justify-content', justifyMap[match[1]]]]
   match = base.match(/^content-(start|end|center|between|around|evenly|stretch)$/)
@@ -3836,6 +3866,8 @@ function flexGridUtility(base) {
   match = base.match(/^row-span-(\d+)$/)
   if (match) return [['grid-row', `span ${match[1]} / span ${match[1]}`]]
   if (base === 'col-span-full') return [['grid-column', '1 / -1']]
+  match = base.match(/^(col|row)-(start|end)-(\d+|auto)$/)
+  if (match) return [[`grid-${match[1] === 'col' ? 'column' : 'row'}-${match[2]}`, match[3]]]
   if (base === 'grid-flow-col') return [['grid-auto-flow', 'column']]
   if (base === 'grid-flow-row') return [['grid-auto-flow', 'row']]
 
@@ -3843,10 +3875,11 @@ function flexGridUtility(base) {
 }
 
 function typographyUtility(base) {
-  let match = base.match(/^font-(sans|display|mono)$/)
+  let match = base.match(/^font-(sans|serif|display|mono)$/)
   if (match) {
     const map = {
       sans: 'var(--font-inter, var(--sf-font-sans, ui-sans-serif, system-ui, sans-serif))',
+      serif: 'var(--font-serif, var(--sf-font-serif, ui-serif, Georgia, Cambria, "Times New Roman", serif))',
       display: 'var(--font-display, var(--sf-font-display, ui-serif, Georgia, serif))',
       mono: 'var(--font-mono, var(--sf-font-mono, ui-monospace, monospace))',
     }
@@ -3894,22 +3927,33 @@ function colourUtility(base) {
 }
 
 function borderUtility(base) {
-  if (base === 'border') return [['border-width', '1px']]
+  // A border width draws nothing without a line style, so width utilities set both.
+  if (base === 'border') return [['border-width', '1px'], ['border-style', 'solid']]
   if (base === 'border-0') return [['border-width', '0']]
-  if (base === 'border-2') return [['border-width', '0.125rem']]
-  if (base === 'border-t') return [['border-top-width', '1px']]
-  if (base === 'border-r') return [['border-right-width', '1px']]
-  if (base === 'border-b') return [['border-bottom-width', '1px']]
-  if (base === 'border-l') return [['border-left-width', '1px']]
-  if (base === 'border-y') return [['border-top-width', '1px'], ['border-bottom-width', '1px']]
-  if (base === 'border-x') return [['border-left-width', '1px'], ['border-right-width', '1px']]
+  if (base === 'border-2') return [['border-width', '0.125rem'], ['border-style', 'solid']]
+  if (base === 'border-t') return [['border-top-width', '1px'], ['border-top-style', 'solid']]
+  if (base === 'border-r') return [['border-right-width', '1px'], ['border-right-style', 'solid']]
+  if (base === 'border-b') return [['border-bottom-width', '1px'], ['border-bottom-style', 'solid']]
+  if (base === 'border-l') return [['border-left-width', '1px'], ['border-left-style', 'solid']]
+  if (base === 'border-y') return [['border-top-width', '1px'], ['border-bottom-width', '1px'], ['border-top-style', 'solid'], ['border-bottom-style', 'solid']]
+  if (base === 'border-x') return [['border-left-width', '1px'], ['border-right-width', '1px'], ['border-left-style', 'solid'], ['border-right-style', 'solid']]
   const sideWidth = base.match(/^border-(t|r|b|l)-(\d+)$/)
   if (sideWidth) {
     const side = { t: 'top', r: 'right', b: 'bottom', l: 'left' }[sideWidth[1]]
-    return [[`border-${side}-width`, borderWidthUnit(sideWidth[2])]]
+    return [[`border-${side}-width`, borderWidthUnit(sideWidth[2])], [`border-${side}-style`, 'solid']]
   }
-  if (base === 'divide-y') return [['--sf-divide-y', '1px']]
-  if (base === 'divide-x') return [['--sf-divide-x', '1px']]
+  const borderStyle = base.match(/^border-(solid|dashed|dotted|double|hidden|none)$/)
+  if (borderStyle) return [['border-style', borderStyle[1]]]
+  const divide = base.match(/^divide-(x|y)(?:-(\d+))?$/)
+  if (divide) {
+    const side = divide[1] === 'y' ? 'block' : 'inline'
+    const width = divide[2] === undefined ? '1px' : borderWidthUnit(divide[2])
+    return [[`border-${side}-start-width`, width], [`border-${side}-start-style`, 'solid']]
+  }
+  const divideStyle = base.match(/^divide-(solid|dashed|dotted|double|none)$/)
+  if (divideStyle) return [['border-style', divideStyle[1]]]
+  const divideColour = base.match(/^divide-(.+)$/)
+  if (divideColour && colourValue(divideColour[1])) return [['border-color', colourValue(divideColour[1])]]
   const roundedSide = base.match(/^rounded-(t|r|b|l|tr|tl|br|bl)-(none|xs|sm|md|lg|xl|2xl|3xl|full)$/)
   if (roundedSide) {
     const radius = `var(--radius-${roundedSide[2]})`
@@ -3947,6 +3991,9 @@ function borderUtility(base) {
 }
 
 function effectUtility(base) {
+  const linear = base.match(/^bg-linear-to-(t|b|l|r|tl|tr|bl|br)$/)
+  if (linear) return effectUtility(`bg-gradient-to-${linear[1]}`)
+  if (base === 'bg-none') return [['background-image', 'none']]
   if (base === 'bg-gradient-to-r') return [['background-image', 'linear-gradient(to right, var(--sf-gradient-stops))']]
   if (base === 'bg-gradient-to-l') return [['background-image', 'linear-gradient(to left, var(--sf-gradient-stops))']]
   if (base === 'bg-gradient-to-t') return [['background-image', 'linear-gradient(to top, var(--sf-gradient-stops))']]
@@ -3968,6 +4015,7 @@ function effectUtility(base) {
 
   let match = base.match(/^opacity-(\d+)$/)
   if (match) return [['opacity', String(Number(match[1]) / 100)]]
+  if (base === 'blur') return [['filter', 'blur(0.5rem)']]
   match = base.match(/^blur-(none|sm|md|lg|xl|2xl|3xl)$/)
   if (match) {
     const map = { none: '0', sm: '0.25rem', md: '0.75rem', lg: '1rem', xl: '1.5rem', '2xl': '2.5rem', '3xl': '4rem' }
@@ -3998,6 +4046,9 @@ function effectUtility(base) {
   if (base === 'transition') return [['transition-property', 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter'], ['transition-duration', 'var(--duration-normal)'], ['transition-timing-function', 'var(--ease-standard)']]
   if (base === 'transition-all') return [['transition-property', 'all'], ['transition-duration', 'var(--duration-normal)'], ['transition-timing-function', 'var(--ease-standard)']]
   if (base === 'transition-colors') return [['transition-property', 'color, background-color, border-color, text-decoration-color, fill, stroke'], ['transition-duration', 'var(--duration-normal)'], ['transition-timing-function', 'var(--ease-standard)']]
+  if (base === 'transition-opacity') return [['transition-property', 'opacity'], ['transition-duration', 'var(--duration-normal)'], ['transition-timing-function', 'var(--ease-standard)']]
+  if (base === 'transition-shadow') return [['transition-property', 'box-shadow'], ['transition-duration', 'var(--duration-normal)'], ['transition-timing-function', 'var(--ease-standard)']]
+  if (base === 'transition-none') return [['transition-property', 'none']]
   if (base === 'transition-transform') return [['transition-property', 'transform'], ['transition-duration', 'var(--duration-normal)'], ['transition-timing-function', 'var(--ease-standard)']]
   match = base.match(/^transition-\[(.+)\]$/)
   if (match) return [['transition-property', arbitraryValue(match[1])], ['transition-duration', 'var(--duration-normal)']]
@@ -4010,6 +4061,9 @@ function effectUtility(base) {
   if (base === 'ease-in-out') return [['transition-timing-function', 'cubic-bezier(0.4, 0, 0.2, 1)']]
   if (base === 'animate-pulse') return [['animation', 'sf-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite']]
   if (base === 'animate-spin') return [['animation', 'sf-spin 1s linear infinite']]
+  if (base === 'animate-ping') return [['animation', 'sf-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite']]
+  if (base === 'animate-bounce') return [['animation', 'sf-bounce 1s infinite']]
+  if (base === 'animate-none') return [['animation', 'none']]
   if (base === 'animate-in') return [['animation', 'sf-enter var(--duration-normal) var(--ease-standard) both']]
   if (base === 'animate-out') return [['animation', 'sf-exit var(--duration-fast) var(--ease-standard) both']]
   return null
@@ -4020,7 +4074,7 @@ function transformUtility(base) {
   let match = base.match(/^(-?)translate-x-(.+)$/)
   if (match) declarations.push(['--sf-translate-x', `${match[1] ? '-' : ''}${spacingUnit(match[2]) ?? sizeKeyword(match[2])}`])
   match = base.match(/^(-?)translate-y-(.+)$/)
-  if (match) declarations.push(['--sf-translate-y', `${match[1] ? '-' : ''}${spacingUnit(match[2]) ?? sizeKeyword(match[2])}`])
+  if (match) declarations.push(['--sf-translate-y', `${match[1] ? '-' : ''}${spacingUnit(match[2]) ?? sizeKeyword(match[2], 'y')}`])
   match = base.match(/^scale-\[(.+)\]$/)
   if (match) declarations.push(['--sf-scale-x', arbitraryValue(match[1])], ['--sf-scale-y', arbitraryValue(match[1])])
   match = base.match(/^scale-(\d+)$/)
@@ -4045,7 +4099,9 @@ function cssRuleFor(token) {
   const selectorResult = selectorFor(token, variants)
   if (!selectorResult) return null
 
-  const { selector, wrappers, needsPseudoContent } = selectorResult
+  const { wrappers, needsPseudoContent } = selectorResult
+  // space-* and divide-* style the gaps between children, not the element itself.
+  const selector = /^-?(space-[xy]-|divide-)/.test(base) ? `${selectorResult.selector} > * + *` : selectorResult.selector
   const allDeclarations = needsPseudoContent ? [['content', '""'], ...declarations] : declarations
   let rule = `${selector}{${allDeclarations.map(([property, value]) => `${property}:${value}`).join(';')}}`
 
@@ -4713,16 +4769,6 @@ function buildLayoutCss() {
     }
   }
 
-  :where(.space-y-1, .space-y-2, .space-y-3, .space-y-4, .space-y-5, .space-y-6, .space-y-8, .space-y-10, .space-y-12) > * + * {
-    margin-block-start: var(--sf-space-y);
-  }
-
-  :where(.space-x-1, .space-x-2, .space-x-3, .space-x-4, .space-x-5, .space-x-6, .space-x-8) > * + * {
-    margin-inline-start: var(--sf-space-x);
-  }
-
-  .divide-y > * + * { border-block-start-width: var(--sf-divide-y); }
-  .divide-x > * + * { border-inline-start-width: var(--sf-divide-x); }
 }`
 }
 
@@ -5550,6 +5596,8 @@ function buildUsedKeyframesCss(bases) {
 
   if (bases.has('animate-pulse')) keyframes.push('@keyframes sf-pulse { 50% { opacity: .5; } }')
   if (bases.has('animate-spin')) keyframes.push('@keyframes sf-spin { to { transform: rotate(360deg); } }')
+  if (bases.has('animate-ping')) keyframes.push('@keyframes sf-ping { 75%, 100% { transform: scale(2); opacity: 0; } }')
+  if (bases.has('animate-bounce')) keyframes.push('@keyframes sf-bounce { 0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); } 50% { transform: none; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); } }')
   if (bases.has('animate-in')) keyframes.push('@keyframes sf-enter { from { opacity: 0; transform: translate3d(0, .5rem, 0) scale(.98); } to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }')
   if (bases.has('animate-out')) keyframes.push('@keyframes sf-exit { from { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } to { opacity: 0; transform: translate3d(0, .25rem, 0) scale(.98); } }')
 
@@ -5591,11 +5639,25 @@ function utilitySuggestionClasses() {
 
 function nearestClass(token) {
   const { base } = splitVariants(token)
-  const candidates = knownPublicClasses()
-  const scored = candidates
+  const known = knownPublicClasses()
+  // Flow's own version of a common class, e.g. `prose` -> `sf-prose`.
+  if (known.includes(`sf-${base}`)) return `sf-${base}`
+  const scored = [...siblingUtilities(base), ...known]
     .map((candidate) => ({ candidate, score: levenshtein(base, candidate) }))
     .sort((a, b) => a.score - b.score)
-  return scored[0]?.score <= Math.max(4, Math.ceil(base.length / 3)) ? scored[0].candidate : null
+  // Only near typos: a looser match often names a class that does something else.
+  return scored[0]?.score <= Math.max(1, Math.floor(base.length / 5)) ? scored[0].candidate : null
+}
+
+// The same utility with other keyword or spacing values, e.g. `h-scren` -> `h-screen`.
+function siblingUtilities(base) {
+  const cut = base.lastIndexOf('-')
+  if (cut <= 0) return []
+  const prefix = base.slice(0, cut)
+  const values = [...Object.keys(sizeKeywords), 'none', 'first', 'last', 'center', 'start', 'end', '0', 'px', '1', '2', '3', '4', '6', '8', '10', '12', '16', '24']
+  return values
+    .map((value) => `${prefix}-${value}`)
+    .filter((candidate) => candidate !== base && declarationsFor(candidate))
 }
 
 function lintSourceFiles() {
